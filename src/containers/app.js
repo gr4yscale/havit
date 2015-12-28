@@ -19,7 +19,9 @@ class App extends React.Component {
     let Component = route.component
 
     return (
-      <Component navigator={navigator} route={route} />
+      <Component navigator={navigator}
+          route={route}
+      />
     )
   }
 
@@ -30,14 +32,14 @@ class App extends React.Component {
   render() {
     return (
       <Navigator
-        ref='navigator'
-        style={styles.navigator}
-        configureScene={this.configureScene}
-        renderScene={this.renderScene}
-        initialRoute={{
-          component: LinksInboxContainer,
-          name: 'LinksInboxContainer'
-        }}
+          ref="navigator"
+          style={styles.navigator}
+          configureScene={this.configureScene}
+          renderScene={this.renderScene}
+          initialRoute={{
+            component: LinksInboxContainer,
+            name: 'LinksInboxContainer',
+          }}
       />
     )
   }
@@ -49,7 +51,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  }
+  },
 })
 
 export default App

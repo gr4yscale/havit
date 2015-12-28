@@ -8,7 +8,7 @@ let {
   StyleSheet,
   View,
   TouchableHighlight,
-  Text
+  Text,
 } = React;
 
 // TOFIX: fuck tcomb-form, build auth form myself!
@@ -21,7 +21,16 @@ class AuthContainer extends Component {
 
   render() {
     return (
-      <Text>Yo</Text>
+      <View style={styles.container}>
+        <View style={styles.inputs}>
+          <TouchableHighlight style={styles.button}
+              onPress={this.onLoginButtonPress.bind(this)}
+              underlayColor="#99d9f4"
+          >
+            <Text style={styles.buttonText}>Login, motherfucker!</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
     );
   }
 }
@@ -29,18 +38,18 @@ class AuthContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
   },
   inputs: {
     marginTop: 80,
     marginBottom: 10,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
   },
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   button: {
     height: 36,
@@ -50,13 +59,13 @@ let styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     alignSelf: 'stretch',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 })
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 }
 
@@ -65,6 +74,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 //select={state => state.get('something').toJS()}
-// export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer)
-
-export default AuthContainer
+export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer)

@@ -4,11 +4,6 @@ import configureStore from './redux/store/configureStore'
 
 import App from './containers/app'
 
-let {
-  View,
-  Text
-} = React
-
 const store = configureStore()
 
 class Root extends React.Component {

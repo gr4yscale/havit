@@ -8,14 +8,14 @@ export const endpoint = 'http://api.soundcloud.com/tracks/198545703/comments?cli
 
 function requestComments() {
   return {
-    type: COMMENTS_REQUEST
+    type: COMMENTS_REQUEST,
   }
 }
 
 function successComments(json) {
   return {
     type: COMMENTS_SUCCESS,
-    comments: json
+    comments: json,
   }
 }
 

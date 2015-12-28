@@ -2,7 +2,7 @@ import React from 'react-native'
 import Root from './src/root'
 
 const {
-  AppRegistry
+  AppRegistry,
 } = React
 
 AppRegistry.registerComponent('HavitApp', () => Root)
