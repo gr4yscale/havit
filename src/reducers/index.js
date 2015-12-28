@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import soundcloudReducer from './soundcloudReducer';
+import comments from './comments';
 import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
-  soundcloud: soundcloudReducer,
-  auth: authReducer,
+  comments,
+  authReducer,
 });
 
 export default rootReducer;

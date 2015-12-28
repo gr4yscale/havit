@@ -1,7 +1,7 @@
 import React from 'react-native';
-import {fetchComments} from '../redux/actions/api';
-// import {selectUser} from '../actions/user';
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
+import * as soundcloudActions from '../redux/actions/soundcloudActions';
 
 let {
   Component,
@@ -13,7 +13,7 @@ let {
   TouchableOpacity,
 } = React;
 
-class LinksInboxContainer extends Component {
+class SoundcloudContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -26,8 +26,8 @@ class LinksInboxContainer extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchComments())
+    const { fetchComments } = this.props
+    fetchComments()
   }
 
   displayUser() {
@@ -43,6 +43,7 @@ class LinksInboxContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
     let comments = this.props.comments.items;
     let dataSource = comments ? this.state.dataSource.cloneWithRows(comments) : this.state.dataSource.cloneWithRows([])
 
@@ -119,7 +120,13 @@ let styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return state
+  return {
+    comments: state.soundcloud,
+  };
 }
 
-export default connect(mapStateToProps)(LinksInboxContainer);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(soundcloudActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SoundcloudContainer);
