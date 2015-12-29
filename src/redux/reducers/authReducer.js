@@ -21,11 +21,22 @@ function loginFormFields(state = [], action) {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.AUTH_LOGIN_FORM_CHANGED:
+    case actionTypes.LOGIN_FORM_CHANGED:
       return Object.assign({}, state, {
         ...state,
         ...{form : {fields: loginFormFields(state, action)}},
       })
+    case actionTypes.LOGIN_REQUEST:
+      return state;
+    case actionTypes.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        ...{currentUser: action.response},
+      })
+
+    case actionTypes.LOGIN_FAILURE:
+      return state;
+
     default:
       return state;
   }

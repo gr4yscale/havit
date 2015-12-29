@@ -1,16 +1,10 @@
 import expect from 'expect'
 import deepfreeze from 'deep-freeze'
 import reducer from '../src/redux/reducers/authReducer'
-import * as actionTypes from '../src/redux/actionTypes'
+import {loginFormChanged} from '../src/redux/actions/authActions'
 
 describe('auth reducer', () => {
-  it('updates username in auth form fields data without mutation', () => {
-
-    const action = {
-      type: actionTypes.AUTH_LOGIN_FORM_CHANGED,
-      field: 'username',
-      value: 'gr4yscale',
-    }
+  it('loginFormChanged action transforms auth form fields data without mutation', () => {
 
     const beforeState = {
       form: {
@@ -21,7 +15,6 @@ describe('auth reducer', () => {
         },
       },
     }
-
     const afterState = {
       form: {
         fields: {
@@ -31,12 +24,11 @@ describe('auth reducer', () => {
         },
       },
     }
-
     // ensure that we don't mutate state
     deepfreeze(beforeState);
 
     expect(
-      reducer(beforeState, action)
+      reducer(beforeState, loginFormChanged('username', 'gr4yscale'))
     ).toEqual(afterState)
   })
 })

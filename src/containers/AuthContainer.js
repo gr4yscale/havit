@@ -11,12 +11,19 @@ let {
   TouchableHighlight,
   Text,
   TextInput,
-} = React;
+} = React
 
 class AuthContainer extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  loginButtonPressed() {
+    const { login } = this.props;
+    let username = this.props.auth.form.fields.username;
+    let password = this.props.auth.form.fields.password;
+    login(username, password);
   }
 
   render() {
@@ -27,15 +34,23 @@ class AuthContainer extends Component {
           <TextInput
               style={styles.inputs}
               placeholder={"Username"}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              autoFocus={true}
               onChangeText={(txt) => loginFormChanged('username',txt)}
           />
           <TextInput
               style={styles.inputs}
               placeholder={"Password"}
+              autoCapitalize={'none'}
+              secureTextEntry={true}
+              autoCorrect={false}
               onChangeText={(txt) => loginFormChanged('password',txt)}
           />
-          <TouchableHighlight style={styles.button}
+          <TouchableHighlight
+              style={styles.button}
               underlayColor="#99d9f4"
+              onPress={this.loginButtonPressed.bind(this)}
           >
             <Text style={styles.buttonText}>Log the f*ck in!</Text>
           </TouchableHighlight>
@@ -85,12 +100,13 @@ let styles = StyleSheet.create({
 
 AuthContainer.propTypes = {
   loginFormChanged: PropTypes.func.isRequired,
-};
+  login: PropTypes.func.isRequired,
+}
 
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
