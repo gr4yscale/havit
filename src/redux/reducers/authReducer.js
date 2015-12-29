@@ -3,9 +3,13 @@
 import * as actionTypes from '../actionTypes'
 
 const initialState = {
-  formUsername: 'silly',
-  formEmail: 'silly@sally.com',
-  formPassword: 'thepass',
+  form: {
+    fields: {
+      username: '',
+      email: '',
+      password: '',
+    },
+  },
 }
 
 function loginFormFields(state = [], action) {
