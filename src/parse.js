@@ -39,6 +39,14 @@ export default class Parse {
     }
   }
 
+  getMyLinks() {
+    try {
+      return this.fetchFromParse('GET', '/1/classes/Link')
+    } catch(error) {
+      throw error;
+    }
+  }
+
   fetchFromParse(method = 'GET', url = '', body = '') {
     let requestOptions = {
       method,

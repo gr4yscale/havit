@@ -12,7 +12,7 @@ const initialState = {
   },
 }
 
-function loginFormFields(state = [], action) {
+function loginFormFields(state = initialState, action) {
   let { field, value } = action;
   let updatedField = {};
   updatedField[field] = value;
