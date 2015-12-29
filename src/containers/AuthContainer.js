@@ -1,7 +1,7 @@
 import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
-// import * as authActions from '../actions/authActions'
+import * as authActions from '../actions/authActions'
 
 let {
   Component,
@@ -10,8 +10,6 @@ let {
   TouchableHighlight,
   Text,
 } = React;
-
-// TOFIX: fuck tcomb-form, build auth form myself!
 
 class AuthContainer extends Component {
 

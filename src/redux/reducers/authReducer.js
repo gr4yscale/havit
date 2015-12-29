@@ -1,33 +1,28 @@
-// import * as actionTypes from '../actionTypes';
-//
-// export default function comments(state = [], action) {
-//   switch (action.type) {
-//   case actionTypes.COMMENTS_REQUEST:
-//     return Object.assign({}, state, {
-//       isFetching: true,
-//       items: [],
-//     })
-//   case actionTypes.COMMENTS_SUCCESS:
-//     // TOFIX: mutating state? test this.
-//     return Object.assign({}, state, {
-//       isFetching: false,
-//       items: [...action.comments],
-//     })
-//   default:
-//     return state;
-//   }
-// }
+'use strict'
 
+import * as actionTypes from '../actionTypes'
 
-// import { SET_SELECTED_USER } from '../actions/user';
+const initialState = {
+  formUsername: 'silly',
+  formEmail: 'silly@sally.com',
+  formPassword: 'thepass',
+}
 
-// export default function user(state = [], action) {
-//   switch (action.type) {
-//     case SET_SELECTED_USER:
-//       return Object.assign({}, state, {
-//         selectedUser: action.user`
-//       })
-//     default:
-//       return state;
-//   }
-// }
+function loginFormFields(state = [], action) {
+  let { field, value } = action;
+  let updatedField = {};
+  updatedField[field] = value;
+  return Object.assign({}, state.form.fields, updatedField)
+}
+
+export default function auth(state = initialState, action) {
+  switch (action.type) {
+    case actionTypes.AUTH_LOGIN_FORM_CHANGED:
+      return Object.assign({}, state, {
+        ...state,
+        ...{form : {fields: loginFormFields(state, action)}},
+      })
+    default:
+      return state;
+  }
+}
