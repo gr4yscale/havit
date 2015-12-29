@@ -36,7 +36,6 @@ class LinksFeedContainer extends Component {
   }
 
   render() {
-    console.log(this.props.links);
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
 
     return (
@@ -79,7 +78,6 @@ let styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
-    paddingTop: 20,
     backgroundColor: '#88BBFF',
   },
   row: {
@@ -88,7 +86,7 @@ let styles = StyleSheet.create({
     padding: 8,
     // marginLeft:4,
     // marginRight:4,
-    marginTop: 1,
+    marginBottom: 1,
     opacity: 0.9,
     backgroundColor: '#FFFFFF',
   },

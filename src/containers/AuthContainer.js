@@ -66,7 +66,7 @@ let styles = StyleSheet.create({
     flex: 1,
   },
   form: {
-    marginTop: 80,
+    marginTop: 30,
     marginBottom: 10,
     marginLeft: 20,
     marginRight: 20,
