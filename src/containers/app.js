@@ -2,9 +2,7 @@ import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
 import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
-// var ScrollableTabView = require('react-native-scrollable-tab-view');
 // TOFIX: remove presentation (styling) and navigator out of here, setup redux provider here, remove root.js
-
 
 let {
   StyleSheet,
@@ -19,12 +17,13 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollableTabView style={{marginTop:-6}}
-            tabBarUnderlineColor={'#88BBFF'}
-            tabBarActiveTextColor={'#000000'}
+        <ScrollableTabView style={{marginTop:-2}}
+            tabBarUnderlineColor={'#E91E63'}
+            tabBarActiveTextColor={'#E91E63'}
         >
           <LinksFeedContainer tabLabel="Inbox" />
-          <AuthContainer tabLabel="Login" />
+          <AuthContainer tabLabel="Sent" />
+          <AuthContainer tabLabel="Friends" />
         </ScrollableTabView>
       </View>
     )

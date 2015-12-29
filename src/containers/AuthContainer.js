@@ -78,8 +78,8 @@ let styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: '#E91E63',
+    borderColor: '#E91E63',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 8,

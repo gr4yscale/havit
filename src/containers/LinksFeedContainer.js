@@ -2,6 +2,7 @@ import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
+import {MKButton} from 'react-native-material-kit';
 
 let {
   Component,
@@ -10,7 +11,15 @@ let {
   ListView,
   Text,
   TouchableOpacity,
+  Image
 } = React
+
+const PlainFab = MKButton.plainFab()
+  .withOnPress(() => {
+    console.log('Hi, its a colored button!');
+  })
+  .build();
+
 
 class LinksFeedContainer extends Component {
 
@@ -68,6 +77,14 @@ class LinksFeedContainer extends Component {
             pageSize={4}
             style = {styles.listView}
         />
+        <View style={{flexDirection: 'column', flex: 1, alignItems: 'center', backgroundColor:'#FFCCB9', height:60}}>
+          <PlainFab>
+            <Image
+                pointerEvents="none"
+                source={require('../../img/plus_dark.png')}
+            />
+          </PlainFab>
+        </View>
       </View>
     );
   }
@@ -76,9 +93,12 @@ class LinksFeedContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    backgroundColor:'#FFCCB9',
   },
   listView: {
-    backgroundColor: '#88BBFF',
+    backgroundColor: '#FFCCB9',
+    height: 440,
   },
   row: {
     flex: 1,
@@ -86,7 +106,7 @@ let styles = StyleSheet.create({
     padding: 8,
     // marginLeft:4,
     // marginRight:4,
-    marginBottom: 1,
+    marginBottom: 0.5,
     opacity: 0.9,
     backgroundColor: '#FFFFFF',
   },
