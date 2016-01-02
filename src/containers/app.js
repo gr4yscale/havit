@@ -1,13 +1,8 @@
 import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
+import ShareContainer from './ShareContainer'
 import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
-// TOFIX: remove presentation (styling) and navigator out of here, setup redux provider here, remove root.js
-
-let {
-  StyleSheet,
-  View,
-} = React
 
 class App extends React.Component {
   constructor(props) {
