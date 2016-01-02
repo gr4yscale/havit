@@ -2,9 +2,10 @@ const BASE_URL = 'https://api.parse.com';
 
 export default class Parse {
 
-  constructor( sessionToken = '') {
+  constructor(userObjectId, sessionToken) {
     this.applicationId = '[redacted]'
     this.restAPIKey = '[redacted]'
+    this.userObjectId = userObjectId
     this.sessionToken = sessionToken
   }
 

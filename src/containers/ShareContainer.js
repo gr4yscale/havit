@@ -58,14 +58,16 @@ let styles = StyleSheet.create({
   },
 })
 
-function mapStateToProps(state) {
-  return {
-    friends: state.entities.friends,
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     friends: state.entities.friends,
+//   }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(serverActions, dispatch);
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(ShareContainer)
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(serverActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShareContainer)
+export default ShareContainer;

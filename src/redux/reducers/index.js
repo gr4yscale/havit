@@ -1,12 +1,20 @@
 import { combineReducers } from 'redux';
-import soundcloudReducer from './soundcloudReducer'
-import authReducer from './authReducer'
-import serverReducer from './serverReducer'
+import auth from './authReducer'
+import server from './serverReducer'
+import share from './shareReducer'
 
 const rootReducer = combineReducers({
-  soundcloud: soundcloudReducer,
-  auth: authReducer,
-  entities: serverReducer,
+  auth,
+  entities: server,
 });
 
+function reducer(state = {}, action) {
+  return {
+    auth: auth(state, action),
+    entities: server(state, action),
+    share: share(state, action),
+  }
+}
+
 export default rootReducer;
+// export default reducer;

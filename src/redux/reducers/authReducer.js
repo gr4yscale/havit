@@ -19,6 +19,7 @@ function loginFormFields(state = initialState, action) {
   return Object.assign({}, state.form.fields, updatedField)
 }
 
+// TOFIX: no need for ...state
 export default function auth(state = initialState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_FORM_CHANGED:
