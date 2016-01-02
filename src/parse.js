@@ -47,6 +47,17 @@ export default class Parse {
     }
   }
 
+  getFriends() {
+    try {
+      let body = `where={"$relatedTo":{"object":{"__type":"Pointer","className":"_User","objectId":"${this.userObjectId}"},"key":"friends"}}`;
+      let encodedBody = encodeURIComponent(body)
+      let url = `/1/users?${encodedBody}`
+      return this.fetchFromParse('GET', url)
+    } catch(error) {
+      throw error;
+    }
+  }
+
   fetchFromParse(method = 'GET', url = '', body = '') {
     let requestOptions = {
       method,
