@@ -1,7 +1,8 @@
 import React from 'react-native';
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
+import * as shareActions from '../redux/actions/shareActions'
+
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 
@@ -19,10 +20,19 @@ let deviceWidth = Dimensions.get('window').width;
 
 class ShareContainer extends Component {
 
+  componentDidMount() {
+    const { fetchFriends } = this.props
+    setTimeout(function() {
+      fetchFriends()
+    }, 200);
+  }
+
   render() {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <FriendList
+            {...this.props}
             headerClass={ShareHeader}
         />
 
@@ -58,16 +68,16 @@ let styles = StyleSheet.create({
   },
 })
 
-// function mapStateToProps(state) {
-//   return {
-//     friends: state.entities.friends,
-//   }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(serverActions, dispatch);
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(ShareContainer)
-
-export default ShareContainer;
+export default connect(
+  (state) => {
+    return {
+      friends: state.share.selectedFriends,
+    }
+  },
+  (dispatch) => {
+    return {
+      fetchFriends: () => dispatch(serverActions.fetchFriends()),
+      friendListCellTapped: (rowId) => dispatch(shareActions.friendListCellTapped(rowId)),
+    }
+  }
+)(ShareContainer)

@@ -1,9 +1,4 @@
 import React from 'react-native';
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux/native'
-// import {fetchFriends} from '../redux/actions/serverActions' // tofix: have container compnoent hook this up and pass it in
-import * as serverActions from '../redux/actions/serverActions'
-import * as shareActions from '../redux/actions/shareActions'
 
 let {
   Component,
@@ -29,13 +24,6 @@ class FriendList extends Component {
     }
   }
 
-  componentDidMount() {
-    const { fetchFriends } = this.props
-    setTimeout(function() {
-      fetchFriends()
-    }, 200);
-  }
-
   onRowPressed(rowId) {
     console.log(`tapped ${rowId}`)
     const { friendListCellTapped } = this.props
@@ -55,11 +43,12 @@ class FriendList extends Component {
         <ListView
             dataSource = {dataSource}
             renderRow = {(rowData, sectionId, rowId) => {
+              let text = rowData.selected ? <Text style={{fontSize:30}}>{rowData.displayName}</Text> : <Text>{rowData.displayName}</Text>
               return (
               <TouchableOpacity onPress={this.onRowPressed.bind(this, parseInt(rowId))}>
                 <View style={styles.row}>
                   <Text>
-                    {rowData.displayName}
+                    {text}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -89,23 +78,4 @@ let styles = StyleSheet.create({
   },
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchFriends: () => dispatch(serverActions.fetchFriends()),
-    friendListCellTapped: (rowId) => dispatch(shareActions.friendListCellTapped(rowId)),
-  // return bindActionCreators(serverActions, dispatch);
-  }
-}
-
-export default connect(
-  (state) => {return {friends: state.entities.friends}},
-  mapDispatchToProps
- )(FriendList)
-
- // (dispatch) => {
- //   debugger;;
- //   return {
- //     fetchFriends: () => dispatch(fetchFriends()),
- //     friendListCellTapped: (rowId) => dispatch(friendListCellTapped(rowId)),
- //   }
- // }
+export default FriendList
