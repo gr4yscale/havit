@@ -33,21 +33,24 @@ class ShareHeader extends Component {
 
 let styles = StyleSheet.create({
   form: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor:'#EEEEEE',
+    marginTop: 8,
+    marginBottom: 8,
+    marginLeft: 8,
+    marginRight: 8,
   },
   inputs: {
     flex:1,
-    height: 32,
-    fontSize:14,
+    height: 30,
+    fontSize:13,
     borderColor: '#BBBBBB',
-    borderRadius: 8,
-    borderWidth: 1,
-    padding: 8,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 4,
+    borderWidth: 0,
+    paddingLeft: 6,
+    paddingRight: 6,
     marginTop: 4,
-    marginBottom: 4,
+    marginBottom: 0,
   },
 })
 

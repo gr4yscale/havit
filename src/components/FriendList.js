@@ -6,7 +6,7 @@ let {
   View,
   ListView,
   Text,
-  TouchableOpacity,
+  TouchableHighlight,
   Dimensions,
 } = React
 
@@ -43,15 +43,21 @@ class FriendList extends Component {
         <ListView
             dataSource = {dataSource}
             renderRow = {(rowData, sectionId, rowId) => {
-              let text = rowData.selected ? <Text style={{fontSize:30}}>{rowData.displayName}</Text> : <Text>{rowData.displayName}</Text>
+              let text = rowData.selected ?
+                <Text style={styles.cellText}>[x] {rowData.displayName}</Text> : <Text style={styles.cellText}>[ ] {rowData.displayName}</Text>
               return (
-              <TouchableOpacity onPress={this.onRowPressed.bind(this, parseInt(rowId))}>
+              <TouchableHighlight
+                  onPress={this.onRowPressed.bind(this, parseInt(rowId))}
+                  delayPressIn={0}
+                  delayPressOut={0}
+                  underlayColor={'#FF3B7F'}
+              >
                 <View style={styles.row}>
                   <Text>
                     {text}
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </TouchableHighlight>
               )
             }}
             initialListSize={20}
@@ -75,6 +81,11 @@ let styles = StyleSheet.create({
     marginBottom: 0.5,
     opacity: 0.9,
     backgroundColor: '#FFFFFF',
+  },
+  cellText: {
+    color: '#333333',
+    fontWeight: '600',
+    // backgroundColor: '#99EEFF',
   },
 })
 
