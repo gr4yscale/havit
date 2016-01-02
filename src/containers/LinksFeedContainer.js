@@ -11,10 +11,15 @@ let {
   ListView,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions,
 } = React
 
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
 const PlainFab = MKButton.plainFab()
+  .withBackgroundColor('#FF3B7F')
   .withOnPress(() => {
     console.log('Hi, its a colored button!');
   })
@@ -35,6 +40,7 @@ class LinksFeedContainer extends Component {
 
   componentDidMount() {
     const { fetchLinksReceived } = this.props
+    //TOFIX: setTimeout is being used to prevent changing state before it's loaded from persistence layer
     setTimeout(function() {
       fetchLinksReceived()
     }, 200);
@@ -46,6 +52,7 @@ class LinksFeedContainer extends Component {
 
   render() {
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
+    let statusIndicator = <Text style={{color:'#FF3B7F', paddingRight:4, fontWeight:'800'}}>●</Text>
 
     return (
       <View style={styles.container}>
@@ -54,20 +61,23 @@ class LinksFeedContainer extends Component {
             renderRow = {(rowData, sectionId, rowId) => {
               return (
               <TouchableOpacity onPress={this.linkCellTapped.bind(this, parseInt(rowId))}>
-              <View style={styles.row}>
-                <View style={{flexDirection: 'column', flex: 1, alignItems: 'flex-start'}}>
-                  <Text
-                      style={styles.titleText}
-                      numberOfLines={6}
-                  >
-                    {rowData.title}
-                  </Text>
-                  <Text
-                      style={styles.urlText}
-                      numberOfLines={1}
-                  >
-                    {rowData.url}
-                  </Text>
+                <View style={styles.row}>
+                  <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+                    {statusIndicator}
+                    <View style={{flexDirection: 'column', flex: 1,marginLeft: 4}}>
+                      <Text
+                          style={styles.titleText}
+                          numberOfLines={6}
+                      >
+                        {rowData.title}
+                      </Text>
+                      <Text
+                          style={styles.urlText}
+                          numberOfLines={1}
+                      >
+                        {rowData.url}
+                      </Text>
+                  </View>
                 </View>
               </View>
               </TouchableOpacity>
@@ -77,13 +87,15 @@ class LinksFeedContainer extends Component {
             pageSize={4}
             style = {styles.listView}
         />
-        <View style={{flexDirection: 'column', flex: 1, alignItems: 'center', backgroundColor:'#FFCCB9', height:60}}>
+        <View style={{position:'absolute', width:deviceWidth, height: 80, bottom: 0}}>
+        <View style={{flex: 1,alignItems:'center'}}>
           <PlainFab>
             <Image
                 pointerEvents="none"
-                source={require('../../img/plus_dark.png')}
+                source={require('../../img/plus_white.png')}
             />
           </PlainFab>
+        </View>
         </View>
       </View>
     );
@@ -92,13 +104,15 @@ class LinksFeedContainer extends Component {
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor:'#FFCCB9',
+    flex:1,
+    backgroundColor:'#EEEEEE',
+    height:deviceHeight - 72,
+  },
+  content: {
+    flex:1,
   },
   listView: {
-    backgroundColor: '#FFCCB9',
-    height: 440,
+    // backgroundColor: '#FFCCB9',
   },
   row: {
     flex: 1,

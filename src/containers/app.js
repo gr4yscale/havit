@@ -16,25 +16,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollableTabView style={{marginTop:-2}}
-            tabBarUnderlineColor={'#E91E63'}
-            tabBarActiveTextColor={'#E91E63'}
+        <ScrollableTabView style={{marginTop:8, paddingTop:14}}
+            tabBarUnderlineColor={'#FF3B7F'}
+            tabBarActiveTextColor={'#FF3B7F'}
         >
+          <ShareContainer tabLabel="Share" />
           <LinksFeedContainer tabLabel="Inbox" />
-          <AuthContainer tabLabel="Sent" />
           <AuthContainer tabLabel="Friends" />
         </ScrollableTabView>
-      </View>
     )
   }
 }
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop:20,
-  },
-})
 
 export default App
