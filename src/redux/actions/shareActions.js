@@ -1,6 +1,8 @@
+import * as actionTypes from '../actionTypes'
+
 export function friendListCellTapped(rowId) {
   return {
-    type: 'FRIEND_LIST_CELL_TAPPED',
+    type: actionTypes.FRIEND_LIST_CELL_TAPPED,
     rowId,
   }
 }

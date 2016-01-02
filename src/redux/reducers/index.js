@@ -6,15 +6,7 @@ import share from './shareReducer'
 const rootReducer = combineReducers({
   auth,
   entities: server,
-});
-
-function reducer(state = {}, action) {
-  return {
-    auth: auth(state, action),
-    entities: server(state, action),
-    share: share(state, action),
-  }
-}
+  share,
+})
 
 export default rootReducer;
-// export default reducer;

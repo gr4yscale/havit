@@ -2,7 +2,7 @@ import * as actionTypes from '../actionTypes'
 
 // TOFIX: handle error cases
 
-export default function auth(state = {}, action) {
+export default function server(state = {}, action) {
   switch (action.type) {
     case actionTypes.LINKS_RECEIVED_REQUEST:
       return Object.assign({}, state, {
