@@ -12,6 +12,7 @@ import rootReducer from './reducers'
 const reducer = storage.reducer(rootReducer)
 let engine = createEngine('havit-save-key')
 engine = decorators.filter(engine, ['auth']);
+engine = decorators.debounce(engine, 1500);
 
 const persistence = storage.createMiddleware(engine)
 
