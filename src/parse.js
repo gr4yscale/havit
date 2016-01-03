@@ -42,7 +42,11 @@ export default class Parse {
 
   getMyLinks() {
     try {
-      return this.fetchFromParse('GET', '/1/classes/Link')
+      let body = `where={"recipient_ids": {"$in": ["${this.userObjectId}"]}}`
+      let encodedBody = encodeURIComponent(body)
+      console.log(encodedBody)
+      let url = `/1/classes/Link?${encodedBody}`
+      return this.fetchFromParse('GET', url)
     } catch(error) {
       throw error;
     }
@@ -50,7 +54,7 @@ export default class Parse {
 
   getFriends() {
     try {
-      let body = `where={"$relatedTo":{"object":{"__type":"Pointer","className":"_User","objectId":"${this.userObjectId}"},"key":"friends"}}`;
+      let body = `where={"$relatedTo":{"object":{"__type":"Pointer","className":"_User","objectId":"${this.userObjectId}"},"key":"friends"}}`
       let encodedBody = encodeURIComponent(body)
       let url = `/1/users?${encodedBody}`
       return this.fetchFromParse('GET', url)

@@ -15,8 +15,8 @@ class App extends React.Component {
             tabBarUnderlineColor={'#FF3B7F'}
             tabBarActiveTextColor={'#FF3B7F'}
         >
-          <ShareContainer tabLabel="Share" />
           <LinksFeedContainer tabLabel="Inbox" />
+          <ShareContainer tabLabel="Share" />
           <AuthContainer tabLabel="Friends" />
         </ScrollableTabView>
     )
