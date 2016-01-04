@@ -6,6 +6,7 @@
     "android-setup-port": "adb reverse tcp:8081 tcp:8080",
     "test": "mocha --compilers js:babel-core/register --watch tests/*.js",
     "start": "react-native start",
+    "bundle": "react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle",
     "clean-babelrc-files": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
   "dependencies": {
