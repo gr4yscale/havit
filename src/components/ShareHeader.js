@@ -13,6 +13,13 @@ class ShareHeader extends Component {
       <View style={styles.form}>
       <TextInput
           style={styles.inputs}
+          placeholder={"URL"}
+          autoCapitalize={'none'}
+          autoCorrect={false}
+          autoFocus={true}
+      />
+      <TextInput
+          style={styles.inputs}
           placeholder={"Title"}
           autoCapitalize={'none'}
           autoCorrect={false}
@@ -34,7 +41,7 @@ class ShareHeader extends Component {
 let styles = StyleSheet.create({
   form: {
     backgroundColor:'#EEEEEE',
-    marginTop: 8,
+    marginTop: 4,
     marginBottom: 8,
     marginLeft: 8,
     marginRight: 8,
