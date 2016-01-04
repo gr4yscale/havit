@@ -36,7 +36,6 @@ class AuthContainer extends Component {
               placeholder={"Username"}
               autoCapitalize={'none'}
               autoCorrect={false}
-              autoFocus={true}
               onChangeText={(txt) => loginFormChanged('username',txt)}
           />
           <TextInput
