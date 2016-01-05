@@ -2,7 +2,7 @@ import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
 import ShareContainer from './ShareContainer'
-import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
+import CustomScrollableTabView from '../components/CustomScrollableTabView'
 import CustomTabBar from '../components/CustomTabBar'
 
 class App extends React.Component {
