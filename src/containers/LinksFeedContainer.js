@@ -13,6 +13,7 @@ let {
   TouchableOpacity,
   Image,
   Dimensions,
+  LinkingIOS
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -46,8 +47,9 @@ class LinksFeedContainer extends Component {
     }, 200);
   }
 
-  linkCellTapped(rowId) {
-    console.log(`tapped ${rowId}`)
+  linkCellTapped(data) {
+    // console.log(`tapped ${rowData}`)
+    LinkingIOS.openURL(data.url)
   }
 
   render() {
@@ -58,9 +60,9 @@ class LinksFeedContainer extends Component {
       <View style={styles.container}>
         <ListView
             dataSource = {dataSource}
-            renderRow = {(rowData, sectionId, rowId) => {
+            renderRow = {(rowData) => {
               return (
-              <TouchableOpacity onPress={this.linkCellTapped.bind(this, parseInt(rowId))}>
+              <TouchableOpacity onPress={this.linkCellTapped.bind(this, rowData)}>
                 <View style={styles.row}>
                   <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
                     {statusIndicator}
