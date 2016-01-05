@@ -1,12 +1,10 @@
 import React from 'react-native';
+import FriendListCell from './FriendListCell'
 
 let {
   Component,
   StyleSheet,
-  View,
   ListView,
-  Text,
-  TouchableHighlight,
   Dimensions,
 } = React
 
@@ -24,10 +22,9 @@ class FriendList extends Component {
     }
   }
 
-  onRowPressed(rowId) {
-    console.log(`tapped ${rowId}`)
+  onCellPressed(data) {
     const { friendListCellTapped } = this.props
-    friendListCellTapped(rowId)
+    friendListCellTapped(data.objectId)
   }
 
   renderHeader() {
@@ -42,22 +39,13 @@ class FriendList extends Component {
     return (
         <ListView
             dataSource = {dataSource}
-            renderRow = {(rowData, sectionId, rowId) => {
-              let text = rowData.selected ?
-                <Text style={styles.cellText}>[x] {rowData.displayName}</Text> : <Text style={styles.cellText}>[ ] {rowData.displayName}</Text>
+            renderRow = {(data, sectionId, rowId) => {
+              let props = {rowId, data}
               return (
-              <TouchableHighlight
-                  onPress={this.onRowPressed.bind(this, parseInt(rowId))}
-                  delayPressIn={0}
-                  delayPressOut={0}
-                  underlayColor={'#FF3B7F'}
-              >
-                <View style={styles.row}>
-                  <Text>
-                    {text}
-                  </Text>
-                </View>
-              </TouchableHighlight>
+                <FriendListCell
+                    onPress={() => this.onCellPressed(data)}
+                    {...props}
+                />
               )
             }}
             initialListSize={20}
