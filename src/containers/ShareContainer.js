@@ -65,7 +65,7 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor:'#EEEEEE',
-    height:deviceHeight - 62,
+    height:deviceHeight - 66,
   },
   buttonText: {
     fontSize: 18,

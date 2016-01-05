@@ -106,7 +106,7 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor:'#EEEEEE',
-    height:deviceHeight - 62,
+    height:deviceHeight - 72,
   },
   content: {
     flex:1,
