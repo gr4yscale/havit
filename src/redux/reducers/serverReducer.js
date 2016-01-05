@@ -23,7 +23,6 @@ export default function server(state = {}, action) {
         friends: action.response.results,
         friendsFetching: false,
       })
-
     default:
       return state;
   }

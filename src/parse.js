@@ -51,6 +51,14 @@ export default class Parse {
     }
   }
 
+  shareLink(data) {
+    try {
+      return this.fetchFromParse('POST', '/1/classes/Link', data)
+    } catch(error) {
+      throw error;
+    }
+  }
+
   getFriends() {
     try {
       let body = `where={"$relatedTo":{"object":{"__type":"Pointer","className":"_User","objectId":"${this.userObjectId}"},"key":"friends"}}`

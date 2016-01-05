@@ -42,7 +42,46 @@ export function fetchFriends() {
   }
 }
 
+export function shareLink() {
+  return (dispatch, getState) => {
 
+    console.log(getState())
+
+    let form = getState().share.form
+    let senderId = getState().auth.currentUser.objectId
+    let friends = getState().share.selectedFriends
+
+    let recipientIds = friends.filter((friend) => {
+      return (friend.selected === true)
+    }).map((friend) => {
+      return friend.objectId
+    })
+
+    let postData = {
+      'url' : form.url,
+      'title' : form.title,
+      'comment' : form.comment,
+      'sender_id' : senderId,
+      'recipient_ids' : recipientIds,
+    }
+
+    dispatch(shareRequest());
+    let parse = configuredParse(getState());
+    return parse.shareLink(postData)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        dispatch(shareSuccess(json))
+      } else {
+        dispatch(shareFailure(JSON.parse(response._bodyInit)))
+      }
+      return response;
+    })
+    .catch((error) => {
+      dispatch(linksReceivedFailure(error))
+    })
+  }
+}
 
 // links receieved
 
@@ -84,6 +123,28 @@ function friendsSuccess(json) {
 function friendsFailure(error) {
   return {
     type: actionTypes.FRIENDS_FAILURE,
+    payload: error,
+  }
+}
+
+// share
+
+function shareRequest() {
+  return {
+    type: actionTypes.SHARE_REQUEST,
+  }
+}
+
+function shareSuccess(json) {
+  return {
+    type: actionTypes.SHARE_SUCCESS,
+    response: json,
+  }
+}
+
+function shareFailure(error) {
+  return {
+    type: actionTypes.SHARE_FAILURE,
     payload: error,
   }
 }

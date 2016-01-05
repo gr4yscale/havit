@@ -6,7 +6,9 @@ const initialState = {
     title: '',
     comment: '',
   },
-}
+  sharing: false,
+  friendsFetching: false,
+} // TOFIX: set selectedFriends?
 
 // TOFIX: find or build a way to make this cleaner (auto create actions, specify a state shape for reducer)
 function shareFormFields(state = initialState, action) {
@@ -47,6 +49,22 @@ export default function share(state = initialState, action) {
         selectedFriends,
         friendsFetching: false,
       })
+
+    case actionTypes.SHARE_REQUEST:
+      return Object.assign({}, state, {
+        sharing: true,
+      })
+
+    case actionTypes.SHARE_SUCCESS:
+      let friends = state.selectedFriends.map((friend) => {
+        return Object.assign({}, friend, { selected: false })
+      })
+
+      return Object.assign({}, state, {
+        ...initialState,
+        selectedFriends : friends,
+      })
+
     default:
       return state;
   }

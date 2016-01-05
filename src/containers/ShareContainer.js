@@ -34,6 +34,11 @@ class ShareContainer extends Component {
     )
   }
 
+  shareButtonPressed() {
+    const {shareLink} = this.props
+    shareLink()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -44,6 +49,7 @@ class ShareContainer extends Component {
 
         <View style={{position:'absolute', width:deviceWidth, height: 50, bottom: 0, backgroundColor:'#FF00FF'}}>
           <TouchableHighlight
+              onPress={() => this.shareButtonPressed()}
               style={styles.button}
               underlayColor="#99d9f4"
           >
@@ -83,6 +89,7 @@ export default connect(
   (dispatch) => {
     return {
       fetchFriends: () => dispatch(serverActions.fetchFriends()),
+      shareLink: () => dispatch(serverActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
     }
