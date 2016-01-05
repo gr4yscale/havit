@@ -1,8 +1,16 @@
 import * as actionTypes from '../actionTypes'
 
-export function friendListCellTapped(objectId) {
+export function friendCellTapped(objectId) {
   return {
-    type: actionTypes.FRIEND_LIST_CELL_TAPPED,
+    type: actionTypes.SHARE_FRIEND_CELL_TAPPED,
     objectId,
+  }
+}
+
+export function shareFormChanged(field, value) {
+  return {
+    type: actionTypes.SHARE_FORM_CHANGED,
+    field,
+    value,
   }
 }

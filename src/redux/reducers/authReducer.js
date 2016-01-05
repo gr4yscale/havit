@@ -2,6 +2,7 @@
 
 import * as actionTypes from '../actionTypes'
 
+// TOFIX: remove unecessary fields key?
 const initialState = {
   form: {
     fields: {

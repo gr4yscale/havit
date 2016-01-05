@@ -27,13 +27,19 @@ class ShareContainer extends Component {
     }, 200);
   }
 
+  // TOFIX: passing the props down this way is definitely not the right way to do it
+  renderHeader() {
+    return (
+      <ShareHeader shareFormChanged={this.props.shareFormChanged} />
+    )
+  }
+
   render() {
-    console.log(this.props)
     return (
       <View style={styles.container}>
         <FriendList
             {...this.props}
-            headerClass={ShareHeader}
+            header={this.renderHeader.bind(this)}
         />
 
         <View style={{position:'absolute', width:deviceWidth, height: 50, bottom: 0, backgroundColor:'#FF00FF'}}>
@@ -77,7 +83,8 @@ export default connect(
   (dispatch) => {
     return {
       fetchFriends: () => dispatch(serverActions.fetchFriends()),
-      friendListCellTapped: (rowId) => dispatch(shareActions.friendListCellTapped(rowId)),
+      friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
+      shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
     }
   }
 )(ShareContainer)

@@ -9,6 +9,7 @@ let {
 
 class ShareHeader extends Component {
   render() {
+    const { shareFormChanged } = this.props;
     return (
       <View style={styles.form}>
       <TextInput
@@ -16,14 +17,14 @@ class ShareHeader extends Component {
           placeholder={"URL"}
           autoCapitalize={'none'}
           autoCorrect={false}
-          autoFocus={true}
+          onChangeText={(txt) => shareFormChanged('url',txt)}
       />
       <TextInput
           style={styles.inputs}
           placeholder={"Title"}
           autoCapitalize={'none'}
           autoCorrect={false}
-          autoFocus={true}
+          onChangeText={(txt) => shareFormChanged('title',txt)}
       />
       <TextInput
           style={styles.inputs}
@@ -31,7 +32,7 @@ class ShareHeader extends Component {
           autoCapitalize={'none'}
           multiLine={true}
           numberOfLines={6}
-          autoCorrect={false}
+          onChangeText={(txt) => shareFormChanged('comment',txt)}
       />
       </View>
     )

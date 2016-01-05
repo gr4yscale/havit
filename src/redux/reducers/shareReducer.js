@@ -1,10 +1,29 @@
 import * as actionTypes from '../actionTypes'
 
-const initialState = {}
+const initialState = {
+  form: {
+    url: '',
+    title: '',
+    comment: '',
+  },
+}
+
+// TOFIX: find or build a way to make this cleaner (auto create actions, specify a state shape for reducer)
+function shareFormFields(state = initialState, action) {
+  let { field, value } = action;
+  let updatedField = {};
+  updatedField[field] = value;
+  return Object.assign({}, state.form, updatedField)
+}
 
 export default function share(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.FRIEND_LIST_CELL_TAPPED:
+    case actionTypes.SHARE_FORM_CHANGED:
+      return Object.assign({}, state, {
+        ...{form : shareFormFields(state, action)},
+      })
+
+    case actionTypes.SHARE_FRIEND_CELL_TAPPED:
       return Object.assign({}, state, {
         selectedFriends : state.selectedFriends.map((friend) => {
           return friend.objectId === action.objectId ?

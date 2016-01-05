@@ -44,7 +44,6 @@ export default class Parse {
     try {
       let body = `where={"recipient_ids": {"$in": ["${this.userObjectId}"]}}`
       let encodedBody = encodeURIComponent(body)
-      console.log(encodedBody)
       let url = `/1/classes/Link?${encodedBody}`
       return this.fetchFromParse('GET', url)
     } catch(error) {

@@ -23,13 +23,14 @@ class FriendList extends Component {
   }
 
   onCellPressed(data) {
-    const { friendListCellTapped } = this.props
-    friendListCellTapped(data.objectId)
+    const { friendCellTapped } = this.props
+    friendCellTapped(data.objectId)
   }
 
+  // TOFIX: this sucks, fix it
   renderHeader() {
     return (
-      <this.props.headerClass />
+      <this.props.header />
     )
   }
 
