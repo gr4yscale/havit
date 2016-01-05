@@ -12,8 +12,11 @@ class App extends React.Component {
     super(props)
   }
 
+  shouldComponentUpdate() {
+    return false
+  }
+
   render() {
-    console.log(this.props)
     return (
         <CustomScrollableTabView style={{marginTop:12}}
             tabBarUnderlineColor={'#FF3B7F'}
@@ -32,7 +35,6 @@ class App extends React.Component {
     )
   }
 }
-
 // TOFIX: hack for now to get links list to update when swiping over
 export default connect(
   (state) => { return state},

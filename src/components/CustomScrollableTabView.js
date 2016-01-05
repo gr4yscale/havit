@@ -31,7 +31,7 @@ class CustomScrollableTabView extends Component {
 
   componentWillReceiveProps(props) {
     if (props.initialPage !== this.state.currentPage) {
-      this.goToPage(props.initialPage)
+      // this.goToPage(props.initialPage)
     }
   }
 
