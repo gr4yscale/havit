@@ -8,7 +8,6 @@ let {
   ScrollView,
   Platform,
   StyleSheet,
-  ViewPagerAndroid,
   InteractionManager,
 } = React
 
@@ -80,35 +79,34 @@ class CustomScrollableTabView extends Component {
               let percentOfCurrentScreen = (offsetX - (totalWidth - amountToSubtract)) / screenWidth
 
               this._updateScrollValue(percentOfCurrentScreen) // custom tabbar will use state.offset
-              this.setState({offset: final})
+              this.setState({offset: percentOfCurrentScreen})
 
+              // this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
+            }}
+            onMomentumScrollBegin={(e) => {
+              let offsetX = e.nativeEvent.contentOffset.x
               this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
             }}
-            // onMomentumScrollBegin={(e) => {
-              // let offsetX = e.nativeEvent.contentOffset.x
-              // this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
-            // }}
-            // onMomentumScrollEnd={(e) => {
-              // let offsetX = e.nativeEvent.contentOffset.x
-              // this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
-            // }}
+            onMomentumScrollEnd={(e) => {
+              let offsetX = e.nativeEvent.contentOffset.x
+              this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
+            }}
             scrollEventThrottle={16}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={!this.props.locked}
             directionalLockEnabled
             alwaysBounceVertical={false}
         >
-            {
-              this.props.children.map((child,idx) => {
-              return
-                <View
-                  key={child.props.tabLabel + '_' + idx}
-                  style={{width: this.state.container.width}}
-                >
-              {child}
-              </View>
-            }
-          }
+        {
+          this.props.children.map((child,idx) => {
+            return <View
+                key={child.props.tabLabel + '_' + idx}
+                style={{width: this.state.container.width}}
+                   >
+                    {child}
+                  </View>
+          })
+        }
         </ScrollView>
       )
     } else {
@@ -135,7 +133,6 @@ class CustomScrollableTabView extends Component {
       )
     }
   }
-
   _updateSelectedPage(currentPage) {
     if (typeof currentPage === 'object') {
       currentPage = currentPage.nativeEvent.position
