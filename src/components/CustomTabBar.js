@@ -15,11 +15,10 @@ class CustomTabBar extends Component {
   }
 
   render() {
-
-    let currentPage = this.props.activeTab
-
-    let previousTitle = this.props.tabs[currentPage]
-    let nextTitle = this.props.tabs[currentPage + 1]
+    // let currentPage = this.props.activeTab
+    //TOFIX: not getting the correct titles because activeTab changes
+    let previousTitle = this.props.tabs[0]
+    let nextTitle = this.props.tabs[1]
 
     let previousTitleStyle = {
       transform: [{
