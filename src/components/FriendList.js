@@ -72,7 +72,7 @@ class FriendList extends Component {
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    height:deviceHeight - 72,
+    height:deviceHeight - 72, // TOFIX
   },
   row: {
     flex: 1,

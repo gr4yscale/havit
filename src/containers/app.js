@@ -3,6 +3,7 @@ import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
 import ShareContainer from './ShareContainer'
 import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
+import CustomTabBar from '../components/CustomTabBar'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,9 +12,10 @@ class App extends React.Component {
 
   render() {
     return (
-        <ScrollableTabView style={{marginTop:8, paddingTop:14}}
+        <ScrollableTabView style={{marginTop:12}}
             tabBarUnderlineColor={'#FF3B7F'}
             tabBarActiveTextColor={'#FF3B7F'}
+            renderTabBar={() => <CustomTabBar />}
         >
           <LinksFeedContainer tabLabel="Inbox" />
           <ShareContainer tabLabel="Share" />
