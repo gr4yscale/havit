@@ -3,7 +3,6 @@ import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
-import ShareContainer from './ShareContainer'
 import CustomScrollableTabView from '../components/CustomScrollableTabView'
 import CustomTabBar from '../components/CustomTabBar'
 
@@ -28,7 +27,6 @@ class App extends React.Component {
               fetchLinksReceived()
             }}
         >
-          <ShareContainer tabLabel="Share" />
           <LinksFeedContainer tabLabel="Inbox" />
           <AuthContainer tabLabel="Friends" />
         </CustomScrollableTabView>
