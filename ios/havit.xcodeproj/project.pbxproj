@@ -36,6 +36,8 @@
 		29A1ED3C1C3D632C008CF2C2 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		29A1ED3D1C3D632C008CF2C2 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		29A1ED3E1C3D632C008CF2C2 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		29A1ED741C3D842A008CF2C2 /* HVTShareExtensionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */; };
+		29A1ED751C3D8E16008CF2C2 /* HVTShareExtensionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */; };
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -184,6 +186,8 @@
 		29A1ED2D1C3D5211008CF2C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29A1ED571C3D76FD008CF2C2 /* havit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = havit.entitlements; path = havit/havit.entitlements; sourceTree = "<group>"; };
 		29A1ED581C3D7741008CF2C2 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		29A1ED721C3D842A008CF2C2 /* HVTShareExtensionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVTShareExtensionStorage.h; sourceTree = "<group>"; };
+		29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVTShareExtensionStorage.m; sourceTree = "<group>"; };
 		29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				29A1ED721C3D842A008CF2C2 /* HVTShareExtensionStorage.h */,
+				29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */,
 			);
 			name = havit;
 			sourceTree = "<group>";
@@ -708,6 +714,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				29A1ED741C3D842A008CF2C2 /* HVTShareExtensionStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +722,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A1ED751C3D8E16008CF2C2 /* HVTShareExtensionStorage.m in Sources */,
 				29A1ED291C3D5211008CF2C2 /* RootShareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
