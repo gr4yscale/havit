@@ -13,6 +13,7 @@ let {
   Text,
   TouchableHighlight,
   Dimensions,
+  NativeAppEventEmitter,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -21,10 +22,21 @@ let deviceWidth = Dimensions.get('window').width;
 class ShareContainer extends Component {
 
   componentDidMount() {
-    const { fetchFriends } = this.props
-    setTimeout(function() {
-      fetchFriends()
-    }, 200);
+    const { friendsSuccess } = this.props
+
+    // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
+    // the special private container that is provided for the extension to communicate with the app...weird shit
+
+    this.friendsListUpdateSubscription = NativeAppEventEmitter.addListener(
+      'FriendsListUpdate',
+      (friendsData) => {
+        friendsSuccess(friendsData)
+      }
+    )
+  }
+
+  componentWillUnmount() {
+    this.friendsListUpdateSubscription.remove();
   }
 
   // TOFIX: passing the props down this way is definitely not the right way to do it
@@ -92,7 +104,7 @@ export default connect(
   },
   (dispatch) => {
     return {
-      fetchFriends: () => dispatch(serverActions.fetchFriends()),
+      friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
       shareLink: () => dispatch(serverActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),

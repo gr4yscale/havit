@@ -8,6 +8,8 @@
 
 #import "RootShareViewController.h"
 #import "RCTRootView.h"
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 
 @implementation RootShareViewController
 
@@ -31,6 +33,26 @@
   self.view = rootView;
   
   [self receiveShareExtensionDataIfAvailable];
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSDictionary *friendsData = @{
+                              @"results" : @[
+                                  @{
+                                    @"displayName" :@"Inessa Demidova",
+                                    @"objectId" :@"MKK5q1L0jd",
+                                    @"username":@"inessa"
+                                    },
+                                  @{
+                                    @"displayName" :@"Tyler Powers",
+                                    @"objectId" :@"TTwnsRWf6A",
+                                    @"username":@"gr4yscale"
+                                    },
+                                  ]
+                              };
+    
+    [rootView.bridge.eventDispatcher sendAppEventWithName:@"FriendsListUpdate"
+                                                     body:friendsData];
+  });
 }
 
 - (void)receiveShareExtensionDataIfAvailable {
@@ -57,7 +79,7 @@
                                              NSString *urlAsString = [item absoluteString];
                                              shareData[@"url"] = urlAsString;
                                              
-                                             NSLog(@"share data: %@", shareData);
+                                             NSLog(@"[IOS] Share data: %@", shareData);
                                              [self updateHavitShareReactNativeWithProps:shareData];
                                            }];
 }

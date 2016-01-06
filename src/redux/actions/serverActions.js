@@ -37,7 +37,7 @@ export function fetchFriends() {
       return response;
     })
     .catch((error) => {
-      dispatch(linksReceivedFailure(error))
+      dispatch(friendsFailure(error))
     })
   }
 }
@@ -92,6 +92,8 @@ function linksReceivedRequest() {
 }
 
 function linksReceivedSuccess(json) {
+  console.log('action')
+  console.log(json)
   return {
     type: actionTypes.LINKS_RECEIVED_SUCCESS,
     response: json,
@@ -113,7 +115,7 @@ function friendsRequest() {
   }
 }
 
-function friendsSuccess(json) {
+export function friendsSuccess(json) {
   return {
     type: actionTypes.FRIENDS_SUCCESS,
     response: json,
