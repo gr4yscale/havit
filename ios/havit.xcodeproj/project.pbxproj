@@ -38,6 +38,9 @@
 		29A1ED3E1C3D632C008CF2C2 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		29A1ED741C3D842A008CF2C2 /* HVTShareExtensionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */; };
 		29A1ED751C3D8E16008CF2C2 /* HVTShareExtensionStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */; };
+		29A1ED761C3D9554008CF2C2 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80C1C3A0CA100EF4408 /* assets */; };
+		29A1ED771C3D955A008CF2C2 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
+		29A1ED781C3D956B008CF2C2 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -224,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A1ED781C3D956B008CF2C2 /* libReactNativeIcons.a in Frameworks */,
 				29A1ED351C3D632C008CF2C2 /* libRCTActionSheet.a in Frameworks */,
 				29A1ED361C3D632C008CF2C2 /* libRCTGeolocation.a in Frameworks */,
 				29A1ED371C3D632C008CF2C2 /* libRCTImage.a in Frameworks */,
@@ -694,6 +698,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A1ED771C3D955A008CF2C2 /* ionicons.ttf in Resources */,
+				29A1ED761C3D9554008CF2C2 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
