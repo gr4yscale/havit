@@ -13,7 +13,7 @@ let {
   TouchableOpacity,
   Image,
   Dimensions,
-  LinkingIOS
+  LinkingIOS,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -40,15 +40,18 @@ class LinksFeedContainer extends Component {
   }
 
   componentDidMount() {
-    const { fetchLinksReceived } = this.props
+    const { fetchLinksReceived, fetchFriends } = this.props
     //TOFIX: setTimeout is being used to prevent changing state before it's loaded from persistence layer
     setTimeout(function() {
       fetchLinksReceived()
     }, 200);
+
+    setTimeout(function() {
+      fetchFriends()
+    }, 300);
   }
 
   linkCellTapped(data) {
-    // console.log(`tapped ${rowData}`)
     LinkingIOS.openURL(data.url)
   }
 
@@ -138,14 +141,13 @@ let styles = StyleSheet.create({
   },
 })
 
-function mapStateToProps(state) {
-  return {
-    links: state.entities.links,
+export default connect(
+  (state) => {
+    return {
+      links: state.entities.links,
+    }
+  },
+  (dispatch) => {
+    return bindActionCreators(serverActions, dispatch)
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(serverActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LinksFeedContainer)
+)(LinksFeedContainer)

@@ -1,6 +1,11 @@
 import * as actionTypes from '../actionTypes'
 import Parse from '../../parse'
 
+// TOFIX: move this stuff elsewhere
+import React from 'react-native';
+let { NativeModules } = React
+let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
+
 export function loginFormChanged(field, value) {
   return {
     type: actionTypes.LOGIN_FORM_CHANGED,
@@ -29,6 +34,10 @@ export function loginFailure(error) {
   }
 }
 
+function updateShareExtensionStoreWithCurrentUser(json) {
+  HVTShareExtensionStorage.updateCurrentUser(json)
+}
+
 export function login(username,  password) {
   return (dispatch) => {
     dispatch(loginRequest());
@@ -43,6 +52,7 @@ export function login(username,  password) {
         // TOFIX: reset token on local storage / log out previous user
         // dispatch(logoutState());
         dispatch(loginSuccess(json))
+        updateShareExtensionStoreWithCurrentUser(json)
       } else {
         dispatch(loginFailure(JSON.parse(response._bodyInit)))
       }

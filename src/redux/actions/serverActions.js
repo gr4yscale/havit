@@ -2,6 +2,11 @@ import * as actionTypes from '../actionTypes'
 import Parse from '../../parse'
 import _ from 'lodash'
 
+// TOFIX: move this stuff elsewhere, also merge auth actions into serverActions!
+import React from 'react-native';
+let { NativeModules } = React
+let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
+
 export function fetchLinksReceived() {
   return (dispatch, getState) => {
     dispatch(linksReceivedRequest());
@@ -31,6 +36,7 @@ export function fetchFriends() {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
         dispatch(friendsSuccess(json))
+        updateShareExtensionStoreWithFriends(json)
       } else {
         dispatch(friendsFailure(JSON.parse(response._bodyInit)))
       }
@@ -44,8 +50,6 @@ export function fetchFriends() {
 
 export function shareLink() {
   return (dispatch, getState) => {
-
-    console.log(getState())
 
     let form = getState().share.form
     let senderId = getState().auth.currentUser.objectId
@@ -92,8 +96,6 @@ function linksReceivedRequest() {
 }
 
 function linksReceivedSuccess(json) {
-  console.log('action')
-  console.log(json)
   return {
     type: actionTypes.LINKS_RECEIVED_SUCCESS,
     response: json,
@@ -155,4 +157,9 @@ function configuredParse(state) {
   let userObjectId = _.get(state, 'auth.currentUser.objectId')
   let sessionToken = _.get(state, 'auth.currentUser.sessionToken')
   return new Parse(userObjectId, sessionToken);
+}
+
+// TOFIX: get this out of here!
+function updateShareExtensionStoreWithFriends(json) {
+  HVTShareExtensionStorage.updateFriends(json)
 }
