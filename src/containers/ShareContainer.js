@@ -59,7 +59,11 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
-    const {shareLink} = this.props
+    const {shareLink, shareFormChanged, url, title} = this.props
+    // TOFIX: create an action that expresses intent to set state such as
+    // "set share state from iOS share extension data"
+    shareFormChanged('url', url)
+    shareFormChanged('title', title)
     shareLink()
   }
 
