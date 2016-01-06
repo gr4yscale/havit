@@ -10,6 +10,7 @@
 #import "RCTRootView.h"
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
+#import "HVTShareExtensionStorage.h"
 
 @implementation RootShareViewController
 
@@ -33,26 +34,7 @@
   self.view = rootView;
   
   [self receiveShareExtensionDataIfAvailable];
-  
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    NSDictionary *friendsData = @{
-                              @"results" : @[
-                                  @{
-                                    @"displayName" :@"Inessa Demidova",
-                                    @"objectId" :@"MKK5q1L0jd",
-                                    @"username":@"inessa"
-                                    },
-                                  @{
-                                    @"displayName" :@"Tyler Powers",
-                                    @"objectId" :@"TTwnsRWf6A",
-                                    @"username":@"gr4yscale"
-                                    },
-                                  ]
-                              };
-    
-    [rootView.bridge.eventDispatcher sendAppEventWithName:@"FriendsListUpdate"
-                                                     body:friendsData];
-  });
+  [self refreshDataFromContainerApp];
 }
 
 - (void)receiveShareExtensionDataIfAvailable {
@@ -88,6 +70,26 @@
   RCTRootView *havitShareReactNativeApp = (RCTRootView *)self.view;
   dispatch_async(dispatch_get_main_queue(), ^{
     havitShareReactNativeApp.appProperties = props;
+  });
+}
+
+- (void)refreshDataFromContainerApp {
+
+  HVTShareExtensionStorage *storage = [[HVTShareExtensionStorage alloc] init];
+  NSDictionary *friends = [storage friends];
+  NSDictionary *currentUser = [storage currentUser];
+  
+  RCTRootView *havitShareReactNativeApp = (RCTRootView *)self.view;
+  
+  // TOFIX: Redux-storage is loading from persistence AFTER this comes through without the delay
+  // Fix this fragile ass shit soon!
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  [havitShareReactNativeApp.bridge.eventDispatcher sendAppEventWithName:@"FriendsListUpdate"
+                                                                   body:friends];
+  
+  [havitShareReactNativeApp.bridge.eventDispatcher sendAppEventWithName:@"CurrentUserUpdate"
+                                                                   body:currentUser];
   });
 }
 
