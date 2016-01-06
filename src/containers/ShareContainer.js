@@ -2,6 +2,7 @@ import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import * as shareActions from '../redux/actions/shareActions'
+import * as authActions from '../redux/actions/authActions'
 
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
@@ -22,7 +23,7 @@ let deviceWidth = Dimensions.get('window').width;
 class ShareContainer extends Component {
 
   componentDidMount() {
-    const { friendsSuccess } = this.props
+    const { friendsSuccess, loginSuccess } = this.props
 
     // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
     // the special private container that is provided for the extension to communicate with the app...weird shit
@@ -33,10 +34,18 @@ class ShareContainer extends Component {
         friendsSuccess(friendsData)
       }
     )
+
+    this.currentUserUpdateSubscription = NativeAppEventEmitter.addListener(
+      'CurrentUserUpdate',
+      (currentUserData) => {
+        loginSuccess(currentUserData)
+      }
+    )
   }
 
   componentWillUnmount() {
     this.friendsListUpdateSubscription.remove();
+    this.currentUserUpdateSubscription.remove();
   }
 
   // TOFIX: passing the props down this way is definitely not the right way to do it
@@ -105,6 +114,7 @@ export default connect(
   (dispatch) => {
     return {
       friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
+      loginSuccess: (json) => dispatch(authActions.loginSuccess(json)),
       shareLink: () => dispatch(serverActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
