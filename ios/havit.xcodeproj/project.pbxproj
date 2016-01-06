@@ -24,6 +24,8 @@
 		296FA8091C3A04BD00EF4408 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		296FA80B1C3A050700EF4408 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
 		296FA80D1C3A0CA100EF4408 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80C1C3A0CA100EF4408 /* assets */; };
+		29A1ED291C3D5211008CF2C2 /* RootShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */; };
+		29A1ED301C3D5211008CF2C2 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29A1ED251C3D5211008CF2C2 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -99,6 +101,13 @@
 			remoteGlobalIDString = 2F5A3EB81ACDBF8000439386;
 			remoteInfo = ReactNativeIcons;
 		};
+		29A1ED2E1C3D5211008CF2C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29A1ED241C3D5211008CF2C2;
+			remoteInfo = ShareExtension;
+		};
 		29A904EE1C332CFB0055FFEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */;
@@ -121,6 +130,20 @@
 			remoteInfo = RCTText;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		29A1ED341C3D5211008CF2C2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				29A1ED301C3D5211008CF2C2 /* ShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -145,6 +168,10 @@
 		296FA8031C3A04B100EF4408 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		296FA80A1C3A050700EF4408 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		296FA80C1C3A0CA100EF4408 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
+		29A1ED251C3D5211008CF2C2 /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		29A1ED271C3D5211008CF2C2 /* RootShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootShareViewController.h; sourceTree = "<group>"; };
+		29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootShareViewController.m; sourceTree = "<group>"; };
+		29A1ED2D1C3D5211008CF2C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -174,6 +201,13 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29A1ED221C3D5211008CF2C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +317,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29A1ED261C3D5211008CF2C2 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				29A1ED271C3D5211008CF2C2 /* RootShareViewController.h */,
+				29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */,
+				29A1ED2D1C3D5211008CF2C2 /* Info.plist */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
 		29A904E71C332CFB0055FFEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +378,7 @@
 				13B07FAE1A68108700A75B9A /* havit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* havitTests */,
+				29A1ED261C3D5211008CF2C2 /* ShareExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 			);
 			indentWidth = 2;
@@ -345,6 +390,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* havit.app */,
 				00E356EE1AD99517003FC87E /* havitTests.xctest */,
+				29A1ED251C3D5211008CF2C2 /* ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,15 +423,34 @@
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
+				29A1ED341C3D5211008CF2C2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				29A1ED2F1C3D5211008CF2C2 /* PBXTargetDependency */,
 			);
 			name = havit;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* havit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		29A1ED241C3D5211008CF2C2 /* ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29A1ED311C3D5211008CF2C2 /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildPhases = (
+				29A1ED211C3D5211008CF2C2 /* Sources */,
+				29A1ED221C3D5211008CF2C2 /* Frameworks */,
+				29A1ED231C3D5211008CF2C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareExtension;
+			productName = ShareExtension;
+			productReference = 29A1ED251C3D5211008CF2C2 /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -399,6 +464,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					29A1ED241C3D5211008CF2C2 = {
+						CreatedOnToolsVersion = 7.2;
 					};
 				};
 			};
@@ -467,6 +535,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* havit */,
 				00E356ED1AD99517003FC87E /* havitTests */,
+				29A1ED241C3D5211008CF2C2 /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -577,6 +646,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29A1ED231C3D5211008CF2C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -597,6 +673,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29A1ED211C3D5211008CF2C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A1ED291C3D5211008CF2C2 /* RootShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -604,6 +688,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* havit */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		29A1ED2F1C3D5211008CF2C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29A1ED241C3D5211008CF2C2 /* ShareExtension */;
+			targetProxy = 29A1ED2E1C3D5211008CF2C2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -687,6 +776,36 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = havit;
+			};
+			name = Release;
+		};
+		29A1ED321C3D5211008CF2C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.havit.ShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		29A1ED331C3D5211008CF2C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.havit.ShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -796,6 +915,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		29A1ED311C3D5211008CF2C2 /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A1ED321C3D5211008CF2C2 /* Debug */,
+				29A1ED331C3D5211008CF2C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "havit" */ = {
 			isa = XCConfigurationList;
