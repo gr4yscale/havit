@@ -28,9 +28,12 @@ class ShareContainer extends Component {
   }
 
   // TOFIX: passing the props down this way is definitely not the right way to do it
+  // TOFIX: being sloppy and just giving the header everything coming down from the app component, yikes
   renderHeader() {
     return (
-      <ShareHeader shareFormChanged={this.props.shareFormChanged} />
+      <ShareHeader shareFormChanged={this.props.shareFormChanged}
+          {...this.props}
+      />
     )
   }
 
@@ -66,6 +69,7 @@ let styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#EEEEEE',
     height:deviceHeight - 66,
+    paddingTop:50,
   },
   buttonText: {
     fontSize: 18,

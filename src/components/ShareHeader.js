@@ -18,6 +18,7 @@ class ShareHeader extends Component {
           autoCapitalize={'none'}
           autoCorrect={false}
           onChangeText={(txt) => shareFormChanged('url',txt)}
+          value={this.props.url}
       />
       <TextInput
           style={styles.inputs}
@@ -25,6 +26,7 @@ class ShareHeader extends Component {
           autoCapitalize={'none'}
           autoCorrect={false}
           onChangeText={(txt) => shareFormChanged('title',txt)}
+          value={this.props.title}
       />
       <TextInput
           style={styles.inputs}
@@ -43,7 +45,7 @@ let styles = StyleSheet.create({
   form: {
     backgroundColor:'#EEEEEE',
     marginTop: 4,
-    marginBottom: 8,
+    marginBottom: 20,
     marginLeft: 8,
     marginRight: 8,
   },
@@ -57,7 +59,7 @@ let styles = StyleSheet.create({
     borderWidth: 0,
     paddingLeft: 6,
     paddingRight: 6,
-    marginTop: 4,
+    marginTop: 14,
     marginBottom: 0,
   },
 })
