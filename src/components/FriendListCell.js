@@ -65,6 +65,7 @@ let styles = StyleSheet.create({
     alignItems: 'center',
     padding: 8,
     marginLeft: 2,
+    marginRight: 2,
     marginBottom: 0.5,
     opacity: 0.9,
     backgroundColor: '#FFFFFF',

@@ -101,15 +101,14 @@ class LinksFeedContainer extends Component {
             pageSize={4}
             style = {styles.listView}
         />
-        <View style={{position:'absolute', width:deviceWidth, height: 80, bottom: 0}}>
-        <View style={{flex: 1,alignItems:'center'}}>
+
+        <View style={{position:'absolute', width:48, left: deviceWidth / 2 - 24, height: 80, bottom: 0}}>
           <PlainFab>
             <Image
                 pointerEvents="none"
                 source={require('../../img/plus_white.png')}
             />
           </PlainFab>
-        </View>
         </View>
       </View>
     );
@@ -120,7 +119,7 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor:'#EEEEEE',
-    height:deviceHeight - 72,
+    height:deviceHeight - 66,
   },
   content: {
     flex:1,

@@ -18,7 +18,7 @@ class CustomTabBar extends Component {
     // let currentPage = this.props.activeTab
     //TOFIX: not getting the correct titles because activeTab changes
     let previousTitle = this.props.tabs[0]
-    let nextTitle = this.props.tabs[1]
+    let nextTitle = 'Authenticate' //TOFIX: hardcoding title in like a jerk
 
     let previousTitleStyle = {
       transform: [{
