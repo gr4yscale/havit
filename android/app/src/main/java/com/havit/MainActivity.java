@@ -1,5 +1,9 @@
 package com.havit;
 
+import com.smixx.reactnativeicons.ReactNativeIcons;
+import java.util.Arrays;
+import com.smixx.reactnativeicons.IconFont;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,6 +30,9 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new ReactNativeIcons(Arrays.asList(
+                        new IconFont("ion", "ionicons.ttf")
+                )))
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
