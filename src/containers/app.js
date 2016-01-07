@@ -22,9 +22,11 @@ class App extends React.Component {
             tabBarActiveTextColor={'#FF3B7F'}
             renderTabBar={() => <CustomTabBar />}
             onChangeTab={() => {
-              console.log('on change tab')
-              const { fetchLinksReceived } = this.props
+              console.log('tab changed!')
+              const { fetchLinksReceived, fetchFriends } = this.props
               fetchLinksReceived()
+              //TOFIX: call this from elsewhere!!! this is just to keep the share extension friends list updated for now
+              fetchFriends()
             }}
         >
           <LinksFeedContainer tabLabel="Inbox" />
@@ -39,6 +41,7 @@ export default connect(
   (dispatch) => {
     return {
       fetchLinksReceived: () => dispatch(serverActions.fetchLinksReceived()),
+      fetchFriends: () => dispatch(serverActions.fetchFriends()),
     }
   }
 )(App)
