@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        mReactRootView.startReactApplication(mReactInstanceManager, "havit", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "HavitApp", null);
 
         setContentView(mReactRootView);
     }
