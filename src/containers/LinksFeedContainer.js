@@ -14,6 +14,8 @@ let {
   Image,
   Dimensions,
   LinkingIOS,
+  Alert,
+  Platform,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -52,7 +54,14 @@ class LinksFeedContainer extends Component {
   }
 
   linkCellTapped(data) {
-    LinkingIOS.openURL(data.url)
+    if (Platform.OS === 'ios') {
+      LinkingIOS.openURL(data.url)
+    } else {
+      Alert.alert(
+        'Not yet!',
+        'Feature not yet implemented on Android!'
+      )
+    }
   }
 
   render() {
