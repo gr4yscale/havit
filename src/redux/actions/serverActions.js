@@ -82,6 +82,11 @@ export function shareLink() {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
         dispatch(shareSuccess(json))
+
+        //TOFIX: refactor
+        if (Platform.OS === 'ios') {
+          notifyShareExtensionOfCompletion()
+        }
       } else {
         dispatch(shareFailure(JSON.parse(response._bodyInit)))
       }
@@ -169,4 +174,9 @@ function configuredParse(state) {
 function updateShareExtensionStoreWithFriends(json) {
   let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
   HVTShareExtensionStorage.updateFriends(json)
+}
+
+function notifyShareExtensionOfCompletion() {
+  let RootShareViewController = NativeModules.RootShareViewController
+  RootShareViewController.shareComplete()
 }
