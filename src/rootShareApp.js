@@ -5,6 +5,11 @@ import ShareContainer from './containers/ShareContainer'
 
 
 class RootShareApp extends React.Component {
+
+  shouldComponentUpdate() {
+    return false
+  }
+
   render () {
     return (
       <Provider store={store}>
