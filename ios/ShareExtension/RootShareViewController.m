@@ -19,9 +19,9 @@
   
   NSURL *jsCodeLocation;
   
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+//  jsCodeLocation = [NSURL URLWithString:@"http://10.2.0.72:8081/index.ios.bundle?platform=ios&dev=true"];
   
-  //  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main9" withExtension:@"jsbundle"];
   
   NSDictionary *initialProps = @{@"title" : @"initialTitle",
                                  @"url" : @"initialURL"
