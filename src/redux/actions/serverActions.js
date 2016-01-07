@@ -4,8 +4,10 @@ import _ from 'lodash'
 
 // TOFIX: move this stuff elsewhere, also merge auth actions into serverActions!
 import React from 'react-native';
-let { NativeModules } = React
-let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
+let {
+  NativeModules,
+  Platform,
+} = React
 
 export function fetchLinksReceived() {
   return (dispatch, getState) => {
@@ -36,7 +38,11 @@ export function fetchFriends() {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
         dispatch(friendsSuccess(json))
-        updateShareExtensionStoreWithFriends(json)
+
+        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
+        if (Platform.OS === 'ios') {
+          updateShareExtensionStoreWithFriends(json)
+        }
       } else {
         dispatch(friendsFailure(JSON.parse(response._bodyInit)))
       }
@@ -161,5 +167,6 @@ function configuredParse(state) {
 
 // TOFIX: get this out of here!
 function updateShareExtensionStoreWithFriends(json) {
+  let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
   HVTShareExtensionStorage.updateFriends(json)
 }

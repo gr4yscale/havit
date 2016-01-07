@@ -3,8 +3,10 @@ import Parse from '../../parse'
 
 // TOFIX: move this stuff elsewhere
 import React from 'react-native';
-let { NativeModules } = React
-let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
+let {
+  NativeModules,
+  Platform,
+} = React
 
 export function loginFormChanged(field, value) {
   return {
@@ -35,6 +37,7 @@ export function loginFailure(error) {
 }
 
 function updateShareExtensionStoreWithCurrentUser(json) {
+  let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
   HVTShareExtensionStorage.updateCurrentUser(json)
 }
 
@@ -52,7 +55,11 @@ export function login(username,  password) {
         // TOFIX: reset token on local storage / log out previous user
         // dispatch(logoutState());
         dispatch(loginSuccess(json))
-        updateShareExtensionStoreWithCurrentUser(json)
+
+        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
+        if (Platform.OS === 'ios') {
+          updateShareExtensionStoreWithCurrentUser(json)
+        }
       } else {
         dispatch(loginFailure(JSON.parse(response._bodyInit)))
       }
