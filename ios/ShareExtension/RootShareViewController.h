@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RCTBridgeModule.h"
 
-@interface RootShareViewController : UIViewController
+@interface RootShareViewController : UIViewController <RCTBridgeModule>
 
 @end

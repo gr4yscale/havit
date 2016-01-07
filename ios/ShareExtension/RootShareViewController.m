@@ -14,6 +14,7 @@
 
 @implementation RootShareViewController
 
+RCT_EXPORT_MODULE()
 
 - (void)loadView {
   
@@ -35,6 +36,11 @@
   
   [self receiveShareExtensionDataIfAvailable];
   [self refreshDataFromContainerApp];
+  
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(completeShareExtensionRequest)
+                                               name:@"completeShareExtensionRequestNotification" object:nil];
 }
 
 - (void)receiveShareExtensionDataIfAvailable {
@@ -93,6 +99,20 @@
   [havitShareReactNativeApp.bridge.eventDispatcher sendAppEventWithName:@"CurrentUserUpdate"
                                                                    body:currentUser];
   });
+}
+
+RCT_EXPORT_METHOD(shareComplete)
+{
+  // Annoyingly, we can't call cancelRequestReturningItems:completionHandler: direction on the extensionContext
+  // Apple destroys the extension context when the caller function is coming from JavaScriptCore :(
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"completeShareExtensionRequestNotification" object:self];
+  });
+}
+
+- (void)completeShareExtensionRequest {
+  [self.extensionContext completeRequestReturningItems:nil
+                                     completionHandler:nil];
 }
 
 @end
