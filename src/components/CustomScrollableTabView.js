@@ -9,6 +9,7 @@ let {
   Platform,
   StyleSheet,
   InteractionManager,
+  ViewPagerAndroid,
 } = React
 
 let deviceWidth = Dimensions.get('window').width
@@ -114,7 +115,7 @@ class CustomScrollableTabView extends Component {
         <ViewPagerAndroid
             style={styles.scrollableContentAndroid}
             initialPage={this.props.initialPage}
-            onPageSelected={this._updateSelectedPage}
+            onPageSelected={(page) => this._updateSelectedPage(page)}
             onPageScroll={(e) => {
               const {offset, position} = e.nativeEvent
               this._updateScrollValue(position + offset)
