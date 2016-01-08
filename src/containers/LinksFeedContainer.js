@@ -40,6 +40,7 @@ class LinksFeedContainer extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(['row 1', 'row 2']),
     }
+    this.cells = {}
   }
 
   componentDidMount() {
@@ -54,9 +55,14 @@ class LinksFeedContainer extends Component {
     }, 300);
   }
 
-  handleLinkCellTapped(rowID, data) {
-    console.log('toggling accordion for +', rowID)
-    console.log(data)
+  handleLinkCellTapped(rowID) {
+    let cellRowID = parseInt(rowID)
+    for (let i=0; i<Object.keys(this.cells).length; i++) {
+      if (i !== cellRowID) {
+        this.cells[i].close()
+      }
+    }
+
     // if (Platform.OS === 'ios') {
     //   LinkingIOS.openURL(data.url)
     // } else {
@@ -73,19 +79,18 @@ class LinksFeedContainer extends Component {
 
   render() {
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
-    let statusIndicator = <Text style={{color:'#FF3B7F', paddingRight:4, fontWeight:'800'}}>●</Text>
-
     return (
       <View style={styles.container}>
         <ListView
             dataSource = {dataSource}
-            renderRow = {(data, sectionId, rowId) => {
-              let props = {rowId, data}
+            renderRow = {(data, sectionId, rowID) => {
               return (
                 <LinkCell
                     onLinkCellTapped={(rowID,data) => this.handleLinkCellTapped(rowID,data)}
                     onLinkCellAction={(data,actionType) => this.handleLinkCellAction(data,actionType)}
-                    {...props}
+                    ref={(cell) => this.cells[rowID] = cell}
+                    rowID={rowID}
+                    data={data}
                 />
               )
             }}

@@ -21,10 +21,15 @@ class LinkCell extends Component {
 
   handleContentPress() {
     this.props.onLinkCellTapped(this.props.rowID, this.props.data)
+    this.accordion.toggle()
   }
 
   handleActionPress(buttonType) {
     this.props.onLinkCellAction(this.props.data, buttonType)
+  }
+
+  close() {
+    this.accordion.close()
   }
 
   renderContent() {
@@ -34,7 +39,7 @@ class LinkCell extends Component {
     return (
           <TouchableOpacity onPress={() => this.handleContentPress()} activeOpacity={1}>
             <View style={styles.row}>
-              <View style={styles.cellContent}>
+              <View style={styles.content}>
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
                   {statusIndicator}
                   <View style={{flexDirection: 'column', flex: 1,marginLeft: 4}}>
@@ -54,43 +59,78 @@ class LinkCell extends Component {
 
   renderBottomBar() {
     return (
-          <View style={styles.cellHiddenContent}>
-            <Icon
-                name={'ion|ios-world-outline'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
-            <Icon
-                name={'ion|ios-loop'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
-            <Icon
-                name={'ion|pin'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
-            <Icon
-                name={'ion|ios-pint-outline'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
-            <Icon
-                name={'ion|ios-snowy'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
-            <Icon
-                name={'ion|ios-infinite-outline'}
-                size={34}
-                color={'#FFFFFF'}
-                style={styles.cellHiddenContentIcons}
-            />
+          <View style={styles.hidden}>
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|ios-world-outline'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|ios-loop'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|pin'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|ios-pint-outline'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|ios-snowy'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|ios-infinite-outline'}
+                  size={40}
+                  color={'#FFFFFF'}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
           </View>
         )
   }
@@ -102,13 +142,14 @@ class LinkCell extends Component {
             easing="easeOutCubic"
             underlayColor="rgba(0,0,0,0)"
             animationDuration={100}
+            ref={(accordion) => this.accordion = accordion}
         />
       )
   }
 }
 
 let styles = StyleSheet.create({
-  row: {
+  container: {
     flex: 1,
     flexDirection: 'column',
     // marginBottom: 0.5,
@@ -116,7 +157,7 @@ let styles = StyleSheet.create({
     // opacity: 0.8,
     // backgroundColor: '#FFFFFF',
   },
-  cellContent: {
+  content: {
     flex: 1,
     // marginTop: 2,
     // marginLeft: 1,
@@ -126,20 +167,24 @@ let styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
 
   },
-  cellHiddenContent: {
+  hidden: {
     flex: 1,
     flexDirection: 'row',
     height: 44,
     backgroundColor: '#888888',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 8,
   },
-  cellHiddenContentIcons: {
+  icons: {
     flex: 1,
     // backgroundColor:'#ff8822',
     width: 40,
     height: 40,
-    padding: 4,
+  },
+  iconWrapper: {
+    flex: 1,
+    alignItems: 'center',
   },
   titleText: {
     color: '#000000',
