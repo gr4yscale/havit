@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import {MKButton} from 'react-native-material-kit';
+import LinkCell from '../components/LinkCell'
 
 let {
   Component,
@@ -53,15 +54,21 @@ class LinksFeedContainer extends Component {
     }, 300);
   }
 
-  linkCellTapped(data) {
-    if (Platform.OS === 'ios') {
-      LinkingIOS.openURL(data.url)
-    } else {
-      Alert.alert(
-        'Not yet!',
-        'Feature not yet implemented on Android!'
-      )
-    }
+  handleLinkCellTapped(rowID, data) {
+    console.log('toggling accordion for +', rowID)
+    console.log(data)
+    // if (Platform.OS === 'ios') {
+    //   LinkingIOS.openURL(data.url)
+    // } else {
+    //   Alert.alert(
+    //     'Not yet!',
+    //     'Feature not yet implemented on Android!'
+    //   )
+    // }
+  }
+
+  handleLinkCellAction(data, actionType) {
+    console.log(actionType)
   }
 
   render() {
@@ -72,30 +79,15 @@ class LinksFeedContainer extends Component {
       <View style={styles.container}>
         <ListView
             dataSource = {dataSource}
-            renderRow = {(rowData) => {
+            renderRow = {(data, sectionId, rowId) => {
+              let props = {rowId, data}
               return (
-              <TouchableOpacity onPress={this.linkCellTapped.bind(this, rowData)}>
-                <View style={styles.row}>
-                  <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-                    {statusIndicator}
-                    <View style={{flexDirection: 'column', flex: 1,marginLeft: 4}}>
-                      <Text
-                          style={styles.titleText}
-                          numberOfLines={6}
-                      >
-                        {rowData.title}
-                      </Text>
-                      <Text
-                          style={styles.urlText}
-                          numberOfLines={1}
-                      >
-                        {rowData.url}
-                      </Text>
-                  </View>
-                </View>
-              </View>
-              </TouchableOpacity>
-            )
+                <LinkCell
+                    onLinkCellTapped={(rowID,data) => this.handleLinkCellTapped(rowID,data)}
+                    onLinkCellAction={(data,actionType) => this.handleLinkCellAction(data,actionType)}
+                    {...props}
+                />
+              )
             }}
             initialListSize={20}
             pageSize={4}
@@ -118,7 +110,7 @@ class LinksFeedContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor:'#EEEEEE',
+    backgroundColor:'#EAEAEA',
     height:deviceHeight - 66,
   },
   content: {
@@ -126,26 +118,9 @@ let styles = StyleSheet.create({
   },
   listView: {
     // backgroundColor: '#FFCCB9',
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'column',
-    padding: 8,
-    // marginLeft:4,
-    // marginRight:4,
-    marginBottom: 0.5,
-    opacity: 0.9,
-    backgroundColor: '#FFFFFF',
-  },
-  titleText: {
-    color: '#000000',
-    fontWeight: '600',
-    // backgroundColor: '#99EEFF',
-  },
-  urlText: {
-    color: '#444444',
-    fontWeight: '200',
-    // backgroundColor: '#9999FF',
+    backgroundColor: 'rgba(0,0,0,0)',
+    marginTop:-0.5,
+    // paddingTop: 4,
   },
 })
 
