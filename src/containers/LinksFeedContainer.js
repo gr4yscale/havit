@@ -4,6 +4,7 @@ import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import {MKButton} from 'react-native-material-kit';
 import LinkCell from '../components/LinkCell'
+import * as LinkCellActionTypes from '../components/LinkCell'
 
 let {
   Component,
@@ -62,18 +63,46 @@ class LinksFeedContainer extends Component {
         this.cells[i].close()
       }
     }
+  }
 
-    // if (Platform.OS === 'ios') {
-    //   LinkingIOS.openURL(data.url)
-    // } else {
-    //   Alert.alert(
-    //     'Not yet!',
-    //     'Feature not yet implemented on Android!'
-    //   )
-    // }
+  openURL(url) {
+    if (Platform.OS === 'ios') {
+      LinkingIOS.openURL(url)
+    } else {
+      this.alertNotImplemented()
+    }
+  }
+
+  alertNotImplemented() {
+    Alert.alert(
+      'Not yet!',
+      'Feature not yet implemented on Android!'
+    )
   }
 
   handleLinkCellAction(data, actionType) {
+    switch(actionType) {
+      case LinkCellActionTypes.FriendListCellActionTypeBrowser:
+        this.openURL(data.url)
+        break
+      case LinkCellActionTypes.FriendListCellActionTypeReshare:
+        this.alertNotImplemented()
+        break
+      case LinkCellActionTypes.FriendListCellActionTypePin:
+        this.alertNotImplemented()
+        break
+      case LinkCellActionTypes.FriendListCellActionTypeUserAction1:
+        this.alertNotImplemented()
+        break
+      case LinkCellActionTypes.FriendListCellActionTypeUserAction2:
+        this.alertNotImplemented()
+        break
+      case LinkCellActionTypes.FriendListCellActionTypeUserAction3:
+        this.alertNotImplemented()
+        break
+      default:
+        break
+    }
     console.log(actionType)
   }
 

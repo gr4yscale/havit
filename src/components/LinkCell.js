@@ -73,7 +73,7 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                onPress={() => this.handleActionPress(FriendListCellActionTypeReshare)}
                 style={styles.iconWrapper}
             >
               <Icon
@@ -85,7 +85,7 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                onPress={() => this.handleActionPress(FriendListCellActionTypePin)}
                 style={styles.iconWrapper}
             >
               <Icon
@@ -97,7 +97,7 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction1)}
                 style={styles.iconWrapper}
             >
               <Icon
@@ -109,7 +109,7 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction2)}
                 style={styles.iconWrapper}
             >
               <Icon
@@ -121,7 +121,7 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeBrowser)}
+                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction3)}
                 style={styles.iconWrapper}
             >
               <Icon
