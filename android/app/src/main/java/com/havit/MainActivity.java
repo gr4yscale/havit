@@ -5,6 +5,9 @@ import java.util.Arrays;
 import com.smixx.reactnativeicons.IconFont;
 
 import android.app.Activity;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.smixx.reactnativeicons.ReactNativeIcons;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -30,6 +33,9 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new ReactMaterialKitPackage())
+                .addPackage(new LinearGradientPackage())
+                .addPackage(new ReactNativeIcons())
                 .addPackage(new ReactNativeIcons(Arrays.asList(
                         new IconFont("ion", "ionicons.ttf")
                 )))
