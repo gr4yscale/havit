@@ -52,7 +52,7 @@ class CustomTabBar extends Component {
           <Icon
               name={'ion|navicon'}
               size={30}
-              color={'#000000'}
+              color={'#FFFFFF'}
               style={styles.navIcon}
           />
           <Animated.View style={[previousTitleStyle]}>
@@ -75,21 +75,22 @@ let styles = StyleSheet.create({
     paddingBottom: 10,
   },
   tabs: {
-    height: 54,
+    height: 62,
     flexDirection: 'row',
-    paddingTop: 8,
+    paddingTop: 16,
     borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomColor: 'rgba(0,0,0,0.05)',
+    backgroundColor:'#2ABFD4',
   },
   titleText: {
     height: 32,
     // backgroundColor:'#ff00ff',
     marginLeft: 0,
     marginTop: 8,
-    color: '#000000',
+    color: '#FFFFFF',
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
     fontSize: 24,
   },

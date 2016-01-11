@@ -77,8 +77,8 @@ let styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#FF3B7F',
-    borderColor: '#FF3B7F',
+    backgroundColor: '#2ABFD4',
+    borderColor: '#2ABFD4',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 8,

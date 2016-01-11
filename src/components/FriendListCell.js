@@ -68,7 +68,7 @@ let styles = StyleSheet.create({
     marginRight: 2,
     marginBottom: 0.5,
     opacity: 0.9,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFECE',
     height: 48,
   },
   cellText: {

@@ -17,7 +17,7 @@ class App extends React.Component {
 
   render() {
     return (
-        <CustomScrollableTabView style={{marginTop:12}}
+        <CustomScrollableTabView style={{marginTop:0}}
             tabBarUnderlineColor={'#FF3B7F'}
             tabBarActiveTextColor={'#FF3B7F'}
             renderTabBar={() => <CustomTabBar />}
