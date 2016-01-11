@@ -11,8 +11,6 @@ let {
   StyleSheet,
   View,
   ListView,
-  Text,
-  TouchableOpacity,
   Image,
   Dimensions,
   LinkingIOS,

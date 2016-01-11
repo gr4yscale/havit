@@ -8,6 +8,8 @@ let {
   View,
   Text,
   TouchableOpacity,
+  Animated,
+  Easing,
 } = React
 
 export const FriendListCellActionTypeBrowser = 'FriendListCellActionTypeBrowser'
@@ -19,9 +21,21 @@ export const FriendListCellActionTypeUserAction3 = 'FriendListCellActionTypeUser
 
 class LinkCell extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundColor: new Animated.Value(0),
+    }
+    this.isOpen = false
+  }
+
   handleContentPress() {
     this.props.onLinkCellTapped(this.props.rowID, this.props.data)
-    this.accordion.toggle()
+    if (this.isOpen)
+      this.close()
+    else
+      this.open()
+    this.isOpen = !this.isOpen
   }
 
   handleActionPress(buttonType) {
@@ -30,29 +44,64 @@ class LinkCell extends Component {
 
   close() {
     this.accordion.close()
+    Animated.timing(
+      this.state.backgroundColor,
+      {
+        toValue: 0,
+        easing: Easing.easeOutCubic,
+        duration: 250,
+      },
+    ).start()
+  }
+
+  open() {
+    this.accordion.open()
+    Animated.timing(
+      this.state.backgroundColor,
+      {
+        toValue: 1,
+        easing: Easing.easeOutCubic,
+        duration: 250,
+      },
+    ).start()
   }
 
   renderContent() {
-    let statusIndicator = <Text style={{color:'#2ABFD4', paddingRight:4, fontWeight:'800'}}>●</Text>
+    let statusIndicator = <Text style={styles.statusIndicator}>●</Text>
+    // let friend = this.props.friend ?
     const {title, url} = this.props.data
+
+    let backgroundColor = this.state.backgroundColor.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['#FFFFFF','#444444'],
+    })
+
+    let textColor = this.state.backgroundColor.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['#000','#FFFFFF'],
+    })
+
+    let secondaryTextColor = this.state.backgroundColor.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['#666666','#FFFFFF'],
+    })
 
     return (
           <TouchableOpacity onPress={() => this.handleContentPress()} activeOpacity={1}>
-            <View style={styles.row}>
-              <View style={styles.content}>
-                <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-                  {statusIndicator}
-                  <View style={{flexDirection: 'column', flex: 1,marginLeft: 4}}>
-                    <Text style={styles.titleText} numberOfLines={6}>
-                      {title}
-                    </Text>
-                    <Text style={styles.urlText} numberOfLines={1}>
-                      {url}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+              <Animated.View style={[styles.contentWrapper,{backgroundColor}]}>
+                    {statusIndicator}
+                    <View style={styles.contentText}>
+                      <Animated.Text style={[styles.titleText, {color:textColor}]} numberOfLines={6}>
+                        {title}
+                      </Animated.Text>
+                      <Animated.Text style={[styles.urlText, {color:secondaryTextColor}]} numberOfLines={1}>
+                        {url}
+                      </Animated.Text>
+                      <Animated.Text style={[styles.senderNameText, {color:secondaryTextColor}]} numberOfLines={1}>
+                        @gr4yscale
+                      </Animated.Text>
+                    </View>
+              </Animated.View>
           </TouchableOpacity>
         )
   }
@@ -65,8 +114,8 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-world-outline'}
-                  size={40}
+                  name={'ion|ios-snowy'}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -77,8 +126,8 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-loop'}
-                  size={40}
+                  name={'ion|ios-snowy'}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -89,8 +138,8 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|pin'}
-                  size={40}
+                  name={'ion|ios-snowy'}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -101,8 +150,8 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-pint-outline'}
-                  size={40}
+                  name={'ion|ios-snowy'}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -114,7 +163,7 @@ class LinkCell extends Component {
             >
               <Icon
                   name={'ion|ios-snowy'}
-                  size={40}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -125,8 +174,8 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-infinite-outline'}
-                  size={40}
+                  name={'ion|ios-snowy'}
+                  size={32}
                   color={'#FFFFFF'}
                   style={styles.icons}
               />
@@ -135,15 +184,16 @@ class LinkCell extends Component {
         )
   }
   render() {
+
     return (
-        <Accordion
-            header={this.renderContent()}
-            content={this.renderBottomBar()}
-            easing="easeOutCubic"
-            underlayColor="rgba(0,0,0,0)"
-            animationDuration={100}
-            ref={(accordion) => this.accordion = accordion}
-        />
+      <Accordion
+          header={this.renderContent()}
+          content={this.renderBottomBar()}
+          easing="easeOutCubic"
+          underlayColor="rgba(0,0,0,0)"
+          animationDuration={250}
+          ref={(accordion) => this.accordion = accordion}
+      />
       )
   }
 }
@@ -152,47 +202,60 @@ let styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    // marginBottom: 0.5,
-    // marginTop: 1,
-    // opacity: 0.8,
-    // backgroundColor: '#FFFFFF',
   },
-  content: {
+  contentWrapper: {
     flex: 1,
-    // marginTop: 2,
-    // marginLeft: 1,
-    // marginRight: 1,
-    marginTop: 0.5,
-    padding: 18,
-    backgroundColor: '#FFFFFF',
-
+    padding: 14,
+    paddingTop: 16,
+    paddingBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  contentText: {
+    flexDirection: 'column',
+    flex: 1,
+    marginLeft: 4,
   },
   hidden: {
     flex: 1,
     flexDirection: 'row',
-    height: 44,
-    backgroundColor: '#888888',
+    height: 54,
+    backgroundColor: '#777777',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
   },
   icons: {
     flex: 1,
-    // backgroundColor:'#ff8822',
-    width: 40,
-    height: 40,
+    width: 32,
+    height: 32,
   },
   iconWrapper: {
     flex: 1,
     alignItems: 'center',
   },
+  senderNameText: {
+    fontWeight: '300',
+    fontSize: 12,
+    paddingTop: 4,
+    color: '#FFFFFF',
+  },
   titleText: {
     color: '#000000',
     fontWeight: '600',
+    fontSize: 18,
+    marginTop: 4,
   },
   urlText: {
     color: '#666666',
     fontWeight: '200',
+    fontSize: 12,
+    paddingTop: 4,
+  },
+  statusIndicator: {
+    color:'#2ABFD4',
+    paddingRight:4,
+    fontWeight:'800',
   },
 })
 
