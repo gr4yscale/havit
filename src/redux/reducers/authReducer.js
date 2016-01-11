@@ -45,7 +45,7 @@ function signup(state = initialState, action) {
 
   switch (stepTick) {
     case 0:
-      promptText = 'What username do you want?'
+      promptText = `Hello, ${textEntered}. Username?`
       updatedField['displayName'] = textEntered
       break
     case 1:
@@ -57,7 +57,7 @@ function signup(state = initialState, action) {
       updatedField['email'] = textEntered
       break
     case 3:
-      promptText = `Thanks! You're all finished.`
+      promptText = `Thanks! You're all set.`
       updatedField['password'] = textEntered
       break
   }
