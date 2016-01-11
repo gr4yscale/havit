@@ -44,6 +44,7 @@
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		99B21E43FA4E401EA51E9A5D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0763036C1875472A8013414B /* libBVLinearGradient.a */; };
+		D7DBD357AF0647EAB522ECB5 /* libRNGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC0F3EAC7B443D68AE34FDB /* libRNGL.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,13 @@
 			remoteGlobalIDString = 29A1ED241C3D5211008CF2C2;
 			remoteInfo = ShareExtension;
 		};
+		29A62CBD1C42E5F900A2377F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFBC228D2FBA456B8F175736 /* RNGL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
+			remoteInfo = RNGL;
+		};
 		29A904EE1C332CFB0055FFEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */;
@@ -203,6 +211,8 @@
 		36D3D0BA5BDD4C909603D04A /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		DFBC228D2FBA456B8F175736 /* RNGL.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGL.xcodeproj; path = "../node_modules/gl-react-native/ios/RNGL.xcodeproj"; sourceTree = "<group>"; };
+		DFC0F3EAC7B443D68AE34FDB /* libRNGL.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGL.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +240,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				99B21E43FA4E401EA51E9A5D /* libBVLinearGradient.a in Frameworks */,
+				D7DBD357AF0647EAB522ECB5 /* libRNGL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +382,14 @@
 			path = ShareExtension;
 			sourceTree = "<group>";
 		};
+		29A62CAD1C42E5F900A2377F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29A62CBE1C42E5F900A2377F /* libRNGL.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		29A904E71C332CFB0055FFEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +430,7 @@
 				29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */,
 				296FA8031C3A04B100EF4408 /* ReactNativeIcons.xcodeproj */,
 				36D3D0BA5BDD4C909603D04A /* BVLinearGradient.xcodeproj */,
+				DFBC228D2FBA456B8F175736 /* RNGL.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -601,6 +621,10 @@
 					ProductGroup = 296FA8041C3A04B100EF4408 /* Products */;
 					ProjectRef = 296FA8031C3A04B100EF4408 /* ReactNativeIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = 29A62CAD1C42E5F900A2377F /* Products */;
+					ProjectRef = DFBC228D2FBA456B8F175736 /* RNGL.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -673,6 +697,13 @@
 			fileType = archive.ar;
 			path = libReactNativeIcons.a;
 			remoteRef = 296FA8071C3A04B100EF4408 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		29A62CBE1C42E5F900A2377F /* libRNGL.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGL.a;
+			remoteRef = 29A62CBD1C42E5F900A2377F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */ = {
@@ -811,6 +842,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/havit.app/havit";
@@ -832,6 +864,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/havit.app/havit";
@@ -851,6 +884,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
 				);
 				INFOPLIST_FILE = havit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -873,6 +907,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
 				);
 				INFOPLIST_FILE = havit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -898,6 +933,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gr4yscale.havit.shareExtension;
@@ -921,6 +957,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -970,6 +1007,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1011,6 +1049,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.smixx.reactnativeicons.IconFont;
 
 import android.app.Activity;
+import com.projectseptember.RNGL.RNGLPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.smixx.reactnativeicons.ReactNativeIcons;
@@ -33,6 +34,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new RNGLPackage())
                 .addPackage(new ReactMaterialKitPackage())
                 .addPackage(new LinearGradientPackage())
                 .addPackage(new ReactNativeIcons())

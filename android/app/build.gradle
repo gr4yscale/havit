@@ -72,6 +72,7 @@ android {
 }
 
 dependencies {
+    compile project(':gl-react-native')
     compile project(':react-native-material-kit')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-icons')
