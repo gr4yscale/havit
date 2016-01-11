@@ -29,3 +29,7 @@ export const SHARE_FORM_CHANGED = 'SHARE_FORM_CHANGED'
 export const SHARE_REQUEST = 'SHARE_REQUEST';
 export const SHARE_SUCCESS = 'SHARE_SUCCESS';
 export const SHARE_FAILURE = 'SHARE_FAILURE';
+
+// Sign Up
+
+export const SIGNUP_NEXT = 'SIGNUP_NEXT';

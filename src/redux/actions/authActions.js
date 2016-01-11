@@ -41,6 +41,15 @@ function updateShareExtensionStoreWithCurrentUser(json) {
   HVTShareExtensionStorage.updateCurrentUser(json)
 }
 
+
+// SIGN UP
+export function signupNext(textEntered) {
+  return {
+    type: actionTypes.SIGNUP_NEXT,
+    textEntered,
+  }
+}
+
 export function login(username,  password) {
   return (dispatch) => {
     dispatch(loginRequest());
