@@ -45,7 +45,7 @@ class CustomScrollableTabView extends Component {
     } else {
       this.scrollView.setPage(pageNumber)
     }
-    this.setState({currentPage: pageNumber})
+    // this.setState({currentPage: pageNumber})
   }
 
   renderTabBar(props) {
@@ -80,7 +80,7 @@ class CustomScrollableTabView extends Component {
               let percentOfCurrentScreen = (offsetX - (totalWidth - amountToSubtract)) / screenWidth
 
               this._updateScrollValue(percentOfCurrentScreen) // custom tabbar will use state.offset
-              this.setState({offset: percentOfCurrentScreen})
+              // this.setState({offset: percentOfCurrentScreen})
 
               // this._updateSelectedPage(parseInt(offsetX / this.state.container.width))
             }}
@@ -138,9 +138,12 @@ class CustomScrollableTabView extends Component {
     if (typeof currentPage === 'object') {
       currentPage = currentPage.nativeEvent.position
     }
-    this.setState({currentPage}, () => {
-      this.props.onChangeTab({ i: currentPage })
-    })
+
+    this.props.onChangeTab({ i: currentPage })
+    // TOFIX the currentPage value is useless, just making sure we fire our callback
+    // this.setState({currentPage}, () => {
+    //   this.props.onChangeTab({ i: currentPage })
+    // })
   }
 
   _updateScrollValue(value) {
