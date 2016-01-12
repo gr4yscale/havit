@@ -84,10 +84,13 @@ export function loginFailure(error) {
 }
 
 // TOFIX: refactor to use current state
-export function login(username,  password) {
-  return (dispatch) => {
+export function login() {
+  return (dispatch, getState) => {
     dispatch(loginRequest());
     let parse = new Parse();
+    let username = getState().auth.form.fields.username
+    let password = getState().auth.form.fields.password
+
     return parse.login({
       username,
       password,

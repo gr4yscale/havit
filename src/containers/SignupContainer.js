@@ -1,5 +1,6 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native'
+import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
 // import AnimGL from '../gl/animGL'
@@ -20,10 +21,13 @@ let deviceWidth = Dimensions.get('window').width;
 class SignupContainer extends Component {
 
   signupButtonPressed() {
-    const {signup} = this.props
+    const {signup, login} = this.props
     signup()
+    .then(() => login())
     .then(() => {
       Actions.MainContainer()
+      // TOFIX: explictly save our store here to avoid a race so that when the user reloads
+      // the app and the user data wasn't saved, they're stuck with sign in screen
     })
   }
 
@@ -159,9 +163,6 @@ export default connect(
     return state.auth.signup
   },
   (dispatch) => {
-    return {
-      signupNext: (textEntered) => dispatch(serverActions.signupNext(textEntered)),
-      signup: () => dispatch(serverActions.signup()),
-    }
+    return bindActionCreators(serverActions, dispatch);
   }
 )(SignupContainer)
