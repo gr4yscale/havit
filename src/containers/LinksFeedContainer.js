@@ -43,15 +43,13 @@ class LinksFeedContainer extends Component {
   }
 
   componentDidMount() {
-    const { fetchLinksReceived, fetchFriends } = this.props
-    //TOFIX: setTimeout is being used to prevent changing state before it's loaded from persistence layer
-    setTimeout(function() {
-      fetchLinksReceived()
-    }, 200);
+    console.log('LinksFeedContainer componentDidMount')
 
-    setTimeout(function() {
-      fetchFriends()
-    }, 300);
+    const { fetchLinksReceived } = this.props
+    //TOFIX: setTimeout is being used to prevent changing state before it's loaded from persistence layer
+    // setTimeout(function() {
+    //   fetchLinksReceived()
+    // }, 200);
   }
 
   handleLinkCellTapped(rowID) {

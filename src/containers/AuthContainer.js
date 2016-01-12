@@ -20,10 +20,12 @@ class AuthContainer extends Component {
   }
 
   loginButtonPressed() {
-    const { login } = this.props;
-    let username = this.props.auth.form.fields.username;
-    let password = this.props.auth.form.fields.password;
-    login(username, password);
+    const { login, fetchLinksReceived, fetchFriends } = this.props
+    let username = this.props.auth.form.fields.username
+    let password = this.props.auth.form.fields.password
+    login(username, password)
+    .then(() => fetchLinksReceived())
+    .then(() => fetchFriends())
   }
 
   render() {
