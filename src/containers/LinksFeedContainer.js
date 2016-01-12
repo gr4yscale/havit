@@ -44,12 +44,6 @@ class LinksFeedContainer extends Component {
 
   componentDidMount() {
     console.log('LinksFeedContainer componentDidMount')
-
-    const { fetchLinksReceived } = this.props
-    //TOFIX: setTimeout is being used to prevent changing state before it's loaded from persistence layer
-    // setTimeout(function() {
-    //   fetchLinksReceived()
-    // }, 200);
   }
 
   handleLinkCellTapped(rowID) {
@@ -149,17 +143,15 @@ class LinksFeedContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor:'#555555',
+    backgroundColor:'#FFFFFF',
     height:deviceHeight - 62,
   },
   content: {
     flex:1,
   },
   listView: {
-    // backgroundColor: '#FFCCB9',
     backgroundColor: 'rgba(0,0,0,0)',
-    marginTop:-0.5,
-    // paddingTop: 4,
+    paddingTop: 20,
   },
 })
 

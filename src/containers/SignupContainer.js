@@ -1,7 +1,7 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
-import AnimGL from '../gl/animGL'
+// import AnimGL from '../gl/animGL'
 
 let {
   Component,
@@ -81,7 +81,7 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor:'#FF3B7F',
-    height:deviceHeight - 62,
+    height:deviceHeight - 62, // - 62 when custom navbar is show
   },
   shaderWrapper: {
     position:'absolute',
@@ -116,7 +116,6 @@ let styles = StyleSheet.create({
     height: 40,
     borderWidth: 0,
     padding: 8,
-    textAlign: 'center',
     color:'#000000',
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
     fontSize: 16,
@@ -126,13 +125,13 @@ let styles = StyleSheet.create({
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
     fontSize: 24,
     fontWeight: '600',
-    textAlign: 'center',
     color:'#FFFFFF',
     marginLeft: 30,
     marginRight: 30,
     marginTop: 130,
     paddingBottom:4,
     paddingTop:2,
+    paddingLeft: 4,
     backgroundColor: '#000000',
   },
   buttonText: {

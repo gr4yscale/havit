@@ -53,7 +53,7 @@ class AuthContainer extends Component {
               underlayColor="#99d9f4"
               onPress={this.loginButtonPressed.bind(this)}
           >
-            <Text style={styles.buttonText}>Log the f*ck in!</Text>
+            <Text style={styles.buttonText}>Log In</Text>
           </TouchableHighlight>
         </View>
       </View>
