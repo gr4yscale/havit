@@ -70,7 +70,7 @@ class SignupContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-
+        
         <Text style={styles.bigText}>{this.props.promptText}</Text>
         {this.renderFormIfNeeded()}
         {this.renderFinishButtonIfNeeded()}
