@@ -1,6 +1,7 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
+import {Actions} from '../../node_modules/react-native-router-flux'
 // import AnimGL from '../gl/animGL'
 
 let {
@@ -21,8 +22,9 @@ class SignupContainer extends Component {
   signupButtonPressed() {
     const {signup} = this.props
     signup()
-    //  TOFIX: dismiss the navigator here
-    // .then(dispatch('route!!!!'))
+    .then(() => {
+      Actions.MainContainer()
+    })
   }
 
   // TOFIX: is this really the best way to handle this?

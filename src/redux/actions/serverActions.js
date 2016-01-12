@@ -35,7 +35,6 @@ export function signup() {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
         // TOFIX: reset token on local storage / log out previous user
-
         // TOFIX: yucky place for this, but just getting android functional for now, will move out later
         if (Platform.OS === 'ios') {
           updateShareExtensionStoreWithCurrentUser(json)
@@ -44,7 +43,6 @@ export function signup() {
       } else {
         dispatch(signupFailure(JSON.parse(response._bodyInit)))
       }
-      return response;
     })
     .catch((error) => {
       dispatch(signupFailure(error))

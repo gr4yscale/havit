@@ -5,6 +5,7 @@ import * as serverActions from '../redux/actions/serverActions'
 import {MKButton} from 'react-native-material-kit';
 import LinkCell from '../components/LinkCell'
 import * as LinkCellActionTypes from '../components/LinkCell'
+import {Actions} from '../../node_modules/react-native-router-flux'
 
 let {
   Component,
@@ -24,7 +25,7 @@ let deviceWidth = Dimensions.get('window').width;
 const PlainFab = MKButton.plainFab()
   .withBackgroundColor('#FF3B7F')
   .withOnPress(() => {
-    console.log('Hi, its a colored button!');
+    Actions.Share()
   })
   .build();
 
