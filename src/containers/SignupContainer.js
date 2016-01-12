@@ -1,7 +1,6 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
-import * as authActions from '../redux/actions/authActions'
 import AnimGL from '../gl/animGL'
 
 let {

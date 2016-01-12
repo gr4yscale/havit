@@ -1,7 +1,7 @@
 import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
-import * as authActions from '../redux/actions/authActions'
+import * as serverActions from '../redux/actions/serverActions'
 
 let {
   Component,
@@ -109,7 +109,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authActions, dispatch);
+  return bindActionCreators(serverActions, dispatch);
 }
 
 // for using Immutable.js - get a pure JS object to work with instead of an immutable.js wrapper

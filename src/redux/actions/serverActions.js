@@ -9,6 +9,136 @@ let {
   Platform,
 } = React
 
+
+// SIGN UP
+//////////////////////////////////////////////////////
+
+export function signupNext(textEntered) {
+  return {
+    type: actionTypes.SIGNUP_NEXT,
+    textEntered,
+  }
+}
+
+export const signupRequest = () => ({type: actionTypes.SIGNUP_REQUEST})
+export const signupSuccess = (json) => ({type: actionTypes.SIGNUP_SUCCESS, response: json})
+export const signupFailure = (error) => ({type: actionTypes.SIGNUP_FAILURE, payload: error})
+
+export function signup() {
+  return (dispatch, getState) => {
+    dispatch(signupRequest());
+    let parse = new Parse();
+    let data = getState().auth.signup.fields
+
+    return parse.signup(data)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        // TOFIX: reset token on local storage / log out previous user
+
+        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
+        if (Platform.OS === 'ios') {
+          updateShareExtensionStoreWithCurrentUser(json)
+        }
+        dispatch(signupSuccess(json))
+      } else {
+        dispatch(signupFailure(JSON.parse(response._bodyInit)))
+      }
+      return response;
+    })
+    .catch((error) => {
+      dispatch(signupFailure(error))
+    })
+  }
+}
+
+
+
+// LOGIN
+//////////////////////////////////////////////////////
+
+export function loginFormChanged(field, value) {
+  return {
+    type: actionTypes.LOGIN_FORM_CHANGED,
+    field,
+    value,
+  }
+}
+
+export function loginRequest() {
+  return {
+    type: actionTypes.LOGIN_REQUEST,
+  }
+}
+
+export function loginSuccess(json) {
+  return {
+    type: actionTypes.LOGIN_SUCCESS,
+    response: json,
+  }
+}
+
+export function loginFailure(error) {
+  return {
+    type: actionTypes.LOGIN_FAILURE,
+    payload: error,
+  }
+}
+
+// TOFIX: refactor to use current state
+export function login(username,  password) {
+  return (dispatch) => {
+    dispatch(loginRequest());
+    let parse = new Parse();
+    return parse.login({
+      username,
+      password,
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        // TOFIX: reset token on local storage / log out previous user
+
+        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
+        if (Platform.OS === 'ios') {
+          updateShareExtensionStoreWithCurrentUser(json)
+        }
+        dispatch(loginSuccess(json))
+      } else {
+        dispatch(loginFailure(JSON.parse(response._bodyInit)))
+      }
+    })
+    .catch((error) => {
+      dispatch(loginFailure(error))
+    })
+  }
+}
+
+
+
+// LINKS
+//////////////////////////////////////////////////////
+
+function linksReceivedRequest() {
+  return {
+    type: actionTypes.LINKS_RECEIVED_REQUEST,
+  }
+}
+
+function linksReceivedSuccess(json) {
+  return {
+    type: actionTypes.LINKS_RECEIVED_SUCCESS,
+    response: json,
+  }
+}
+
+function linksReceivedFailure(error) {
+  return {
+    type: actionTypes.LINKS_RECEIVED_FAILURE,
+    payload: error,
+  }
+}
+
 export function fetchLinksReceived() {
   return (dispatch, getState) => {
     dispatch(linksReceivedRequest());
@@ -26,6 +156,30 @@ export function fetchLinksReceived() {
     .catch((error) => {
       dispatch(linksReceivedFailure(error))
     })
+  }
+}
+
+
+// FRIENDS
+//////////////////////////////////////////////////////
+
+function friendsRequest() {
+  return {
+    type: actionTypes.FRIENDS_REQUEST,
+  }
+}
+
+export function friendsSuccess(json) {
+  return {
+    type: actionTypes.FRIENDS_SUCCESS,
+    response: json,
+  }
+}
+
+function friendsFailure(error) {
+  return {
+    type: actionTypes.FRIENDS_FAILURE,
+    payload: error,
   }
 }
 
@@ -51,6 +205,31 @@ export function fetchFriends() {
     .catch((error) => {
       dispatch(friendsFailure(error))
     })
+  }
+}
+
+
+
+// SHARE
+//////////////////////////////////////////////////////
+
+function shareRequest() {
+  return {
+    type: actionTypes.SHARE_REQUEST,
+  }
+}
+
+function shareSuccess(json) {
+  return {
+    type: actionTypes.SHARE_SUCCESS,
+    response: json,
+  }
+}
+
+function shareFailure(error) {
+  return {
+    type: actionTypes.SHARE_FAILURE,
+    payload: error,
   }
 }
 
@@ -98,71 +277,8 @@ export function shareLink() {
   }
 }
 
-// links receieved
-
-function linksReceivedRequest() {
-  return {
-    type: actionTypes.LINKS_RECEIVED_REQUEST,
-  }
-}
-
-function linksReceivedSuccess(json) {
-  return {
-    type: actionTypes.LINKS_RECEIVED_SUCCESS,
-    response: json,
-  }
-}
-
-function linksReceivedFailure(error) {
-  return {
-    type: actionTypes.LINKS_RECEIVED_FAILURE,
-    payload: error,
-  }
-}
-
-// friends
-
-function friendsRequest() {
-  return {
-    type: actionTypes.FRIENDS_REQUEST,
-  }
-}
-
-export function friendsSuccess(json) {
-  return {
-    type: actionTypes.FRIENDS_SUCCESS,
-    response: json,
-  }
-}
-
-function friendsFailure(error) {
-  return {
-    type: actionTypes.FRIENDS_FAILURE,
-    payload: error,
-  }
-}
-
-// share
-
-function shareRequest() {
-  return {
-    type: actionTypes.SHARE_REQUEST,
-  }
-}
-
-function shareSuccess(json) {
-  return {
-    type: actionTypes.SHARE_SUCCESS,
-    response: json,
-  }
-}
-
-function shareFailure(error) {
-  return {
-    type: actionTypes.SHARE_FAILURE,
-    payload: error,
-  }
-}
+// UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:
+//////////////////////////////////////////////////////
 
 function configuredParse(state) {
   let userObjectId = _.get(state, 'auth.currentUser.objectId')
@@ -170,10 +286,14 @@ function configuredParse(state) {
   return new Parse(userObjectId, sessionToken);
 }
 
-// TOFIX: get this out of here!
 function updateShareExtensionStoreWithFriends(json) {
   let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
   HVTShareExtensionStorage.updateFriends(json)
+}
+
+function updateShareExtensionStoreWithCurrentUser(json) {
+  let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
+  HVTShareExtensionStorage.updateCurrentUser(json)
 }
 
 function notifyShareExtensionOfCompletion() {

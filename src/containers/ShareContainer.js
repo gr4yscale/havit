@@ -2,7 +2,6 @@ import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import * as shareActions from '../redux/actions/shareActions'
-import * as authActions from '../redux/actions/authActions'
 
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
@@ -118,7 +117,7 @@ export default connect(
   (dispatch) => {
     return {
       friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
-      loginSuccess: (json) => dispatch(authActions.loginSuccess(json)),
+      loginSuccess: (json) => dispatch(serverActions.loginSuccess(json)),
       shareLink: () => dispatch(serverActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
