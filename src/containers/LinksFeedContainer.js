@@ -76,6 +76,16 @@ class LinksFeedContainer extends Component {
     )
   }
 
+  saveToPocket(url) {
+    let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({'value1':url}),
+    }
+    let iftttURL = 'https://maker.ifttt.com/trigger/havit_send_to_pocket/with/key/[redacted]'
+    fetch(iftttURL, requestOptions)
+  }
+
   handleLinkCellAction(data, actionType) {
     switch(actionType) {
       case LinkCellActionTypes.FriendListCellActionTypeBrowser:
@@ -88,7 +98,7 @@ class LinksFeedContainer extends Component {
         this.alertNotImplemented()
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction1:
-        this.alertNotImplemented()
+        this.saveToPocket(data.url)
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction2:
         this.alertNotImplemented()
