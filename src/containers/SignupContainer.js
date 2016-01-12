@@ -21,10 +21,8 @@ let deviceWidth = Dimensions.get('window').width;
 class SignupContainer extends Component {
 
   signupButtonPressed() {
-    const {signup, login} = this.props
-    signup()
-    .then(() => login())
-    .then(() => {
+    const {signup} = this.props
+    signup().then(() => {
       Actions.MainContainer()
       // TOFIX: explictly save our store here to avoid a race so that when the user reloads
       // the app and the user data wasn't saved, they're stuck with sign in screen

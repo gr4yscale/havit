@@ -34,12 +34,8 @@ export function signup() {
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
-        // TOFIX: reset token on local storage / log out previous user
-        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
-        if (Platform.OS === 'ios') {
-          updateShareExtensionStoreWithCurrentUser(json)
-        }
         dispatch(signupSuccess(json))
+        dispatch(login(data.username, data.password))
       } else {
         dispatch(signupFailure(JSON.parse(response._bodyInit)))
       }
@@ -83,14 +79,10 @@ export function loginFailure(error) {
   }
 }
 
-// TOFIX: refactor to use current state
-export function login() {
-  return (dispatch, getState) => {
+export function login(username, password) {
+  return dispatch => {
     dispatch(loginRequest());
     let parse = new Parse();
-    let username = getState().auth.form.fields.username
-    let password = getState().auth.form.fields.password
-
     return parse.login({
       username,
       password,
