@@ -239,6 +239,7 @@ export function shareLink() {
       return friend.objectId
     })
 
+    // TOFIX: factor this into the parse module
     let postData = {
       'url' : form.url,
       'title' : form.title,
@@ -262,10 +263,105 @@ export function shareLink() {
       } else {
         dispatch(shareFailure(JSON.parse(response._bodyInit)))
       }
-      return response;
     })
     .catch((error) => {
-      dispatch(linksReceivedFailure(error))
+      dispatch(shareFailure(error))
+    })
+  }
+}
+
+
+//////////////////////////////////////////////////////
+// Users Users Users Users Users Users Users Users
+//////////////////////////////////////////////////////
+
+export const getAllUsersRequest = () => ({type: actionTypes.USERS_GET_ALL_REQUEST})
+export const getAllUsersSuccess = (json) => ({type: actionTypes.USERS_GET_ALL_SUCCESS, response: json})
+export const getAllUsersFailure = (error) => ({type: actionTypes.USERS_GET_ALL_FAILURE, payload: error})
+
+export function getAllUsers() {
+  return (dispatch) => {
+    dispatch(getAllUsersRequest());
+    let parse = new Parse()
+    return parse.getAllUsers()
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        dispatch(getAllUsersSuccess(json))
+      } else {
+        dispatch(getAllUsersFailure(JSON.parse(response._bodyInit)))
+      }
+    })
+    .catch((error) => {
+      dispatch(getAllUsersFailure(error))
+    })
+  }
+}
+
+// TOFIX: change get to fetch
+
+export const getUserByEmailRequest = (email) => ({type: actionTypes.GET_USER_BY_EMAIL_REQUEST, email})
+export const getUserByEmailSuccess = (json) => ({type: actionTypes.GET_USER_BY_EMAIL_SUCCESS, response: json})
+export const getUserByEmailFailure = (error) => ({type: actionTypes.GET_USER_BY_EMAIL_FAILURE, payload: error})
+
+export function fetchUserByEmail(email) {
+  return (dispatch) => {
+    dispatch(getUserByEmailRequest(email));
+    let parse = new Parse()
+    return parse.getUserByEmail(email)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        dispatch(getUserByEmailSuccess(json))
+      } else {
+        dispatch(getUserByEmailFailure(JSON.parse(response._bodyInit)))
+      }
+    })
+    .catch((error) => {
+      dispatch(getUserByEmailFailure(error))
+    })
+  }
+}
+
+export function getUserByEmail(state, email) {
+  return _.find(state.entities.users, {email})
+}
+
+export function fetchUserByEmailIfNeeded(email) {
+  return (dispatch, getState) => {
+    if (!getUserByEmail(getState(), email)) {
+      return dispatch(fetchUserByEmail(email))
+    } else {
+      return Promise.resolve()
+    }
+  }
+}
+
+export const addFriendRequest = () => ({type: actionTypes.ADD_FRIEND_REQUEST})
+const addFriendSuccess = (json) => ({type: actionTypes.ADD_FRIEND_SUCCESS, response: json})
+const addFriendFailure = (error) => ({type: actionTypes.ADD_FRIEND_FAILURE, payload: error})
+
+export function addFriend(email) {
+  return (dispatch, getState) => {
+    return dispatch(fetchUserByEmailIfNeeded(email))
+    .then(() => {
+      dispatch(addFriendRequest())
+
+      let friend = getUserByEmail(getState(), email)
+      let parse = configuredParse(getState());
+
+      return parse.addFriendToMe(friend.objectId)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          let json = JSON.parse(response._bodyInit)
+          dispatch(addFriendSuccess(json))
+        } else {
+          dispatch(addFriendFailure(JSON.parse(response._bodyInit)))
+        }
+      })
+    })
+    .catch((error) => {
+      dispatch(addFriendFailure(error))
     })
   }
 }

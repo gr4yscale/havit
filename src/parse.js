@@ -3,8 +3,8 @@ const BASE_URL = 'https://api.parse.com';
 export default class Parse {
 
   constructor(userObjectId, sessionToken) {
-    this.applicationId = '[redacted]'
-    this.restAPIKey = '[redacted]'
+    this.applicationId = '1vtTD3vv6uTuaYMbI3Cb1qvqpr4Z9FV6HBa3lzXW'
+    this.restAPIKey = 'ntdEELitKO1xruJi260HSUGLUJPZ02leB7W3SBcu'
     this.userObjectId = userObjectId
     this.sessionToken = sessionToken
   }
@@ -69,6 +69,48 @@ export default class Parse {
       throw error;
     }
   }
+
+  addFriendToMe(objectId) {
+    let params = {
+      'friends': {
+        '__op': 'AddRelation',
+        'objects': [
+          {
+            '__type': 'Pointer',
+            'className': '_User',
+            'objectId': `${objectId}`,
+          },
+        ],
+      },
+    }
+    let url = `/1/users/${this.userObjectId}`
+    try {
+      return this.fetchFromParse('PUT', url, params)
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  getAllUsers() {
+    try {
+      return this.fetchFromParse('GET', '/1/users')
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  getUserByEmail(email) {
+    try {
+      let body = `where={"email":"${email}"}`
+      let encodedBody = encodeURIComponent(body)
+      let url = `/1/users?${encodedBody}`
+      return this.fetchFromParse('GET', url)
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   fetchFromParse(method = 'GET', url = '', body = '') {
     let requestOptions = {
