@@ -62,6 +62,17 @@ class FriendAddContainer extends Component {
     }
   }
 
+  handleOnChangeText(text) {
+    this.emailTextEntered = text
+    let user = _.find(this.props.users, {email: text})
+    if (user) {
+      this.setState({userFound: true})
+      console.log('user found')
+    } else {
+      this.setState({userFound: false})
+    }
+  }
+
   renderSearchForm() {
     return (
         <View style={styles.searchFormContainer}>
@@ -85,13 +96,14 @@ class FriendAddContainer extends Component {
   }
 
   render() {
+    let backgroundColor = this.state.userFound ?  '#00BB00' : '#FF0088'
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{`Enter a friend's email address to add them:`}</Text>
-        <View style={[{backgroundColor:'#5511ff'}]}>
+        <View style={{backgroundColor:'#0055FF'}}>
           {this.renderSearchForm()}
         </View>
-        <View style={{flex: 1,backgroundColor:'#9900ff'}}>
+        <View style={{flex: 1,backgroundColor}}>
         <ListView
             dataSource = {this.state.dataSource}
             renderRow = {(data) => {
