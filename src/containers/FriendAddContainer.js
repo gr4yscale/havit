@@ -14,11 +14,10 @@ let {
   Dimensions,
   TouchableHighlight,
   ListView,
-  TextInput
+  TextInput,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
 
 class FriendAddContainer extends Component {
 
@@ -26,12 +25,12 @@ class FriendAddContainer extends Component {
     super(props)
 
     let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+      rowHasChanged: (r1, r2) => r1.objectId !== r2.objectId,
     })
     this.state = {
-      dataSource: ds.cloneWithRows(['yo', 'yo yo yo yo', 'yo again', 'more yo', 'yo ho ho']),
+      dataSource: ds.cloneWithRows([]),
+      userFound: false,
     }
-    //dispatch fetching cache of all users
   }
 
   componentDidMount() {
@@ -40,37 +39,32 @@ class FriendAddContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.userFound != this.state.userFound
+    return nextState.userFound != this.state.userFound ||
+      nextProps.friends != this.props.friends
   }
 
-  dispatchAddFriend() {
-    const {addFriend} = this.props
+  dispatchAddFriendAndClearSearchInput() {
+    const {addFriend, fetchFriends} = this.props
     addFriend(this.emailTextEntered)
-    .then(() => console.log('friend added'))
+    .then(() => {
+      if (this.textInput) {
+        this.textInput.setNativeProps({text: ''})
+      }
+    })
+    .then(() => fetchFriends())
   }
   addButtonPressed() {
-    this.dispatchAddFriend()
+    this.dispatchAddFriendAndClearSearchInput()
   }
 
-  // TOFIX: is this really the best way to handle this?
-  handleTextEntered(event) {
-    let text = event.nativeEvent.text
-    this.dispatchAddFriend()
-
-    if (this.textInput) {
-      this.textInput.setNativeProps({text: ''})
-    }
+  handleTextEntered() {
+    this.dispatchAddFriendAndClearSearchInput()
   }
 
   handleOnChangeText(text) {
     this.emailTextEntered = text
     let user = _.find(this.props.users, {email: text})
-    if (user) {
-      this.setState({userFound: true})
-      console.log('user found')
-    } else {
-      this.setState({userFound: false})
-    }
+    this.setState({userFound: (user ? true : false)})
   }
 
   renderSearchForm() {
@@ -80,7 +74,7 @@ class FriendAddContainer extends Component {
               style={[styles.inputs, {flex: 1,backgroundColor:'#9944ff'}]}
               autoCapitalize={'none'}
               autoCorrect={false}
-              onSubmitEditing={(event) => this.handleTextEntered(event)}
+              onSubmitEditing={() => this.handleTextEntered()}
               onChangeText={(text) => this.handleOnChangeText(text)}
               ref={(component)=> this.textInput = component}
           />
@@ -97,6 +91,8 @@ class FriendAddContainer extends Component {
 
   render() {
     let backgroundColor = this.state.userFound ?  '#00BB00' : '#FF0088'
+    let dataSource = this.props.friends ? this.state.dataSource.cloneWithRows(this.props.friends) : this.state.dataSource.cloneWithRows([])
+
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>{`Enter a friend's email address to add them:`}</Text>
@@ -105,11 +101,11 @@ class FriendAddContainer extends Component {
         </View>
         <View style={{flex: 1,backgroundColor}}>
         <ListView
-            dataSource = {this.state.dataSource}
+            dataSource = {dataSource}
             renderRow = {(data) => {
               return (
                 <FriendAddCell
-                    text={data}
+                    text={data.displayName}
                 />
               )
             }}
@@ -160,8 +156,8 @@ let styles = StyleSheet.create({
 
   },
   listView: {
-    backgroundColor: 'rgba(0,1,0,0)',
-    paddingTop: 20,
+    backgroundColor: 'rgba(0,0,0,0)',
+    paddingTop: 16,
     paddingLeft: 8,
     paddingRight: 8,
   },
@@ -178,6 +174,7 @@ let styles = StyleSheet.create({
 export default connect(
   (state) => {
     return {
+      friends: state.entities.friends,
       users: state.entities.users,
     }
   },
