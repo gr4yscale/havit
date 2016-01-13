@@ -1,8 +1,9 @@
 import React from 'react-native';
-// import {connect} from 'react-redux/native'
-// import {bindActionCreators} from 'redux'
-// import * as serverActions from '../redux/actions/serverActions'
-import {Actions} from '../../node_modules/react-native-router-flux'
+import {connect} from 'react-redux/native'
+import {bindActionCreators} from 'redux'
+import * as serverActions from '../redux/actions/serverActions'
+// import {Actions} from '../../node_modules/react-native-router-flux'
+import _ from 'lodash'
 import FriendAddCell from '../components/FriendAddCell'
 
 let {
@@ -28,25 +29,34 @@ class FriendAddContainer extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     })
     this.state = {
-      dataSource: ds.cloneWithRows(["yo", "yo yo yo yo", "yo again", "more yo", "yo ho ho"]),
+      dataSource: ds.cloneWithRows(['yo', 'yo yo yo yo', 'yo again', 'more yo', 'yo ho ho']),
     }
-
     //dispatch fetching cache of all users
   }
 
-  signupButtonPressed() {
-    const {signup} = this.props
-    signup().then(() => {
-      Actions.MainContainer()
-      // TOFIX: explictly save our store here to avoid a race so that when the user reloads
-      // the app and the user data wasn't saved, they're stuck with sign in screen
-    })
+  componentDidMount() {
+    const {getAllUsers} = this.props
+    getAllUsers()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.userFound != this.state.userFound
+  }
+
+  dispatchAddFriend() {
+    const {addFriend} = this.props
+    addFriend(this.emailTextEntered)
+    .then(() => console.log('friend added'))
+  }
+  addButtonPressed() {
+    this.dispatchAddFriend()
   }
 
   // TOFIX: is this really the best way to handle this?
   handleTextEntered(event) {
     let text = event.nativeEvent.text
-    this.props.signupNext(text)
+    this.dispatchAddFriend()
+
     if (this.textInput) {
       this.textInput.setNativeProps({text: ''})
     }
@@ -56,16 +66,17 @@ class FriendAddContainer extends Component {
     return (
         <View style={styles.searchFormContainer}>
           <TextInput
-              style={[styles.inputs, {flex: 1,backgroundColor:'#FFAA11'}]}
+              style={[styles.inputs, {flex: 1,backgroundColor:'#9944ff'}]}
               autoCapitalize={'none'}
               autoCorrect={false}
               onSubmitEditing={(event) => this.handleTextEntered(event)}
-              ref={(component)=>this.textInput = component}
+              onChangeText={(text) => this.handleOnChangeText(text)}
+              ref={(component)=> this.textInput = component}
           />
           <TouchableHighlight
               style={styles.button}
               underlayColor="#99d9f4"
-              onPress={() => this.signupButtonPressed()}
+              onPress={() => this.addButtonPressed()}
           >
             <Text style={styles.buttonText}>+</Text>
           </TouchableHighlight>
@@ -152,13 +163,13 @@ let styles = StyleSheet.create({
   },
 })
 
-// export default connect(
-//   (state) => {
-//     return state
-//   },
-//   (dispatch) => {
-//     return bindActionCreators(serverActions, dispatch);
-//   }
-// )(FriendAddContainer)
-
-export default FriendAddContainer
+export default connect(
+  (state) => {
+    return {
+      users: state.entities.users,
+    }
+  },
+  (dispatch) => {
+    return bindActionCreators(serverActions, dispatch);
+  }
+)(FriendAddContainer)
