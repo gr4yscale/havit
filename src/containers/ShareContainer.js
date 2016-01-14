@@ -46,7 +46,7 @@ class ShareContainer extends Component {
   }
 
   componentDidMount() {
-    const { friendsSuccess, loginSuccess } = this.props
+    const {friendsSuccess, loginSuccess, shareFormChanged, url, title} = this.props
 
     // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
     // the special private container that is provided for the extension to communicate with the app...weird shit
@@ -64,6 +64,13 @@ class ShareContainer extends Component {
         loginSuccess(currentUserData)
       }
     )
+
+    // We receive title and url from the share extension intially, but ultimately want child compeonnts to
+    // react to changes in the redux store so when friend cells are tapped the title/url/comment fields don't
+    // get overwritten by old data in these initial props.
+    // TOFIX: make this a different action such as "LOAD FROM NATIVE SHARE MODULE"
+    shareFormChanged('url', url)
+    shareFormChanged('title', title)
   }
 
   componentWillUnmount() {
@@ -71,13 +78,8 @@ class ShareContainer extends Component {
     this.currentUserUpdateSubscription.remove();
   }
 
-
   shareButtonPressed() {
-    const {shareLink, postAllIftttActions, shareFormChanged, url, title} = this.props
-    // TOFIX: create an action that expresses intent to set state such as
-    // "set share state from iOS share extension data"
-    shareFormChanged('url', url)
-    shareFormChanged('title', title)
+    const {shareLink, postAllIftttActions} = this.props
 
     Promise.all([shareLink(), postAllIftttActions()])
     .then(() => {
@@ -183,6 +185,9 @@ export default connect(
   (state) => {
     return {
       friends: state.share.selectedFriends,
+      titleRedux: state.share.form.title,
+      urlRedux: state.share.form.url,
+      commentRedux: state.share.form.comment,
     }
   },
   (dispatch) => {

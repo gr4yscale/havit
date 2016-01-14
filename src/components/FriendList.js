@@ -57,7 +57,7 @@ class FriendList extends Component {
             initialListSize={20}
             pageSize={4}
             style = {styles.listView}
-            renderHeader={this.renderHeader.bind(this)}
+            renderHeader={() => this.renderHeader()}
         />
     );
   }
