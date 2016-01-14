@@ -5,13 +5,14 @@ import * as shareActions from '../redux/actions/shareActions'
 
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
+import {Icon} from '../../node_modules/react-native-icons'
 
 let {
   Component,
   StyleSheet,
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   Dimensions,
   NativeAppEventEmitter,
   NativeModules,
@@ -21,7 +22,28 @@ let {
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
+// credit: brentvatne from his example in
+// https://github.com/brentvatne/react-native-linear-gradient
+function incrementColor(color, step){
+  let colorToInt = parseInt(color.substr(1), 16)
+  let nstep = parseInt(step)
+  if (!isNaN(colorToInt) && !isNaN(nstep)) {
+    colorToInt += nstep
+    let ncolor = colorToInt.toString(16)
+    ncolor = '#' + (new Array(7-ncolor.length).join(0)) + ncolor
+    if (/^#[0-9a-f]{6}$/i.test(ncolor)) {
+      return ncolor
+    }
+  }
+  return color;
+}
+
 class ShareContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {bgColor:'#9922FF'} //cc22aa
+  }
 
   componentDidMount() {
     const { friendsSuccess, loginSuccess } = this.props
@@ -49,15 +71,6 @@ class ShareContainer extends Component {
     this.currentUserUpdateSubscription.remove();
   }
 
-  // TOFIX: passing the props down this way is definitely not the right way to do it
-  // TOFIX: being sloppy and just giving the header everything coming down from the app component, yikes
-  renderHeader() {
-    return (
-      <ShareHeader shareFormChanged={this.props.shareFormChanged}
-          {...this.props}
-      />
-    )
-  }
 
   shareButtonPressed() {
     const {shareLink, postAllIftttActions, shareFormChanged, url, title} = this.props
@@ -78,29 +91,63 @@ class ShareContainer extends Component {
     })
   }
 
+  closeButtonPressed() {
+    if (Platform.OS === 'ios') {
+      NativeModules.RootShareViewController.shareComplete()
+    }
+  }
+
   handleCellPressed() {
     this.setState({
       bgColor: incrementColor(this.state.bgColor, 2000),
     })
   }
 
+  // TOFIX: passing the props down this way is definitely not the right way to do it
+  // TOFIX: being sloppy and just giving the header everything coming down from the app component, yikes
+  renderHeader() {
+    return (
+      <ShareHeader shareFormChanged={this.props.shareFormChanged}
+          {...this.props}
+      />
+    )
+  }
+
+  renderCloseButton() {
+    return (
+      <TouchableOpacity
+          onPress={() => this.closeButtonPressed()}
+          style={{position: 'absolute', top: 20, left: 10, width: 30, height: 30}}
+      >
+        <Icon
+            name={'ion|android-close'}
+            size={30}
+            color={'#FFFFFF'}
+            style={styles.closeIcon}
+        />
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor:this.state.bgColor}]}>
         <FriendList
             {...this.props}
             header={this.renderHeader.bind(this)}
+            onCellPressed={() => this.handleCellPressed()}
         />
 
         <View style={{position:'absolute', width:deviceWidth, height: 50, bottom: 0, backgroundColor:'#FF00FF'}}>
-          <TouchableHighlight
+          <TouchableOpacity
               onPress={() => this.shareButtonPressed()}
               style={styles.button}
               underlayColor="#99d9f4"
           >
             <Text style={styles.buttonText}>Share!</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
+        {this.renderCloseButton()}
       </View>
     );
   }
@@ -109,9 +156,8 @@ class ShareContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor:'#EEEEEE',
     height:deviceHeight - 66,
-    paddingTop:50,
+    paddingTop:40,
   },
   buttonText: {
     fontSize: 18,
@@ -123,6 +169,13 @@ let styles = StyleSheet.create({
     backgroundColor: '#FF3B7F',
     alignSelf: 'stretch',
     justifyContent: 'center',
+  },
+  closeIcon: {
+    position:'absolute',
+    left: 0,
+    top: 0,
+    width: 30,
+    height: 30,
   },
 })
 

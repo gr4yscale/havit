@@ -45,7 +45,7 @@ class animGL extends React.Component {
     const loop = time => {
       this.raf = requestAnimationFrame(loop);
       this.setState({
-        value: (1 + Math.cos(time / 1000)) / 2 // cycle between 0 and 1
+        value: (1 + Math.cos(time / 6000)) / 2 // cycle between 0 and 1
       });
     };
     this.raf = requestAnimationFrame(loop);

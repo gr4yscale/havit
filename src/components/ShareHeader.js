@@ -43,7 +43,7 @@ class ShareHeader extends Component {
 
 let styles = StyleSheet.create({
   form: {
-    backgroundColor:'#EEEEEE',
+    backgroundColor:'transparent',
     marginTop: 4,
     marginBottom: 20,
     marginLeft: 8,

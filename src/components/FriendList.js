@@ -15,16 +15,21 @@ class FriendList extends Component {
   constructor(props) {
     super(props);
     let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+      rowHasChanged: (r1, r2) => r1.objectId !== r2.objectId,
     })
     this.state = {
       dataSource: ds.cloneWithRows(['dummy row1']),
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.friends != this.props.friends
+  }
+
   onCellPressed(data) {
     const { friendCellTapped } = this.props
     friendCellTapped(data.objectId)
+    this.props.onCellPressed()
   }
 
   // TOFIX: this sucks, fix it

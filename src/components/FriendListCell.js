@@ -6,7 +6,7 @@ let {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
 } = React
 
 class FriendListCell extends Component {
@@ -17,7 +17,7 @@ class FriendListCell extends Component {
   renderText() {
     if (this.props.data.selected)
       return (
-        <Text style={[styles.cellText, {color:'#FF3B7F'}]}>
+        <Text style={[styles.cellText, {color:'#FF3B7F', fontWeight:'600'}]}>
           {this.props.data.displayName}
         </Text>
       )
@@ -33,7 +33,7 @@ class FriendListCell extends Component {
     if (this.props.data.selected)
       return (
         <Icon
-            name={'ion|ios-checkmark-outline'}
+            name={'ion|android-done'}
             size={30}
             color={'#FF3B7F'}
             style={styles.selectedIcon}
@@ -43,7 +43,7 @@ class FriendListCell extends Component {
 
   render() {
     return (
-      <TouchableHighlight
+      <TouchableOpacity
           onPress={() => this.handlePress()}
           delayPressIn={0}
           delayPressOut={0}
@@ -53,7 +53,7 @@ class FriendListCell extends Component {
           {this.renderText()}
           {this.renderSelectionIcon()}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }
@@ -64,17 +64,17 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
-    marginLeft: 2,
-    marginRight: 2,
+    marginLeft: 8,
+    marginRight: 8,
     marginBottom: 0.5,
-    opacity: 0.9,
-    backgroundColor: '#FFFECE',
+    opacity: 1.0,
+    backgroundColor: '#EEEEEE',
     height: 48,
   },
   cellText: {
     color: '#333333',
     fontWeight: '500',
-    fontSize: 24,
+    fontSize: 22,
   },
   selectedIcon: {
     position:'absolute',
