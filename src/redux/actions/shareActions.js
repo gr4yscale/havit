@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes'
 import {createAction} from 'redux-actions'
+import Parse from '../../parse'
 import _ from 'lodash'
 
 export function friendCellTapped(objectId) {
@@ -14,6 +15,50 @@ export function shareFormChanged(field, value) {
     type: actionTypes.SHARE_FORM_CHANGED,
     field,
     value,
+  }
+}
+
+const shareRequest = createAction(actionTypes.SHARE_REQUEST)
+const shareSuccess = createAction(actionTypes.SHARE_SUCCESS)
+const shareFailure = createAction(actionTypes.SHARE_FAILURE)
+
+export function shareLink() {
+  return (dispatch, getState) => {
+    let postData = shareDataToPost(getState())
+    dispatch(shareRequest());
+    let parse = configuredParse(getState())
+    return parse.shareLink(postData)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        dispatch(shareSuccess(json))
+      } else {
+        dispatch(shareFailure(JSON.parse(response._bodyInit)))
+      }
+    })
+    .catch((error) => {
+      dispatch(shareFailure(error))
+    })
+  }
+}
+
+function shareDataToPost(state) {
+  let form = state.share.form
+  let senderId = state.auth.currentUser.objectId
+  let friends = state.share.selectedFriends
+
+  let recipientIds = friends.filter((friend) => {
+    return (friend.selected === true)
+  }).map((friend) => {
+    return friend.objectId
+  })
+
+  return {
+    'url' : form.url,
+    'title' : form.title,
+    'comment' : form.comment,
+    'sender_id' : senderId,
+    'recipient_ids' : recipientIds,
   }
 }
 
@@ -103,4 +148,13 @@ function iftttRequest(urlToShare, iftttUrl, title, senderName) {
     }),
   }
   return fetch(iftttUrl, requestOptions)
+}
+
+// UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:
+//////////////////////////////////////////////////////
+
+function configuredParse(state) {
+  let userObjectId = _.get(state, 'auth.currentUser.objectId')
+  let sessionToken = _.get(state, 'auth.currentUser.sessionToken')
+  return new Parse(userObjectId, sessionToken);
 }

@@ -14,6 +14,8 @@ let {
   TouchableHighlight,
   Dimensions,
   NativeAppEventEmitter,
+  NativeModules,
+  Platform,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -58,15 +60,18 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
-    const {shareLink, triggerAllIftttActions, shareFormChanged, url, title} = this.props
+    const {shareLink, postAllIftttActions, shareFormChanged, url, title} = this.props
     // TOFIX: create an action that expresses intent to set state such as
     // "set share state from iOS share extension data"
     shareFormChanged('url', url)
     shareFormChanged('title', title)
 
-    Promise.all([shareLink(), triggerAllIftttActions()])
+    Promise.all([shareLink(), postAllIftttActions()])
     .then(() => {
       console.log('Havit share + IFTTT action requests all completed')
+      if (Platform.OS === 'ios') {
+        NativeModules.RootShareViewController.shareComplete()
+      }
     })
     .catch((error) => {
       console.log('There was an error sharing the love:', error)
@@ -131,10 +136,10 @@ export default connect(
     return {
       friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
       loginSuccess: (json) => dispatch(serverActions.loginSuccess(json)),
-      shareLink: () => dispatch(serverActions.shareLink()),
+      shareLink: () => dispatch(shareActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
-      triggerAllIftttActions: () => dispatch(shareActions.triggerAllIftttActions()),
+      postAllIftttActions: () => dispatch(shareActions.postAllIftttActions()),
     }
   }
 )(ShareContainer)

@@ -144,7 +144,6 @@ export function fetchLinksReceived() {
       } else {
         dispatch(linksReceivedFailure(JSON.parse(response._bodyInit)))
       }
-      return response;
     })
     .catch((error) => {
       dispatch(linksReceivedFailure(error))
@@ -197,75 +196,6 @@ export function fetchFriends() {
     })
     .catch((error) => {
       dispatch(friendsFailure(error))
-    })
-  }
-}
-
-
-
-// SHARE
-//////////////////////////////////////////////////////
-
-function shareRequest() {
-  return {
-    type: actionTypes.SHARE_REQUEST,
-  }
-}
-
-function shareSuccess(json) {
-  return {
-    type: actionTypes.SHARE_SUCCESS,
-    response: json,
-  }
-}
-
-function shareFailure(error) {
-  return {
-    type: actionTypes.SHARE_FAILURE,
-    payload: error,
-  }
-}
-
-export function shareLink() {
-  return (dispatch, getState) => {
-
-    let form = getState().share.form
-    let senderId = getState().auth.currentUser.objectId
-    let friends = getState().share.selectedFriends
-
-    let recipientIds = friends.filter((friend) => {
-      return (friend.selected === true)
-    }).map((friend) => {
-      return friend.objectId
-    })
-
-    // TOFIX: factor this into the parse module
-    let postData = {
-      'url' : form.url,
-      'title' : form.title,
-      'comment' : form.comment,
-      'sender_id' : senderId,
-      'recipient_ids' : recipientIds,
-    }
-
-    dispatch(shareRequest());
-    let parse = configuredParse(getState());
-    return parse.shareLink(postData)
-    .then((response) => {
-      if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(shareSuccess(json))
-
-        //TOFIX: refactor
-        if (Platform.OS === 'ios') {
-          notifyShareExtensionOfCompletion()
-        }
-      } else {
-        dispatch(shareFailure(JSON.parse(response._bodyInit)))
-      }
-    })
-    .catch((error) => {
-      dispatch(shareFailure(error))
     })
   }
 }
@@ -383,9 +313,4 @@ function updateShareExtensionStoreWithFriends(json) {
 function updateShareExtensionStoreWithCurrentUser(json) {
   let HVTShareExtensionStorage = NativeModules.HVTShareExtensionStorage
   HVTShareExtensionStorage.updateCurrentUser(json)
-}
-
-function notifyShareExtensionOfCompletion() {
-  let RootShareViewController = NativeModules.RootShareViewController
-  RootShareViewController.shareComplete()
 }
