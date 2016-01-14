@@ -63,6 +63,17 @@ export default function share(state = initialState, action) {
       return Object.assign({}, state, {
         ...initialState,
         selectedFriends : friends,
+        sharing: false,
+      })
+
+    case 'ALL_IFTTT_ACTIONS_BEGIN':
+      return Object.assign({}, state, {
+        triggeringIftttActions: true,
+      })
+
+    case 'ALL_IFTTT_ACTIONS_SUCCESS':
+      return Object.assign({}, state, {
+        triggeringIftttActions: false,
       })
 
     default:

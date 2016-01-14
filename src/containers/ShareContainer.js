@@ -58,12 +58,25 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
-    const {shareLink, shareFormChanged, url, title} = this.props
+    const {shareLink, triggerAllIftttActions, shareFormChanged, url, title} = this.props
     // TOFIX: create an action that expresses intent to set state such as
     // "set share state from iOS share extension data"
     shareFormChanged('url', url)
     shareFormChanged('title', title)
-    shareLink()
+
+    Promise.all([shareLink(), triggerAllIftttActions()])
+    .then(() => {
+      console.log('Havit share + IFTTT action requests all completed')
+    })
+    .catch((error) => {
+      console.log('There was an error sharing the love:', error)
+    })
+  }
+
+  handleCellPressed() {
+    this.setState({
+      bgColor: incrementColor(this.state.bgColor, 2000),
+    })
   }
 
   render() {
@@ -121,6 +134,7 @@ export default connect(
       shareLink: () => dispatch(serverActions.shareLink()),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
+      triggerAllIftttActions: () => dispatch(shareActions.triggerAllIftttActions()),
     }
   }
 )(ShareContainer)
