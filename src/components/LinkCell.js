@@ -69,7 +69,7 @@ class LinkCell extends Component {
   renderContent() {
     let statusIndicator = <Text style={styles.statusIndicator}>●</Text>
     // let friend = this.props.friend ?
-    const {title, url} = this.props.data
+    const {title, url, senderDisplayName} = this.props.data
 
     let backgroundColor = this.state.backgroundColor.interpolate({
       inputRange: [0, 1],
@@ -98,7 +98,7 @@ class LinkCell extends Component {
                         {url}
                       </Animated.Text>
                       <Animated.Text style={[styles.senderNameText, {color:secondaryTextColor}]} numberOfLines={1}>
-                        @gr4yscale
+                        {senderDisplayName}
                       </Animated.Text>
                     </View>
               </Animated.View>

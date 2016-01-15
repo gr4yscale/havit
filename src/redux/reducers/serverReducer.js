@@ -1,4 +1,5 @@
 import * as actionTypes from '../actionTypes'
+import _ from 'lodash'
 
 // TOFIX: initial state
 
@@ -11,8 +12,20 @@ export default function server(state = {}, action) {
         linksFetching: true,
       })
     case actionTypes.LINKS_RECEIVED_SUCCESS:
+      let friends = state.friends
+      let links = action.response.results.map(
+        (link) => {
+          let sender = _.find(friends, {objectId: link.sender_id})
+          let senderDisplayName = _.get(sender, 'displayName') ? sender.displayName : 'Unknown Sender'
+          // mutating state here, but I don't care...it seems expensive to alloc new objects for this
+          return {
+            ...link,
+            senderDisplayName,
+          }
+        }
+      )
       return Object.assign({}, state, {
-        links: action.response.results,
+        links,
         linksFetching: false,
       })
     case actionTypes.FRIENDS_REQUEST:
