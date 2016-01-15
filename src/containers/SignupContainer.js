@@ -12,7 +12,7 @@ let {
   Text,
   Dimensions,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -59,23 +59,36 @@ class SignupContainer extends Component {
   renderFinishButtonIfNeeded() {
     if (this.props.finished)
       return (
-        <TouchableHighlight
+        <TouchableOpacity
             style={styles.button}
             underlayColor="#99d9f4"
             onPress={() => this.signupButtonPressed()}
         >
           <Text style={styles.buttonText}>Click here to get started.</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
+    )
+  }
+
+  renderSignupButton() {
+    return (
+      <TouchableOpacity
+          style={[styles.button, styles.signupButton]}
+          underlayColor="#99d9f4"
+          onPress={() => Actions.SignIn()}
+      >
+        <Text style={[styles.buttonText, styles.smallText, {textAlign: 'center'}]}>Click here to sign in if you already have an account.</Text>
+      </TouchableOpacity>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        
-        <Text style={styles.bigText}>{this.props.promptText}</Text>
+
+        <Text style={[styles.text, styles.bigText]}>{this.props.promptText}</Text>
         {this.renderFormIfNeeded()}
         {this.renderFinishButtonIfNeeded()}
+        {this.renderSignupButton()}
       </View>
     );
   }
@@ -125,18 +138,27 @@ let styles = StyleSheet.create({
     fontSize: 16,
     // fontWeight: '600',
   },
-  bigText: {
+  text: {
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
-    fontSize: 24,
     fontWeight: '600',
     color:'#FFFFFF',
     marginLeft: 30,
     marginRight: 30,
-    marginTop: 130,
+    marginTop: 100,
     paddingBottom:4,
     paddingTop:2,
     paddingLeft: 4,
     backgroundColor: '#000000',
+  },
+  bigText: {
+    fontSize: 24,
+  },
+  smallText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#FFFFFF',
+    backgroundColor:'#000000',
+    padding: 6,
   },
   buttonText: {
     fontSize: 18,
@@ -153,6 +175,10 @@ let styles = StyleSheet.create({
     marginTop: 12,
     marginLeft: 30,
     marginRight: 30,
+  },
+  signupButton: {
+    marginTop: 160,
+    backgroundColor: 'transparent',
   },
 })
 

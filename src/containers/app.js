@@ -3,10 +3,18 @@ import LinksFeedContainer from './LinksFeedContainer'
 import AuthContainer from './AuthContainer'
 import ShareContainer from './ShareContainer'
 import SignupContainer from './SignupContainer'
+import FriendAddContainer from './FriendAddContainer'
 import CustomScrollableTabView from '../components/CustomScrollableTabView'
 import CustomTabBar from '../components/CustomTabBar'
-import {Router, Route} from '../../node_modules/react-native-router-flux'
+import {Router, Route, Schema} from '../../node_modules/react-native-router-flux'
+import {Actions} from '../../node_modules/react-native-router-flux'
+import ExNavigator from '../../node_modules/@exponent/react-native-navigator';
 
+let {
+  Navigator,
+  Text,
+  TouchableOpacity,
+} = React
 
 class MainContainer extends React.Component {
   render() {
@@ -17,29 +25,50 @@ class MainContainer extends React.Component {
           renderTabBar={() => <CustomTabBar />}
       >
         <LinksFeedContainer tabLabel="Inbox" />
-        <AuthContainer />
-        <SignupContainer tabLabel="Signup" />
+        <ShareContainer tabLabel="Share" />
+        <FriendAddContainer tabLabel="Friends" />
       </CustomScrollableTabView>
     )
   }
 }
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   shouldComponentUpdate() {
     return false
+  }
+
+  createRightButton () {
+    return (
+      <TouchableOpacity
+          touchRetentionOffset={ExNavigator.Styles.barButtonTouchRetentionOffset}
+          style={[ExNavigator.Styles.barLeftButton]}
+          onPress={() => {Actions.pop()}}
+      >
+        <Text style={[ExNavigator.Styles.barLeftButtonText]}>Close</Text>
+      </TouchableOpacity>
+    )
   }
 
   render() {
     return (
       <Router hideNavBar={true} >
-        <Route name="SignUp" component={SignupContainer} title="Signup" />
+        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
+
         <Route name="MainContainer" component={MainContainer} title="Inbox" initial={true} />
-        <Route name="SignIn" component={AuthContainer} title="Sign in" />
         <Route name="Share" component={ShareContainer} title="Share" />
+        <Route name="Friends" component={FriendAddContainer} title="Friends" />
+
+        <Route name="Authenticate" wrapRouter={true} >
+          <Router hideNavBar={false}>
+          <Route name="SignUp"
+              component={SignupContainer} title="Sign up" schema="modal" renderLeftButton={this.createRightButton}
+          />
+          <Route name="SignIn"
+              component={AuthContainer} title="Sign in" schema="modal" renderLeftButton={this.createRightButton}
+              sceneStyle={{paddingTop: 64}}
+          />
+          </Router>
+        </Route>
       </Router>
     )
   }

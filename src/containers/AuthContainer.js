@@ -11,6 +11,7 @@ let {
   TouchableHighlight,
   Text,
   TextInput,
+  Navigator,
 } = React
 
 class AuthContainer extends Component {
@@ -31,6 +32,7 @@ class AuthContainer extends Component {
     const { loginFormChanged } = this.props;
     return (
       <View style={styles.container}>
+        <Text style={[styles.text, styles.bigText]}>Enter login details below:</Text>
         <View style={styles.form}>
           <TextInput
               style={styles.inputs}
@@ -52,7 +54,7 @@ class AuthContainer extends Component {
               underlayColor="#99d9f4"
               onPress={this.loginButtonPressed.bind(this)}
           >
-            <Text style={styles.buttonText}>Log In</Text>
+            <Text style={styles.buttonText}>Sign in</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -64,6 +66,7 @@ let styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     flex: 1,
+    paddingTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
   },
   form: {
     marginTop: 30,
@@ -95,6 +98,21 @@ let styles = StyleSheet.create({
     padding: 8,
     marginTop: 4,
     marginBottom: 4,
+  },
+  text: {
+    fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
+    fontWeight: '600',
+    color:'#FFFFFF',
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 30,
+    paddingBottom:4,
+    paddingTop:2,
+    paddingLeft: 4,
+    backgroundColor: '#000000',
+  },
+  bigText: {
+    fontSize: 24,
   },
 })
 

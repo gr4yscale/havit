@@ -5,6 +5,7 @@ import { loadInitialData } from './redux/store'
 import App from './containers/app'
 import {Actions} from '../node_modules/react-native-router-flux'
 import _ from 'lodash' // TOFIX: hrmmmm... not sure about having this one in...
+import * as serverActions from './redux/actions/serverActions'
 
 class Root extends React.Component {
 
@@ -12,9 +13,9 @@ class Root extends React.Component {
     super(props)
     loadInitialData((newState) => {
       if (_.get(newState, 'auth.currentUser')) {
-        Actions.MainContainer()
+        store.dispatch(serverActions.fetchLinksReceived())
       } else {
-        Actions.SignUp()
+        Actions.Authenticate()
       }
     })
   }
