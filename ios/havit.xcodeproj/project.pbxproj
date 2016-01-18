@@ -21,6 +21,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		29281E311C4D5BE000307F74 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29281E231C4D5BA300307F74 /* libCodePush.a */; };
+		29281E6F1C4D5C6500307F74 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 29281E6E1C4D5C6500307F74 /* libz.tbd */; };
 		296FA8091C3A04BD00EF4408 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		296FA80B1C3A050700EF4408 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
 		296FA80D1C3A0CA100EF4408 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80C1C3A0CA100EF4408 /* assets */; };
@@ -111,6 +113,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		29281E221C4D5BA300307F74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29281E1D1C4D5BA300307F74 /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
 		296FA8071C3A04B100EF4408 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 296FA8031C3A04B100EF4408 /* ReactNativeIcons.xcodeproj */;
@@ -196,6 +205,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = havit/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = havit/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		29281E1D1C4D5BA300307F74 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		29281E6E1C4D5C6500307F74 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		296FA8031C3A04B100EF4408 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		296FA80A1C3A050700EF4408 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		296FA80C1C3A0CA100EF4408 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
@@ -248,6 +259,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29281E6F1C4D5C6500307F74 /* libz.tbd in Frameworks */,
+				29281E311C4D5BE000307F74 /* libCodePush.a in Frameworks */,
 				29A1ED781C3D956B008CF2C2 /* libReactNativeIcons.a in Frameworks */,
 				29A1ED351C3D632C008CF2C2 /* libRCTActionSheet.a in Frameworks */,
 				29A1ED361C3D632C008CF2C2 /* libRCTGeolocation.a in Frameworks */,
@@ -363,6 +376,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29281E1E1C4D5BA300307F74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29281E231C4D5BA300307F74 /* libCodePush.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		296FA8041C3A04B100EF4408 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +438,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				29281E1D1C4D5BA300307F74 /* CodePush.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -446,6 +468,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				29281E6E1C4D5C6500307F74 /* libz.tbd */,
 				296FA80A1C3A050700EF4408 /* ionicons.ttf */,
 				296FA80C1C3A0CA100EF4408 /* assets */,
 				13B07FAE1A68108700A75B9A /* havit */,
@@ -574,6 +597,10 @@
 					ProjectRef = 36D3D0BA5BDD4C909603D04A /* BVLinearGradient.xcodeproj */;
 				},
 				{
+					ProductGroup = 29281E1E1C4D5BA300307F74 /* Products */;
+					ProjectRef = 29281E1D1C4D5BA300307F74 /* CodePush.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -690,6 +717,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		29281E231C4D5BA300307F74 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 29281E221C4D5BA300307F74 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */ = {
@@ -927,6 +961,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
+					"$(SRCROOT)/../node_modules/react-native-code-push",
+				);
 				INFOPLIST_FILE = ShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -952,6 +994,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient",
+					"$(SRCROOT)/../node_modules/gl-react-native/ios",
+					"$(SRCROOT)/../node_modules/react-native-code-push",
+				);
 				INFOPLIST_FILE = ShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
