@@ -33,6 +33,13 @@ class MainContainer extends React.Component {
 }
 
 class App extends React.Component {
+
+  componentDidMount() {
+    if (this.props.lastIntentUrlReceived) {
+      Actions.Share({url: this.props.lastIntentUrlReceived})
+    }
+  }
+
   shouldComponentUpdate() {
     return false
   }

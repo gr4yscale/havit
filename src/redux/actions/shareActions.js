@@ -150,6 +150,8 @@ function iftttRequest(urlToShare, iftttUrl, title, senderName) {
   return fetch(iftttUrl, requestOptions)
 }
 
+export const androidIntentReceieved = createAction('ANDROID_INTENT_RECEIVED')
+
 // UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:
 //////////////////////////////////////////////////////
 

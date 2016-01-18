@@ -64,6 +64,7 @@ export default function share(state = initialState, action) {
         ...initialState,
         selectedFriends : friends,
         sharing: false,
+        lastIntentUrlReceived: '',
       })
 
     case 'ALL_IFTTT_ACTIONS_BEGIN':
@@ -75,6 +76,13 @@ export default function share(state = initialState, action) {
       return Object.assign({}, state, {
         triggeringIftttActions: false,
       })
+
+    case 'ANDROID_INTENT_RECEIVED':
+      return Object.assign({}, state, {
+        lastIntentUrlReceived: action.payload.url,
+      })
+
+
 
     default:
       return state;
