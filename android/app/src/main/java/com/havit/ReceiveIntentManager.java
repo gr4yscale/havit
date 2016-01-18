@@ -14,6 +14,8 @@ import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEm
  */
 
 public final class ReceiveIntentManager extends ReactContextBaseJavaModule implements LifecycleEventListener {
+    String mLastUrlReceived = null;
+
     public ReceiveIntentManager(ReactApplicationContext reactContext) {
         super(reactContext);
     }
@@ -47,14 +49,15 @@ public final class ReceiveIntentManager extends ReactContextBaseJavaModule imple
                 url = intent.getDataString();
             }
 
-            if (url != null) {
+            if (url != null && (url != mLastUrlReceived)) {
                 Log.e("ReceiveIntent", url);
 
                 getReactApplicationContext().getJSModule(RCTDeviceEventEmitter.class)
                         .emit("IntentReceived", url);
+
+                mLastUrlReceived = url;
             }
         }
-
     }
 
     @Override
