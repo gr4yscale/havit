@@ -13,7 +13,6 @@ import com.smixx.reactnativeicons.IconFont;
 import com.projectseptember.RNGL.RNGLPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.smixx.reactnativeicons.ReactNativeIcons;
 
 public class MainActivity extends ReactActivity {
 
@@ -43,6 +42,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+        new ReceiveIntentPackage(),
         new RNGLPackage(),
         new ReactMaterialKitPackage(),
         new LinearGradientPackage(),
