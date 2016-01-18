@@ -62,7 +62,6 @@ let styles = StyleSheet.create({
   },
   inputs: {
     flex:1,
-    height: 30,
     fontSize:13,
     borderColor: '#BBBBBB',
     backgroundColor: '#FFFFFF',

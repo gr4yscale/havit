@@ -2,10 +2,11 @@ import React from 'react-native';
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import * as shareActions from '../redux/actions/shareActions'
-
+import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import {Icon} from '../../node_modules/react-native-icons'
+
 
 let {
   Component,
@@ -94,6 +95,9 @@ class ShareContainer extends Component {
   }
 
   closeButtonPressed() {
+
+    Actions.pop()
+
     if (Platform.OS === 'ios') {
       NativeModules.RootShareViewController.shareComplete()
     }
@@ -159,7 +163,8 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     height:deviceHeight - 66,
-    paddingTop:40,
+    paddingTop:50,
+    paddingBottom: 60,
   },
   buttonText: {
     fontSize: 18,

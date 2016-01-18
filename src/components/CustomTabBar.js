@@ -6,7 +6,6 @@ let {
   StyleSheet,
   View,
   Text,
-  Animated,
 } = React
 
 class CustomTabBar extends Component {
@@ -15,37 +14,6 @@ class CustomTabBar extends Component {
   }
 
   render() {
-    // let currentPage = this.props.activeTab
-    //TOFIX: not getting the correct titles because activeTab changes
-    let previousTitle = this.props.tabs[0]
-    let nextTitle = 'Sign Up' //TOFIX: hardcoding title in like a jerk
-
-    let previousTitleStyle = {
-      transform: [{
-        translateX: this.props.scrollValue.interpolate(
-          {inputRange: [0, 0.5], outputRange: [30.0, 4.0]}
-        ),
-      }],
-      opacity: this.props.scrollValue.interpolate(
-        {inputRange: [0, 0.45], outputRange: [1.0, 0.0]}
-      ),
-      position: 'absolute',
-      left: 30,
-    }
-
-    let nextTitleStyle = {
-      transform: [{
-        translateX: this.props.scrollValue.interpolate(
-          {inputRange: [0.5, 1.0], outputRange: [8.0, -18.0]}
-        ),
-      }],
-      opacity: this.props.scrollValue.interpolate(
-        {inputRange: [0.45, 1.0], outputRange: [0.0, 1.0]}
-      ),
-      position: 'absolute',
-      left: 78,
-    }
-
     return (
       <View>
         <View style={styles.tabs}>
@@ -55,12 +23,7 @@ class CustomTabBar extends Component {
               color={'#FFFFFF'}
               style={styles.navIcon}
           />
-          <Animated.View style={[previousTitleStyle]}>
-            <Text style={styles.titleText}>{previousTitle}</Text>
-          </Animated.View>
-          <Animated.View style={[nextTitleStyle]}>
-            <Text style={styles.titleText}>{nextTitle}</Text>
-          </Animated.View>
+          <Text style={styles.titleText}>Havit!</Text>
         </View>
       </View>
     )
@@ -88,7 +51,7 @@ let styles = StyleSheet.create({
   titleText: {
     height: 32,
     // backgroundColor:'#ff00ff',
-    marginLeft: 0,
+    marginLeft: 4,
     marginTop: 8,
     color: '#FFFFFF',
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/

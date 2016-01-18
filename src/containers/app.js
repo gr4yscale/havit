@@ -25,8 +25,9 @@ class MainContainer extends React.Component {
           renderTabBar={() => <CustomTabBar />}
       >
         <LinksFeedContainer tabLabel="Inbox" />
-        <ShareContainer tabLabel="Share" />
+        <AuthContainer tabLabel="Auth" />
         <FriendAddContainer tabLabel="Friends" />
+        <ShareContainer tabLabel="Share" />
       </CustomScrollableTabView>
     )
   }
