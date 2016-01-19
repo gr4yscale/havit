@@ -2,6 +2,7 @@ import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
+import {Actions} from '../../node_modules/react-native-router-flux'
 
 let {
   Component,
@@ -26,6 +27,7 @@ class AuthContainer extends Component {
     login(username, password)
     .then(() => fetchFriends())
     .then(() => fetchLinksReceived())
+    .then(() => Actions.MainContainer())
   }
 
   render() {
