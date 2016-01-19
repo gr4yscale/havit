@@ -44,6 +44,8 @@
 		29A1ED771C3D955A008CF2C2 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
 		29A1ED781C3D956B008CF2C2 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
+		29F9F6141C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
+		29F9F6151C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		99B21E43FA4E401EA51E9A5D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0763036C1875472A8013414B /* libBVLinearGradient.a */; };
 		D7DBD357AF0647EAB522ECB5 /* libRNGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC0F3EAC7B443D68AE34FDB /* libRNGL.a */; };
@@ -219,6 +221,7 @@
 		29A1ED721C3D842A008CF2C2 /* HVTShareExtensionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVTShareExtensionStorage.h; sourceTree = "<group>"; };
 		29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVTShareExtensionStorage.m; sourceTree = "<group>"; };
 		29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
+		29F9F6131C4D60AC00158785 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		36D3D0BA5BDD4C909603D04A /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -355,7 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				29A1ED571C3D76FD008CF2C2 /* havit.entitlements */,
-				29E88E511C3E87E600C99D7F /* main9.jsbundle */,
+				29F9F6131C4D60AC00158785 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -784,9 +787,9 @@
 			files = (
 				296FA80D1C3A0CA100EF4408 /* assets in Resources */,
 				296FA80B1C3A050700EF4408 /* ionicons.ttf in Resources */,
+				29F9F6141C4D60AC00158785 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				29E88E521C3E87E600C99D7F /* main9.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,8 +797,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F9F6151C4D60AC00158785 /* main.jsbundle in Resources */,
 				29A1ED771C3D955A008CF2C2 /* ionicons.ttf in Resources */,
-				29E88E531C3E87E600C99D7F /* main9.jsbundle in Resources */,
 				29A1ED761C3D9554008CF2C2 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
