@@ -25,7 +25,7 @@ let deviceWidth = Dimensions.get('window').width;
 const PlainFab = MKButton.plainFab()
   .withBackgroundColor('#FF3B7F')
   .withOnPress(() => {
-    Actions.Share()
+    Actions.Share({inAppShare: true})
   })
   .build();
 
@@ -87,7 +87,7 @@ class LinksFeedContainer extends Component {
         this.openURL(data.url)
         break
       case LinkCellActionTypes.FriendListCellActionTypeReshare:
-        this.alertNotImplemented()
+        Actions.Share({url: data.url, title: data.title, inAppShare: true})
         break
       case LinkCellActionTypes.FriendListCellActionTypePin:
         this.alertNotImplemented()

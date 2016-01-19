@@ -98,7 +98,7 @@ class ShareContainer extends Component {
 
     Actions.pop()
 
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === 'ios' && !this.props.inAppShare) {
       NativeModules.RootShareViewController.shareComplete()
     }
   }
