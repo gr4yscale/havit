@@ -1,3 +1,4 @@
+import CodePush from '../node_modules/react-native-code-push'
 import React from 'react-native'
 import { Provider } from 'react-redux/native'
 import store from './redux/store'
@@ -33,6 +34,12 @@ class Root extends React.Component {
       setTimeout(() => this.loadInitialData(), 1000)
     } else {
       this.loadInitialData()
+    }
+  }
+
+  componentDidMount() {
+    if (!__DEV__) {
+      CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
   }
 
