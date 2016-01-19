@@ -30,9 +30,9 @@ class Root extends React.Component {
 
     this.lastIntentUrlReceived = store.getState().share.lastIntentUrlReceived
     if (this.lastIntentUrlReceived) {
-      setTimeout(() => loadInitialData(), 1000)
+      setTimeout(() => this.loadInitialData(), 1000)
     } else {
-      loadInitialData()
+      this.loadInitialData()
     }
   }
 

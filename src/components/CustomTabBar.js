@@ -6,6 +6,7 @@ let {
   StyleSheet,
   View,
   Text,
+  TouchableOpacity,
 } = React
 
 class CustomTabBar extends Component {
@@ -13,16 +14,22 @@ class CustomTabBar extends Component {
     super(props);
   }
 
+  handleNavIconPress() {
+    this.props.onNavIconPress()
+  }
+
   render() {
     return (
       <View>
         <View style={styles.tabs}>
-          <Icon
-              name={'ion|navicon'}
-              size={30}
-              color={'#FFFFFF'}
-              style={styles.navIcon}
-          />
+          <TouchableOpacity onPress={() => this.handleNavIconPress()}>
+            <Icon
+                name={'ion|navicon'}
+                size={30}
+                color={'#FFFFFF'}
+                style={styles.navIcon}
+            />
+          </TouchableOpacity>
           <Text style={styles.titleText}>Havit!</Text>
         </View>
       </View>

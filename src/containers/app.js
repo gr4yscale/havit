@@ -17,15 +17,19 @@ let {
 } = React
 
 class MainContainer extends React.Component {
+
+  handleNavIconPress() {
+    Actions.Authenticate()
+  }
+
   render() {
     return (
       <CustomScrollableTabView style={{marginTop:0}}
           tabBarUnderlineColor={'#FF3B7F'}
           tabBarActiveTextColor={'#FF3B7F'}
-          renderTabBar={() => <CustomTabBar />}
+          renderTabBar={() => <CustomTabBar onNavIconPress={() => this.handleNavIconPress()} />}
       >
         <LinksFeedContainer tabLabel="Inbox" />
-        <AuthContainer tabLabel="Auth" />
         <FriendAddContainer tabLabel="Friends" />
         <ShareContainer tabLabel="Share" />
       </CustomScrollableTabView>
@@ -70,10 +74,12 @@ class App extends React.Component {
           <Router hideNavBar={false}>
           <Route name="SignUp"
               component={SignupContainer} title="Sign up" schema="modal" renderLeftButton={this.createRightButton}
+              type="replace"
           />
           <Route name="SignIn"
               component={AuthContainer} title="Sign in" schema="modal" renderLeftButton={this.createRightButton}
               sceneStyle={{paddingTop: 64}}
+              type="replace"
           />
           </Router>
         </Route>
