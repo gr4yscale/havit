@@ -8,23 +8,25 @@
  */
 
 #import "AppDelegate.h"
-
 #import "RCTRootView.h"
+#import "CodePush.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
   NSURL *jsCodeLocation;
 
-//  jsCodeLocation = [NSURL URLWithString:@"http://10.2.0.72:8081/index.ios.bundle?platform=ios&dev=true"];
-
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main9" withExtension:@"jsbundle"];
+  #ifdef DEBUG
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  #else
+    jsCodeLocation = [CodePush bundleURL];
+  #endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"HavitApp"
-                                               initialProperties:nil
-                                                   launchOptions:launchOptions];
+                                                    moduleName:@"HavitApp"
+                                             initialProperties:nil
+                                                 launchOptions:launchOptions];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

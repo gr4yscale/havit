@@ -11,6 +11,7 @@
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
 #import "HVTShareExtensionStorage.h"
+#import "CodePush.h"
 
 @implementation RootShareViewController
 
@@ -19,10 +20,12 @@ RCT_EXPORT_MODULE()
 - (void)loadView {
   
   NSURL *jsCodeLocation;
-  
-//  jsCodeLocation = [NSURL URLWithString:@"http://10.2.0.72:8081/index.ios.bundle?platform=ios&dev=true"];
-  
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main9" withExtension:@"jsbundle"];
+
+  #ifdef DEBUG
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  #else
+    jsCodeLocation = [CodePush bundleURL];
+  #endif
   
   NSDictionary *initialProps = @{@"title" : @"initialTitle",
                                  @"url" : @"initialURL"
