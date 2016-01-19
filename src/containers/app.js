@@ -31,7 +31,6 @@ class MainContainer extends React.Component {
       >
         <LinksFeedContainer tabLabel="Inbox" />
         <FriendAddContainer tabLabel="Friends" />
-        <ShareContainer tabLabel="Share" />
       </CustomScrollableTabView>
     )
   }

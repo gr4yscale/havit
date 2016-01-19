@@ -3,7 +3,7 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
-// import AnimGL from '../gl/animGL'
+import AnimGL from '../gl/animGL'
 
 let {
   Component,
@@ -13,6 +13,7 @@ let {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  Platform,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -69,8 +70,9 @@ class SignupContainer extends Component {
     )
   }
 
-  renderSignupButton() {
-    return (
+  renderSignupButtonIfNeeded() {
+    if (!this.props.finished)
+      return (
       <TouchableOpacity
           style={[styles.button, styles.signupButton]}
           underlayColor="#99d9f4"
@@ -81,14 +83,23 @@ class SignupContainer extends Component {
     )
   }
 
+  renderFancyShaderBackgroundIfIOS() {
+    if (false)
+    return (
+      <View style={{position:'absolute', top: 0, left: 0, width: deviceWidth, height: deviceWidth}}>
+        <AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-
+        {this.renderFancyShaderBackgroundIfIOS()}
         <Text style={[styles.text, styles.bigText]}>{this.props.promptText}</Text>
         {this.renderFormIfNeeded()}
         {this.renderFinishButtonIfNeeded()}
-        {this.renderSignupButton()}
+        {this.renderSignupButtonIfNeeded()}
       </View>
     );
   }

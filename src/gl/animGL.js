@@ -41,28 +41,36 @@ class animGL extends React.Component {
       value: 0,
     }
   }
+
   componentDidMount () {
     const loop = time => {
       this.raf = requestAnimationFrame(loop);
       this.setState({
         value: (1 + Math.cos(time / 6000)) / 2 // cycle between 0 and 1
       });
-    };
+    }
     this.raf = requestAnimationFrame(loop);
   }
+
   componentWillUnmount () {
     cancelAnimationFrame(this.raf);
   }
   render () {
-    const { width, height } = this.props;
     const { value } = this.state;
-    return <Surface width={width} height={height} pixelRatio={2} eventsThrough
-        style={{position:'absolute', width: width, height: height, top:0, left: 0}}>
-      <GL.Node
-          shader={shaders.helloGL}
-          uniforms={{ value }}
-      />
-    </Surface>;
+    const { width, height } = this.props;
+
+    return <Surface
+        width={width} height={height}
+        pixelRatio={2}
+        eventsThrough={true}
+        opaque={false}
+        ref="helloGL"
+          >
+            <GL.Node
+                shader={shaders.helloGL}
+                uniforms={{ value }}
+            />
+      </Surface>
   }
 }
 

@@ -63,7 +63,8 @@ let styles = StyleSheet.create({
   inputs: {
     flex:1,
     fontSize:13,
-    borderColor: '#BBBBBB',
+    height: 40,
+    borderColor: 'transparent',
     backgroundColor: '#FFFFFF',
     borderRadius: 4,
     borderWidth: 0,
