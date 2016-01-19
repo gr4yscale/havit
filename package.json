@@ -5,9 +5,10 @@
   "scripts": {
     "android-setup-port": "adb reverse tcp:8081 tcp:8080",
     "test": "mocha --compilers js:babel-core/register --watch tests/*.js",
-    "start": "react-native start",
-    "bundle": "react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle",
-    "clean-babelrc-files": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
+    "start": "/usr/local/bin/react-native start",
+    "bundle": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle",
+    "clean-babelrc-files": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
+    "release": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle; code-push release havit-ios ios/main.jsbundle 1.0.0"
   },
   "dependencies": {
     "gl-react": "^2.0.9",
