@@ -6,6 +6,7 @@ import {MKButton} from 'react-native-material-kit';
 import LinkCell from '../components/LinkCell'
 import * as LinkCellActionTypes from '../components/LinkCell'
 import {Actions} from '../../node_modules/react-native-router-flux'
+import AnimGL from '../gl/animGL'
 
 let {
   Component,
@@ -48,6 +49,7 @@ class LinksFeedContainer extends Component {
   }
 
   handleLinkCellTapped(rowID) {
+    return
     let cellRowID = parseInt(rowID)
     for (let i=0; i<Object.keys(this.cells).length; i++) {
       if (i !== cellRowID) {
@@ -111,6 +113,7 @@ class LinksFeedContainer extends Component {
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
     return (
       <View style={styles.container}>
+        <AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />
         <ListView
             dataSource = {dataSource}
             renderRow = {(data, sectionId, rowID) => {
