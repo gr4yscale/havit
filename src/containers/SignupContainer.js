@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import AnimGL from '../gl/animGL'
+import {Icon} from '../../node_modules/react-native-icons'
 
 let {
   Component,
@@ -70,9 +71,8 @@ class SignupContainer extends Component {
     )
   }
 
-  renderSignupButtonIfNeeded() {
-    if (!this.props.finished)
-      return (
+  renderSignupButton() {
+    return (
       <TouchableOpacity
           style={[styles.button, styles.signupButton]}
           underlayColor="#99d9f4"
@@ -85,10 +85,24 @@ class SignupContainer extends Component {
 
   renderFancyShaderBackgroundIfIOS() {
     if (false)
+
+  closeButtonPressed() {
+    Actions.MainContainer()
+  }
+
+  renderCloseButton() {
     return (
-      <View style={{position:'absolute', top: 0, left: 0, width: deviceWidth, height: deviceWidth}}>
-        <AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />
-      </View>
+      <TouchableOpacity
+          onPress={() => Actions.MainContainer()}
+          style={{position: 'absolute', top: 30, left: 18, width: 30, height: 30, backgroundColor:'transparent'}}
+      >
+        <Icon
+            name={'ion|android-close'}
+            size={30}
+            color={'#FFFFFF'}
+            style={styles.closeIcon}
+        />
+      </TouchableOpacity>
     )
   }
 
@@ -99,7 +113,8 @@ class SignupContainer extends Component {
         <Text style={[styles.text, styles.bigText]}>{this.props.promptText}</Text>
         {this.renderFormIfNeeded()}
         {this.renderFinishButtonIfNeeded()}
-        {this.renderSignupButtonIfNeeded()}
+        {this.renderSignupButton()}
+        {this.renderCloseButton()}
       </View>
     );
   }
@@ -190,6 +205,14 @@ let styles = StyleSheet.create({
   signupButton: {
     marginTop: 160,
     backgroundColor: 'transparent',
+  },
+  closeIcon: {
+    position:'absolute',
+    left: 0,
+    top: 0,
+    width: 30,
+    height: 30,
+    backgroundColor:'transparent',
   },
 })
 

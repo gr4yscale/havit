@@ -20,7 +20,7 @@ let {
 class MainContainer extends React.Component {
 
   handleNavIconPress() {
-    Actions.Authenticate()
+    Actions.SignUp()
   }
 
   render() {
@@ -69,7 +69,7 @@ class App extends React.Component {
       <TouchableOpacity
           touchRetentionOffset={ExNavigator.Styles.barButtonTouchRetentionOffset}
           style={[ExNavigator.Styles.barLeftButton]}
-          onPress={() => {Actions.pop()}}
+          onPress={() => {Actions.MainContainer()}}
       >
         <Text style={[ExNavigator.Styles.barLeftButtonText]}>Close</Text>
       </TouchableOpacity>
@@ -81,23 +81,11 @@ class App extends React.Component {
       <Router hideNavBar={true} >
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
 
-        <Route name="MainContainer" component={MainContainer} title="Inbox" initial={true} />
-        <Route name="Share" component={ShareContainer} title="Share" />
+        <Route name="MainContainer" component={MainContainer} title="Inbox" initial={true} type="replace" />
+        <Route name="Share" component={ShareContainer} title="Share" type="replace" />
         <Route name="Friends" component={FriendAddContainer} title="Friends" />
-
-        <Route name="Authenticate" wrapRouter={true} >
-          <Router hideNavBar={false}>
-          <Route name="SignUp"
-              component={SignupContainer} title="Sign up" schema="modal" renderLeftButton={this.createRightButton}
-              type="replace"
-          />
-          <Route name="SignIn"
-              component={AuthContainer} title="Sign in" schema="modal" renderLeftButton={this.createRightButton}
-              sceneStyle={{paddingTop: 64}}
-              type="replace"
-          />
-          </Router>
-        </Route>
+        <Route name="SignUp" component={SignupContainer} title="Sign Up" type="replace" renderLeftButton={this.createRightButton} />
+        <Route name="SignIn" component={AuthContainer} title="Sign In" type="replace" renderLeftButton={this.createRightButton} />
       </Router>
     )
   }

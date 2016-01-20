@@ -51,7 +51,7 @@ class Root extends React.Component {
         store.dispatch(serverActions.fetchLinksReceived())
       } else {
         // TOFIX: Actions may not have all of the routes by this point (race condition)
-        Actions.Authenticate()
+        Actions.SignUp()
       }
     })
   }

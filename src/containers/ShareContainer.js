@@ -95,10 +95,9 @@ class ShareContainer extends Component {
   }
 
   closeButtonPressed() {
-
-    Actions.pop()
-
-    if (Platform.OS === 'ios' && !this.props.inAppShare) {
+    if (this.props.inAppShare) {
+      Actions.MainContainer()
+    } else if (Platform.OS === 'ios' && !this.props.inAppShare) {
       NativeModules.RootShareViewController.shareComplete()
     }
   }

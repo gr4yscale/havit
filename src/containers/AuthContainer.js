@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
+import {Icon} from '../../node_modules/react-native-icons'
 
 let {
   Component,
@@ -13,6 +14,7 @@ let {
   Text,
   TextInput,
   Navigator,
+  TouchableOpacity,
 } = React
 
 class AuthContainer extends Component {
@@ -28,6 +30,22 @@ class AuthContainer extends Component {
     .then(() => fetchFriends())
     .then(() => fetchLinksReceived())
     .then(() => Actions.MainContainer())
+  }
+
+  renderCloseButton() {
+    return (
+      <TouchableOpacity
+          onPress={() => Actions.MainContainer()}
+          style={{position: 'absolute', top: 20, left: 10, width: 30, height: 30}}
+      >
+        <Icon
+            name={'ion|android-close'}
+            size={30}
+            color={'#FFFFFF'}
+            style={styles.closeIcon}
+        />
+      </TouchableOpacity>
+    )
   }
 
   render() {
@@ -59,6 +77,7 @@ class AuthContainer extends Component {
             <Text style={styles.buttonText}>Sign in</Text>
           </TouchableHighlight>
         </View>
+        {this.renderCloseButton()}
       </View>
     );
   }
@@ -115,6 +134,14 @@ let styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 24,
+  },
+  closeIcon: {
+    position:'absolute',
+    left: 0,
+    top: 0,
+    width: 30,
+    height: 30,
+    backgroundColor:'transparent',
   },
 })
 
