@@ -1,4 +1,3 @@
-import CodePush from '../node_modules/react-native-code-push'
 import React from 'react-native'
 import { Provider } from 'react-redux/native'
 import store from './redux/store'
@@ -11,6 +10,7 @@ import * as shareActions from './redux/actions/shareActions'
 
 const {
   DeviceEventEmitter,
+  Platform,
 } = React
 
 // This is necessary because React Components will not have mounted (and thus Router) when we receive the
@@ -38,7 +38,8 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    if (!__DEV__) {
+    if (!__DEV__ && Platform.OS === 'ios') {
+      const CodePush = require('../node_modules/react-native-code-push')
       CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
   }
