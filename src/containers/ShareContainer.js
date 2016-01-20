@@ -6,7 +6,7 @@ import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import {Icon} from '../../node_modules/react-native-icons'
-
+import AnimGL from '../gl/animGL'
 
 let {
   Component,
@@ -134,9 +134,15 @@ class ShareContainer extends Component {
     )
   }
 
+  renderFancyShaderBackgroundIfIOS() {
+    if (Platform.OS === 'ios')
+      return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
+  }
+
   render() {
     return (
       <View style={[styles.container, {backgroundColor:this.state.bgColor}]}>
+        {this.renderFancyShaderBackgroundIfIOS()}
         <FriendList
             {...this.props}
             header={this.renderHeader.bind(this)}

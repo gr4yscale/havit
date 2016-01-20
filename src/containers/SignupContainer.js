@@ -22,6 +22,11 @@ let deviceWidth = Dimensions.get('window').width;
 
 class SignupContainer extends Component {
 
+
+  shouldComponentUpdate() {
+    return true
+  }
+
   signupButtonPressed() {
     const {signup} = this.props
     signup().then(() => {
@@ -84,10 +89,8 @@ class SignupContainer extends Component {
   }
 
   renderFancyShaderBackgroundIfIOS() {
-    if (false)
-
-  closeButtonPressed() {
-    Actions.MainContainer()
+    if (Platform.OS === 'ios')
+      return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
   }
 
   renderCloseButton() {
@@ -125,14 +128,6 @@ let styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#FF3B7F',
     height:deviceHeight - 62, // - 62 when custom navbar is show
-  },
-  shaderWrapper: {
-    position:'absolute',
-    width: deviceWidth,
-    height: deviceHeight,
-    top:0,
-    left: 0,
-    opacity: 0.4,
   },
   formContainer: {
     marginTop: 8,

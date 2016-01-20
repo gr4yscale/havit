@@ -109,11 +109,16 @@ class LinksFeedContainer extends Component {
     console.log(actionType)
   }
 
+  renderFancyShaderBackgroundIfIOS() {
+    if (Platform.OS === 'ios')
+      return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
+  }
+
   render() {
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
     return (
       <View style={styles.container}>
-        <AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />
+        {this.renderFancyShaderBackgroundIfIOS()}
         <ListView
             dataSource = {dataSource}
             renderRow = {(data, sectionId, rowID) => {
@@ -155,7 +160,7 @@ let styles = StyleSheet.create({
   },
   listView: {
     backgroundColor: 'rgba(0,0,0,0)',
-    paddingTop: 20,
+    paddingTop: 0,
   },
 })
 
