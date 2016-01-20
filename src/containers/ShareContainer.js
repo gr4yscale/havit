@@ -79,6 +79,11 @@ class ShareContainer extends Component {
     this.currentUserUpdateSubscription.remove();
   }
 
+  shouldComponentUpdate() {
+    console.log('sharecontainer: shouldComponentUpdate')
+    return true
+  }
+
   shareButtonPressed() {
     const {shareLink, postAllIftttActions} = this.props
 
