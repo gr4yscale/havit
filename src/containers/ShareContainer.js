@@ -103,6 +103,8 @@ class ShareContainer extends Component {
   }
 
   handleCellPressed() {
+    //TOFIX: debug
+    return
     this.setState({
       bgColor: incrementColor(this.state.bgColor, 2000),
     })
