@@ -7,7 +7,7 @@ import ShareContainer from './containers/ShareContainer'
 class RootShareApp extends React.Component {
 
   shouldComponentUpdate() {
-    return false
+    return true
   }
 
   render () {

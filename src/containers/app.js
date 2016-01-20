@@ -54,7 +54,9 @@ class App extends React.Component {
   }
 
   shouldComponentUpdate() {
-    return false
+    console.log('app: shouldComponentUpdate')
+    return true
+  }
 
   _handleAppStateChange(currentAppState) {
     console.log(currentAppState)
