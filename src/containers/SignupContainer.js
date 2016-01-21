@@ -3,8 +3,9 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
-import AnimGL from '../gl/animGL'
+import BlackWhiteTripShader from '../gl/blackWhiteTripShader'
 import {Icon} from '../../node_modules/react-native-icons'
+import StyleSheet from '../stylesheets/debugStylesheet.js'
 
 let {
   Component,
@@ -89,8 +90,9 @@ class SignupContainer extends Component {
   }
 
   renderFancyShaderBackgroundIfIOS() {
-    if (Platform.OS === 'ios')
-      return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
+    if (Platform.OS === 'ios') {
+      return (<BlackWhiteTripShader width={deviceWidth} height={deviceHeight} pixelRatio={2} collapsable={false} />)
+    }
   }
 
   renderCloseButton() {

@@ -142,8 +142,9 @@ class ShareContainer extends Component {
   }
 
   renderFancyShaderBackgroundIfIOS() {
-    if (Platform.OS === 'ios')
+    if (Platform.OS === 'ios') {
       return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
+    }
   }
 
   render() {

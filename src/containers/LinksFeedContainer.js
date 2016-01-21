@@ -110,11 +110,13 @@ class LinksFeedContainer extends Component {
   }
 
   renderFancyShaderBackgroundIfIOS() {
-    if (Platform.OS === 'ios')
+    if (Platform.OS === 'ios') {
       return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
+    }
   }
 
   render() {
+
     let dataSource = this.props.links ? this.state.dataSource.cloneWithRows(this.props.links) : this.state.dataSource.cloneWithRows([])
     return (
       <View style={styles.container}>
