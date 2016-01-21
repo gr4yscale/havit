@@ -37,5 +37,6 @@ function createDebugStylesheet(debugOptions) {
 
 export default createDebugStylesheet({
   backgroundColor: randomHexColor,
+  opacity: 1.0,
   borderColor: randomHexColor, borderWidth: 0.5,
 });
