@@ -25,6 +25,7 @@
 		296FA8091C3A04BD00EF4408 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		296FA80B1C3A050700EF4408 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
 		296FA80D1C3A0CA100EF4408 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80C1C3A0CA100EF4408 /* assets */; };
+		29A0C3671C4FC4D1004D752C /* libRNGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A62CBE1C42E5F900A2377F /* libRNGL.a */; };
 		29A1ED291C3D5211008CF2C2 /* RootShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */; };
 		29A1ED301C3D5211008CF2C2 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29A1ED251C3D5211008CF2C2 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29A1ED351C3D632C008CF2C2 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -274,6 +275,7 @@
 				29A1ED3C1C3D632C008CF2C2 /* libRCTVibration.a in Frameworks */,
 				29A1ED3D1C3D632C008CF2C2 /* libRCTWebSocket.a in Frameworks */,
 				29A1ED3E1C3D632C008CF2C2 /* libReact.a in Frameworks */,
+				29A0C3671C4FC4D1004D752C /* libRNGL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
