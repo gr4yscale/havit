@@ -28,6 +28,10 @@ export default function server(state = {}, action) {
         links,
         linksFetching: false,
       })
+    case 'LINKS_SENT_SUCCESS':
+      return Object.assign({}, state, {
+        linksSent : action.payload.results,
+      })
     case actionTypes.FRIENDS_REQUEST:
       return Object.assign({}, state, {
         friends: [],

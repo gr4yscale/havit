@@ -1,5 +1,6 @@
 import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
+import LinksSentContainer from './LinksSentContainer'
 import AuthContainer from './AuthContainer'
 import ShareContainer from './ShareContainer'
 import SignupContainer from './SignupContainer'
@@ -31,6 +32,7 @@ class MainContainer extends React.Component {
           renderTabBar={() => <CustomTabBar onNavIconPress={() => this.handleNavIconPress()} />}
       >
         <LinksFeedContainer tabLabel="Inbox" />
+        <LinksSentContainer tabLabel="Inbox" />
         <FriendAddContainer tabLabel="Friends" />
       </CustomScrollableTabView>
     )

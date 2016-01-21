@@ -1,6 +1,7 @@
 import * as actionTypes from '../actionTypes'
 import Parse from '../../parse'
 import _ from 'lodash'
+import {createAction} from 'redux-actions'
 
 // TOFIX: move this stuff elsewhere, also merge auth actions into serverActions!
 import React from 'react-native';
@@ -147,6 +148,33 @@ export function fetchLinksReceived() {
     })
     .catch((error) => {
       dispatch(linksReceivedFailure(error))
+    })
+  }
+}
+
+
+// LINKS SENT
+//////////////////////////////////////////////////////
+
+const linksSentRequest = createAction('LINKS_SENT_REQUEST')
+const linksSentSuccess = createAction('LINKS_SENT_SUCCESS')
+const linksSentFailure = createAction('LINKS_SENT_FAILURE')
+
+export function fetchLinksSent() {
+  return (dispatch, getState) => {
+    dispatch(linksSentRequest());
+    let parse = configuredParse(getState());
+    return parse.getSentLinks()
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        let json = JSON.parse(response._bodyInit)
+        dispatch(linksSentSuccess(json))
+      } else {
+        dispatch(linksSentFailure(JSON.parse(response._bodyInit)))
+      }
+    })
+    .catch((error) => {
+      dispatch(linksSentFailure(error))
     })
   }
 }

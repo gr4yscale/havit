@@ -24,11 +24,12 @@ class AuthContainer extends Component {
   }
 
   loginButtonPressed() {
-    const {login, fetchLinksReceived, fetchFriends} = this.props
+    const {login, fetchLinksReceived, fetchLinksSent, fetchFriends} = this.props
     const {username, password } = this.props.auth.form.fields
     login(username, password)
     .then(() => fetchFriends())
     .then(() => fetchLinksReceived())
+    .then(() => fetchLinksSent())
     .then(() => Actions.MainContainer())
   }
 

@@ -51,6 +51,17 @@ export default class Parse {
     }
   }
 
+  getSentLinks() {
+    try {
+      let body = `where={"sender_id":"${this.userObjectId}"}`
+      let encodedBody = encodeURIComponent(body)
+      let url = `/1/classes/Link?${encodedBody}`
+      return this.fetchFromParse('GET', url)
+    } catch(error) {
+      throw error;
+    }
+  }
+
   shareLink(data) {
     try {
       return this.fetchFromParse('POST', '/1/classes/Link', data)
