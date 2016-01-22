@@ -25,6 +25,7 @@ export default cairn({
   text: {
     fontFamily: FONT_FAMILY,
     color: COLOR_1,
+    margin: 8,
 
     huge: {
       fontSize: FONT_SIZE_HUGE,
@@ -62,7 +63,6 @@ export default cairn({
       marginTop: 4,
       opacity: 0.3,
     },
-
   },
 
   buttonText: {
@@ -99,7 +99,21 @@ export default cairn({
     },
   },
 
+  card: {
+    content: {
+      position:'absolute',
+      backgroundColor:COLOR_1,
+      padding: 8,
+    },
 
+    shadow: {
+      position:'absolute',
+      backgroundColor:COLOR_2,
+      marginLeft: 4,
+      marginTop: 4,
+      opacity: 0.3,
+    },
+  },
 
 
 }, (styles) => StyleSheet.create(styles))
