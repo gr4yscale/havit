@@ -3,14 +3,15 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
-// import BlackWhiteTripShader from '../gl/BlackWhiteTripShader'
+import BlackWhiteTripShader from '../gl/BlackWhiteTripShader'
 // import StyleSheet from '../stylesheets/debugStylesheet.js'
 
 import HVTTextInput from '../components/HVTTextInput'
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
+import HVTCard from '../components/HVTCard'
 
-import style, {COLOR_2, COLOR_3} from '../stylesheets/styles'
+import style, {COLOR_2, COLOR_3, COLOR_5} from '../stylesheets/styles'
 
 let {
   Component,
@@ -20,13 +21,18 @@ let {
   Dimensions,
   TouchableOpacity,
   Platform,
+  TextInput,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
-class SignupContainer extends Component {
 
+const signupCardMargin = 20
+const signupCardHeight = 176
+
+
+class SignupContainer extends Component {
 
   shouldComponentUpdate() {
     return true
@@ -64,31 +70,95 @@ class SignupContainer extends Component {
   }
 
   renderFormIfNeeded() {
+
+    // <HVTTextInput
+    //     width={deviceWidth - 200}
+    //     height={40}
+    //     onSubmitEditing={(event) => this.handleOnSubmitEditing(event)}
+    //     ref={(component)=>this.textInput = component}
+    // />
+  //
+  //   if (!this.props.finished)
+  //     return (
+  //     <View style={styles.formContainer}>
+  //       <HVTCard
+  //           width={deviceWidth-60}
+  //           height={200}
+  //       >
+  //       <Text {...style('text.huge', [styles.bigText])} >{this.props.promptText}</Text>
+  //
+  //       </HVTCard>
+  //     </View>
+  //   )
+  // }
+
+  // <Text {...style('text.huge', [styles.bigText])} >{this.props.promptText}</Text>
+
     if (!this.props.finished)
       return (
-      <View style={styles.formContainer}>
-        <Text {...style('text.huge', [styles.bigText])} >{this.props.promptText}</Text>
-        <HVTTextInput
-            width={deviceWidth - 42}
-            height={40}
-            onSubmitEditing={(event) => this.handleOnSubmitEditing(event)}
-            ref={(component)=>this.textInput = component}
+
+      <HVTCard
+          width={deviceWidth - (signupCardMargin + 4)}
+          height={signupCardHeight}
+          extraStyle={styles.formCard}
+      >
+        <TextInput
+            {...style('text.heading textInput.flatInput', [styles.textInputs, styles.textInputName])}
+            {...this.props}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            blurOnSubmit={false}
+            ref={(component)=>this.textInputName = component}
+            placeholder={"Name"}
         />
-      </View>
+        <TextInput
+            {...style('text.heading textInput.flatInput', [styles.textInputs, styles.textInputUserName])}
+            {...this.props}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            blurOnSubmit={false}
+            ref={(component)=>this.textInputUserName = component}
+            placeholder={"Username"}
+        />
+        <TextInput
+            {...style('text.heading textInput.flatInput', [styles.textInputs, styles.textInputEmail])}
+            {...this.props}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            blurOnSubmit={false}
+            ref={(component)=>this.textInputEmail = component}
+            placeholder={"Email"}
+        />
+        <TextInput
+            {...style('text.heading textInput.flatInput', [styles.textInputs, styles.textInputPassword])}
+            {...this.props}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            blurOnSubmit={false}
+            ref={(component)=>this.textInputPassword = component}
+            placeholder={"Password"}
+        />
+
+      </HVTCard>
     )
   }
 
   render() {
+    // <BlackWhiteTripShader width={deviceWidth} height={deviceHeight} pixelRatio={2} animate={true} />
+
+
+    // <HVTButton
+    //     text={"Click here to sign up if you already have an account."}
+    //     onPress={() => Actions.SignIn()}
+    //     extraTouchableStyle={styles.signupButton}
+    // />
+
     return (
       <View style={styles.container}>
         {this.renderFormIfNeeded()}
         {this.renderFinishButtonIfNeeded()}
 
-        <HVTButton
-            text={"Click here to sign up if you already have an account."}
-            onPress={() => Actions.SignIn()}
-            extraTouchableStyle={styles.signupButton}
-        />
+
 
         <HVTIconButton
             iconName="ion|android-close"
@@ -108,21 +178,16 @@ let styles = StyleSheet.create({
     backgroundColor:COLOR_3,
     height:deviceHeight,
   },
-  formContainer: {
+  formCard: {
     flex: 0,
-    height: 100, // label + text input
     marginTop: 70,
-    marginLeft: 20,
-    marginRight: 18,
-    backgroundColor: 'transparent',
+    marginLeft: signupCardMargin / 2,
+    marginRight: signupCardMargin / 2,
   },
   bigText: {
-    paddingBottom:4,
-    marginBottom: 4,
-    paddingTop:2,
-    paddingLeft: 4,
+    marginTop: 8,
+    marginBottom: 8,
     color:COLOR_2,
-    backgroundColor:COLOR_3,
     textAlign: 'center',
   },
   signupButton: {
@@ -135,6 +200,26 @@ let styles = StyleSheet.create({
     top: 28,
     left: 18,
     backgroundColor:'rgba(0,0,0,0)',
+  },
+
+  // big chunk of stupidity - get HVTCard working with flexbox
+  textInputs: {
+    width: deviceWidth - (signupCardMargin + 20 + 4),
+    height: 40,
+    borderColor: COLOR_5,
+    marginLeft: 10,
+  },
+  textInputName: {
+    top: 8,
+  },
+  textInputUserName: {
+    top: 48,
+  },
+  textInputEmail: {
+    top: 88,
+  },
+  textInputPassword: {
+    top: 128,
   },
 })
 
