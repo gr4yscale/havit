@@ -1,6 +1,6 @@
-const React = require("react-native");
-const GL = require("gl-react");
-const {Surface} = require("gl-react-native");
+const React = require('react-native')
+const GL = require('gl-react')
+const {Surface} = require('gl-react-native')
 
 const shaders = GL.Shaders.create({
   blackWhiteTrip: {
@@ -26,15 +26,16 @@ void main () {
 
   vec2 position = ( gl_FragCoord.xy / vec2(800.0, 1200.0));
 
-  //vec2 position = ( gl_FragCoord.xy / resolution.xy );
-  //vec2 uv = vec2(position.x,((position.y-0.5)*(resolution.y/resolution.x))+0.5);
+  //vec2 newUV = uv;
+  // newUV.y = (uv.y + sin(ourtime * 2.0));
+  // newUV.y = (uv.y + ourtime);
 
   float swirla2 = (1.-length(abs(uv-0.5)-50.))*5.;
   float swirl2 = clamp(strobes(swirla2-ourtime),0.,1.);
 
   gl_FragColor = vec4(vec3(swirl2), 1.0);
 }
-    `
+    `,
   },
 });
 
@@ -42,41 +43,43 @@ class BlackWhiteTripShader extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      value: 0.1,
+      value: 0.0,
     }
   }
 
   componentDidMount () {
-    const loop = time => {
-      this.raf = requestAnimationFrame(loop);
+    let updateVal = this.props.animate ? 0.005 : 0.0
+    const loop = () => {
+      this.raf = requestAnimationFrame(loop) //eslint-disable-line no-undef
       this.setState({
-        value: parseFloat(this.state.value + 0.005),
-        // value: (1 + Math.cos(time / 500)) / 2 // cycle between 0 and 1
-      });
+        value: parseFloat(this.state.value + updateVal),
+      })
     }
-    this.raf = requestAnimationFrame(loop);
+    this.raf = requestAnimationFrame(loop) //eslint-disable-line no-undef
   }
 
   componentWillUnmount () {
-    cancelAnimationFrame(this.raf);
+    cancelAnimationFrame(this.raf) //eslint-disable-line no-undef
   }
+
   render () {
     const { value } = this.state;
     const { width, height } = this.props;
 
-    return <Surface
+    return (
+    <Surface
         width={width} height={height}
         pixelRatio={2}
         opaque={true}
         ref="blackWhiteTrip"
-        style={{position:'absolute', width: width, height: height, top:0, left: 0}}
-          >
-            <GL.Node
-                shader={shaders.blackWhiteTrip}
-                uniforms={{ time: value }}
-
-            />
-      </Surface>
+        style={{position:'absolute', width, height, top:0, left: 0}}
+    >
+        <GL.Node
+            shader={shaders.blackWhiteTrip}
+            uniforms={{ time: value }}
+        />
+    </Surface>
+    )
   }
 }
 

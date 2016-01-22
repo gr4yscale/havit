@@ -38,7 +38,7 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    if (!__DEV__ && Platform.OS === 'ios') {
+    if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
       const CodePush = require('../node_modules/react-native-code-push')
       CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
