@@ -50,6 +50,7 @@ export default cairn({
 
   textInput: {
     position:'absolute',
+    margin: 0,
 
     input: {
       padding: 8,
@@ -62,6 +63,11 @@ export default cairn({
       marginLeft: 4,
       marginTop: 4,
       opacity: 0.3,
+    },
+
+    flatInput: {
+      padding: 8,
+      color: COLOR_2,
     },
   },
 
@@ -101,9 +107,9 @@ export default cairn({
 
   card: {
     content: {
-      position:'absolute',
       backgroundColor:COLOR_1,
-      padding: 8,
+      marginRight: 4,
+      marginBottom: 4,
     },
 
     shadow: {
