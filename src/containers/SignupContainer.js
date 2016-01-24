@@ -3,15 +3,15 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
-import BlackWhiteTripShader from '../gl/BlackWhiteTripShader'
-// import StyleSheet from '../stylesheets/debugStylesheet.js'
 
-import HVTTextInput from '../components/HVTTextInput'
+const {Surface} = require('gl-react-native')
+import ShaderRGBShift from '../gl/ShaderRGBShift'
+
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
 import HVTCard from '../components/HVTCard'
 
-import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_5} from '../stylesheets/styles'
+import style, {COLOR_1, COLOR_2, COLOR_5} from '../stylesheets/styles'
 
 let {
   Component,
@@ -22,19 +22,32 @@ let {
   TouchableOpacity,
   Platform,
   TextInput,
+  Animated,
+
 } = React
 
-let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
-
-
-const signupCardMargin = 20
-const signupCardHeight = 176
-
+let deviceHeight = Dimensions.get('window').height
+let deviceWidth = Dimensions.get('window').width
 
 class SignupContainer extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state={
+      pulse: 4.0,
+    }
+  }
+
+  componentWillMount() {
+    this.timingAnim = new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    Animated.timing(this.timingAnim, {toValue: 1.0, duration: 250}).start()
+  }
+
   shouldComponentUpdate() {
+    console.log('wanting to update')
     return true
   }
 
@@ -56,7 +69,14 @@ class SignupContainer extends Component {
     }
   }
 
-  renderFinishButtonIfNeeded() {
+  handleChangeText(txt) {
+    this.setState({pulse: txt.length + 4})
+    // setTimeout(() => {
+      // this.setState({pulse: 2.0})
+    // }, 100)
+  }
+
+  renderSignUpButtonIfNeeded() {
     if (this.props.finished)
       return (
         <TouchableOpacity
@@ -70,36 +90,6 @@ class SignupContainer extends Component {
   }
 
   renderFormIfNeeded() {
-
-    // <TextInput
-    //     {...style('text.heading', [styles.textInputs, styles.textInputUserName])}
-    //     {...this.props}
-    //     autoCapitalize={'none'}
-    //     autoCorrect={false}
-    //     blurOnSubmit={false}
-    //     ref={(component)=>this.textInputUserName = component}
-    //     placeholder={"Username"}
-    // />
-    // <TextInput
-    //     {...style('text.heading', [styles.textInputs, styles.textInputEmail])}
-    //     {...this.props}
-    //     autoCapitalize={'none'}
-    //     autoCorrect={false}
-    //     blurOnSubmit={false}
-    //     ref={(component)=>this.textInputEmail = component}
-    //     placeholder={"Email"}
-    // />
-    // <TextInput
-    //     {...style('text.heading', [styles.textInputs, styles.textInputPassword])}
-    //     {...this.props}
-    //     autoCapitalize={'none'}
-    //     autoCorrect={false}
-    //     blurOnSubmit={false}
-    //     ref={(component)=>this.textInputPassword = component}
-    //     placeholder={"Password"}
-    // />
-
-
     if (!this.props.finished)
       return (
       <View style={styles.formContainer}>
@@ -113,8 +103,10 @@ class SignupContainer extends Component {
               autoCorrect={false}
               blurOnSubmit={false}
               placeholder={"Name"}
+              ref={(component) => this.textInputName = component}
+              onChangeText={(txt) => this.handleChangeText(txt)}
+              onFocus={() => this.handleChangeText('pst')}
           />
-
           <TextInput
               {...style('text.heading', [styles.inputs])}
               {...this.props}
@@ -122,6 +114,9 @@ class SignupContainer extends Component {
               autoCorrect={false}
               blurOnSubmit={false}
               placeholder={"Email"}
+              ref={(component) => this.textInputEmail = component}
+              onChangeText={(txt) => this.handleChangeText(txt)}
+              onFocus={() => this.handleChangeText('pst')}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -130,8 +125,10 @@ class SignupContainer extends Component {
               autoCorrect={false}
               blurOnSubmit={false}
               placeholder={"Username"}
+              ref={(component) => this.textInputUsername = component}
+              onChangeText={(txt) => this.handleChangeText(txt)}
+              onFocus={() => this.handleChangeText('pst')}
           />
-
           <TextInput
               {...style('text.heading', [styles.inputs])}
               {...this.props}
@@ -139,55 +136,53 @@ class SignupContainer extends Component {
               autoCorrect={false}
               blurOnSubmit={false}
               placeholder={"Password"}
+              ref={(component) => this.textInputPassword = component}
+              onChangeText={(txt) => this.handleChangeText(txt)}
+              onFocus={() => this.handleChangeText('pst')}
+              secureTextEntry={true}
           />
-
-
-
-
-
         </HVTCard>
       </View>
     )
   }
 
   render() {
-    // <BlackWhiteTripShader width={deviceWidth} height={deviceHeight} pixelRatio={2} animate={true} />
-
-
     return (
-
-      <View style={styles.container}>
-<BlackWhiteTripShader width={deviceWidth} height={deviceHeight} pixelRatio={2} animate={true} />
-
-      <View style={styles.container}>
-
-
-
-        {this.renderFormIfNeeded()}
-
-        <View style={styles.container}>
-          {this.renderFinishButtonIfNeeded()}
-
-          <HVTButton
-              text={"Click here to sign up if you already have an account."}
-              onPress={() => Actions.SignIn()}
-              extraTouchableStyle={styles.signupButton}
-          />
-        </View>
-
-        <HVTIconButton
-            iconName="ion|android-close"
-            size={30}
-            color={COLOR_1}
-            onPress={() => Actions.MainContainer()}
-            extraTouchableStyle={styles.closeButton}
-        />
-
+      <View>
+        <Surface
+            width={deviceWidth} height={deviceHeight}
+            pixelRatio={2}
+            style={{position:'absolute', width: deviceWidth, height: deviceHeight, top:0, left: 0}}
+            eventsThrough
+            visibleContent
+        >
+          <ShaderRGBShift>
+            <View style={styles.container}>
+              {this.renderFormIfNeeded()}
+              <View style={styles.container}>
+                {this.renderSignUpButtonIfNeeded()}
+                <HVTButton
+                    text={"Sign Up"}
+                    onPress={() => {Actions.SignIn()}}
+                    extraTouchableStyle={styles.signupButton}
+                />
+            </View>
+            <HVTIconButton
+                iconName="ion|android-close"
+                size={30}
+                color={COLOR_1}
+                onPress={() => Actions.MainContainer()}
+                extraTouchableStyle={styles.closeButton}
+            />
+          </View>
+        </ShaderRGBShift>
+      </Surface>
       </View>
-      </View>
-    );
+    )
   }
 }
+
+const signupCardMargin = 20
 
 let styles = StyleSheet.create({
   container: {
@@ -200,7 +195,7 @@ let styles = StyleSheet.create({
     margin: 0,
   },
   formContainer: {
-    flex: 1.0,
+    flex: 0,
     flexDirection: 'row',
     marginTop: 66,
     marginLeft: signupCardMargin / 2,
@@ -213,9 +208,9 @@ let styles = StyleSheet.create({
     textAlign: 'center',
   },
   signupButton: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
+    marginTop: 8,
+    marginLeft: signupCardMargin / 2,
+    marginRight: signupCardMargin / 2,
   },
   closeButton: {
     position:'absolute',
@@ -230,6 +225,7 @@ let styles = StyleSheet.create({
     backgroundColor: COLOR_1,
     marginLeft: 10,
     padding: 8,
+    color: COLOR_2,
   },
 })
 
