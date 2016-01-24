@@ -11,6 +11,7 @@
     "release": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle; code-push release havit-ios ios/main.jsbundle 1.0.0"
   },
   "dependencies": {
+    "cairn": "^0.4.5",
     "gl-react": "^2.0.9",
     "gl-react-native": "^2.17.7",
     "lodash": "^3.10.1",
