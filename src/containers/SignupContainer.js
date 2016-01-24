@@ -3,15 +3,13 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
-
-const {Surface} = require('gl-react-native')
 import ShaderRGBShift from '../gl/ShaderRGBShift'
 
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
 import HVTCard from '../components/HVTCard'
 
-import style, {COLOR_1, COLOR_2, COLOR_5} from '../stylesheets/styles'
+import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_5, FONT_SIZE_HEADING} from '../stylesheets/styles'
 
 let {
   Component,
@@ -22,8 +20,6 @@ let {
   TouchableOpacity,
   Platform,
   TextInput,
-  Animated,
-
 } = React
 
 let deviceHeight = Dimensions.get('window').height
@@ -34,20 +30,19 @@ class SignupContainer extends Component {
   constructor(props) {
     super(props)
     this.state={
-      pulse: 4.0,
+      shiftAmount: 0.0,
     }
   }
 
   componentWillMount() {
-    this.timingAnim = new Animated.Value(0)
+
   }
 
   componentDidMount() {
-    Animated.timing(this.timingAnim, {toValue: 1.0, duration: 250}).start()
+
   }
 
   shouldComponentUpdate() {
-    console.log('wanting to update')
     return true
   }
 
@@ -70,10 +65,12 @@ class SignupContainer extends Component {
   }
 
   handleChangeText(txt) {
-    this.setState({pulse: txt.length + 4})
+
+    this.setState({shiftAmount: this.state.shiftAmount + 5})
+
     // setTimeout(() => {
-      // this.setState({pulse: 2.0})
-    // }, 100)
+    //   this.setState({shiftAmount: 0})
+    // }, 300)
   }
 
   renderSignUpButtonIfNeeded() {
@@ -106,6 +103,7 @@ class SignupContainer extends Component {
               ref={(component) => this.textInputName = component}
               onChangeText={(txt) => this.handleChangeText(txt)}
               onFocus={() => this.handleChangeText('pst')}
+              placeholderTextColor={COLOR_1}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -117,6 +115,7 @@ class SignupContainer extends Component {
               ref={(component) => this.textInputEmail = component}
               onChangeText={(txt) => this.handleChangeText(txt)}
               onFocus={() => this.handleChangeText('pst')}
+              placeholderTextColor={COLOR_1}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -128,6 +127,7 @@ class SignupContainer extends Component {
               ref={(component) => this.textInputUsername = component}
               onChangeText={(txt) => this.handleChangeText(txt)}
               onFocus={() => this.handleChangeText('pst')}
+              placeholderTextColor={COLOR_1}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -140,6 +140,7 @@ class SignupContainer extends Component {
               onChangeText={(txt) => this.handleChangeText(txt)}
               onFocus={() => this.handleChangeText('pst')}
               secureTextEntry={true}
+              placeholderTextColor={COLOR_1}
           />
         </HVTCard>
       </View>
@@ -147,19 +148,15 @@ class SignupContainer extends Component {
   }
 
   render() {
+
+
+
     return (
-      <View>
-        <Surface
-            width={deviceWidth} height={deviceHeight}
-            pixelRatio={2}
-            style={{position:'absolute', width: deviceWidth, height: deviceHeight, top:0, left: 0}}
-            eventsThrough
-            visibleContent
-        >
-          <ShaderRGBShift>
-            <View style={styles.container}>
+      <View style={styles.content}>
+          <ShaderRGBShift width={deviceWidth} height={deviceHeight} shiftAmount={this.state.shiftAmount} opaque={false}>
+            <View style={[styles.container]}>
               {this.renderFormIfNeeded()}
-              <View style={styles.container}>
+              <View style={[styles.container]}>
                 {this.renderSignUpButtonIfNeeded()}
                 <HVTButton
                     text={"Sign Up"}
@@ -176,7 +173,6 @@ class SignupContainer extends Component {
             />
           </View>
         </ShaderRGBShift>
-      </Surface>
       </View>
     )
   }
@@ -188,6 +184,7 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     height:deviceHeight,
+    backgroundColor:COLOR_3,
   },
   formCard: {
     flex: 1,
@@ -222,10 +219,10 @@ let styles = StyleSheet.create({
     height: 40,
     borderBottomColor: COLOR_5,
     borderBottomWidth: 1,
-    backgroundColor: COLOR_1,
     marginLeft: 10,
     padding: 8,
-    color: COLOR_2,
+    color: COLOR_1,
+    fontSize: FONT_SIZE_HEADING,
   },
 })
 
