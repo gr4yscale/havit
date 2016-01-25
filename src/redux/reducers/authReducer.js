@@ -89,17 +89,20 @@ export default function auth(state = initialState, action) {
     case actionTypes.SIGNUP_NEXT:
       return signup(state, action)
 
-    case 'AUTH_SWITCH_TO_SIGN_IN':
+    case 'AUTH_MODE_SWITCH_TO_SIGN_IN':
       return Object.assign({}, state, {
         authMode: authModeSignIn,
       })
 
-    case 'AUTH_SWITCH_TO_SIGN_UP':
+    case 'AUTH_MODE_SWITCH_TO_SIGN_UP':
       return Object.assign({}, state, {
         authMode: authModeSignUp,
       })
 
-
+    case 'AUTH_MODE_RESET':
+      return Object.assign({}, state, {
+        authMode: '',
+      })
 
     default:
       return state;
