@@ -9,9 +9,9 @@ let {
   TextInput,
 } = React
 
-export const signUpFormHeight = 450 //TOFIX: hack: this should be measured
+export const signInFormHeight = 280 //TOFIX: hack: this should be measured
 
-class SignUpForm extends Component {
+class SignInForm extends Component {
 
   render() {
     return (
@@ -19,26 +19,6 @@ class SignUpForm extends Component {
         <HVTCard
             extraStyle={styles.container}
         >
-          <TextInput
-              {...style('text.heading', [styles.inputs])}
-              {...this.props}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-              blurOnSubmit={false}
-              placeholder={"Name"}
-              placeholderTextColor={COLOR_1}
-              ref={(component) => this.textInputName = component}
-          />
-          <TextInput
-              {...style('text.heading', [styles.inputs])}
-              {...this.props}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-              blurOnSubmit={false}
-              placeholder={"Email"}
-              placeholderTextColor={COLOR_1}
-              ref={(component) => this.textInputEmail = component}
-          />
           <TextInput
               {...style('text.heading', [styles.inputs])}
               {...this.props}
@@ -72,6 +52,9 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
   },
+  formCard: {
+    flex: 1,
+  },
   formContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -90,4 +73,4 @@ let styles = StyleSheet.create({
   },
 })
 
-export default SignUpForm
+export default SignInForm

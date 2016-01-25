@@ -1,8 +1,10 @@
-import React from 'react-native';
+import React from 'react-native'
+import dismissKeyboard from '../../node_modules/react-native/Libraries/Utilities/dismissKeyboard'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
-import SignUpForm from '../components/auth/SignUpForm'
+import SignUpForm, {signUpFormHeight} from '../components/auth/SignUpForm'
+import SignInForm, {signInFormHeight} from '../components/auth/SignInForm'
 
 import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5, FONT_SIZE_TITLE} from '../stylesheets/styles'
 
@@ -12,19 +14,18 @@ let {
   View,
   Dimensions,
   Animated,
-  InteractionManager,
   Easing,
 } = React
 
 let deviceHeight = Dimensions.get('window').height
-let deviceWidth = Dimensions.get('window').width
 
 class IntroContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       animation: new Animated.Value(0),
+      authMode: 'signin',
     }
   }
 
@@ -41,13 +42,29 @@ class IntroContainer extends Component {
       transform: [
         {translateY: this.state.animation.interpolate({
           inputRange: [-100, 0, 100],
-          outputRange: [0, -400, 0],
+          outputRange: [-400, -400, 0],
         }),
       }],
     }
     return (
       <Animated.View style={[styles.container,animationStyle]}>
-        <SignUpForm />
+        <SignUpForm/>
+      </Animated.View>
+    )
+  }
+
+  renderSignInForm() {
+    let animationStyle = {
+      transform: [
+        {translateY: this.state.animation.interpolate({
+          inputRange: [-100, 0, 100],
+          outputRange: [0, -400, -400],
+        }),
+      }],
+    }
+    return (
+      <Animated.View style={[styles.container,animationStyle]}>
+        <SignInForm />
       </Animated.View>
     )
   }
@@ -57,11 +74,11 @@ class IntroContainer extends Component {
       transform: [
         {translateY: this.state.animation.interpolate({
           inputRange: [-100, 0, 100],
-          outputRange: [0, 0, -(deviceHeight - 440)],
+          outputRange: [0, 0, -(deviceHeight - signUpFormHeight)],
         }),
       }],
       opacity: this.state.animation.interpolate({
-        inputRange: [-100, 0, 100],
+        inputRange: [-50, 0, 100],
         outputRange: [0, 1, 1],
       }),
     }
@@ -70,6 +87,7 @@ class IntroContainer extends Component {
         <HVTButton
             text={"Create an account"}
             onPress={() => {
+              this.setState({authMode: 'signup'})
               Animated.timing(
                 this.state.animation,
                 {
@@ -88,13 +106,13 @@ class IntroContainer extends Component {
   renderSignInButton() {
     let animationStyle = {
       opacity: this.state.animation.interpolate({
-        inputRange: [-100, 0, 10],
-        outputRange: [0, 1, 0],
+        inputRange: [-100, 0, 50],
+        outputRange: [1, 1, 0],
       }),
       transform: [
         {translateY: this.state.animation.interpolate({
           inputRange: [-100, 0, 100],
-          outputRange: [0, 0, -(deviceHeight - 436)],
+          outputRange: [-(deviceHeight - signInFormHeight), 0, 0],
         }),
       }],
     }
@@ -103,11 +121,12 @@ class IntroContainer extends Component {
         <HVTButton
             text={"Sign In"}
             onPress={() => {
+              this.setState({authMode: 'signin'})
               Animated.timing(
                 this.state.animation,
                 {
                   toValue: -100,
-                  duration: 2000,
+                  duration: 250,
                 },
               ).start()
             }}
@@ -134,6 +153,7 @@ class IntroContainer extends Component {
             size={30}
             color={COLOR_1}
             onPress={() => {
+              dismissKeyboard()
               Animated.timing(
                 this.state.animation,
                 {
@@ -149,9 +169,12 @@ class IntroContainer extends Component {
   }
 
   render() {
+
+    let form = this.state.authMode === 'signin' ? this.renderSignInForm() : this.renderSignUpForm()
+
     return (
       <View style={[styles.container, {backgroundColor:'white'}]}>
-        {this.renderSignUpForm()}
+        {form}
         {this.renderSignUpButton()}
         {this.renderSignInButton()}
         {this.renderBackButton()}
