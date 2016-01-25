@@ -5,7 +5,6 @@ export const COMMENTS_SUCCESS = 'COMMENTS_SUCCESS';
 
 // Auth
 
-export const LOGIN_FORM_CHANGED = 'LOGIN_FORM_CHANGED';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';

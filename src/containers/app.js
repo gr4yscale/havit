@@ -2,6 +2,7 @@ import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
 import LinksSentContainer from './LinksSentContainer'
 import AuthContainer from './AuthContainer'
+import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
 import SignupContainer from './SignupContainer'
 import FriendAddContainer from './FriendAddContainer'
@@ -85,11 +86,12 @@ class App extends React.Component {
       <Router hideNavBar={true} >
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
 
-        <Route name="MainContainer" component={MainContainer} title="Inbox" initial={true} type="replace" />
+        <Route name="MainContainer" component={MainContainer} title="Inbox" type="replace" />
         <Route name="Share" component={ShareContainer} title="Share" type="replace" />
         <Route name="Friends" component={FriendAddContainer} title="Friends" />
         <Route name="SignUp" component={SignupContainer} title="Sign Up" type="replace" renderLeftButton={this.createRightButton} />
         <Route name="SignIn" component={AuthContainer} title="Sign In" type="replace" renderLeftButton={this.createRightButton} />
+        <Route name="Intro" component={IntroContainer} title="Intro" type="replace" renderLeftButton={this.createRightButton} initial={true} />
       </Router>
     )
   }

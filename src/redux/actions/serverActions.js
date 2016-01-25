@@ -52,14 +52,6 @@ export function signup() {
 // LOGIN
 //////////////////////////////////////////////////////
 
-export function loginFormChanged(field, value) {
-  return {
-    type: actionTypes.LOGIN_FORM_CHANGED,
-    field,
-    value,
-  }
-}
-
 export function loginRequest() {
   return {
     type: actionTypes.LOGIN_REQUEST,

@@ -1,6 +1,8 @@
 'use strict'
 
 import * as actionTypes from '../actionTypes'
+import {authModeSignIn, authModeSignUp} from '../actions/authActions'
+
 
 // TOFIX: remove unecessary fields key?
 const initialState = {
@@ -22,11 +24,11 @@ const initialState = {
     },
     finished: false,
   },
-  authType: 'signup',
+  authMode: '',
 }
 
-function loginFormFields(state = initialState, action) {
-  let { field, value } = action
+function loginFormFields(state = initialState, payload) {
+  let { field, value } = payload
   let updatedField = {}
   updatedField[field] = value
   return Object.assign({}, state.form.fields, updatedField)
@@ -76,24 +78,28 @@ function signup(state = initialState, action) {
 // TOFIX: no need for ...state
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.LOGIN_FORM_CHANGED:
+    case 'AUTH_SIGN_IN_FORM_CHANGED':
       return Object.assign({}, state, {
         ...state,
-        ...{form : {fields: loginFormFields(state, action)}},
+        ...{form : {fields: loginFormFields(state, action.payload)}},
       })
-    case actionTypes.LOGIN_REQUEST:
-      return state;
-    case actionTypes.LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        ...state,
-        ...{currentUser: action.response},
-      })
-
     case actionTypes.LOGIN_FAILURE:
       return state;
 
     case actionTypes.SIGNUP_NEXT:
       return signup(state, action)
+
+    case 'AUTH_SWITCH_TO_SIGN_IN':
+      return Object.assign({}, state, {
+        authMode: authModeSignIn,
+      })
+
+    case 'AUTH_SWITCH_TO_SIGN_UP':
+      return Object.assign({}, state, {
+        authMode: authModeSignUp,
+      })
+
+
 
     default:
       return state;

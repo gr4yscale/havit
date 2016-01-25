@@ -1,6 +1,8 @@
 import React from 'react-native'
 import dismissKeyboard from '../../node_modules/react-native/Libraries/Utilities/dismissKeyboard'
-import {Actions} from '../../node_modules/react-native-router-flux'
+import {connect} from 'react-redux/native'
+import {bindActionCreators} from 'redux'
+import * as authActions from '../redux/actions/authActions'
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
 import SignUpForm, {signUpFormHeight} from '../components/auth/SignUpForm'
@@ -64,7 +66,7 @@ class IntroContainer extends Component {
     }
     return (
       <Animated.View style={[styles.container,animationStyle]}>
-        <SignInForm />
+        <SignInForm loginFormChanged={this.props.loginFormChanged} />
       </Animated.View>
     )
   }
@@ -116,12 +118,16 @@ class IntroContainer extends Component {
         }),
       }],
     }
+    const {authSignInButtonPressed} = this.props
+
     return (
       <Animated.View style={[{paddingBottom: 20, backgroundColor:'transparent'},animationStyle]}>
         <HVTButton
             text={"Sign In"}
             onPress={() => {
               this.setState({authMode: 'signin'})
+              authSignInButtonPressed()
+
               Animated.timing(
                 this.state.animation,
                 {
@@ -213,3 +219,12 @@ let styles = StyleSheet.create({
 })
 
 export default IntroContainer
+
+export default connect(
+  (state) => {
+    return state.auth
+  },
+  (dispatch) => {
+    return bindActionCreators(authActions, dispatch);
+  }
+)(IntroContainer)
