@@ -44,7 +44,7 @@ export function shareLink() {
 
 function shareDataToPost(state) {
   let form = state.share.form
-  let senderId = state.auth.currentUser.objectId
+  let senderId = state.entities.currentUser.objectId
   let friends = state.share.selectedFriends
 
   let recipientIds = friends.filter((friend) => {
@@ -70,7 +70,7 @@ const iftttUserActionsFailure = createAction('IFTTT_USER_ACTIONS_FAILURE')
 export function postIftttActionsToFriend(user, urlToShare, title) {
   return (dispatch, getState) => {
     let fullFriend = _.find(getState().entities.friends, {objectId: user.objectId})
-    let senderName = getState().auth.currentUser.displayName
+    let senderName = getState().entities.currentUser.displayName
 
     if (!fullFriend.triggerIftttActionsOnReceiveShare) {
       dispatch(iftttUserActionsSuccess('User does not allow IFTTT actions to trigger when receiving a share.'))
@@ -156,7 +156,7 @@ export const androidIntentReceieved = createAction('ANDROID_INTENT_RECEIVED')
 //////////////////////////////////////////////////////
 
 function configuredParse(state) {
-  let userObjectId = _.get(state, 'auth.currentUser.objectId')
-  let sessionToken = _.get(state, 'auth.currentUser.sessionToken')
+  let userObjectId = _.get(state, 'entities.currentUser.objectId')
+  let sessionToken = _.get(state, 'entities.currentUser.sessionToken')
   return new Parse(userObjectId, sessionToken);
 }

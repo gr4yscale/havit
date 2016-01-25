@@ -13,7 +13,8 @@ const reducer = storage.reducer(rootReducer)
 let engine = createEngine('havit-save-key')
 
 // TOFIX: make sure persisting friends doesn't bite me in the ass later with cache invalidation issues!
-let stateKeysToPersist = ['auth','entities','share']
+// Ensure we didn't fuck iOS up
+let stateKeysToPersist = ['entities']
 
 engine = decorators.filter(engine, stateKeysToPersist)
 

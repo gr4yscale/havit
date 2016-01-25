@@ -328,8 +328,8 @@ export function addFriend(email) {
 //////////////////////////////////////////////////////
 
 function configuredParse(state) {
-  let userObjectId = _.get(state, 'auth.currentUser.objectId')
-  let sessionToken = _.get(state, 'auth.currentUser.sessionToken')
+  let userObjectId = _.get(state, 'entities.currentUser.objectId')
+  let sessionToken = _.get(state, 'entities.currentUser.sessionToken')
   return new Parse(userObjectId, sessionToken);
 }
 

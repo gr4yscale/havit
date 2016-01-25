@@ -7,6 +7,11 @@ import _ from 'lodash'
 
 export default function server(state = {}, action) {
   switch (action.type) {
+    case actionTypes.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        ...{currentUser: action.response},
+      })
     case actionTypes.LINKS_RECEIVED_REQUEST:
       return Object.assign({}, state, {
         linksFetching: true,
