@@ -4,8 +4,8 @@ import cairn from '../../node_modules/cairn'
 
 export const COLOR_1 = '#FFFFFF'
 export const COLOR_2 = '#000000'
-export const COLOR_3 = '#FF3B7F'
-export const COLOR_4 = '#444444'
+export const COLOR_3 = '#33FFBB'
+export const COLOR_4 = '#282C34'
 export const COLOR_5 = '#666666'
 export const FONT_FAMILY = 'AvenirNext-Medium'
 export const FONT_SIZE_HUGE = 24
@@ -84,14 +84,16 @@ export default cairn({
       margin: 10,
       color: COLOR_1,
       fontFamily: FONT_FAMILY,
-      fontSize: FONT_SIZE_HEADING,
+      fontSize: FONT_SIZE_HUGE,
       fontWeight: FONT_WEIGHT_HEADING,
       textAlign: 'center',
+      justifyContent:'center',
     },
 
     textWrapper: {
       backgroundColor:COLOR_2,
-      borderRadius: 20,
+      height: 48,
+      borderRadius: 24,
     },
   },
 
@@ -107,17 +109,17 @@ export default cairn({
 
   card: {
     content: {
-      backgroundColor:COLOR_1,
-      marginRight: 4,
-      marginBottom: 4,
+      backgroundColor:COLOR_4,
+      marginRight: 6,
+      marginBottom: 6,
     },
 
     shadow: {
       position:'absolute',
       backgroundColor:COLOR_2,
-      marginLeft: 4,
-      marginTop: 4,
-      opacity: 0.3,
+      marginLeft: 6,
+      marginTop: 6,
+      opacity: 0,
     },
   },
 
