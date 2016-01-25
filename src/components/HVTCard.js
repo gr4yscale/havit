@@ -6,7 +6,6 @@ let {
   Component,
   View,
   PropTypes,
-  Animated,
 } = React
 
 // TOFIX: container is positioned relative (flexbox), but contained views are positioned absolute
@@ -33,11 +32,22 @@ class HVTCard extends Component {
     console.log(this.state)
   }
 
+  // render() {
+  //   return (
+  //     <View {...style('container', [this.props.extraStyle])}>
+  //       <View {...style('card.shadow', [{width: this.state.contentWidth, height: this.state.contentHeight}])} />
+  //       <View {...style('card.content')} onLayout={this.handleContentLayout.bind(this)}>
+  //         {this.props.children}
+  //       </View>
+  //     </View>
+  //   )
+  // }
+
+
   render() {
     return (
       <View {...style('container', [this.props.extraStyle])}>
-        <View {...style('card.shadow', [{width: this.state.contentWidth, height: this.state.contentHeight}])} />
-        <View {...style('card.content')} onLayout={this.handleContentLayout.bind(this)}>
+        <View {...style('card.content')}>
           {this.props.children}
         </View>
       </View>
