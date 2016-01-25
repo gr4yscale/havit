@@ -18,6 +18,7 @@ let {
   LinkingIOS,
   Alert,
   Platform,
+  IntentAndroid,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -62,7 +63,7 @@ class LinksSentContainer extends Component {
     if (Platform.OS === 'ios') {
       LinkingIOS.openURL(url)
     } else {
-      this.alertNotImplemented()
+      IntentAndroid.openURL(url)
     }
   }
 
