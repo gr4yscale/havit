@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes'
 import Parse from '../../parse'
 import _ from 'lodash'
 import {createAction} from 'redux-actions'
+import {resetSelectedFriends} from '../actions/shareActions'
 
 // TOFIX: move this stuff elsewhere, also merge auth actions into serverActions!
 import React from 'react-native';
@@ -204,6 +205,7 @@ export function fetchFriends() {
       if (response.status === 200 || response.status === 201) {
         let json = JSON.parse(response._bodyInit)
         dispatch(friendsSuccess(json))
+        dispatch(resetSelectedFriends(json.results)) // TOFIX: too imperitive
 
         // TOFIX: yucky place for this, but just getting android functional for now, will move out later
         if (Platform.OS === 'ios') {

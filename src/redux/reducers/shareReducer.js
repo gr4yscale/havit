@@ -38,12 +38,12 @@ export default function share(state = initialState, action) {
         friendsFetching: true,
       })
 
-    case actionTypes.FRIENDS_SUCCESS:
-      let selectedFriends = action.response.results.map(
+    case 'RESET_SELECTED_FRIENDS':
+      let selectedFriends = action.payload.map(
         (friend) => Object.assign({}, { objectId: friend.objectId,
-                                     displayName: friend.displayName,
-                                        selected: false,
-                                       })
+          displayName: friend.displayName,
+          selected: false,
+        })
       )
       return Object.assign({}, state, {
         selectedFriends,

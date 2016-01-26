@@ -152,6 +152,8 @@ function iftttRequest(urlToShare, iftttUrl, title, senderName) {
 
 export const androidIntentReceieved = createAction('ANDROID_INTENT_RECEIVED')
 
+export const resetSelectedFriends = createAction('RESET_SELECTED_FRIENDS')
+
 // UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:
 //////////////////////////////////////////////////////
 
