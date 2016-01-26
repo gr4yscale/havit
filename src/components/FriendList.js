@@ -23,7 +23,7 @@ class FriendList extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.friends != this.props.friends
+    return nextProps.selectedFriends != this.props.selectedFriends
   }
 
   onCellPressed(data) {
@@ -40,7 +40,7 @@ class FriendList extends Component {
   }
 
   render() {
-    let dataSource = this.props.friends ? this.state.dataSource.cloneWithRows(this.props.friends) : this.state.dataSource.cloneWithRows([])
+    let dataSource = this.props.selectedFriends ? this.state.dataSource.cloneWithRows(this.props.selectedFriends) : this.state.dataSource.cloneWithRows([])
 
     return (
         <ListView

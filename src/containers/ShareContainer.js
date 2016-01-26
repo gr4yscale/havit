@@ -47,25 +47,12 @@ class ShareContainer extends Component {
   }
 
   componentDidMount() {
-    const {friendsSuccess, loginSuccess, shareFormChanged, url, title} = this.props
-
-    // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
-    // the special private container that is provided for the extension to communicate with the app...weird shit
-
-    this.friendsListUpdateSubscription = NativeAppEventEmitter.addListener(
-      'FriendsListUpdate',
-      (friendsData) => {
-        friendsSuccess(friendsData)
-      }
-    )
-
-    this.currentUserUpdateSubscription = NativeAppEventEmitter.addListener(
-      'CurrentUserUpdate',
-      (currentUserData) => {
-        loginSuccess(currentUserData)
-      }
-    )
-
+    const {resetSelectedFriends, shareFormChanged, url, title} = this.props
+    if (Platform.OS === 'ios') {
+      this.subscribeToDataUpdateEvents()
+    } else if (this.props.friends) {
+      resetSelectedFriends(this.props.friends)
+    }
     // We receive title and url from the share extension intially, but ultimately want child compeonnts to
     // react to changes in the redux store so when friend cells are tapped the title/url/comment fields don't
     // get overwritten by old data in these initial props.
@@ -82,6 +69,23 @@ class ShareContainer extends Component {
   shouldComponentUpdate() {
     console.log('sharecontainer: shouldComponentUpdate')
     return true
+  // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
+  // the special private container that is provided for the extension to communicate with the app...weird shit
+  subscribeToDataUpdateEvents() {
+    const {friendsSuccess, loginSuccess, resetSelectedFriends} = this.props
+    this.friendsListUpdateSubscription = NativeAppEventEmitter.addListener(
+      'FriendsListUpdate',
+      (friendsList) => {
+        friendsSuccess(friendsList)
+        resetSelectedFriends(friendsList.results)
+      }
+    )
+    this.currentUserUpdateSubscription = NativeAppEventEmitter.addListener(
+      'CurrentUserUpdate',
+      (currentUserData) => {
+        loginSuccess(currentUserData)
+      }
+    )
   }
 
   shareButtonPressed() {
@@ -202,7 +206,8 @@ let styles = StyleSheet.create({
 export default connect(
   (state) => {
     return {
-      friends: state.share.selectedFriends,
+      selectedFriends: state.share.selectedFriends,
+      friends: state.entities.friends,
       titleRedux: state.share.form.title,
       urlRedux: state.share.form.url,
       commentRedux: state.share.form.comment,
@@ -213,6 +218,7 @@ export default connect(
       friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
       loginSuccess: (json) => dispatch(serverActions.loginSuccess(json)),
       shareLink: () => dispatch(shareActions.shareLink()),
+      resetSelectedFriends: (payload) => dispatch(shareActions.resetSelectedFriends(payload)),
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
       postAllIftttActions: () => dispatch(shareActions.postAllIftttActions()),
