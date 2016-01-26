@@ -52,7 +52,9 @@ class Root extends React.Component {
         if (_.get(newState, 'entities.friends')) {
           store.dispatch(shareActions.resetSelectedFriends(newState.entities.friends))
         }
-        Actions.MainContainer()
+        if (!this.lastIntentUrlReceived) {
+          Actions.MainContainer()
+        }
         // TOFIX: don't do this when sharing to load faster
         store.dispatch(serverActions.fetchLinksReceived())
       } else {

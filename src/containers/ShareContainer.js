@@ -61,14 +61,18 @@ class ShareContainer extends Component {
     shareFormChanged('title', title)
   }
 
-  componentWillUnmount() {
-    this.friendsListUpdateSubscription.remove();
-    this.currentUserUpdateSubscription.remove();
-  }
-
   shouldComponentUpdate() {
     console.log('sharecontainer: shouldComponentUpdate')
     return true
+  }
+
+  componentWillUnmount() {
+    if (Platform.os === 'android') {
+      this.friendsListUpdateSubscription.remove();
+      this.currentUserUpdateSubscription.remove();
+    }
+  }
+
   // update state with the JSON that we'll get through iOS from the native share extension grabbing it out of
   // the special private container that is provided for the extension to communicate with the app...weird shit
   subscribeToDataUpdateEvents() {
@@ -108,6 +112,8 @@ class ShareContainer extends Component {
       Actions.MainContainer()
     } else if (Platform.OS === 'ios' && !this.props.inAppShare) {
       NativeModules.RootShareViewController.shareComplete()
+    } else if (Platform.OS === 'android') {
+      Actions.MainContainer()
     }
   }
 
