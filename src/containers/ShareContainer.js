@@ -98,16 +98,14 @@ class ShareContainer extends Component {
     Promise.all([shareLink(), postAllIftttActions()])
     .then(() => {
       console.log('Havit share + IFTTT action requests all completed')
-      if (Platform.OS === 'ios') {
-        NativeModules.RootShareViewController.shareComplete()
-      }
+      this.close()
     })
     .catch((error) => {
       console.log('There was an error sharing the love:', error)
     })
   }
 
-  closeButtonPressed() {
+  close() {
     if (this.props.inAppShare) {
       Actions.MainContainer()
     } else if (Platform.OS === 'ios' && !this.props.inAppShare) {
@@ -138,7 +136,7 @@ class ShareContainer extends Component {
   renderCloseButton() {
     return (
       <TouchableOpacity
-          onPress={() => this.closeButtonPressed()}
+          onPress={() => this.close()}
           style={{position: 'absolute', top: 20, left: 10, width: 30, height: 30}}
       >
         <Icon
