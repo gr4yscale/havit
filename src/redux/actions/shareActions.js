@@ -79,7 +79,10 @@ export function postIftttActionsToFriend(user, urlToShare, title) {
     dispatch(iftttUserActionsRequest())
 
     let requestPromises = []
-    for (let iftttUrl of iftttUrlsForUser(fullFriend)) {
+    let urls = iftttUrlsForUser(fullFriend)
+
+    for (let i = 0; i < urls.length; i++) {
+      let iftttUrl = urls[i]
       let requestPromise = iftttRequest(urlToShare, iftttUrl, title, senderName)
       // .then((response) => console.log('****', response))
       requestPromises.push(requestPromise)
@@ -112,7 +115,8 @@ export function postAllIftttActions() {
     let title = shareState.form.title
 
     let actions = []
-    for (let friend of selectedFriends) {
+    for (let i = 0; i < selectedFriends.length; i++) {
+      let friend = selectedFriends[i]
       actions.push(dispatch(postIftttActionsToFriend(friend, url, title)))
     }
 
@@ -129,7 +133,9 @@ export function postAllIftttActions() {
 
 function iftttUrlsForUser(user) {
   let iftttUrls = []
-  for (let key of ['iftttUrl1', 'iftttUrl2', 'iftttUrl3']) {
+  let urlKeys = ['iftttUrl1', 'iftttUrl2', 'iftttUrl3']
+  for (let i = 0; i < urlKeys.length; i++) {
+    let key = urlKeys[i]
     if (user[key]) {
       iftttUrls.push(user[key])
     }
