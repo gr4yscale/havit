@@ -14,12 +14,12 @@ export const loginFormChanged = createAction('AUTH_SIGN_IN_FORM_CHANGED')
 export function authSignInButtonPressed() {
   return (dispatch, getState) => {
     let authMode = getState().auth.authMode
-    let signInFields = getState().auth.form.fields
+    let signInForm = getState().auth.signInForm
 
     if (authMode === authModeSignUp || authMode === '') {
       dispatch(authModeSwitchToSignIn())
     } else if (authMode === authModeSignIn) {
-      return dispatch(serverActions.login(signInFields.username, signInFields.password))
+      return dispatch(serverActions.login(signInForm.username, signInForm.password))
             .then(() => dispatch(serverActions.fetchFriends()))
             .then(() => dispatch(serverActions.fetchLinksReceived()))
             .then(() => dispatch(serverActions.fetchLinksSent()))

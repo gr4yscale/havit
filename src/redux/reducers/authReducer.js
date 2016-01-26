@@ -31,7 +31,7 @@ function loginFormFields(state = initialState, payload) {
   let { field, value } = payload
   let updatedField = {}
   updatedField[field] = value
-  return Object.assign({}, state.form.fields, updatedField)
+  return Object.assign({}, state.signInForm, updatedField)
 }
 
 function signup(state = initialState, action) {
@@ -81,7 +81,7 @@ export default function auth(state = initialState, action) {
     case 'AUTH_SIGN_IN_FORM_CHANGED':
       return Object.assign({}, state, {
         ...state,
-        ...{form : {fields: loginFormFields(state, action.payload)}},
+        ...{signInForm: loginFormFields(state, action.payload)},
       })
     case actionTypes.LOGIN_FAILURE:
       return state;
