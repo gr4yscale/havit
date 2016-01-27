@@ -34,9 +34,9 @@ class Root extends React.Component {
 
     this.lastIntentUrlReceived = store.getState().share.lastIntentUrlReceived
     if (this.lastIntentUrlReceived) {
-      setTimeout(() => this.loadInitialData(), 1000)
+      setTimeout(() => this.loadInitialDataFromReduxStorage(), 1000)
     } else {
-      this.loadInitialData()
+      this.loadInitialDataFromReduxStorage()
     }
   }
 
@@ -53,7 +53,7 @@ class Root extends React.Component {
   }
 
   // TOFIX: do this on LOAD action of redux-store, this is logic that should be in the actions not component
-  loadInitialData() {
+  loadInitialDataFromReduxStorage() {
     loadInitialData((newState) => {
       console.log(newState)
       if (_.get(newState, 'entities.currentUser')) {
@@ -63,8 +63,6 @@ class Root extends React.Component {
         if (!this.lastIntentUrlReceived) {
           Actions.MainContainer()
         }
-        // TOFIX: don't do this when sharing to load faster
-        store.dispatch(serverActions.fetchLinksReceived())
       } else {
         // TOFIX: Actions may not have all of the routes by this point (race condition)
         Actions.SignUp()
@@ -76,12 +74,12 @@ class Root extends React.Component {
     if (Platform.OS === 'ios') {
       AppStateIOS.addEventListener('change', (appState) => {
         if (appState === 'active') {
-          Alert.alert('foregrounded','stealing the attention, yo!')
+          this.refreshData()
         }
       })
     } else {
       ActivityAndroid.addEventListener('activityResume', () => {
-        Alert.alert('foregrounded','stealing the attention, yo!')
+        this.refreshData()
       })
     }
   }
@@ -92,6 +90,13 @@ class Root extends React.Component {
     } else {
       // TOFIX: don't cleanup for android right now; will be removing react-native-activity-android soon once I upgrade RN
     }
+  }
+
+  refreshData() {
+    store.dispatch(serverActions.fetchLinksReceived())
+    .then(() => {
+      store.dispatch(serverActions.fetchLinksSent())
+    })
   }
 
   render () {
