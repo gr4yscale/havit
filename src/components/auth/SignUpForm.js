@@ -14,6 +14,8 @@ export const signUpFormHeight = 450 //TOFIX: hack: this should be measured
 class SignUpForm extends Component {
 
   render() {
+    const { signUpFormChanged } = this.props
+
     return (
       <View style={styles.formContainer}>
         <HVTCard
@@ -28,6 +30,7 @@ class SignUpForm extends Component {
               placeholder={"Name"}
               placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputName = component}
+              onChangeText={(value) => signUpFormChanged({field: 'displayName', value})}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -38,6 +41,7 @@ class SignUpForm extends Component {
               placeholder={"Email"}
               placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputEmail = component}
+              onChangeText={(value) => signUpFormChanged({field: 'email', value})}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -48,6 +52,7 @@ class SignUpForm extends Component {
               placeholder={"Username"}
               placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputUsername = component}
+              onChangeText={(value) => signUpFormChanged({field: 'username', value})}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -57,8 +62,9 @@ class SignUpForm extends Component {
               blurOnSubmit={false}
               placeholder={"Password"}
               placeholderTextColor={COLOR_1}
-              ref={(component) => this.textInputPassword = component}
               secureTextEntry={true}
+              ref={(component) => this.textInputPassword = component}
+              onChangeText={(value) => signUpFormChanged({field: 'password', value})}
           />
         </HVTCard>
       </View>

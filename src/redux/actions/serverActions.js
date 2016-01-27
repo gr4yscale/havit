@@ -15,13 +15,6 @@ let {
 // SIGN UP
 //////////////////////////////////////////////////////
 
-export function signupNext(textEntered) {
-  return {
-    type: actionTypes.SIGNUP_NEXT,
-    textEntered,
-  }
-}
-
 export const signupRequest = () => ({type: actionTypes.SIGNUP_REQUEST})
 export const signupSuccess = (json) => ({type: actionTypes.SIGNUP_SUCCESS, response: json})
 export const signupFailure = (error) => ({type: actionTypes.SIGNUP_FAILURE, payload: error})
@@ -30,7 +23,7 @@ export function signup() {
   return (dispatch, getState) => {
     dispatch(signupRequest());
     let parse = new Parse();
-    let data = getState().auth.signup.fields
+    let data = getState().auth.signUpForm
 
     return parse.signup(data)
     .then((response) => {
@@ -47,7 +40,6 @@ export function signup() {
     })
   }
 }
-
 
 
 // LOGIN

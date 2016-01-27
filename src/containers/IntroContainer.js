@@ -3,16 +3,13 @@ import dismissKeyboard from '../../node_modules/react-native/Libraries/Utilities
 import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as authActions from '../redux/actions/authActions'
-import {authModeSignIn} from '../redux/actions/authActions'
+import {authModeSignIn, authModeSignUp} from '../redux/actions/authActions'
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
 import SignUpForm, {signUpFormHeight} from '../components/auth/SignUpForm'
 import SignInForm, {signInFormHeight} from '../components/auth/SignInForm'
-import {Actions} from '../../node_modules/react-native-router-flux'
 
 import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5, FONT_SIZE_TITLE} from '../stylesheets/styles'
-
-
 
 let {
   Component,
@@ -54,7 +51,7 @@ class IntroContainer extends Component {
     }
     return (
       <Animated.View style={[styles.container,animationStyle]}>
-        <SignUpForm/>
+        <SignUpForm signUpFormChanged={this.props.signUpFormChanged} />
       </Animated.View>
     )
   }
@@ -71,7 +68,7 @@ class IntroContainer extends Component {
     return (
 
       <Animated.View style={[styles.container,animationStyle]}>
-        <SignInForm loginFormChanged={this.props.loginFormChanged} />
+        <SignInForm signInFormChanged={this.props.signInFormChanged} />
       </Animated.View>
     )
   }
@@ -89,12 +86,17 @@ class IntroContainer extends Component {
         outputRange: [0, 1, 1],
       }),
     }
+    const {authSignUpButtonPressed} = this.props
+
     return (
       <Animated.View style={[{backgroundColor:'transparent'},animationStyle]}>
         <HVTButton
             text={"Create an account"}
             onPress={() => {
-              Animated.timing(this.state.animation, {toValue: 100, duration: 250, easing: Easing.easeOutCubic }).start()
+              if (this.props.authMode !== authModeSignUp) {
+                Animated.timing(this.state.animation, {toValue: 100, duration: 250, easing: Easing.easeOutCubic }).start()
+              }
+              authSignUpButtonPressed()
               dismissKeyboard()
             }}
             extraTouchableStyle={styles.buttons}
@@ -126,8 +128,8 @@ class IntroContainer extends Component {
               if (this.props.authMode !== authModeSignIn) {
                 Animated.timing(this.state.animation, {toValue: -100, duration: 250 }).start()
               }
-              dismissKeyboard()
               authSignInButtonPressed()
+              dismissKeyboard()
             }}
             extraTouchableStyle={[styles.buttons, {marginTop: 8}]}
         />

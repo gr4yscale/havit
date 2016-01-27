@@ -13,15 +13,8 @@ export const signInFormHeight = 280 //TOFIX: hack: this should be measured
 
 class SignInForm extends Component {
 
-  // onSubmitEditing={(event) => this.handleFieldChanged('username', event)}
-  // onBlur={(event) => this.handleFieldChanged('username', event)}
-  // handleFieldChanged(field, event) {
-  //   const { loginFormChanged } = this.props
-  //   loginFormChanged({field, value: event.nativeEvent.text})
-  // }
-
   render() {
-    const { loginFormChanged } = this.props
+    const { signInFormChanged } = this.props
 
     return (
       <View style={styles.formContainer}>
@@ -37,7 +30,7 @@ class SignInForm extends Component {
               placeholder={"Username"}
               placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputUsername = component}
-              onChangeText={(value) => loginFormChanged({field: 'username', value})}
+              onChangeText={(value) => signInFormChanged({field: 'username', value})}
           />
           <TextInput
               {...style('text.heading', [styles.inputs])}
@@ -49,7 +42,7 @@ class SignInForm extends Component {
               placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputPassword = component}
               secureTextEntry={true}
-              onChangeText={(value) => loginFormChanged({field: 'password', value})}
+              onChangeText={(value) => signInFormChanged({field: 'password', value})}
           />
         </HVTCard>
       </View>
