@@ -48,6 +48,7 @@ class FriendListCell extends Component {
           delayPressIn={0}
           delayPressOut={0}
           underlayColor={'#FFFFFF'}
+          activeOpacity={1}
       >
         <View style={styles.row}>
           {this.renderText()}
@@ -66,7 +67,7 @@ let styles = StyleSheet.create({
     padding: 8,
     marginLeft: 8,
     marginRight: 8,
-    marginBottom: 0.5,
+    marginBottom: 2.0,
     opacity: 1.0,
     backgroundColor: '#EEEEEE',
     height: 48,

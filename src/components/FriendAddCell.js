@@ -40,6 +40,7 @@ class FriendAddCell extends Component {
           delayPressIn={0}
           delayPressOut={0}
           underlayColor={'#FFFFFF'}
+          activeOpacity={1}
       >
         <View style={styles.row}>
           {this.renderText()}

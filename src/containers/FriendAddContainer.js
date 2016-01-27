@@ -15,6 +15,7 @@ let {
   TouchableHighlight,
   ListView,
   TextInput,
+  Alert,
 } = React
 
 let deviceHeight = Dimensions.get('window').height;
@@ -106,6 +107,7 @@ class FriendAddContainer extends Component {
               return (
                 <FriendAddCell
                     text={data.displayName}
+                    onPress={() => {Alert.alert('Not implemented', `Sorry, you can't remove friends right now`)}}
                 />
               )
             }}

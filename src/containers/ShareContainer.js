@@ -6,7 +6,6 @@ import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import {Icon} from '../../node_modules/react-native-icons'
-import AnimGL from '../gl/animGL'
 import style from '../stylesheets/styles'
 
 let {
@@ -21,8 +20,7 @@ let {
   Platform,
 } = React
 
-let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
+let deviceHeight = Dimensions.get('window').height
 
 // credit: brentvatne from his example in
 // https://github.com/brentvatne/react-native-linear-gradient
@@ -44,7 +42,7 @@ class ShareContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {bgColor:'#9922FF'} //cc22aa
+    this.state = {bgColor:'cc22aa'}
   }
 
   componentDidMount() {
@@ -126,16 +124,6 @@ class ShareContainer extends Component {
     })
   }
 
-  // TOFIX: passing the props down this way is definitely not the right way to do it
-  // TOFIX: being sloppy and just giving the header everything coming down from the app component, yikes
-  renderHeader() {
-    return (
-      <ShareHeader shareFormChanged={this.props.shareFormChanged}
-          {...this.props}
-      />
-    )
-  }
-
   renderCloseButton() {
     return (
       <TouchableOpacity
@@ -152,10 +140,13 @@ class ShareContainer extends Component {
     )
   }
 
-  renderFancyShaderBackgroundIfIOS() {
-    if (Platform.OS === 'ios') {
-      return (<AnimGL width={deviceWidth} height={deviceHeight} pixelRatio={2} />)
-    }
+  // TOFIX: investigate prop passing (being sloppy and just giving the header everything coming down from the app component, yikes)
+  renderHeader() {
+    return (
+      <ShareHeader shareFormChanged={this.props.shareFormChanged}
+          {...this.props}
+      />
+    )
   }
 
   render() {
@@ -168,7 +159,6 @@ class ShareContainer extends Component {
     }
     return (
       <View style={[styles.container, {backgroundColor:this.state.bgColor}]}>
-        {this.renderFancyShaderBackgroundIfIOS()}
         <FriendList
             {...this.props}
             header={this.renderHeader.bind(this)}
@@ -196,17 +186,6 @@ let styles = StyleSheet.create({
     height:deviceHeight - 66,
     paddingTop:50,
     paddingBottom: 60,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center',
-  },
-  button: {
-    height: 50,
-    backgroundColor: '#FF3B7F',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
   },
   closeIcon: {
     position:'absolute',

@@ -12,6 +12,8 @@ import {Actions} from '../../node_modules/react-native-router-flux'
 
 import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5, FONT_SIZE_TITLE} from '../stylesheets/styles'
 
+
+
 let {
   Component,
   StyleSheet,
@@ -67,6 +69,7 @@ class IntroContainer extends Component {
       }],
     }
     return (
+
       <Animated.View style={[styles.container,animationStyle]}>
         <SignInForm loginFormChanged={this.props.loginFormChanged} />
       </Animated.View>

@@ -15,6 +15,7 @@ class HVTIconButton extends Component {
     <TouchableOpacity
         {...style('buttonIcon', [{width: this.props.size, height: this.props.size}, this.props.extraTouchableStyle])}
         onPress={() => this.props.onPress()}
+        activeOpacity={1}
     >
       <Icon
           color={this.props.color ? this.props.color : COLOR_1}

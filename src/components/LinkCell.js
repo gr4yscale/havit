@@ -210,6 +210,7 @@ let styles = StyleSheet.create({
     paddingBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 6,
   },
   contentText: {
     flexDirection: 'column',

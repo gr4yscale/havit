@@ -157,5 +157,12 @@ export default cairn({
     },
   },
 
+  // closeIcon: {
+  //   position:'absolute',
+  //   left: 0,
+  //   top: 0,
+  //   width: 30,
+  //   height: 30,
+  // },
 
 }, (styles) => StyleSheet.create(styles))

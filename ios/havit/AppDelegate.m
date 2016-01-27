@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "RCTRootView.h"
 #import "CodePush.h"
-
+        
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -18,7 +18,7 @@
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+    jsCodeLocation = [NSURL URLWithString:@"http://admins-MacBook-Pro.local:8081/index.ios.bundle?dev=true"];
   #else
     jsCodeLocation = [CodePush bundleURL];
   #endif

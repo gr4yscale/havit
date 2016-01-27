@@ -1,10 +1,8 @@
 import React from 'react-native'
 import LinksFeedContainer from './LinksFeedContainer'
 import LinksSentContainer from './LinksSentContainer'
-import AuthContainer from './AuthContainer'
 import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
-import SignupContainer from './SignupContainer'
 import FriendAddContainer from './FriendAddContainer'
 import CustomScrollableTabView from '../components/CustomScrollableTabView'
 import CustomTabBar from '../components/CustomTabBar'
@@ -20,16 +18,12 @@ let {
 
 class MainContainer extends React.Component {
 
-  handleNavIconPress() {
-    Actions.SignUp()
-  }
-
   render() {
     return (
       <CustomScrollableTabView style={{marginTop:0}}
           tabBarUnderlineColor={'#FF3B7F'}
           tabBarActiveTextColor={'#FF3B7F'}
-          renderTabBar={() => <CustomTabBar onNavIconPress={() => this.handleNavIconPress()} />}
+          renderTabBar={() => <CustomTabBar onNavIconPress={() => Actions.Intro()} />}
       >
         <LinksFeedContainer tabLabel="Inbox" />
         <LinksSentContainer tabLabel="Inbox" />
@@ -42,7 +36,6 @@ class MainContainer extends React.Component {
 class App extends React.Component {
 
   componentDidMount() {
-
     if (this.props.lastIntentUrlReceived) {
       Actions.Share({url: this.props.lastIntentUrlReceived})
     }
@@ -66,6 +59,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('app: render')
     return (
       <Router hideNavBar={true} >
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
@@ -73,9 +67,7 @@ class App extends React.Component {
         <Route name="MainContainer" component={MainContainer} title="Inbox" type="replace" />
         <Route name="Share" component={ShareContainer} title="Share" type="replace" />
         <Route name="Friends" component={FriendAddContainer} title="Friends" />
-        <Route name="SignUp" component={SignupContainer} title="Sign Up" type="replace" renderLeftButton={this.createRightButton} />
-        <Route name="SignIn" component={AuthContainer} title="Sign In" type="replace" renderLeftButton={this.createRightButton} />
-        <Route name="Intro" component={IntroContainer} title="Intro" type="replace" renderLeftButton={this.createRightButton} initial={true} />
+        <Route name="Intro" component={IntroContainer} title="Intro" type="replace" renderLeftButton={this.createRightButton}  initial={true} />
       </Router>
     )
   }

@@ -22,7 +22,7 @@ class CustomTabBar extends Component {
     return (
       <View>
         <View style={styles.tabs}>
-          <TouchableOpacity onPress={() => this.handleNavIconPress()}>
+          <TouchableOpacity onPress={() => this.handleNavIconPress()} activeOpacity={1}>
             <Icon
                 name={'ion|navicon'}
                 size={30}

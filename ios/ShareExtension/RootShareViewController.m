@@ -22,7 +22,7 @@ RCT_EXPORT_MODULE()
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+    jsCodeLocation = [NSURL URLWithString:@"http://admins-MacBook-Pro.local:8081/index.ios.bundle?dev=true"];
   #else
     jsCodeLocation = [CodePush bundleURL];
   #endif
@@ -95,7 +95,7 @@ RCT_EXPORT_MODULE()
   // TOFIX: Redux-storage is loading from persistence AFTER this comes through without the delay
   // Fix this fragile ass shit soon! ...30 mins of my life that i will never get back :(
 
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
   [havitShareReactNativeApp.bridge.eventDispatcher sendAppEventWithName:@"FriendsListUpdate"
                                                                    body:friends];
   

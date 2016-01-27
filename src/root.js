@@ -55,7 +55,6 @@ class Root extends React.Component {
   // TOFIX: do this on LOAD action of redux-store, this is logic that should be in the actions not component
   loadInitialDataFromReduxStorage() {
     loadInitialData((newState) => {
-      console.log(newState)
       if (_.get(newState, 'entities.currentUser')) {
         if (_.get(newState, 'entities.friends')) {
           store.dispatch(shareActions.resetSelectedFriends(newState.entities.friends))

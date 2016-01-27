@@ -16,6 +16,7 @@ class HVTButton extends Component {
     <TouchableOpacity
         {...style('buttonText.touchable', [this.props.extraTouchableStyle])}
         onPress={() => this.props.onPress()}
+        activeOpacity={1}
     >
       <View {...style('buttonText.textWrapper', {borderRadius: this.props.borderRadius})}>
         <Text {...style('buttonText.text', [this.props.extraTextStyle])}>
