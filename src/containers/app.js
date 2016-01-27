@@ -16,7 +16,6 @@ let {
   Navigator,
   Text,
   TouchableOpacity,
-  AppStateIOS,
 } = React
 
 class MainContainer extends React.Component {
@@ -43,30 +42,15 @@ class MainContainer extends React.Component {
 class App extends React.Component {
 
   componentDidMount() {
-    AppStateIOS.addEventListener('change', this._handleAppStateChange)
-    AppStateIOS.addEventListener('memoryWarning', this._handleMemoryWarning)
 
     if (this.props.lastIntentUrlReceived) {
       Actions.Share({url: this.props.lastIntentUrlReceived})
     }
   }
 
-  componentWillUnmount() {
-    AppStateIOS.removeEventListener('change', this._handleAppStateChange)
-    AppStateIOS.removeEventListener('memoryWarning', this._handleMemoryWarning)
-  }
-
   shouldComponentUpdate() {
     console.log('app: shouldComponentUpdate')
     return true
-  }
-
-  _handleAppStateChange(currentAppState) {
-    console.log(currentAppState)
-  }
-
-  _handleMemoryWarning() {
-    console.log('********** MEMORY WARNING!!! ************')
   }
 
   createRightButton () {

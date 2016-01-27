@@ -7,10 +7,13 @@ import {Actions} from '../node_modules/react-native-router-flux'
 import _ from 'lodash' // TOFIX: hrmmmm... not sure about having this one in...
 import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
+import ActivityAndroid from '../node_modules/react-native-activity-android'
 
 const {
   DeviceEventEmitter,
   Platform,
+  AppStateIOS,
+  Alert,
 } = React
 
 // This is necessary because React Components will not have mounted (and thus Router) when we receive the
@@ -42,6 +45,11 @@ class Root extends React.Component {
       const CodePush = require('../node_modules/react-native-code-push')
       CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
+    this.subscribeToAppLifecycleEvents()
+  }
+
+  componentWillUnmount() {
+    this.removeAppLifecycleEventListeners()
   }
 
   // TOFIX: do this on LOAD action of redux-store, this is logic that should be in the actions not component
@@ -62,6 +70,28 @@ class Root extends React.Component {
         Actions.SignUp()
       }
     })
+  }
+
+  subscribeToAppLifecycleEvents() {
+    if (Platform.OS === 'ios') {
+      AppStateIOS.addEventListener('change', (appState) => {
+        if (appState === 'active') {
+          Alert.alert('foregrounded','stealing the attention, yo!')
+        }
+      })
+    } else {
+      ActivityAndroid.addEventListener('activityResume', () => {
+        Alert.alert('foregrounded','stealing the attention, yo!')
+      })
+    }
+  }
+
+  removeAppLifecycleEventListeners() {
+    if (Platform.OS === 'ios') {
+      AppStateIOS.removeEventListener('change', this._handleAppStateChange)
+    } else {
+      // TOFIX: don't cleanup for android right now; will be removing react-native-activity-android soon once I upgrade RN
+    }
   }
 
   render () {
