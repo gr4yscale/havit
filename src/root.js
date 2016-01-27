@@ -62,6 +62,7 @@ class Root extends React.Component {
         }
         if (!this.lastIntentUrlReceived) {
           Actions.MainContainer()
+          this.refreshData()
         }
       } else {
         // TOFIX: Actions may not have all of the routes by this point (race condition)
