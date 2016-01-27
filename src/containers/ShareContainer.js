@@ -7,6 +7,7 @@ import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import {Icon} from '../../node_modules/react-native-icons'
 import AnimGL from '../gl/animGL'
+import style from '../stylesheets/styles'
 
 let {
   Component,
@@ -93,6 +94,8 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
+    if (!this.props.shareDataValid) return
+
     const {shareLink, postAllIftttActions, fetchLinksSent } = this.props
 
     Promise.all([shareLink(), postAllIftttActions()])
@@ -156,6 +159,13 @@ class ShareContainer extends Component {
   }
 
   render() {
+
+    let shareButtonTouchableStyle = 'buttonBottomBar.touchable buttonBottomBar.touchableInvalid'
+    let shareButtonTextStyle = 'buttonBottomBar.text buttonBottomBar.textInvalid'
+    if (this.props.shareDataValid === true) {
+      shareButtonTouchableStyle = 'buttonBottomBar.touchable buttonBottomBar.touchableValid'
+      shareButtonTextStyle = 'buttonBottomBar.text buttonBottomBar.textValid'
+    }
     return (
       <View style={[styles.container, {backgroundColor:this.state.bgColor}]}>
         {this.renderFancyShaderBackgroundIfIOS()}
@@ -165,13 +175,13 @@ class ShareContainer extends Component {
             onCellPressed={() => this.handleCellPressed()}
         />
 
-        <View style={{position:'absolute', width:deviceWidth, height: 50, bottom: 0, backgroundColor:'#FF00FF'}}>
+        <View {...style('buttonBottomBar.container')}>
           <TouchableOpacity
               onPress={() => this.shareButtonPressed()}
-              style={styles.button}
-              underlayColor="#99d9f4"
+              {...style(shareButtonTouchableStyle)}
+              activeOpacity={this.props.shareDataValid ? 0 : 0.5}
           >
-            <Text style={styles.buttonText}>Share!</Text>
+            <Text {...style(shareButtonTextStyle)}>Share!</Text>
           </TouchableOpacity>
         </View>
         {this.renderCloseButton()}
@@ -215,6 +225,7 @@ export default connect(
       titleRedux: state.share.form.title,
       urlRedux: state.share.form.url,
       commentRedux: state.share.form.comment,
+      shareDataValid: state.share.shareDataValid,
     }
   },
   (dispatch) => {

@@ -1,6 +1,9 @@
+import { Dimensions } from 'react-native'
 import { StyleSheet } from 'react-native'
 // import StyleSheet from '../stylesheets/debugStylesheet.js'
 import cairn from '../../node_modules/cairn'
+
+const deviceWidth = Dimensions.get('window').width;
 
 export const COLOR_1 = '#FFFFFF'
 export const COLOR_2 = '#000000'
@@ -57,14 +60,12 @@ export default cairn({
       color: COLOR_2,
       backgroundColor: COLOR_1,
     },
-
     shadow: {
       backgroundColor:COLOR_2,
       marginLeft: 4,
       marginTop: 4,
       opacity: 0.3,
     },
-
     flatInput: {
       padding: 8,
       color: COLOR_2,
@@ -79,7 +80,6 @@ export default cairn({
         underlayColor: COLOR_3,
       },
     },
-
     text: {
       margin: 10,
       color: COLOR_1,
@@ -87,13 +87,12 @@ export default cairn({
       fontSize: FONT_SIZE_HUGE,
       fontWeight: FONT_WEIGHT_HEADING,
       textAlign: 'center',
-      justifyContent:'center',
     },
-
     textWrapper: {
       backgroundColor:COLOR_2,
       height: 48,
       borderRadius: 24,
+      justifyContent:'center',
     },
   },
 
@@ -107,13 +106,48 @@ export default cairn({
     },
   },
 
+  buttonBottomBar: {
+    container: {
+      position:'absolute',
+      width:deviceWidth,
+      height: 50,
+      bottom: 0,
+    },
+    touchable: {
+      height: 50,
+      backgroundColor: COLOR_4,
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+    },
+    touchableValid: {
+      backgroundColor: COLOR_3,
+    },
+    touchableInvalid: {
+      backgroundColor: COLOR_4,
+    },
+    text: {
+      color: COLOR_3,
+      fontFamily: FONT_FAMILY,
+      fontSize: FONT_SIZE_HUGE,
+      fontWeight: FONT_WEIGHT_HEADING,
+      textAlign: 'center',
+      justifyContent:'center',
+    },
+    textValid: {
+      color: COLOR_4,
+      fontWeight: FONT_WEIGHT_HUGE,
+    },
+    textInvalid: {
+      color: COLOR_3,
+    },
+  },
+
   card: {
     content: {
       backgroundColor:COLOR_4,
       marginRight: 6,
       marginBottom: 6,
     },
-
     shadow: {
       position:'absolute',
       backgroundColor:COLOR_2,
