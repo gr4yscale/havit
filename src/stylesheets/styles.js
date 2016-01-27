@@ -115,15 +115,15 @@ export default cairn({
     },
     touchable: {
       height: 50,
-      backgroundColor: COLOR_4,
+      backgroundColor: COLOR_5,
       alignSelf: 'stretch',
       justifyContent: 'center',
     },
     touchableValid: {
-      backgroundColor: COLOR_3,
+      backgroundColor: COLOR_4,
     },
     touchableInvalid: {
-      backgroundColor: COLOR_4,
+      backgroundColor: COLOR_5,
     },
     text: {
       color: COLOR_3,
@@ -134,7 +134,7 @@ export default cairn({
       justifyContent:'center',
     },
     textValid: {
-      color: COLOR_4,
+      color: COLOR_1,
       fontWeight: FONT_WEIGHT_HUGE,
     },
     textInvalid: {

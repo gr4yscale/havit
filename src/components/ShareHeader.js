@@ -1,4 +1,6 @@
 import React from 'react-native';
+import style, { COLOR_1, COLOR_5, FONT_SIZE_TITLE } from '../stylesheets/styles'
+import HVTCard from './HVTCard'
 
 let {
   Component,
@@ -21,57 +23,63 @@ class ShareHeader extends Component {
   render() {
     const { shareFormChanged } = this.props;
     return (
-      <View style={styles.form}>
-      <TextInput
-          style={styles.inputs}
-          placeholder={"URL"}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          onChangeText={(txt) => shareFormChanged('url',txt)}
-          ref={(component)=>this.urlInput = component}
-      />
-      <TextInput
-          style={styles.inputs}
-          placeholder={"Title"}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          onChangeText={(txt) => shareFormChanged('title',txt)}
-          ref={(component)=>this.titleInput = component}
-      />
-      <TextInput
-          style={styles.inputs}
-          placeholder={"Comment"}
-          autoCapitalize={'none'}
-          multiLine={true}
-          numberOfLines={6}
-          onChangeText={(txt) => shareFormChanged('comment',txt)}
-          ref={(component)=>this.commentInput = component}
-      />
+      <View style={styles.formContainer}>
+        <HVTCard
+            extraStyle={styles.container}
+        >
+          <TextInput
+              {...style('text.heading', [styles.inputs])}
+              placeholder={"URL"}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              placeholderTextColor={COLOR_1}
+              onChangeText={(txt) => shareFormChanged('url',txt)}
+              ref={(component)=>this.urlInput = component}
+          />
+          <TextInput
+              {...style('text.heading', [styles.inputs])}
+              placeholder={"Title"}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              placeholderTextColor={COLOR_1}
+              onChangeText={(txt) => shareFormChanged('title',txt)}
+              ref={(component)=>this.titleInput = component}
+          />
+          <TextInput
+              {...style('text.heading', [styles.inputs])}
+              placeholder={"Comment"}
+              autoCapitalize={'none'}
+              multiLine={true}
+              numberOfLines={6}
+              placeholderTextColor={COLOR_1}
+              onChangeText={(txt) => shareFormChanged('comment',txt)}
+              ref={(component)=>this.commentInput = component}
+          />
+        </HVTCard>
       </View>
     )
   }
 }
 
 let styles = StyleSheet.create({
-  form: {
-    backgroundColor:'transparent',
-    marginTop: 4,
-    marginBottom: 20,
+  formCard: {
+    flex: 1,
+  },
+  formContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 8,
     marginLeft: 8,
-    marginRight: 8,
+    marginRight: 3,
   },
   inputs: {
-    flex:1,
-    fontSize:13,
     height: 40,
-    borderColor: 'transparent',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 4,
-    borderWidth: 0,
-    paddingLeft: 6,
-    paddingRight: 6,
-    marginTop: 14,
-    marginBottom: 0,
+    borderBottomColor: COLOR_5,
+    borderBottomWidth: 1,
+    marginLeft: 10,
+    padding: 8,
+    color: COLOR_1,
+    fontSize: FONT_SIZE_TITLE,
   },
 })
 

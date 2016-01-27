@@ -1,6 +1,7 @@
 import React from 'react-native'
 import Accordion from '../../node_modules/react-native-accordion'
 import {Icon} from '../../node_modules/react-native-icons'
+import { COLOR_5 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -210,7 +211,6 @@ let styles = StyleSheet.create({
     paddingBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 6,
   },
   contentText: {
     flexDirection: 'column',
@@ -254,7 +254,7 @@ let styles = StyleSheet.create({
     paddingTop: 4,
   },
   statusIndicator: {
-    color:'#2ABFD4',
+    color:COLOR_5,
     paddingRight:4,
     fontWeight:'800',
   },

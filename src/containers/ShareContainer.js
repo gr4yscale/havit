@@ -6,7 +6,7 @@ import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import {Icon} from '../../node_modules/react-native-icons'
-import style from '../stylesheets/styles'
+import style, { COLOR_3 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -119,9 +119,9 @@ class ShareContainer extends Component {
   handleCellPressed() {
     //TOFIX: debug
     return
-    this.setState({
-      bgColor: incrementColor(this.state.bgColor, 2000),
-    })
+    // this.setState({
+    //   bgColor: incrementColor(this.state.bgColor, 2000),
+    // })
   }
 
   renderCloseButton() {
@@ -158,7 +158,7 @@ class ShareContainer extends Component {
       shareButtonTextStyle = 'buttonBottomBar.text buttonBottomBar.textValid'
     }
     return (
-      <View style={[styles.container, {backgroundColor:this.state.bgColor}]}>
+      <View style={[styles.container]}>
         <FriendList
             {...this.props}
             header={this.renderHeader.bind(this)}
@@ -186,6 +186,7 @@ let styles = StyleSheet.create({
     height:deviceHeight - 66,
     paddingTop:50,
     paddingBottom: 60,
+    backgroundColor: COLOR_3,
   },
   closeIcon: {
     position:'absolute',
