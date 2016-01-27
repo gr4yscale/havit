@@ -94,9 +94,6 @@ class Root extends React.Component {
 
   refreshData() {
     store.dispatch(serverActions.fetchLinksReceived())
-    .then(() => {
-      store.dispatch(serverActions.fetchLinksSent())
-    })
   }
 
   render () {

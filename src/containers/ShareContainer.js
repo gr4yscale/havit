@@ -93,12 +93,12 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
-    const {shareLink, postAllIftttActions} = this.props
+    const {shareLink, postAllIftttActions, fetchLinksSent } = this.props
 
     Promise.all([shareLink(), postAllIftttActions()])
     .then(() => {
-      console.log('Havit share + IFTTT action requests all completed')
       this.close()
+      fetchLinksSent()
     })
     .catch((error) => {
       console.log('There was an error sharing the love:', error)
@@ -226,6 +226,7 @@ export default connect(
       friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
       shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
       postAllIftttActions: () => dispatch(shareActions.postAllIftttActions()),
+      fetchLinksSent: () => dispatch(serverActions.fetchLinksSent()),
     }
   }
 )(ShareContainer)
