@@ -42,7 +42,7 @@ export default class Parse {
 
   getMyLinks() {
     try {
-      let body = `where={"recipient_ids": {"$in": ["${this.userObjectId}"]}}`
+      let body = `where={"recipient_ids": {"$in": ["${this.userObjectId}"]}}&order=-createdAt`
       let encodedBody = encodeURIComponent(body)
       let url = `/1/classes/Link?${encodedBody}`
       return this.fetchFromParse('GET', url)
@@ -53,7 +53,7 @@ export default class Parse {
 
   getSentLinks() {
     try {
-      let body = `where={"sender_id":"${this.userObjectId}"}`
+      let body = `where={"sender_id":"${this.userObjectId}"}&order=-createdAt`
       let encodedBody = encodeURIComponent(body)
       let url = `/1/classes/Link?${encodedBody}`
       return this.fetchFromParse('GET', url)
