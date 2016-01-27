@@ -78,5 +78,6 @@ dependencies {
     compile project(':react-native-material-kit')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-icons')
+    compile project(':react-native-activity-android')
     compile "com.facebook.react:react-native:0.18.+"
 }
