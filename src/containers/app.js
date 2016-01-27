@@ -4,8 +4,8 @@ import LinksSentContainer from './LinksSentContainer'
 import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
 import FriendAddContainer from './FriendAddContainer'
-import CustomScrollableTabView from '../components/CustomScrollableTabView'
-import CustomTabBar from '../components/CustomTabBar'
+import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
+import TabBar from '../components/TabBar'
 import {Router, Route, Schema} from '../../node_modules/react-native-router-flux'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import ExNavigator from '../../node_modules/@exponent/react-native-navigator';
@@ -20,15 +20,12 @@ class MainContainer extends React.Component {
 
   render() {
     return (
-      <CustomScrollableTabView style={{marginTop:0}}
-          tabBarUnderlineColor={'#FF3B7F'}
-          tabBarActiveTextColor={'#FF3B7F'}
-          renderTabBar={() => <CustomTabBar onNavIconPress={() => Actions.Intro()} />}
-      >
-        <LinksFeedContainer tabLabel="Inbox" />
-        <LinksSentContainer tabLabel="Inbox" />
-        <FriendAddContainer tabLabel="Friends" />
-      </CustomScrollableTabView>
+      <ScrollableTabView initialPage={0} renderTabBar={() => <TabBar />}>
+        <LinksFeedContainer tabLabel="ion|home" />
+        <LinksSentContainer tabLabel="ion|paper-airplane" />
+        <FriendAddContainer tabLabel="ion|person-stalker" />
+        <IntroContainer tabLabel="ion|gear-a" />
+      </ScrollableTabView>
     )
   }
 }
