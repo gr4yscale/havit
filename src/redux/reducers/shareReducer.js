@@ -21,6 +21,8 @@ function shareFormFields(state = initialState, action) {
 }
 
 function shareDataIsValid(state) {
+  if (!state.selectedFriends) return false
+
   let atLeastOneFriendSelected = false
   for (let i = 0; i < state.selectedFriends.length; i++) { //TOFIX: using yucky syntax until Symbol ES6 polyfill is working on Android
     let friend = state.selectedFriends[i]
