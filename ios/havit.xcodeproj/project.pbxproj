@@ -44,6 +44,9 @@
 		29A1ED771C3D955A008CF2C2 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 296FA80A1C3A050700EF4408 /* ionicons.ttf */; };
 		29A1ED781C3D956B008CF2C2 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296FA8081C3A04B100EF4408 /* libReactNativeIcons.a */; };
 		29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A904EF1C332CFB0055FFEF /* libRCTMaterialKit.a */; };
+		29C684DB1C5A291900DD399D /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C684D81C5A291900DD399D /* HockeySDK.framework */; };
+		29C684DC1C5A291900DD399D /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 29C684DA1C5A291900DD399D /* HockeySDKResources.bundle */; };
+		29C684E01C5A365200DD399D /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C684DF1C5A365200DD399D /* HockeySDK.framework */; };
 		29F9F6141C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
 		29F9F6151C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
 		29F9F6E81C4DC39600158785 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29281E231C4D5BA300307F74 /* libCodePush.a */; };
@@ -221,6 +224,9 @@
 		29A1ED721C3D842A008CF2C2 /* HVTShareExtensionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVTShareExtensionStorage.h; sourceTree = "<group>"; };
 		29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVTShareExtensionStorage.m; sourceTree = "<group>"; };
 		29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
+		29C684D81C5A291900DD399D /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		29C684DA1C5A291900DD399D /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		29C684DF1C5A365200DD399D /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		29F9F6131C4D60AC00158785 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		36D3D0BA5BDD4C909603D04A /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -245,6 +251,7 @@
 				296FA8091C3A04BD00EF4408 /* libReactNativeIcons.a in Frameworks */,
 				29A904F61C332D340055FFEF /* libRCTMaterialKit.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				29C684DB1C5A291900DD399D /* HockeySDK.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
@@ -269,6 +276,7 @@
 				29A1ED361C3D632C008CF2C2 /* libRCTGeolocation.a in Frameworks */,
 				29A1ED371C3D632C008CF2C2 /* libRCTImage.a in Frameworks */,
 				29A1ED381C3D632C008CF2C2 /* libRCTLinking.a in Frameworks */,
+				29C684E01C5A365200DD399D /* HockeySDK.framework in Frameworks */,
 				29A1ED391C3D632C008CF2C2 /* libRCTNetwork.a in Frameworks */,
 				29A1ED3A1C3D632C008CF2C2 /* libRCTSettings.a in Frameworks */,
 				29A1ED3B1C3D632C008CF2C2 /* libRCTText.a in Frameworks */,
@@ -423,6 +431,40 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29C684C51C5A27EF00DD399D /* HockeyApp */ = {
+			isa = PBXGroup;
+			children = (
+				29C684DE1C5A365200DD399D /* HockeySDKCrashOnlyExtension */,
+				29C684D71C5A291900DD399D /* HockeySDK.embeddedframework */,
+			);
+			name = HockeyApp;
+			sourceTree = "<group>";
+		};
+		29C684D71C5A291900DD399D /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				29C684D81C5A291900DD399D /* HockeySDK.framework */,
+				29C684D91C5A291900DD399D /* Resources */,
+			);
+			path = HockeySDK.embeddedframework;
+			sourceTree = "<group>";
+		};
+		29C684D91C5A291900DD399D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				29C684DA1C5A291900DD399D /* HockeySDKResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		29C684DE1C5A365200DD399D /* HockeySDKCrashOnlyExtension */ = {
+			isa = PBXGroup;
+			children = (
+				29C684DF1C5A365200DD399D /* HockeySDK.framework */,
+			);
+			path = HockeySDKCrashOnlyExtension;
+			sourceTree = "<group>";
+		};
 		29E88E9F1C3FD87C00C99D7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +518,7 @@
 				296FA80C1C3A0CA100EF4408 /* assets */,
 				13B07FAE1A68108700A75B9A /* havit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				29C684C51C5A27EF00DD399D /* HockeyApp */,
 				00E356EF1AD99517003FC87E /* havitTests */,
 				29A1ED261C3D5211008CF2C2 /* ShareExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -790,6 +833,7 @@
 				29F9F6141C4D60AC00158785 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				29C684DC1C5A291900DD399D /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +960,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -943,6 +991,10 @@
 				CODE_SIGN_ENTITLEMENTS = havit/havit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -971,6 +1023,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDKCrashOnlyExtension",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1007,6 +1063,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDKCrashOnlyExtension",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

@@ -13,6 +13,10 @@
 #import "HVTShareExtensionStorage.h"
 #import "CodePush.h"
 
+@import HockeySDK;
+
+static BOOL didSetupHockeySDK = NO;
+
 @implementation RootShareViewController
 
 RCT_EXPORT_MODULE()
@@ -44,6 +48,15 @@ RCT_EXPORT_MODULE()
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(completeShareExtensionRequest)
                                                name:@"completeShareExtensionRequestNotification" object:nil];
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  if (!didSetupHockeySDK) {
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"[redacted]"];
+    [[BITHockeyManager sharedHockeyManager].crashManager setCrashManagerStatus: BITCrashManagerStatusAutoSend];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+  }
 }
 
 - (void)receiveShareExtensionDataIfAvailable {
