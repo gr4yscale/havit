@@ -118,6 +118,8 @@ export default cairn({
       backgroundColor: COLOR_5,
       alignSelf: 'stretch',
       justifyContent: 'center',
+      padding: 0,
+      margin: 0,
     },
     touchableValid: {
       backgroundColor: COLOR_4,
@@ -132,6 +134,7 @@ export default cairn({
       fontWeight: FONT_WEIGHT_HEADING,
       textAlign: 'center',
       justifyContent:'center',
+      backgroundColor: 'rgba(0,0,0,0)',
     },
     textValid: {
       color: COLOR_1,
@@ -139,6 +142,20 @@ export default cairn({
     },
     textInvalid: {
       color: COLOR_3,
+    },
+    progressBarAndroid: {
+      position: 'absolute',
+      bottom: 43,
+      left: 0,
+      margin: 0,
+      padding: 0,
+      width: deviceWidth,
+      height: 18,
+      props: {
+        styleAttr: 'Horizontal',
+        indeterminate: true,
+        color: COLOR_5,
+      },
     },
   },
 

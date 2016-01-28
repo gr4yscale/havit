@@ -18,6 +18,7 @@ let {
   NativeAppEventEmitter,
   NativeModules,
   Platform,
+  ProgressBarAndroid,
 } = React
 
 let deviceHeight = Dimensions.get('window').height
@@ -92,7 +93,7 @@ class ShareContainer extends Component {
   }
 
   shareButtonPressed() {
-    if (!this.props.shareDataValid) return
+    if (!this.props.share.shareDataValid) return
 
     const {shareLink, postAllIftttActions, fetchLinksSent } = this.props
 
@@ -149,11 +150,16 @@ class ShareContainer extends Component {
     )
   }
 
+  renderAndroidProgressBar() {
+    if (Platform.OS === 'android' && this.props.share.sharing)
+      return (<ProgressBarAndroid {...style('buttonBottomBar.progressBarAndroid')} />)
+  }
+
   render() {
 
     let shareButtonTouchableStyle = 'buttonBottomBar.touchable buttonBottomBar.touchableInvalid'
     let shareButtonTextStyle = 'buttonBottomBar.text buttonBottomBar.textInvalid'
-    if (this.props.shareDataValid === true) {
+    if (this.props.share.shareDataValid) {
       shareButtonTouchableStyle = 'buttonBottomBar.touchable buttonBottomBar.touchableValid'
       shareButtonTextStyle = 'buttonBottomBar.text buttonBottomBar.textValid'
     }
@@ -165,16 +171,20 @@ class ShareContainer extends Component {
             onCellPressed={() => this.handleCellPressed()}
         />
 
+        {this.renderAndroidProgressBar()}
+
         <View {...style('buttonBottomBar.container')}>
           <TouchableOpacity
               onPress={() => this.shareButtonPressed()}
               {...style(shareButtonTouchableStyle)}
-              activeOpacity={this.props.shareDataValid ? 0 : 0.5}
+              activeOpacity={this.props.share.shareDataValid ? 0 : 0.5}
           >
             <Text {...style(shareButtonTextStyle)}>Share!</Text>
           </TouchableOpacity>
         </View>
+
         {this.renderCloseButton()}
+
       </View>
     );
   }
@@ -205,7 +215,7 @@ export default connect(
       titleRedux: state.share.form.title,
       urlRedux: state.share.form.url,
       commentRedux: state.share.form.comment,
-      shareDataValid: state.share.shareDataValid,
+      share: state.share,
     }
   },
   (dispatch) => {
