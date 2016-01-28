@@ -27,16 +27,14 @@ export function signup() {
 
     return parse.signup(data)
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
         dispatch(signupSuccess(json))
-        dispatch(login(data.username, data.password))
+        return dispatch(login(data.username, data.password))
       } else {
-        dispatch(signupFailure(JSON.parse(response._bodyInit)))
+        dispatch(signupFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(signupFailure(error))
     })
   }
 }
@@ -74,25 +72,20 @@ export function login(username, password) {
       password,
     })
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        // TOFIX: reset token on local storage / log out previous user
-
         // TOFIX: yucky place for this, but just getting android functional for now, will move out later
         if (Platform.OS === 'ios') {
           updateShareExtensionStoreWithCurrentUser(json)
         }
-        dispatch(loginSuccess(json))
+        return dispatch(loginSuccess(json))
       } else {
-        dispatch(loginFailure(JSON.parse(response._bodyInit)))
+        dispatch(loginFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(loginFailure(error))
     })
   }
 }
-
 
 
 // LINKS
@@ -124,15 +117,13 @@ export function fetchLinksReceived() {
     let parse = configuredParse(getState());
     return parse.getMyLinks()
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(linksReceivedSuccess(json))
+        return dispatch(linksReceivedSuccess(json))
       } else {
-        dispatch(linksReceivedFailure(JSON.parse(response._bodyInit)))
+        dispatch(linksReceivedFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(linksReceivedFailure(error))
     })
   }
 }
@@ -151,15 +142,13 @@ export function fetchLinksSent() {
     let parse = configuredParse(getState());
     return parse.getSentLinks()
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(linksSentSuccess(json))
+        return dispatch(linksSentSuccess(json))
       } else {
-        dispatch(linksSentFailure(JSON.parse(response._bodyInit)))
+        dispatch(linksSentFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(linksSentFailure(error))
     })
   }
 }
@@ -194,8 +183,8 @@ export function fetchFriends() {
     let parse = configuredParse(getState());
     return parse.getFriends()
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
         dispatch(friendsSuccess(json))
         dispatch(resetSelectedFriends(json.results)) // TOFIX: too imperitive
 
@@ -203,13 +192,11 @@ export function fetchFriends() {
         if (Platform.OS === 'ios') {
           updateShareExtensionStoreWithFriends(json)
         }
+        return Promise.resolve()
       } else {
-        dispatch(friendsFailure(JSON.parse(response._bodyInit)))
+        dispatch(friendsFailure(json.error))
+        return Promise.reject(json.error)
       }
-      return response;
-    })
-    .catch((error) => {
-      dispatch(friendsFailure(error))
     })
   }
 }
@@ -229,15 +216,13 @@ export function getAllUsers() {
     let parse = new Parse()
     return parse.getAllUsers()
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(getAllUsersSuccess(json))
+        return dispatch(getAllUsersSuccess(json))
       } else {
-        dispatch(getAllUsersFailure(JSON.parse(response._bodyInit)))
+        dispatch(getAllUsersFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(getAllUsersFailure(error))
     })
   }
 }
@@ -254,15 +239,13 @@ export function fetchUserByEmail(email) {
     let parse = new Parse()
     return parse.getUserByEmail(email)
     .then((response) => {
+      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(getUserByEmailSuccess(json))
+        return dispatch(getUserByEmailSuccess(json))
       } else {
-        dispatch(getUserByEmailFailure(JSON.parse(response._bodyInit)))
+        dispatch(getUserByEmailFailure(json.error))
+        return Promise.reject(json.error)
       }
-    })
-    .catch((error) => {
-      dispatch(getUserByEmailFailure(error))
     })
   }
 }
@@ -296,16 +279,14 @@ export function addFriend(email) {
 
       return parse.addFriendToMe(friend.objectId)
       .then((response) => {
+        let json = JSON.parse(response._bodyInit)
         if (response.status === 200 || response.status === 201) {
-          let json = JSON.parse(response._bodyInit)
-          dispatch(addFriendSuccess(json))
+          return dispatch(addFriendSuccess(json))
         } else {
-          dispatch(addFriendFailure(JSON.parse(response._bodyInit)))
+          dispatch(addFriendFailure(json.error))
+          return Promise.reject(json.error)
         }
       })
-    })
-    .catch((error) => {
-      dispatch(addFriendFailure(error))
     })
   }
 }

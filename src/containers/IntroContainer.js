@@ -18,6 +18,7 @@ let {
   Dimensions,
   Animated,
   Easing,
+  Alert,
 } = React
 
 let deviceHeight = Dimensions.get('window').height
@@ -97,6 +98,9 @@ class IntroContainer extends Component {
                 Animated.timing(this.state.animation, {toValue: 100, duration: 250, easing: Easing.easeOutCubic }).start()
               }
               authSignUpButtonPressed()
+              .catch((error) => {
+                Alert.alert('Error Signing Up!', `The error returned from the server was:\n\n${error}`)
+              })
               dismissKeyboard()
             }}
             extraTouchableStyle={styles.buttons}
@@ -129,6 +133,9 @@ class IntroContainer extends Component {
                 Animated.timing(this.state.animation, {toValue: -100, duration: 250 }).start()
               }
               authSignInButtonPressed()
+              .catch((error) => {
+                Alert.alert('Error Signing In!', `The error returned from the server was:\n\n${error}`)
+              })
               dismissKeyboard()
             }}
             extraTouchableStyle={[styles.buttons, {marginTop: 8}]}
