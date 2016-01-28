@@ -10,7 +10,9 @@
 #import "AppDelegate.h"
 #import "RCTRootView.h"
 #import "CodePush.h"
-        
+
+@import HockeySDK;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -34,6 +36,12 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (void)setupHockey {
+  [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"[redacted]"];
+  [[BITHockeyManager sharedHockeyManager].crashManager setCrashManagerStatus: BITCrashManagerStatusAutoSend];
+  [[BITHockeyManager sharedHockeyManager] startManager];
 }
 
 @end
