@@ -1,36 +1,20 @@
 import React from 'react-native'
-import LinksFeedContainer from './LinksFeedContainer'
-import LinksSentContainer from './LinksSentContainer'
+import MainContainer from './MainContainer'
 import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
 import FriendAddContainer from './FriendAddContainer'
-import ScrollableTabView from '../../node_modules/react-native-scrollable-tab-view'
-import TabBar from '../components/TabBar'
 import {Router, Route, Schema} from '../../node_modules/react-native-router-flux'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import ExNavigator from '../../node_modules/@exponent/react-native-navigator';
 
 let {
+  Component,
   Navigator,
   Text,
   TouchableOpacity,
 } = React
 
-class MainContainer extends React.Component {
-
-  render() {
-    return (
-      <ScrollableTabView initialPage={0} renderTabBar={() => <TabBar />}>
-        <LinksFeedContainer tabLabel="ion|home" />
-        <LinksSentContainer tabLabel="ion|paper-airplane" />
-        <FriendAddContainer tabLabel="ion|person-stalker" />
-        <IntroContainer tabLabel="ion|gear-a" />
-      </ScrollableTabView>
-    )
-  }
-}
-
-class App extends React.Component {
+class App extends Component {
 
   componentDidMount() {
     if (this.props.lastIntentUrlReceived) {
@@ -64,7 +48,9 @@ class App extends React.Component {
         <Route name="MainContainer" component={MainContainer} title="Inbox" type="replace" />
         <Route name="Share" component={ShareContainer} title="Share" type="replace" />
         <Route name="Friends" component={FriendAddContainer} title="Friends" />
-        <Route name="Intro" component={IntroContainer} title="Intro" type="replace" renderLeftButton={this.createRightButton}  initial={true} />
+        <Route name="Intro" component={IntroContainer} title="Intro" type="replace"
+            initial={true}
+        />
       </Router>
     )
   }
