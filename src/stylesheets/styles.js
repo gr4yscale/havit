@@ -174,6 +174,51 @@ export default cairn({
     },
   },
 
+  tabBar: {
+    props: {
+      activeIconIndicatorOffset:  41,
+    },
+    tab: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: 0,
+    },
+    tabs: {
+      height: 64,
+      flexDirection: 'row',
+      paddingTop: 20,
+      borderWidth: 1,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomColor: 'rgba(0,0,0,0.05)',
+      paddingBottom: 4,
+      backgroundColor: COLOR_4,
+      justifyContent: 'center',
+    },
+    icon: {
+      width: 30, // be sure to change constant in TabBar.js
+      height: 30,
+      position: 'absolute',
+      top: 0,
+      left: 32,
+      props: {
+        size: 30,
+        color: COLOR_5,
+      },
+    },
+    tabDotStyle: {
+      position: 'absolute',
+      width: 6,
+      height: 6,
+      borderRadius: 3,
+      marginLeft: 3,
+      backgroundColor: COLOR_3,
+      bottom: 6,
+    },
+  },
+
   // closeIcon: {
   //   position:'absolute',
   //   left: 0,
