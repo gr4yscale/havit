@@ -14,11 +14,6 @@ let {
 
 class MainContainer extends Component {
 
-  shouldComponentUpdate() {
-    console.log('MainContainer: shouldComponentUpdate')
-    return true
-  }
-
   render() {
     return (
       <ScrollableTabView

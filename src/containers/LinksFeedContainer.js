@@ -33,8 +33,8 @@ class LinksFeedContainer extends Component {
     this.cells = {}
   }
 
-  componentDidMount() {
-    console.log('LinksFeedContainer componentDidMount')
+  shouldComponentUpdate(nextProps) {
+    return nextProps.links != this.props.links
   }
 
   handleLinkCellTapped(rowID) {
