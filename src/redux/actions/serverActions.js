@@ -291,6 +291,8 @@ export function addFriend(email) {
   }
 }
 
+export const resetRequestCount = createAction('RESET_REQUEST_COUNT')
+
 // UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:
 //////////////////////////////////////////////////////
 

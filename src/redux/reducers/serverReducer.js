@@ -1,11 +1,21 @@
 import * as actionTypes from '../actionTypes'
 import _ from 'lodash'
 
-// TOFIX: initial state
+const initialState = {
+  requestCount: 0,
+}
 
 // TOFIX: handle error cases
 
-export default function server(state = {}, action) {
+function requestCount(state, increment) {
+  if (increment) {
+    return state.requestCount + 1
+  } else {
+    return state.requestCount - 1
+  }
+}
+
+export default function server(state = initialState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
       return Object.assign({}, state, {
@@ -14,7 +24,7 @@ export default function server(state = {}, action) {
       })
     case actionTypes.LINKS_RECEIVED_REQUEST:
       return Object.assign({}, state, {
-        linksFetching: true,
+        requestCount: requestCount(state, true),
       })
     case actionTypes.LINKS_RECEIVED_SUCCESS:
       let friends = state.friends
@@ -31,31 +41,36 @@ export default function server(state = {}, action) {
       )
       return Object.assign({}, state, {
         links,
-        linksFetching: false,
+        requestCount: requestCount(state, false),
+      })
+    case 'LINKS_SENT_REQUEST':
+      return Object.assign({}, state, {
+        requestCount: requestCount(state, true),
       })
     case 'LINKS_SENT_SUCCESS':
       return Object.assign({}, state, {
         linksSent : action.payload.results,
+        requestCount: requestCount(state, false),
       })
     case actionTypes.FRIENDS_REQUEST:
       return Object.assign({}, state, {
         friends: [],
-        friendsFetching: true,
+        requestCount: requestCount(state, true),
       })
     case actionTypes.FRIENDS_SUCCESS:
       return Object.assign({}, state, {
         friends: action.response.results,
-        friendsFetching: false,
+        requestCount: requestCount(state, false),
       })
     case actionTypes.USERS_GET_ALL_REQUEST:
       return Object.assign({}, state, {
         users: [],
-        usersFetching: true,
+        requestCount: requestCount(state, true),
       })
     case actionTypes.USERS_GET_ALL_SUCCESS:
       return Object.assign({}, state, {
         users: action.response.results,
-        usersFetching: false,
+        requestCount: requestCount(state, false),
       })
 
     // TOFIX: handle get_user_by_email_request/fail
@@ -65,6 +80,10 @@ export default function server(state = {}, action) {
           ...state.users,
           action.response.results[0],
         ],
+      })
+    case 'RESET_REQUEST_COUNT':
+      return Object.assign({}, state, {
+        requestCount: 0,
       })
 
     default:

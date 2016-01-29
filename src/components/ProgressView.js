@@ -50,7 +50,6 @@ class ProgressView extends Component {
       <View style={styles.container}>
         <Animated.View
             style={[styles.animatedIndicator, scaleStyle, positionStyle]}
-            shouldRasterizeIOS={true}
         />
       </View>
     )
