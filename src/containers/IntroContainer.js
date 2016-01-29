@@ -157,7 +157,7 @@ class IntroContainer extends Component {
     return (
       <Animated.View style={[styles.backButtonWrapper, animationStyle]}>
         <HVTIconButton
-            iconName="ion|android-arrow-back"
+            iconName="ion|android-close"
             size={30}
             color={COLOR_1}
             onPress={() => {

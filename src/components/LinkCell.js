@@ -1,7 +1,7 @@
 import React from 'react-native'
 import Accordion from '../../node_modules/react-native-accordion'
 import {Icon} from '../../node_modules/react-native-icons'
-import { COLOR_5 } from '../stylesheets/styles'
+import { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -74,17 +74,17 @@ class LinkCell extends Component {
 
     let backgroundColor = this.state.backgroundColor.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#FFFFFF','#444444'],
+      outputRange: [COLOR_1, COLOR_4],
     })
 
     let textColor = this.state.backgroundColor.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#000','#FFFFFF'],
+      outputRange: [COLOR_2, COLOR_1],
     })
 
     let secondaryTextColor = this.state.backgroundColor.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#666666','#FFFFFF'],
+      outputRange: [COLOR_5, COLOR_1],
     })
 
     return (
@@ -115,9 +115,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|earth'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -127,9 +127,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|android-share'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -139,9 +139,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|android-plane'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -151,9 +151,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|android-restaurant'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -163,9 +163,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|android-bar'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -175,9 +175,9 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|ios-snowy'}
+                  name={'ion|android-cart'}
                   size={32}
-                  color={'#FFFFFF'}
+                  color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
@@ -220,8 +220,8 @@ let styles = StyleSheet.create({
   hidden: {
     flex: 1,
     flexDirection: 'row',
-    height: 54,
-    backgroundColor: '#777777',
+    height: 48,
+    backgroundColor: COLOR_5,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
@@ -239,16 +239,16 @@ let styles = StyleSheet.create({
     fontWeight: '300',
     fontSize: 12,
     paddingTop: 4,
-    color: '#FFFFFF',
+    color: COLOR_1,
   },
   titleText: {
-    color: '#000000',
+    color: COLOR_2,
     fontWeight: '600',
     fontSize: 18,
     marginTop: 4,
   },
   urlText: {
-    color: '#666666',
+    color: COLOR_5,
     fontWeight: '200',
     fontSize: 12,
     paddingTop: 4,

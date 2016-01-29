@@ -29,6 +29,7 @@ class SignUpForm extends Component {
               blurOnSubmit={false}
               placeholder={"Name"}
               placeholderTextColor={COLOR_1}
+              underlineColorAndroid="transparent"
               ref={(component) => this.textInputName = component}
               onChangeText={(value) => signUpFormChanged({field: 'displayName', value})}
           />
@@ -40,6 +41,7 @@ class SignUpForm extends Component {
               blurOnSubmit={false}
               placeholder={"Email"}
               placeholderTextColor={COLOR_1}
+              underlineColorAndroid="transparent"
               ref={(component) => this.textInputEmail = component}
               onChangeText={(value) => signUpFormChanged({field: 'email', value})}
           />
@@ -51,6 +53,7 @@ class SignUpForm extends Component {
               blurOnSubmit={false}
               placeholder={"Username"}
               placeholderTextColor={COLOR_1}
+              underlineColorAndroid="transparent"
               ref={(component) => this.textInputUsername = component}
               onChangeText={(value) => signUpFormChanged({field: 'username', value})}
           />
@@ -62,6 +65,7 @@ class SignUpForm extends Component {
               blurOnSubmit={false}
               placeholder={"Password"}
               placeholderTextColor={COLOR_1}
+              underlineColorAndroid="transparent"
               secureTextEntry={true}
               ref={(component) => this.textInputPassword = component}
               onChangeText={(value) => signUpFormChanged({field: 'password', value})}
@@ -87,11 +91,10 @@ let styles = StyleSheet.create({
   },
   inputs: {
     height: 40,
-    borderBottomColor: COLOR_5,
-    borderBottomWidth: 1,
     marginLeft: 10,
     padding: 8,
     color: COLOR_1,
+    backgroundColor: COLOR_5,
     fontSize: FONT_SIZE_TITLE,
   },
 })

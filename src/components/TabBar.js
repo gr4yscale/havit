@@ -1,6 +1,6 @@
 import { Icon } from '../../node_modules/react-native-icons'
 import React from 'react-native'
-import style from '../stylesheets/styles'
+import style, {COLOR_5} from '../stylesheets/styles'
 
 let {
   Component,
@@ -26,10 +26,10 @@ class TabBar extends Component {
 
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} {...style('tabBar.tab')}>
-        <Icon name={name} {...style('tabBar.icon')}
+        <Icon name={name} style={style('tabBar.icon').style} size={style('tabBar.icon').size} color={COLOR_5}
             ref={(icon) => { this.selectedTabIcons[page] = icon }}
         />
-        <Icon name={name} {...style('tabBar.icon')}
+        <Icon name={name} style={style('tabBar.icon').style} size={style('tabBar.icon').size} color={COLOR_5}
             ref={(icon) => { this.unselectedTabIcons[page] = icon }}
         />
       </TouchableOpacity>
