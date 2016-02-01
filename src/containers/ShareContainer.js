@@ -62,9 +62,11 @@ class ShareContainer extends Component {
     shareFormChanged('title', title)
   }
 
-  shouldComponentUpdate() {
-    console.log('sharecontainer: shouldComponentUpdate')
-    return true
+
+  shouldComponentUpdate(nextProps) {
+    let val = nextProps.share.sharing != this.props.share.sharing ||
+      nextProps.share.selectedFriends != this.props.share.selectedFriends
+    return val
   }
 
   componentWillUnmount() {
