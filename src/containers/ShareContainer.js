@@ -5,8 +5,9 @@ import * as shareActions from '../redux/actions/shareActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
+import ProgressView from '../components/ProgressView'
 import {Icon} from '../../node_modules/react-native-icons'
-import style, { COLOR_3 } from '../stylesheets/styles'
+import style, { COLOR_1, COLOR_3 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -150,9 +151,9 @@ class ShareContainer extends Component {
     )
   }
 
-  renderAndroidProgressBar() {
-    if (Platform.OS === 'android' && this.props.share.sharing)
-      return (<ProgressBarAndroid {...style('buttonBottomBar.progressBarAndroid')} />)
+  renderProgressView() {
+    if (this.props.share.sharing)
+      return (<ProgressView animate={true} extraContainerStyle={styles.progressViewContainer} indicatorColor={COLOR_1} />)
   }
 
   render() {
@@ -171,8 +172,6 @@ class ShareContainer extends Component {
             onCellPressed={() => this.handleCellPressed()}
         />
 
-        {this.renderAndroidProgressBar()}
-
         <View {...style('buttonBottomBar.container')}>
           <TouchableOpacity
               onPress={() => this.shareButtonPressed()}
@@ -181,6 +180,7 @@ class ShareContainer extends Component {
           >
             <Text {...style(shareButtonTextStyle)}>Share!</Text>
           </TouchableOpacity>
+          {this.renderProgressView()}
         </View>
 
         {this.renderCloseButton()}
@@ -204,6 +204,9 @@ let styles = StyleSheet.create({
     top: 0,
     width: 30,
     height: 30,
+  },
+  progressViewContainer: {
+    top: 0,
   },
 })
 
