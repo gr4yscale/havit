@@ -18,7 +18,7 @@ let stateKeysToPersist = ['entities']
 
 engine = decorators.filter(engine, stateKeysToPersist)
 
-let actionsAllowedToSave = [LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, 'LINKS_SENT_SUCCESS']
+let actionsAllowedToSave = [LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, 'LINKS_SENT_SUCCESS', 'AUTH_LOGOUT']
 const persistence = storage.createMiddleware(engine, [], actionsAllowedToSave)
 
 const logger = createLogger()

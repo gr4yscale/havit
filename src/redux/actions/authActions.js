@@ -11,6 +11,7 @@ const authModeSwitchToSignUp = createAction('AUTH_MODE_SWITCH_TO_SIGN_UP')
 export const authModeReset = createAction('AUTH_MODE_RESET')
 export const signInFormChanged = createAction('AUTH_SIGN_IN_FORM_CHANGED')
 export const signUpFormChanged = createAction('AUTH_SIGN_UP_FORM_CHANGED')
+export const logout = createAction('AUTH_LOGOUT')
 
 export function authSignInButtonPressed() {
   return (dispatch, getState) => { // this is a promise (redux-thunk)

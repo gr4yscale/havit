@@ -57,6 +57,9 @@ export default function auth(state = initialState, action) {
     case 'AUTH_MODE_RESET':
       return initialState
 
+    case 'AUTH_LOGOUT':
+      return Object.assign({}, initialState)
+
     default:
       return state;
   }

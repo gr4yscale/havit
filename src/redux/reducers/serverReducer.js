@@ -86,6 +86,9 @@ export default function server(state = initialState, action) {
         requestCount: 0,
       })
 
+    case 'AUTH_LOGOUT':
+      return Object.assign({}, initialState)
+
     default:
       return state;
   }

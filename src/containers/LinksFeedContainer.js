@@ -1,6 +1,7 @@
 import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
+import {logout} from '../redux/actions/authActions'
 import * as serverActions from '../redux/actions/serverActions'
 import LinkCell from '../components/LinkCell'
 import * as LinkCellActionTypes from '../components/LinkCell'
@@ -90,7 +91,8 @@ class LinksFeedContainer extends Component {
         this.alertNotImplemented()
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction3:
-        this.alertNotImplemented()
+        this.props.dispatch(logout())
+        Actions.Intro()
         break
       default:
         break
@@ -147,6 +149,9 @@ export default connect(
     }
   },
   (dispatch) => {
-    return bindActionCreators(serverActions, dispatch)
+    return {
+      ...bindActionCreators(serverActions, dispatch),
+      dispatch,
+    }
   }
 )(LinksFeedContainer)
