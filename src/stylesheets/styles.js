@@ -110,7 +110,7 @@ export default cairn({
     container: {
       position:'absolute',
       width:deviceWidth,
-      height: 50,
+      height: 53,
       bottom: 0,
     },
     touchable: {
@@ -119,7 +119,7 @@ export default cairn({
       alignSelf: 'stretch',
       justifyContent: 'center',
       padding: 0,
-      margin: 0,
+      marginTop: 3,
     },
     touchableValid: {
       backgroundColor: COLOR_4,

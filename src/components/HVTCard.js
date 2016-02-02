@@ -23,15 +23,14 @@ class HVTCard extends Component {
     }
   }
 
-  handleContentLayout(event) {
-    this.setState({
-      contentWidth: event.nativeEvent.layout.width,
-      contentHeight: event.nativeEvent.layout.height,
-    })
-
-    console.log(this.state)
-  }
-
+  // handleContentLayout(event) {
+  //   this.setState({
+  //     contentWidth: event.nativeEvent.layout.width,
+  //     contentHeight: event.nativeEvent.layout.height,
+  //   })
+  //
+  //   console.log(this.state)
+  // }
   // render() {
   //   return (
   //     <View {...style('container', [this.props.extraStyle])}>

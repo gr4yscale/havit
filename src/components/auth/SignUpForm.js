@@ -1,5 +1,5 @@
 import React from 'react-native'
-import style, {COLOR_1, COLOR_5, FONT_SIZE_TITLE} from '../../stylesheets/styles'
+import style, {COLOR_1, FONT_SIZE_TITLE} from '../../stylesheets/styles'
 import HVTCard from '../HVTCard'
 
 let {
@@ -8,8 +8,6 @@ let {
   View,
   TextInput,
 } = React
-
-export const signUpFormHeight = 450 //TOFIX: hack: this should be measured
 
 class SignUpForm extends Component {
 
@@ -83,7 +81,7 @@ let styles = StyleSheet.create({
     flex:1,
   },
   formContainer: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'row',
     marginTop: 80,
     marginLeft: signupCardMargin / 2,
@@ -94,7 +92,6 @@ let styles = StyleSheet.create({
     marginLeft: 10,
     padding: 8,
     color: COLOR_1,
-    backgroundColor: COLOR_5,
     fontSize: FONT_SIZE_TITLE,
   },
 })

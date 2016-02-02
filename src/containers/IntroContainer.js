@@ -6,10 +6,10 @@ import * as authActions from '../redux/actions/authActions'
 import {authModeSignIn, authModeSignUp} from '../redux/actions/authActions'
 import HVTButton from '../components/HVTButton'
 import HVTIconButton from '../components/HVTIconButton'
-import SignUpForm, {signUpFormHeight} from '../components/auth/SignUpForm'
-import SignInForm, {signInFormHeight} from '../components/auth/SignInForm'
+import SignUpForm from '../components/auth/SignUpForm'
+import SignInForm from '../components/auth/SignInForm'
 
-import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5, FONT_SIZE_TITLE} from '../stylesheets/styles'
+import {COLOR_1, COLOR_2} from '../stylesheets/styles'
 
 let {
   Component,
@@ -17,11 +17,11 @@ let {
   View,
   Dimensions,
   Animated,
-  Easing,
   Alert,
 } = React
 
-let deviceHeight = Dimensions.get('window').height
+const deviceHeight = Dimensions.get('window').height
+const signupCardMargin = 20
 
 class IntroContainer extends Component {
 
@@ -29,7 +29,10 @@ class IntroContainer extends Component {
     super(props)
     this.state = {
       animation: new Animated.Value(0),
-      authMode: 'signin',
+      signUpFormHeight: 0,
+      signInFormHeight: 0,
+      signUpButtonheight: 0,
+      signInButtonHeight: 0,
     }
   }
 
@@ -51,7 +54,12 @@ class IntroContainer extends Component {
       }],
     }
     return (
-      <Animated.View style={[styles.container,animationStyle]}>
+      <Animated.View style={animationStyle}
+          onLayout={(event) => {
+            // console.log('laying out sign up', event.nativeEvent.layout.height)
+            this.setState({signUpFormHeight: event.nativeEvent.layout.height})
+          }}
+      >
         <SignUpForm signUpFormChanged={this.props.signUpFormChanged} />
       </Animated.View>
     )
@@ -66,9 +74,13 @@ class IntroContainer extends Component {
         }),
       }],
     }
-    return (
 
-      <Animated.View style={[styles.container,animationStyle]}>
+    return (
+      <Animated.View style={animationStyle}
+          onLayout={(event) => {
+            this.setState({signInFormHeight: event.nativeEvent.layout.height})
+          }}
+      >
         <SignInForm signInFormChanged={this.props.signInFormChanged} />
       </Animated.View>
     )
@@ -79,7 +91,7 @@ class IntroContainer extends Component {
       transform: [
         {translateY: this.state.animation.interpolate({
           inputRange: [-100, 0, 100],
-          outputRange: [0, 0, -(deviceHeight - signUpFormHeight)],
+          outputRange: [0, 0, -(deviceHeight - this.state.signUpFormHeight) + this.state.signUpButtonHeight], // 152 being the origin of sign up button, roughly
         }),
       }],
       opacity: this.state.animation.interpolate({
@@ -90,12 +102,16 @@ class IntroContainer extends Component {
     const {authSignUpButtonPressed} = this.props
 
     return (
-      <Animated.View style={[{backgroundColor:'transparent'},animationStyle]}>
+      <Animated.View style={[animationStyle]}
+          onLayout={(event) => {
+            this.setState({signUpButtonHeight: deviceHeight - event.nativeEvent.layout.y})
+          }}
+      >
         <HVTButton
             text={"Create an account"}
             onPress={() => {
               if (this.props.authMode !== authModeSignUp) {
-                Animated.timing(this.state.animation, {toValue: 100, duration: 250, easing: Easing.easeOutCubic }).start()
+                Animated.timing(this.state.animation, {toValue: 100, duration: 250}).start()
               }
               authSignUpButtonPressed()
               .catch((error) => {
@@ -118,19 +134,23 @@ class IntroContainer extends Component {
       transform: [
         {translateY: this.state.animation.interpolate({
           inputRange: [-100, 0, 100],
-          outputRange: [-(deviceHeight - signInFormHeight), 0, 0],
+          outputRange: [-(deviceHeight - this.state.signInFormHeight) + this.state.signInButtonHeight, 0, 0],
         }),
       }],
     }
     const {authSignInButtonPressed} = this.props
 
     return (
-      <Animated.View style={[{paddingBottom: 20, backgroundColor:'transparent'},animationStyle]}>
+      <Animated.View style={animationStyle}
+          onLayout={(event) => {
+            this.setState({signInButtonHeight: deviceHeight - event.nativeEvent.layout.y})
+          }}
+      >
         <HVTButton
             text={"Sign In"}
             onPress={() => {
               if (this.props.authMode !== authModeSignIn) {
-                Animated.timing(this.state.animation, {toValue: -100, duration: 250 }).start()
+                Animated.timing(this.state.animation, {toValue: -100, duration: 250}).start()
               }
               authSignInButtonPressed()
               .catch((error) => {
@@ -154,6 +174,7 @@ class IntroContainer extends Component {
       },
       ],
     }
+
     return (
       <Animated.View style={[styles.backButtonWrapper, animationStyle]}>
         <HVTIconButton
@@ -162,8 +183,7 @@ class IntroContainer extends Component {
             color={COLOR_1}
             onPress={() => {
               dismissKeyboard()
-              this.props.authModeReset()
-              Animated.timing(this.state.animation, { toValue: 0, duration: 250 }).start()
+              Animated.timing(this.state.animation, { toValue: 0, duration: 250}).start(() => this.props.authModeReset())
             }}
             extraTouchableStyle={styles.backButton}
         />
@@ -172,12 +192,11 @@ class IntroContainer extends Component {
   }
 
   render() {
-
     let form = this.props.authMode === 'signin' ? this.renderSignInForm() : this.renderSignUpForm()
-
     return (
-      <View style={[styles.container, {backgroundColor:'white'}]}>
+      <View style={[styles.container, {paddingBottom: 20}]}>
         {form}
+        <View style={styles.container} />
         {this.renderSignUpButton()}
         {this.renderSignInButton()}
         {this.renderBackButton()}
@@ -186,16 +205,12 @@ class IntroContainer extends Component {
   }
 }
 
-const signupCardMargin = 20
-
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    height:deviceHeight,
-    backgroundColor: 'white',
   },
   buttons: {
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: signupCardMargin / 2,
     marginRight: signupCardMargin / 2,
   },
@@ -205,13 +220,13 @@ let styles = StyleSheet.create({
     left: 10,
     width: 30,
     height: 30,
-    backgroundColor:'rgba(0,0,0,1)',
+    backgroundColor:COLOR_2,
   },
   backButton: {
     position:'absolute',
     top: 0,
     left: 0,
-    backgroundColor:'rgba(0,0,0,1)',
+    backgroundColor:COLOR_2,
   },
 })
 

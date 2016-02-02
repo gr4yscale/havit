@@ -9,8 +9,6 @@ let {
   TextInput,
 } = React
 
-export const signInFormHeight = 280 //TOFIX: hack: this should be measured
-
 class SignInForm extends Component {
 
   render() {
