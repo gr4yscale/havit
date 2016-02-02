@@ -58,6 +58,7 @@ class Root extends React.Component {
       if (_.get(newState, 'entities.currentUser')) {
         if (_.get(newState, 'entities.friends')) {
           store.dispatch(shareActions.resetSelectedFriends(newState.entities.friends))
+          store.dispatch(serverActions.resetRequestCount()) //TOFIX: dirty hack; requestCount gets persisted on the entities key
         }
         if (!this.lastIntentUrlReceived) {
           Actions.MainContainer()
