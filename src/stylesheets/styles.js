@@ -19,6 +19,7 @@ export const FONT_WEIGHT_HUGE = '600'
 export const FONT_WEIGHT_HEADING = '400'
 export const FONT_WEIGHT_TITLE = '300'
 export const FONT_WEIGHT_SUBTITLE = '200'
+export const ICON_SIZE_NORMAL = 30
 
 export default cairn({
   container: {
@@ -110,7 +111,7 @@ export default cairn({
     container: {
       position:'absolute',
       width:deviceWidth,
-      height: 53,
+      height: 50,
       bottom: 0,
     },
     touchable: {
@@ -118,8 +119,6 @@ export default cairn({
       backgroundColor: COLOR_5,
       alignSelf: 'stretch',
       justifyContent: 'center',
-      padding: 0,
-      marginTop: 3,
     },
     touchableValid: {
       backgroundColor: COLOR_4,
@@ -142,20 +141,6 @@ export default cairn({
     },
     textInvalid: {
       color: COLOR_3,
-    },
-    progressBarAndroid: {
-      position: 'absolute',
-      bottom: 43,
-      left: 0,
-      margin: 0,
-      padding: 0,
-      width: deviceWidth,
-      height: 18,
-      props: {
-        styleAttr: 'Horizontal',
-        indeterminate: true,
-        color: COLOR_5,
-      },
     },
   },
 
@@ -198,13 +183,13 @@ export default cairn({
       justifyContent: 'center',
     },
     icon: {
-      width: 30, // be sure to change constant in TabBar.js
-      height: 30,
+      width: ICON_SIZE_NORMAL, // be sure to change constant in TabBar.js
+      height: ICON_SIZE_NORMAL,
       position: 'absolute',
       top: 0,
       left: 32,
       props: {
-        size: 30,
+        size: ICON_SIZE_NORMAL,
         color: COLOR_5,
       },
     },
@@ -219,6 +204,102 @@ export default cairn({
     },
   },
 
+  listCell: {
+    content: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 8,
+      paddingLeft: 12,
+      backgroundColor: COLOR_1,
+      height: 40,
+    },
+    touchable: {
+      props: {
+        delayPressIn: 0,
+        delayPressOut: 0,
+        underlayColor: COLOR_1,
+        activeOpacity: 1,
+      },
+    },
+    text: {
+      color: COLOR_4,
+      fontFamily: FONT_FAMILY,
+      fontSize: FONT_SIZE_HEADING,
+      fontWeight: FONT_WEIGHT_HEADING,
+    },
+    textSelected: {
+      color: COLOR_2,
+      fontWeight: FONT_WEIGHT_HEADING,
+    },
+    selectionIcon: {
+      position:'absolute',
+      right: 10,
+      marginLeft: 10,
+      width: ICON_SIZE_NORMAL,
+      height: ICON_SIZE_NORMAL,
+      props: {
+        name: 'ion|android-done',
+        size: ICON_SIZE_NORMAL,
+        color: COLOR_5,
+      },
+    },
+  },
+
+  form: {
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+      marginLeft: 10,
+      marginRight: 10,
+    },
+    textInput: {
+      height: 40,
+      marginLeft: 10,
+      padding: 8,
+      color: COLOR_1,
+      fontSize: FONT_SIZE_TITLE,
+      props: {
+        autoCapitalize: 'none',
+        autoCorrect: false,
+        blurOnSubmit: false,
+        placeholderTextColor: COLOR_5,
+        underlineColorAndroid: 'rgba(0,0,0,0)',
+      },
+    },
+  },
+
+  separator: {
+    position: 'absolute',
+    bottom: 0,
+    width: deviceWidth,
+    height: 0.5,
+    backgroundColor: COLOR_5,
+  },
+
+  // container-specific:
+
+  share: {
+    formContainer: {
+      backgroundColor: COLOR_1,
+      flexDirection: 'column',
+      marginTop: 0,
+      marginLeft: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      paddingBottom: 8,
+    },
+
+    textInput: {
+      color: COLOR_4,
+      margin: 0,
+      marginLeft: 0, // have to define this because if a 'parent' style is applied cairn won't overwrite it unless explicit
+      paddingLeft: 12,
+      props: {
+        placeholderTextColor: COLOR_5,
+      },
+    },
+  },
   // closeIcon: {
   //   position:'absolute',
   //   left: 0,

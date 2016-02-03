@@ -46,10 +46,11 @@ class ProgressView extends Component {
     let positionStyle = {
       left: this.animation.interpolate({inputRange: [0, 1.0], outputRange: [0, deviceWidth]}),
     }
+    let indicatorBG = this.props.indicatorColor ? this.props.indicatorColor : COLOR_3
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, this.props.extraContainerStyle]}>
         <Animated.View
-            style={[styles.animatedIndicator, scaleStyle, positionStyle]}
+            style={[styles.animatedIndicator, scaleStyle, positionStyle, {backgroundColor: indicatorBG}]}
         />
       </View>
     )

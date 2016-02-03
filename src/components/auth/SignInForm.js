@@ -1,10 +1,9 @@
 import React from 'react-native'
-import style, {COLOR_1, COLOR_5, FONT_SIZE_TITLE} from '../../stylesheets/styles'
+import style from '../../stylesheets/styles'
 import HVTCard from '../HVTCard'
 
 let {
   Component,
-  StyleSheet,
   View,
   TextInput,
 } = React
@@ -15,31 +14,21 @@ class SignInForm extends Component {
     const { signInFormChanged } = this.props
 
     return (
-      <View style={styles.formContainer}>
+      <View {...style('form.container', [{marginTop: 80}])}>
         <HVTCard
-            extraStyle={styles.container}
+            extraStyle={{flex: 1}}
         >
           <TextInput
-              {...style('text.heading', [styles.inputs])}
-              {...this.props}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-              blurOnSubmit={false}
+              {...style('text.heading form.textInput')}
               placeholder={"Username"}
-              placeholderTextColor={COLOR_1}
               ref={(component) => this.textInputUsername = component}
               onChangeText={(value) => signInFormChanged({field: 'username', value})}
           />
           <TextInput
-              {...style('text.heading', [styles.inputs])}
-              {...this.props}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-              blurOnSubmit={false}
+              {...style('text.heading form.textInput')}
               placeholder={"Password"}
-              placeholderTextColor={COLOR_1}
-              ref={(component) => this.textInputPassword = component}
               secureTextEntry={true}
+              ref={(component) => this.textInputPassword = component}
               onChangeText={(value) => signInFormChanged({field: 'password', value})}
           />
         </HVTCard>
@@ -47,32 +36,5 @@ class SignInForm extends Component {
     )
   }
 }
-
-const signupCardMargin = 20
-
-let styles = StyleSheet.create({
-  container: {
-    flex:1,
-  },
-  formCard: {
-    flex: 1,
-  },
-  formContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 80,
-    marginLeft: signupCardMargin / 2,
-    marginRight: signupCardMargin / 2,
-  },
-  inputs: {
-    height: 40,
-    borderBottomColor: COLOR_5,
-    borderBottomWidth: 1,
-    marginLeft: 10,
-    padding: 8,
-    color: COLOR_1,
-    fontSize: FONT_SIZE_TITLE,
-  },
-})
 
 export default SignInForm

@@ -7,7 +7,7 @@ import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import ProgressView from '../components/ProgressView'
 import {Icon} from '../../node_modules/react-native-icons'
-import style, { COLOR_1, COLOR_3 } from '../stylesheets/styles'
+import style, { COLOR_1, COLOR_2 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -15,14 +15,10 @@ let {
   View,
   Text,
   TouchableOpacity,
-  Dimensions,
   NativeAppEventEmitter,
   NativeModules,
   Platform,
-  ProgressBarAndroid,
 } = React
-
-let deviceHeight = Dimensions.get('window').height
 
 // credit: brentvatne from his example in
 // https://github.com/brentvatne/react-native-linear-gradient
@@ -132,12 +128,12 @@ class ShareContainer extends Component {
     return (
       <TouchableOpacity
           onPress={() => this.close()}
-          style={{position: 'absolute', top: 20, left: 10, width: 30, height: 30}}
+          style={{position: 'absolute', top: 20, left: 8, width: 30, height: 30}}
       >
         <Icon
             name={'ion|android-close'}
             size={30}
-            color={'#FFFFFF'}
+            color={COLOR_2}
             style={styles.closeIcon}
         />
       </TouchableOpacity>
@@ -178,15 +174,13 @@ class ShareContainer extends Component {
           <TouchableOpacity
               onPress={() => this.shareButtonPressed()}
               {...style(shareButtonTouchableStyle)}
-              activeOpacity={this.props.share.shareDataValid ? 0 : 0.5}
+              activeOpacity={1}
           >
             <Text {...style(shareButtonTextStyle)}>Share!</Text>
           </TouchableOpacity>
           {this.renderProgressView()}
         </View>
-
         {this.renderCloseButton()}
-
       </View>
     );
   }
@@ -195,10 +189,8 @@ class ShareContainer extends Component {
 let styles = StyleSheet.create({
   container: {
     flex:1,
-    height:deviceHeight - 66,
-    paddingTop:50,
-    paddingBottom: 60,
-    backgroundColor: COLOR_3,
+    paddingTop:48,
+    paddingBottom: 50,
   },
   closeIcon: {
     position:'absolute',

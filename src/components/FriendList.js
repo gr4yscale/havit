@@ -3,12 +3,8 @@ import FriendListCell from './FriendListCell'
 
 let {
   Component,
-  StyleSheet,
   ListView,
-  Dimensions,
 } = React
-
-let deviceHeight = Dimensions.get('window').height;
 
 class FriendList extends Component {
 
@@ -56,31 +52,10 @@ class FriendList extends Component {
             }}
             initialListSize={20}
             pageSize={4}
-            style = {styles.listView}
             renderHeader={() => this.renderHeader()}
         />
     );
   }
 }
-
-let styles = StyleSheet.create({
-  container: {
-    flex:1,
-    height:deviceHeight - 72, // TOFIX
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'column',
-    padding: 8,
-    marginBottom: 0.5,
-    opacity: 0.9,
-    backgroundColor: '#FFFFFF',
-  },
-  cellText: {
-    color: '#333333',
-    fontWeight: '600',
-    // backgroundColor: '#99EEFF',
-  },
-})
 
 export default FriendList
