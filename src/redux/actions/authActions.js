@@ -23,9 +23,9 @@ export function authSignInButtonPressed() {
       return Promise.resolve()
     } else if (authMode === authModeSignIn) {
       return dispatch(serverActions.login(signInForm.username, signInForm.password))
+            .then(() => dispatch(serverActions.fetchFriends()))
             .then(() => dispatch(serverActions.fetchLinksReceived()))
             .then(() => Actions.MainContainer())
-            .then(() => dispatch(serverActions.fetchFriends()))
             .then(() => dispatch(serverActions.fetchLinksSent()))
     }
   }

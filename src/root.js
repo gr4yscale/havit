@@ -94,8 +94,12 @@ class Root extends React.Component {
   }
 
   refreshData() {
-    store.dispatch(serverActions.fetchLinksReceived())
-    store.dispatch(serverActions.fetchLinksSent())
+    // We need our friends list before links received or we'll have "unknown sender" in the inbox cells
+    store.dispatch(serverActions.fetchFriends())
+    .then(() => {
+      store.dispatch(serverActions.fetchLinksReceived())
+      store.dispatch(serverActions.fetchLinksSent())
+    })
   }
 
   render () {
