@@ -26,7 +26,7 @@ RCT_EXPORT_MODULE();
 {
   self = [super init];
   if (self) {
-    self.sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName: @"group.com.gr4yscale.havit"];
+    self.sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName: @"group.havit"];
   }
   return self;
 }

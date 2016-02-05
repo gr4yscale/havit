@@ -220,7 +220,6 @@
 		29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootShareViewController.m; sourceTree = "<group>"; };
 		29A1ED2D1C3D5211008CF2C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29A1ED571C3D76FD008CF2C2 /* havit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = havit.entitlements; path = havit/havit.entitlements; sourceTree = "<group>"; };
-		29A1ED581C3D7741008CF2C2 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		29A1ED721C3D842A008CF2C2 /* HVTShareExtensionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVTShareExtensionStorage.h; sourceTree = "<group>"; };
 		29A1ED731C3D842A008CF2C2 /* HVTShareExtensionStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVTShareExtensionStorage.m; sourceTree = "<group>"; };
 		29A904E61C332CFB0055FFEF /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
@@ -366,7 +365,6 @@
 		13B07FAE1A68108700A75B9A /* havit */ = {
 			isa = PBXGroup;
 			children = (
-				29A1ED571C3D76FD008CF2C2 /* havit.entitlements */,
 				29F9F6131C4D60AC00158785 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -396,6 +394,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		294FB51B1C64AC3B0038B2B4 /* entitlement certs */ = {
+			isa = PBXGroup;
+			children = (
+				29A1ED571C3D76FD008CF2C2 /* havit.entitlements */,
+			);
+			name = "entitlement certs";
+			sourceTree = "<group>";
+		};
 		296FA8041C3A04B100EF4408 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,7 +413,6 @@
 		29A1ED261C3D5211008CF2C2 /* ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				29A1ED581C3D7741008CF2C2 /* ShareExtension.entitlements */,
 				29A1ED271C3D5211008CF2C2 /* RootShareViewController.h */,
 				29A1ED281C3D5211008CF2C2 /* RootShareViewController.m */,
 				29A1ED2D1C3D5211008CF2C2 /* Info.plist */,
@@ -514,12 +519,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				294FB51B1C64AC3B0038B2B4 /* entitlement certs */,
 				296FA80A1C3A050700EF4408 /* ionicons.ttf */,
 				296FA80C1C3A0CA100EF4408 /* assets */,
 				13B07FAE1A68108700A75B9A /* havit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				29C684C51C5A27EF00DD399D /* HockeyApp */,
-				00E356EF1AD99517003FC87E /* havitTests */,
 				29A1ED261C3D5211008CF2C2 /* ShareExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 			);
@@ -608,7 +613,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 8X5RS3Q7BC;
+						DevelopmentTeam = 2GS2S78W58;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -617,7 +622,7 @@
 					};
 					29A1ED241C3D5211008CF2C2 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8X5RS3Q7BC;
+						DevelopmentTeam = 2GS2S78W58;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -854,7 +859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* havitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,7 +1024,7 @@
 		29A1ED321C3D5211008CF2C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = havit/havit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1060,7 +1064,7 @@
 		29A1ED331C3D5211008CF2C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = havit/havit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
