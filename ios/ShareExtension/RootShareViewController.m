@@ -17,6 +17,15 @@
 
 static BOOL didSetupHockeySDK = NO;
 
+
+@interface RootShareViewController ()
+
+@property (nonatomic, strong) __block NSMutableDictionary *propsForRNShareContainer;
+@property (nonatomic, assign) NSInteger itemLoadOperationCount;
+
+@end
+
+
 @implementation RootShareViewController
 
 RCT_EXPORT_MODULE()
@@ -61,32 +70,71 @@ RCT_EXPORT_MODULE()
 
 - (void)receiveShareExtensionDataIfAvailable {
   
-  __block NSMutableDictionary *shareData = [@{
-                                              @"title": @"title",
-                                              @"url": @"url"
-                                              } mutableCopy];
-  
-  NSData *attributedContentTextData = [self.extensionContext.inputItems[0] userInfo][NSExtensionItemAttributedContentTextKey];
-  NSString *title = [[[NSMutableAttributedString alloc] initWithData:attributedContentTextData
-                                                             options:@{}
-                                                  documentAttributes:0
-                                                               error:nil] string];
-  NSLog(@"title: %@", title);
-  
-  shareData[@"title"] = title;
-  
-  NSItemProvider *extensionItemAttachmentProvider = [[self.extensionContext.inputItems.firstObject userInfo][NSExtensionItemAttachmentsKey] firstObject];
-  [extensionItemAttachmentProvider loadItemForTypeIdentifier:@"public.url"
-                                                     options:nil
-                                           completionHandler:^(NSURL<NSSecureCoding> * _Nullable item, NSError * _Null_unspecified error) {
-                                             
-                                             NSString *urlAsString = [item absoluteString];
-                                             shareData[@"url"] = urlAsString;
-                                             
-                                             NSLog(@"[IOS] Share data: %@", shareData);
-                                             [self updateHavitShareReactNativeWithProps:shareData];
-                                           }];
+  self.propsForRNShareContainer = [@{
+                                     @"title": @"",
+                                     @"url": @""
+                                     } mutableCopy];
+
+  // fuck you, apple. why do you have to make simple things such a pain in the ass?
+  for (NSExtensionItem *item in self.extensionContext.inputItems) {
+    
+    // load attributedContenetTextData first
+    if ([item userInfo][NSExtensionItemAttributedContentTextKey]) {
+      NSData *attributedContentTextData = [item userInfo][NSExtensionItemAttributedContentTextKey];
+      NSString *title = [[[NSMutableAttributedString alloc] initWithData:attributedContentTextData
+                                                                 options:@{}
+                                                      documentAttributes:0
+                                                                   error:nil] string];
+      NSLog(@"contentTextData: %@", title);
+      [self loadItem:nil completedWithResults:title];
+    }
+    
+    // now do the ridiculous dance for the other stuff
+    for (NSItemProvider *itemProvider in item.attachments) {
+      for (NSString *type in [itemProvider registeredTypeIdentifiers]) {
+        if ([itemProvider hasItemConformingToTypeIdentifier:type]) {
+          
+          self.itemLoadOperationCount++;
+          
+          [itemProvider loadItemForTypeIdentifier:type
+                                          options:nil
+                                completionHandler:^(id item, NSError * _Null_unspecified error) {
+                                  NSLog(@"Found item of type %@: %@", type, item);
+                                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                    [self loadItem:item completedWithResults:item];
+                                  }];
+                                }];
+        };
+      }
+    }
+  }
 }
+
+- (void)loadItem:(NSItemProvider *)item completedWithResults:(id)resultsItem {
+  if ([resultsItem isKindOfClass:[NSURL class]]) {
+    self.propsForRNShareContainer[@"url"] = [resultsItem absoluteString];
+  }
+  else if ([resultsItem isKindOfClass:[NSString class]]) {
+    NSString *prefix = [[resultsItem substringToIndex:5] lowercaseString];
+    // it's a string with a url prefix
+    if ([prefix containsString:@"http"] || [prefix containsString:@"https"]) {
+      self.propsForRNShareContainer[@"url"] = resultsItem;
+    } else {
+      // yes, it's a title actually
+      self.propsForRNShareContainer[@"title"] = resultsItem;
+    }
+  }
+  
+  if (item) {
+    self.itemLoadOperationCount--;
+  }
+  
+  if (self.itemLoadOperationCount == 0) {
+    [self updateHavitShareReactNativeWithProps:self.propsForRNShareContainer];
+    NSLog(@"%@", self.propsForRNShareContainer);
+  }
+}
+
 
 - (void)updateHavitShareReactNativeWithProps:(NSDictionary *)props {
   RCTRootView *havitShareReactNativeApp = (RCTRootView *)self.view;
@@ -101,7 +149,7 @@ RCT_EXPORT_MODULE()
   NSDictionary *friends = [storage friends];
   NSDictionary *currentUser = [storage currentUser];
   
-  NSLog(@"friends! %@", friends);
+//  NSLog(@"friends! %@", friends);
   
   RCTRootView *havitShareReactNativeApp = (RCTRootView *)self.view;
   
