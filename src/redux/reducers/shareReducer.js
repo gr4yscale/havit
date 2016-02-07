@@ -10,10 +10,11 @@ const initialState = {
   friendsFetching: false,
   shareDataValid: false,
   lastIntentUrlReceived: '',
-} // TOFIX: set selectedFriends?
+  selectedFriends: [],
+}
 
 // TOFIX: find or build a way to make this cleaner (auto create actions, specify a state shape for reducer)
-function shareFormFields(state = initialState, action) {
+function shareFormFields(state, action) {
   let { field, value } = action;
   let updatedField = {};
   updatedField[field] = value;

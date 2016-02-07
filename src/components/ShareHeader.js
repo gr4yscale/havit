@@ -32,15 +32,15 @@ class ShareHeader extends Component {
           />
           <TextInput
               {...style('text.heading form.textInput share.textInput')}
-              placeholder={"URL"}
-              onChangeText={(txt) => shareFormChanged('url',txt)}
-              ref={(component)=>this.urlInput = component}
-          />
-          <TextInput
-              {...style('text.heading form.textInput share.textInput')}
               placeholder={"Title"}
               onChangeText={(txt) => shareFormChanged('title',txt)}
               ref={(component)=>this.titleInput = component}
+          />
+          <TextInput
+              {...style('text.heading form.textInput share.textInput')}
+              placeholder={"URL"}
+              onChangeText={(txt) => shareFormChanged('url',txt)}
+              ref={(component)=>this.urlInput = component}
           />
           <View {...style('separator')} />
       </View>

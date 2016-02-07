@@ -58,13 +58,6 @@ class ShareContainer extends Component {
     shareFormChanged('title', title)
   }
 
-
-  shouldComponentUpdate(nextProps) {
-    let val = nextProps.share.sharing != this.props.share.sharing ||
-      nextProps.share.selectedFriends != this.props.share.selectedFriends
-    return val
-  }
-
   componentWillUnmount() {
     if (Platform.os === 'android') {
       this.friendsListUpdateSubscription.remove();
