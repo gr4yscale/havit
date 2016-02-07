@@ -23,6 +23,12 @@ class SignInForm extends Component {
               placeholder={"Username"}
               ref={(component) => this.textInputUsername = component}
               onChangeText={(value) => signInFormChanged({field: 'username', value})}
+              returnKeyType="next"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.textInputPassword.focus()
+                }
+              }}
           />
           <TextInput
               {...style('text.heading form.textInput')}
@@ -30,6 +36,12 @@ class SignInForm extends Component {
               secureTextEntry={true}
               ref={(component) => this.textInputPassword = component}
               onChangeText={(value) => signInFormChanged({field: 'password', value})}
+              returnKeyType="done"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.props.handleSignIn()
+                }
+              }}
           />
         </HVTCard>
       </View>

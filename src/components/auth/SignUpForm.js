@@ -23,18 +23,36 @@ class SignUpForm extends Component {
               placeholder={"Name"}
               ref={(component) => this.textInputName = component}
               onChangeText={(value) => signUpFormChanged({field: 'displayName', value})}
+              returnKeyType="next"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.textInputEmail.focus()
+                }
+              }}
           />
           <TextInput
               {...style('text.heading form.textInput')}
               placeholder={"Email"}
               ref={(component) => this.textInputEmail = component}
               onChangeText={(value) => signUpFormChanged({field: 'email', value})}
+              returnKeyType="next"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.textInputUsername.focus()
+                }
+              }}
           />
           <TextInput
               {...style('text.heading form.textInput')}
               placeholder={"Username"}
               ref={(component) => this.textInputUsername = component}
               onChangeText={(value) => signUpFormChanged({field: 'username', value})}
+              returnKeyType="next"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.textInputPassword.focus()
+                }
+              }}
           />
           <TextInput
               {...style('text.heading form.textInput')}
@@ -42,6 +60,12 @@ class SignUpForm extends Component {
               secureTextEntry={true}
               ref={(component) => this.textInputPassword = component}
               onChangeText={(value) => signUpFormChanged({field: 'password', value})}
+              returnKeyType="done"
+              onKeyPress={(event) => {
+                if (event.nativeEvent.key === 'Enter') {
+                  this.props.handleSignUp()
+                }
+              }}
           />
         </HVTCard>
       </View>

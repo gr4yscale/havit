@@ -265,6 +265,8 @@ export default cairn({
         blurOnSubmit: false,
         placeholderTextColor: COLOR_5,
         underlineColorAndroid: 'rgba(0,0,0,0)',
+        clearButtonMode:'while-editing',
+        enablesReturnKeyAutomatically: true,
       },
     },
   },

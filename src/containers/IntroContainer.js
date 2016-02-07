@@ -44,6 +44,28 @@ class IntroContainer extends Component {
     return true
   }
 
+  handleSignUpPressed() {
+    if (this.props.authMode !== authModeSignUp) {
+      Animated.timing(this.state.animation, {toValue: 100, duration: 250}).start()
+    }
+    this.props.authSignUpButtonPressed()
+    .catch((error) => {
+      Alert.alert('Error Signing Up!', `The error returned from the server was:\n\n${error}`)
+    })
+    dismissKeyboard()
+  }
+
+  handleSignInPressed() {
+    if (this.props.authMode !== authModeSignIn) {
+      Animated.timing(this.state.animation, {toValue: -100, duration: 250}).start()
+    }
+    this.props.authSignInButtonPressed()
+    .catch((error) => {
+      Alert.alert('Error Signing In!', `The error returned from the server was:\n\n${error}`)
+    })
+    dismissKeyboard()
+  }
+
   renderSignUpForm() {
     let animationStyle = {
       transform: [
@@ -60,7 +82,7 @@ class IntroContainer extends Component {
             this.setState({signUpFormHeight: event.nativeEvent.layout.height})
           }}
       >
-        <SignUpForm signUpFormChanged={this.props.signUpFormChanged} />
+        <SignUpForm signUpFormChanged={this.props.signUpFormChanged} handleSignUp={() => this.handleSignUpPressed()} />
       </Animated.View>
     )
   }
@@ -81,7 +103,7 @@ class IntroContainer extends Component {
             this.setState({signInFormHeight: event.nativeEvent.layout.height})
           }}
       >
-        <SignInForm signInFormChanged={this.props.signInFormChanged} />
+        <SignInForm signInFormChanged={this.props.signInFormChanged} handleSignIn={() => this.handleSignInPressed()} />
       </Animated.View>
     )
   }
@@ -99,7 +121,6 @@ class IntroContainer extends Component {
         outputRange: [0, 1, 1],
       }),
     }
-    const {authSignUpButtonPressed} = this.props
 
     return (
       <Animated.View style={[animationStyle]}
@@ -109,16 +130,7 @@ class IntroContainer extends Component {
       >
         <HVTButton
             text={"Create an account"}
-            onPress={() => {
-              if (this.props.authMode !== authModeSignUp) {
-                Animated.timing(this.state.animation, {toValue: 100, duration: 250}).start()
-              }
-              authSignUpButtonPressed()
-              .catch((error) => {
-                Alert.alert('Error Signing Up!', `The error returned from the server was:\n\n${error}`)
-              })
-              dismissKeyboard()
-            }}
+            onPress={() => this.handleSignUpPressed()}
             extraTouchableStyle={styles.buttons}
         />
       </Animated.View>
@@ -138,7 +150,6 @@ class IntroContainer extends Component {
         }),
       }],
     }
-    const {authSignInButtonPressed} = this.props
 
     return (
       <Animated.View style={animationStyle}
@@ -148,16 +159,7 @@ class IntroContainer extends Component {
       >
         <HVTButton
             text={"Sign In"}
-            onPress={() => {
-              if (this.props.authMode !== authModeSignIn) {
-                Animated.timing(this.state.animation, {toValue: -100, duration: 250}).start()
-              }
-              authSignInButtonPressed()
-              .catch((error) => {
-                Alert.alert('Error Signing In!', `The error returned from the server was:\n\n${error}`)
-              })
-              dismissKeyboard()
-            }}
+            onPress={() => this.handleSignInPressed()}
             extraTouchableStyle={[styles.buttons, {marginTop: 8}]}
         />
       </Animated.View>
