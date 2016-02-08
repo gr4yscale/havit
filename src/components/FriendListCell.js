@@ -10,9 +10,6 @@ let {
 } = React
 
 class FriendListCell extends Component {
-  handlePress() {
-    this.props.onPress(this.props.data)
-  }
 
   renderText() {
     if (this.props.data.selected)
@@ -37,7 +34,7 @@ class FriendListCell extends Component {
   render() {
     return (
       <TouchableOpacity
-          onPress={() => this.handlePress()}
+          onPress={() => this.props.onPress(this.props.data)}
           {...style('listCell.touchable')}
       >
         <View {...style('listCell.content')}>

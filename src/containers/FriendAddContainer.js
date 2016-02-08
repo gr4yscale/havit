@@ -5,6 +5,7 @@ import * as serverActions from '../redux/actions/serverActions'
 // import {Actions} from '../../node_modules/react-native-router-flux'
 import _ from 'lodash'
 import FriendAddCell from '../components/FriendAddCell'
+import { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
 
 let {
   Component,
@@ -49,11 +50,13 @@ class FriendAddContainer extends Component {
     addFriend(this.emailTextEntered)
     .then(() => {
       if (this.textInput) {
-        this.textInput.setNativeProps({text: ''})
+        this.textInput.clear()
+        this.setState({userFound: false})
       }
+      fetchFriends()
     })
-    .then(() => fetchFriends())
   }
+
   addButtonPressed() {
     this.dispatchAddFriendAndClearSearchInput()
   }
@@ -68,11 +71,11 @@ class FriendAddContainer extends Component {
     this.setState({userFound: (user ? true : false)})
   }
 
-  renderSearchForm() {
+  renderSearchForm(buttonBackgroundColor) {
     return (
         <View style={styles.searchFormContainer}>
           <TextInput
-              style={[styles.inputs, {flex: 1,backgroundColor:'#9944ff'}]}
+              style={[styles.inputs, {flex: 1,backgroundColor:COLOR_4}]}
               autoCapitalize={'none'}
               autoCorrect={false}
               onSubmitEditing={() => this.handleTextEntered()}
@@ -80,7 +83,7 @@ class FriendAddContainer extends Component {
               ref={(component)=> this.textInput = component}
           />
           <TouchableHighlight
-              style={styles.button}
+              style={[styles.button, {backgroundColor: buttonBackgroundColor}]}
               underlayColor="#99d9f4"
               onPress={() => this.addButtonPressed()}
           >
@@ -91,16 +94,18 @@ class FriendAddContainer extends Component {
   }
 
   render() {
-    let backgroundColor = this.state.userFound ?  '#00BB00' : '#FF0088'
+    let backgroundColor = this.state.userFound ?  COLOR_3 : COLOR_1
+    let buttonBackgroundColor = this.state.userFound ?  COLOR_1 : COLOR_3
+
     let dataSource = this.props.friends ? this.state.dataSource.cloneWithRows(this.props.friends) : this.state.dataSource.cloneWithRows([])
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor}]}>
         <Text style={styles.bigText}>{`Enter a friend's email address to add them:`}</Text>
-        <View style={{backgroundColor:'#0055FF'}}>
-          {this.renderSearchForm()}
+        <View>
+          {this.renderSearchForm(buttonBackgroundColor)}
         </View>
-        <View style={{flex: 1,backgroundColor}}>
+        <View style={{flex: 1}}>
         <ListView
             dataSource = {dataSource}
             renderRow = {(data) => {
@@ -125,27 +130,25 @@ let styles = StyleSheet.create({
   container: {
     flex:1,
     flexDirection: 'column',
-    backgroundColor:'#FF3B00',
     height:deviceHeight - 62, // - 62 when custom navbar is show
   },
   searchFormContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor:'#ff00ff',
     padding:8,
   },
   inputs: {
     height: 40,
     borderWidth: 0,
     padding: 8,
-    color:'#FFFFFF',
+    color:COLOR_1,
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
     fontSize: 20,
     // fontWeight: '600',
   },
   buttonText: {
     fontSize: 18,
-    color: '#000000',
+    color: COLOR_2,
     alignSelf: 'center',
     fontFamily:'AvenirNext-Medium',
     fontWeight: '400',
@@ -153,23 +156,21 @@ let styles = StyleSheet.create({
   button: {
     height: 40,
     width: 40,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOR_3,
     justifyContent: 'center',
 
   },
   listView: {
     backgroundColor: 'rgba(0,0,0,0)',
-    paddingTop: 16,
-    paddingLeft: 8,
-    paddingRight: 8,
+    paddingTop: 0,
   },
   bigText: {
     fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
     fontSize: 20,
     fontWeight: '600',
-    color:'#FFFFFF',
-    backgroundColor: '#003377',
+    color:COLOR_4,
     padding: 8,
+    paddingBottom: 0,
   },
 })
 

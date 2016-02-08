@@ -244,6 +244,21 @@ export default cairn({
         color: COLOR_5,
       },
     },
+    deletionIcon: {
+      position:'absolute',
+      right: 10,
+      marginLeft: 10,
+      top: 6,
+      padding: 0,
+      paddingLeft: 0,
+      width: ICON_SIZE_NORMAL,
+      height: ICON_SIZE_NORMAL,
+      props: {
+        name: 'ion|ios-close-empty',
+        size: ICON_SIZE_NORMAL,
+        color: COLOR_5,
+      },
+    },
   },
 
   form: {

@@ -1,7 +1,7 @@
 import React from 'react-native'
 import Accordion from '../../node_modules/react-native-accordion'
 import {Icon} from '../../node_modules/react-native-icons'
-import { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5 } from '../stylesheets/styles'
+import style, { COLOR_1, COLOR_2, COLOR_4, COLOR_5 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -103,6 +103,7 @@ class LinkCell extends Component {
                       </Animated.Text>
                     </View>
               </Animated.View>
+              <View {...style('separator')} />
           </TouchableOpacity>
         )
   }
@@ -206,9 +207,10 @@ let styles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
-    padding: 14,
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: 6,
+    paddingBottom: 12,
+    paddingLeft: 12,
+    paddingRight: 16,
     flexDirection: 'row',
     alignItems: 'center',
   },
