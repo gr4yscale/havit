@@ -27,6 +27,11 @@ DeviceEventEmitter.addListener(
   }
 )
 
+let CodePush
+if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
+  CodePush = require('../node_modules/react-native-code-push')
+}
+
 class Root extends React.Component {
 
   constructor(props) {
@@ -44,7 +49,6 @@ class Root extends React.Component {
 
   componentDidMount() {
     if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
-      const CodePush = require('../node_modules/react-native-code-push')
       CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
     this.subscribeToAppLifecycleEvents()
@@ -78,6 +82,9 @@ class Root extends React.Component {
       AppStateIOS.addEventListener('change', (appState) => {
         if (appState === 'active') {
           this.refreshData()
+          if (!__DEV__) { //eslint-disable-line no-undef
+            CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
+          }
         }
       })
     } else {
