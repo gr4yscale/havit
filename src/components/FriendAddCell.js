@@ -14,7 +14,7 @@ class FriendAddCell extends Component {
   render() {
     return (
       <TouchableOpacity
-          onPress={() => this.props.onPress(this.props.data)}
+          onPress={() => this.props.onPress()}
           {...style('listCell.touchable')}
       >
         <View {...style('listCell.content')}>

@@ -102,6 +102,27 @@ export default class Parse {
     }
   }
 
+  removeFriendFromMe(objectId) {
+    let params = {
+      'friends': {
+        '__op': 'RemoveRelation',
+        'objects': [
+          {
+            '__type': 'Pointer',
+            'className': '_User',
+            'objectId': `${objectId}`,
+          },
+        ],
+      },
+    }
+    let url = `/1/users/${this.userObjectId}`
+    try {
+      return this.fetchFromParse('PUT', url, params)
+    } catch(error) {
+      throw error;
+    }
+  }
+
   getAllUsers() {
     try {
       return this.fetchFromParse('GET', '/1/users')

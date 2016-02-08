@@ -291,6 +291,27 @@ export function addFriend(email) {
   }
 }
 
+const removeFriendRequest = createAction('REMOVE_FRIEND_REQUEST')
+const removeFriendSuccess = createAction('REMOVE_FRIEND_SUCCESS')
+const removeFriendFailure = createAction('REMOVE_FRIEND_FAILURE')
+
+export function removeFriend(objectId) {
+  return (dispatch, getState) => {
+    dispatch(removeFriendRequest())
+    let parse = configuredParse(getState());
+    return parse.removeFriendFromMe(objectId)
+    .then((response) => {
+      let json = JSON.parse(response._bodyInit)
+      if (response.status === 200 || response.status === 201) {
+        return dispatch(removeFriendSuccess(json))
+      } else {
+        dispatch(removeFriendFailure(json.error))
+        return Promise.reject(json.error)
+      }
+    })
+  }
+}
+
 export const resetRequestCount = createAction('RESET_REQUEST_COUNT')
 
 // UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:

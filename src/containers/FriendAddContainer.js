@@ -46,14 +46,13 @@ class FriendAddContainer extends Component {
   }
 
   dispatchAddFriendAndClearSearchInput() {
-    const {addFriend, fetchFriends} = this.props
-    addFriend(this.emailTextEntered)
+    this.props.addFriend(this.emailTextEntered)
     .then(() => {
       if (this.textInput) {
         this.textInput.clear()
         this.setState({userFound: false})
       }
-      fetchFriends()
+      this.props.fetchFriends()
     })
   }
 
@@ -69,6 +68,23 @@ class FriendAddContainer extends Component {
     this.emailTextEntered = text
     let user = _.find(this.props.users, {email: text})
     this.setState({userFound: (user ? true : false)})
+  }
+
+  handleCellPressed(friend) {
+    Alert.alert(
+      `Remove friend`,
+      `Are you sure that you want to remove this friend?`,
+      [
+        {text: 'No'},
+        {text: 'Yes, remove them.', onPress: () => {
+          console.log(friend)
+          this.props.removeFriend(friend.objectId)
+          .then(() => {
+            this.props.fetchFriends()
+          })
+        }},
+      ]
+    )
   }
 
   renderSearchForm(buttonBackgroundColor) {
@@ -112,7 +128,7 @@ class FriendAddContainer extends Component {
               return (
                 <FriendAddCell
                     text={data.displayName}
-                    onPress={() => {Alert.alert('Not implemented', `Sorry, you can't remove friends right now`)}}
+                    onPress={() => this.handleCellPressed(data)}
                 />
               )
             }}

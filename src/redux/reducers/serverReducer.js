@@ -80,6 +80,23 @@ export default function server(state = initialState, action) {
           ...state.users,
           action.response.results[0],
         ],
+        requestCount: requestCount(state, false),
+      })
+    case actionTypes.ADD_FRIEND_REQUEST:
+      return Object.assign({}, state, {
+        requestCount: requestCount(state, true),
+      })
+    case actionTypes.ADD_FRIEND_SUCCESS:
+      return Object.assign({}, state, {
+        requestCount: requestCount(state, false),
+      })
+    case 'REMOVE_FRIEND_REQUEST':
+      return Object.assign({}, state, {
+        requestCount: requestCount(state, true),
+      })
+    case 'REMOVE_FRIEND_SUCCESS':
+      return Object.assign({}, state, {
+        requestCount: requestCount(state, false),
       })
     case 'RESET_REQUEST_COUNT':
       return Object.assign({}, state, {
