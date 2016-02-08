@@ -9,6 +9,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
 /**
  * Created by gr4yscale on 18/01/2016.
  */
@@ -41,6 +44,7 @@ public final class ReceiveIntentManager extends ReactContextBaseJavaModule imple
             String action = intent.getAction();
             String type = intent.getType();
             String url = null;
+            String title = intent.getStringExtra(Intent.EXTRA_SUBJECT);
 
             if (Intent.ACTION_SEND.equals(action) && "text/plain".equals(type)) {
                 url = intent.getStringExtra(Intent.EXTRA_TEXT);
@@ -52,8 +56,13 @@ public final class ReceiveIntentManager extends ReactContextBaseJavaModule imple
             if (url != null && (url != mLastUrlReceived)) {
                 Log.e("ReceiveIntent", url);
 
+                WritableMap data = Arguments.createMap();
+
+                data.putString("url", url);
+                data.putString("title", title);
+
                 getReactApplicationContext().getJSModule(RCTDeviceEventEmitter.class)
-                        .emit("IntentReceived", url);
+                        .emit("IntentReceived", data);
 
                 mLastUrlReceived = url;
             }

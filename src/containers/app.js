@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.lastIntentUrlReceived) {
-      Actions.Share({url: this.props.lastIntentUrlReceived})
+      Actions.Share({url: this.props.lastIntentUrlReceived, title: this.props.lastIntentTitleReceived})
     }
   }
 

@@ -10,6 +10,7 @@ const initialState = {
   friendsFetching: false,
   shareDataValid: false,
   lastIntentUrlReceived: '',
+  lastIntentTitleReceived: '',
   selectedFriends: [],
 }
 
@@ -101,6 +102,7 @@ export default function share(state = initialState, action) {
     case 'ANDROID_INTENT_RECEIVED':
       return Object.assign({}, state, {
         lastIntentUrlReceived: action.payload.url,
+        lastIntentTitleReceived: action.payload.title,
       })
 
 

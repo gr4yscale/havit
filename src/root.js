@@ -22,8 +22,8 @@ const {
 
 DeviceEventEmitter.addListener(
   'IntentReceived',
-  (url) => {
-    store.dispatch(shareActions.androidIntentReceieved({url}))
+  (data) => {
+    store.dispatch(shareActions.androidIntentReceieved(data))
   }
 )
 
@@ -33,8 +33,10 @@ class Root extends React.Component {
     super(props)
 
     this.lastIntentUrlReceived = store.getState().share.lastIntentUrlReceived
+    this.lastIntentTitleReceived = store.getState().share.lastIntentTitleReceived
+
     if (this.lastIntentUrlReceived) {
-      setTimeout(() => this.loadInitialDataFromReduxStorage(), 1000)
+      setTimeout(() => this.loadInitialDataFromReduxStorage(), 1000) // TOFIX: hacky hack hack...FIXME!
     } else {
       this.loadInitialDataFromReduxStorage()
     }
@@ -105,7 +107,7 @@ class Root extends React.Component {
   render () {
     return (
       <Provider store={store}>
-        {() => <App lastIntentUrlReceived={this.lastIntentUrlReceived} />}
+        {() => <App lastIntentUrlReceived={this.lastIntentUrlReceived} lastIntentTitleReceived={this.lastIntentTitleReceived} />}
       </Provider>
     )
   }
