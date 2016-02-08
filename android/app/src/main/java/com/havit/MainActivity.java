@@ -16,6 +16,7 @@ import com.projectseptember.RNGL.RNGLPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import ca.jaysoo.activityandroid.ActivityAndroidPackage;
+import com.davidsandor.rnclipboardandroid.RNClipboardAndroidPackage;
 
 /** HockeyApp */
 
@@ -66,7 +67,8 @@ public class MainActivity extends ReactActivity {
             new IconFont("ion", "ionicons.ttf")
             )
         ),
-        new ActivityAndroidPackage(this)
+        new ActivityAndroidPackage(this),
+        new RNClipboardAndroidPackage()
       );
     }
 
