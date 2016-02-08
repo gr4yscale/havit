@@ -6,7 +6,7 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger'
 import createEngine from 'redux-storage/engines/reactNativeAsyncStorage'
 import rootReducer from './reducers'
-import {LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS} from './actionTypes'
+import {LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, USERS_GET_ALL_SUCCESS} from './actionTypes'
 
 // setup persistence middleware
 const reducer = storage.reducer(rootReducer)
@@ -18,7 +18,7 @@ let stateKeysToPersist = ['entities']
 
 engine = decorators.filter(engine, stateKeysToPersist)
 
-let actionsAllowedToSave = [LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, 'LINKS_SENT_SUCCESS', 'AUTH_LOGOUT']
+let actionsAllowedToSave = [LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, 'LINKS_SENT_SUCCESS', 'AUTH_LOGOUT', USERS_GET_ALL_SUCCESS]
 const persistence = storage.createMiddleware(engine, [], actionsAllowedToSave)
 
 const logger = createLogger()
