@@ -67,7 +67,7 @@ class FriendAddContainer extends Component {
   handleOnChangeText(text) {
     this.emailTextEntered = text
     let user = _.find(this.props.users, {email: text})
-    this.setState({userFound: (user ? true : false)})
+    this.setState({userFound: ((user && text.length > 0) ? true : false)})
   }
 
   handleCellPressed(friend) {

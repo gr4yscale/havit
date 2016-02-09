@@ -81,25 +81,26 @@ class Root extends React.Component {
     if (Platform.OS === 'ios') {
       AppStateIOS.addEventListener('change', (appState) => {
         if (appState === 'active') {
-          this.refreshData()
-          if (!__DEV__) { //eslint-disable-line no-undef
-            CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
-          }
+          this.appDidBecomeActive()
         }
       })
     } else {
       ActivityAndroid.addEventListener('activityResume', () => {
-        this.refreshData()
+        this.appDidBecomeActive()
       })
     }
   }
 
   removeAppLifecycleEventListeners() {
-    if (Platform.OS === 'ios') {
-      AppStateIOS.removeEventListener('change', this._handleAppStateChange)
-    } else {
-      // TOFIX: don't cleanup for android right now; will be removing react-native-activity-android soon once I upgrade RN
+    // TOFIX: cleanup later, yolo!
+  }
+
+  appDidBecomeActive() {
+    if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
+      CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
+
+    this.refreshData()
   }
 
   refreshData() {
