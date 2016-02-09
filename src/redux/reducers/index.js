@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import auth from './authReducer'
 import server from './serverReducer'
 import share from './shareReducer'
+import app from './appReducer'
 
-const rootReducer = combineReducers({
+export default combineReducers({
+  app,
   auth,
   entities: server,
   share,
 })
-
-export default rootReducer;
