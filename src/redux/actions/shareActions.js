@@ -22,9 +22,15 @@ const shareRequest = createAction(actionTypes.SHARE_REQUEST)
 const shareSuccess = createAction(actionTypes.SHARE_SUCCESS)
 const shareFailure = createAction(actionTypes.SHARE_FAILURE)
 
-export function shareLink() {
+// TOFIX: being lazy, sharing to yourself should probably be its own separate method
+export function shareLink(toOthers) {
   return (dispatch, getState) => {
-    let postData = shareDataToPost(getState())
+    let postData
+    if (toOthers) {
+      postData = shareDataToPostForOthers(getState())
+    } else {
+      postData = shareDataToPostForMyself(getState())
+    }
     dispatch(shareRequest());
     let parse = configuredParse(getState())
     return parse.shareLink(postData)
@@ -42,7 +48,7 @@ export function shareLink() {
   }
 }
 
-function shareDataToPost(state) {
+function shareDataToPostForOthers(state) {
   let form = state.share.form
   let senderId = state.entities.currentUser.objectId
   let friends = state.share.selectedFriends
@@ -59,6 +65,19 @@ function shareDataToPost(state) {
     'comment' : form.comment,
     'sender_id' : senderId,
     'recipient_ids' : recipientIds,
+  }
+}
+
+function shareDataToPostForMyself(state) {
+  let form = state.share.form
+  let senderId = state.entities.currentUser.objectId
+
+  return {
+    'url' : form.url,
+    'title' : form.title,
+    'comment' : form.comment,
+    'sender_id' : senderId,
+    'recipient_ids' : [senderId],
   }
 }
 

@@ -69,6 +69,13 @@ class MainContainer extends Component {
                 Actions.Share({url: clipboardContents, title: '', inAppShare: true})
               }},
               {text: 'Add to Inbox', onPress: () => {
+                const {shareFormChanged, shareLink, fetchLinksReceived} = this.props
+                shareFormChanged('url', clipboardContents)
+                shareFormChanged('title', '')
+                shareLink(false)
+                .then(() => {
+                  fetchLinksReceived()
+                })
               }},
             ]
           )

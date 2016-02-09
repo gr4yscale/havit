@@ -89,7 +89,7 @@ class ShareContainer extends Component {
 
     const {shareLink, postAllIftttActions, fetchLinksSent } = this.props
 
-    Promise.all([shareLink(), postAllIftttActions()])
+    Promise.all([shareLink(true), postAllIftttActions()])
     .then(() => {
       this.close()
       fetchLinksSent()
