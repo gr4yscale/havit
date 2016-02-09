@@ -71,6 +71,7 @@ class LinkCell extends Component {
     let statusIndicator = <Text style={styles.statusIndicator}>●</Text>
     // let friend = this.props.friend ?
     const {title, url, senderDisplayName} = this.props.data
+    let titleText = title ? title : url
 
     let backgroundColor = this.state.backgroundColor.interpolate({
       inputRange: [0, 1],
@@ -87,17 +88,21 @@ class LinkCell extends Component {
       outputRange: [COLOR_5, COLOR_1],
     })
 
+    let subtitleText
+    if (title) subtitleText = (
+      <Animated.Text style={[styles.urlText, {color:secondaryTextColor}]} numberOfLines={1}>
+        {url}
+      </Animated.Text>)
+
     return (
           <TouchableOpacity onPress={() => this.handleContentPress()} activeOpacity={1}>
               <Animated.View style={[styles.contentWrapper,{backgroundColor}]}>
                     {statusIndicator}
                     <View style={styles.contentText}>
                       <Animated.Text style={[styles.titleText, {color:textColor}]} numberOfLines={6}>
-                        {title}
+                        {titleText}
                       </Animated.Text>
-                      <Animated.Text style={[styles.urlText, {color:secondaryTextColor}]} numberOfLines={1}>
-                        {url}
-                      </Animated.Text>
+                      {subtitleText}
                       <Animated.Text style={[styles.senderNameText, {color:secondaryTextColor}]} numberOfLines={1}>
                         {senderDisplayName}
                       </Animated.Text>
