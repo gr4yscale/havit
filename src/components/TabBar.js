@@ -64,7 +64,7 @@ class TabBar extends Component {
 
     return (
       <View>
-        <View {...style('tabBar.tabs')}>
+        <View {...style('tabBar.tabContainer')}>
           {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
         </View>
         <Animated.View style={[style('tabBar.tabDotStyle').style, {left}]} />

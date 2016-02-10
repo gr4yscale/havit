@@ -5,7 +5,7 @@ import * as serverActions from '../redux/actions/serverActions'
 // import {Actions} from '../../node_modules/react-native-router-flux'
 import _ from 'lodash'
 import FriendAddCell from '../components/FriendAddCell'
-import { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
+import style, { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5 } from '../stylesheets/styles'
 
 let {
   Component,
@@ -36,8 +36,8 @@ class FriendAddContainer extends Component {
   }
 
   componentDidMount() {
-    const {getAllUsers} = this.props
-    getAllUsers()
+    // const {getAllUsers} = this.props
+    // getAllUsers()
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -117,7 +117,7 @@ class FriendAddContainer extends Component {
 
     return (
       <View style={[styles.container, {backgroundColor}]}>
-        <Text style={styles.bigText}>{`Enter a friend's email address to add them:`}</Text>
+        <Text {...style('text.heading', [{color: COLOR_2}])}>{`Enter a friend's email address to add them:`}</Text>
         <View>
           {this.renderSearchForm(buttonBackgroundColor)}
         </View>
@@ -152,6 +152,7 @@ let styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding:8,
+    paddingTop: 0,
   },
   inputs: {
     height: 40,
@@ -179,14 +180,6 @@ let styles = StyleSheet.create({
   listView: {
     backgroundColor: 'rgba(0,0,0,0)',
     paddingTop: 0,
-  },
-  bigText: {
-    fontFamily:'AvenirNext-Medium', // http://iosfonts.com/
-    fontSize: 20,
-    fontWeight: '600',
-    color:COLOR_4,
-    padding: 8,
-    paddingBottom: 0,
   },
 })
 

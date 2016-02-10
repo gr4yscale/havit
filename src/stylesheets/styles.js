@@ -169,7 +169,7 @@ export default cairn({
       justifyContent: 'center',
       paddingBottom: 0,
     },
-    tabs: {
+    tabContainer: {
       height: 64,
       flexDirection: 'row',
       paddingTop: 20,
@@ -317,6 +317,62 @@ export default cairn({
       },
     },
   },
+
+
+  // account settings
+
+  actionSettingsTabContainer: {
+    height: 56,
+    flexDirection: 'row',
+    marginTop: 0,
+    paddingTop: 0,
+    borderWidth: 0,
+    // paddingBottom: 4,
+    backgroundColor: 'transparent',
+  },
+
+  actionSettingsTabBar: {
+    props: {
+      activeTabIndicatorOffset: 31,
+    },
+
+    activeTabIndicatorStyle: {
+      position: 'absolute',
+      width: 24,
+      height: 3,
+      backgroundColor: COLOR_3,
+      bottom: 0,
+    },
+  },
+
+  // component-specific
+
+  actionButtonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: 'transparent',
+  },
+
+  actionButtonCircleBackground: {
+    position: 'absolute',
+    padding: 0,
+    margin: 0,
+    width: 38,
+    height: 38,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderRadius: 19,
+    backgroundColor: 'red',
+  },
+
+  actionButtonText: {
+    fontSize: FONT_SIZE_HUGE,
+    fontWeight: FONT_WEIGHT_HEADING,
+    backgroundColor:'transparent',
+  },
+
   // closeIcon: {
   //   position:'absolute',
   //   left: 0,
