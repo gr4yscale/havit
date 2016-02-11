@@ -37,7 +37,7 @@ class AccountSettingsContainer extends Component {
   render() {
     return (
       <ScrollView {...style('container', [{padding: 20}])}>
-        <View style={{flex: 1, marginBottom: 400}}>
+        <View style={{flex: 1, marginBottom: 240}}>
 
           <View style={{backgroundColor: COLOR_4}}>
             <Text {...style('text text.huge', [{color: COLOR_3, textAlign:'center'}])}>
@@ -69,17 +69,10 @@ class AccountSettingsContainer extends Component {
             />
           </View>
 
-          <HVTButton
-              text={"Update Account"}
-              onPress={() => this.handleSignInPressed()}
-              extraTouchableStyle={{marginTop: 10, marginBottom: 10, marginLeft: 10, marginRight: 10}}
-          />
+          <Text {...style('text', [{color: COLOR_2, margin: 0, padding:0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 0, textAlign:'center'}])}>-</Text>
 
-          <Text
-              {...style('text', [{color: COLOR_2, margin: 0, marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 20}])}
-              numberOfLines={4}
-          >
-            {`Using the IFTTT Maker API you can integrate a number of services by cloning our example recipe *here* and pasting the URL back into the 'IFTTT URL' field.`}
+          <Text {...style('text', [{color: COLOR_2, margin: 0, marginLeft: 0, marginRight: 0, marginBottom: 8, marginTop: 6}])} numberOfLines={6}>
+            {`Using the IFTTT Maker API you can integrate a number of services by cloning our example recipe *here* and pasting the URL back into the 'IFTTT URL' field. Hint: you can use emoji 📌📷👻🌮⛱🎉 to make custom buttons!`}
           </Text>
 
           <View style={{backgroundColor: COLOR_4, marginTop: 8, marginBottom: 8}}>
@@ -91,7 +84,7 @@ class AccountSettingsContainer extends Component {
           <ActionsSettingsList />
 
           <HVTButton
-              text={"Update Actions"}
+              text={"Update Account"}
               onPress={() => this.handleSignInPressed()}
               extraTouchableStyle={{marginTop: 10, marginBottom: 10, marginLeft: 10, marginRight: 10}}
           />

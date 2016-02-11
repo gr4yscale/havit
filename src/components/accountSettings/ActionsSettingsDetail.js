@@ -30,16 +30,15 @@ class ActionsSettingsDetail extends Component {
         <View style={{flex: 1, flexDirection: 'column'}}>
           <View style={{flex: 2}}>
             <TextInput
-                {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3}])}
+                {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
                 onChangeText={(value) => ifttActionFieldChanged({field: 'alias', value})}
-                autoFocus={true}
                 placeholder={"Action Name"}
                 returnKeyType="next"
                 autoCapitalize={'characters'}
                 value={alias}
             />
             <TextInput
-                {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3}])}
+                {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
                 onChangeText={(value) => ifttActionFieldChanged({field: 'actionUrl', value})}
                 placeholder={"IFTTT URL"}
                 autoCapitalize={'characters'}

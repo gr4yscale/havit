@@ -13,7 +13,7 @@ import ProgressView from '../components/ProgressView'
 import LinksFeedContainer from './LinksFeedContainer'
 import LinksSentContainer from './LinksSentContainer'
 import FriendAddContainer from './FriendAddContainer'
-import IntroContainer from './IntroContainer'
+import AccountSettingsContainer from './AccountSettingsContainer'
 import {isValidUrl} from '../stringUtils'
 
 let {
@@ -96,7 +96,7 @@ class MainContainer extends Component {
         <LinksFeedContainer tabLabel="ion|home" />
         <LinksSentContainer tabLabel="ion|paper-airplane" />
         <FriendAddContainer tabLabel="ion|person-stalker" />
-        <IntroContainer tabLabel="ion|gear-a" />
+        <AccountSettingsContainer tabLabel="ion|gear-a" />
       </ScrollableTabView>
     )
   }
