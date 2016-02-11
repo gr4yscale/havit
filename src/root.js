@@ -7,6 +7,7 @@ import {Actions} from '../node_modules/react-native-router-flux'
 import _ from 'lodash' // TOFIX: hrmmmm... not sure about having this one in...
 import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
+import * as appActions from './redux/actions/appActions'
 import ActivityAndroid from '../node_modules/react-native-activity-android'
 
 const {
@@ -64,7 +65,7 @@ class Root extends React.Component {
       if (_.get(newState, 'entities.currentUser')) {
         if (_.get(newState, 'entities.friends')) {
           store.dispatch(shareActions.resetSelectedFriends(newState.entities.friends))
-          store.dispatch(serverActions.resetRequestCount()) //TOFIX: dirty hack; requestCount gets persisted on the entities key
+          store.dispatch(appActions.resetRequestCount()) //TOFIX: dirty hack; requestCount gets persisted on the entities key
         }
         if (!this.lastIntentUrlReceived) {
           Actions.MainContainer()

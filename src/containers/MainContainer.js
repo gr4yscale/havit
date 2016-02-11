@@ -91,7 +91,7 @@ class MainContainer extends Component {
           initialPage={0}
           renderTabBar={() => <TabBar />}
           renderProgressView={() => <ProgressView animate={true} />}
-          showProgressView={this.props.waitingOnServerRequest}
+          showProgressView={this.props.requestCount > 0}
       >
         <LinksFeedContainer tabLabel="ion|home" />
         <LinksSentContainer tabLabel="ion|paper-airplane" />
