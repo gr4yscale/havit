@@ -312,6 +312,38 @@ export function removeFriend(objectId) {
   }
 }
 
+const iftttToMyselfRequest = createAction('IFTTT_TO_MYSELF_REQUEST')
+const iftttToMyselfSuccess = createAction('IFTTT_TO_MYSELF_SUCCESS')
+const iftttToMyselfFailure = createAction('IFTTT_TO_MYSELF_FAILURE')
+
+export function iftttToMyself(actionIndex, linkData) {
+  return (dispatch, getState) => {
+    dispatch(iftttToMyselfRequest())
+
+    let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'value1':linkData.url,
+        'value2':linkData.title,
+        'value3':linkData.senderName,
+      }),
+    }
+
+    let iftttUrl = getState().accountSettings.iftttActions[actionIndex].url
+
+    fetch(iftttUrl, requestOptions)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return dispatch(iftttToMyselfSuccess())
+      } else {
+        dispatch(iftttToMyselfFailure(requestOptions))
+        return Promise.reject(requestOptions)
+      }
+    })
+  }
+}
+
 export const resetRequestCount = createAction('RESET_REQUEST_COUNT')
 
 // UTILITY / JUNK / CRUFT / GET THIS THE FUCK OUT OF HERE:

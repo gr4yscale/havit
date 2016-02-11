@@ -340,7 +340,7 @@ export default cairn({
       position: 'absolute',
       width: 24,
       height: 3,
-      backgroundColor: COLOR_3,
+      backgroundColor: COLOR_4,
       bottom: 0,
     },
   },

@@ -63,16 +63,6 @@ class LinksFeedContainer extends Component {
     )
   }
 
-  saveToPocket(url) {
-    let requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({'value1':url}),
-    }
-    let iftttURL = 'https://maker.ifttt.com/trigger/havit_send_to_pocket/with/key/[redacted]'
-    fetch(iftttURL, requestOptions)
-  }
-
   handleLinkCellAction(data, actionType) {
     switch(actionType) {
       case LinkCellActionTypes.FriendListCellActionTypeBrowser:
@@ -82,17 +72,20 @@ class LinksFeedContainer extends Component {
         Actions.Share({url: data.url, title: data.title, inAppShare: true})
         break
       case LinkCellActionTypes.FriendListCellActionTypePin:
-        this.alertNotImplemented()
+        const {fetchFriends} = this.props
+        fetchFriends()
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction1:
-        this.saveToPocket(data.url)
+        this.props.iftttToMyself(0, data)
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction2:
-        this.alertNotImplemented()
+        this.props.iftttToMyself(1, data)
         break
       case LinkCellActionTypes.FriendListCellActionTypeUserAction3:
-        this.props.dispatch(logout())
-        Actions.Intro()
+        this.props.iftttToMyself(2, data)
+        break
+      case LinkCellActionTypes.FriendListCellActionTypeUserAction4:
+        this.props.iftttToMyself(3, data)
         break
       default:
         break
@@ -115,6 +108,7 @@ class LinksFeedContainer extends Component {
                     ref={(cell) => this.cells[rowID] = cell}
                     rowID={rowID}
                     data={data}
+                    iftttActions={this.props.iftttActions}
                 />
               )
             }}
@@ -146,6 +140,7 @@ export default connect(
   (state) => {
     return {
       links: state.entities.links,
+      iftttActions: state.accountSettings.iftttActions,
     }
   },
   (dispatch) => {

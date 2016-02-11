@@ -2,6 +2,7 @@ import React from 'react-native'
 import Accordion from '../../node_modules/react-native-accordion'
 import {Icon} from '../../node_modules/react-native-icons'
 import style, { COLOR_1, COLOR_2, COLOR_4, COLOR_5 } from '../stylesheets/styles'
+import ActionButton from './ActionButton'
 
 let {
   Component,
@@ -19,6 +20,7 @@ export const FriendListCellActionTypePin = 'FriendListCellActionTypePin'
 export const FriendListCellActionTypeUserAction1 = 'FriendListCellActionTypeUserAction1'
 export const FriendListCellActionTypeUserAction2 = 'FriendListCellActionTypeUserAction2'
 export const FriendListCellActionTypeUserAction3 = 'FriendListCellActionTypeUserAction3'
+export const FriendListCellActionTypeUserAction4 = 'FriendListCellActionTypeUserAction4'
 
 class LinkCell extends Component {
 
@@ -121,8 +123,20 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|earth'}
-                  size={32}
+                  name={'ion|android-globe'}
+                  size={30}
+                  color={COLOR_1}
+                  style={styles.icons}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => this.handleActionPress(FriendListCellActionTypePin)}
+                style={styles.iconWrapper}
+            >
+              <Icon
+                  name={'ion|star'}
+                  size={30}
                   color={COLOR_1}
                   style={styles.icons}
               />
@@ -134,62 +148,29 @@ class LinkCell extends Component {
             >
               <Icon
                   name={'ion|android-share'}
-                  size={32}
+                  size={30}
                   color={COLOR_1}
                   style={styles.icons}
               />
             </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypePin)}
-                style={styles.iconWrapper}
-            >
-              <Icon
-                  name={'ion|android-plane'}
-                  size={32}
-                  color={COLOR_1}
-                  style={styles.icons}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction1)}
-                style={styles.iconWrapper}
-            >
-              <Icon
-                  name={'ion|android-restaurant'}
-                  size={32}
-                  color={COLOR_1}
-                  style={styles.icons}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction2)}
-                style={styles.iconWrapper}
-            >
-              <Icon
-                  name={'ion|android-bar'}
-                  size={32}
-                  color={COLOR_1}
-                  style={styles.icons}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction3)}
-                style={styles.iconWrapper}
-            >
-              <Icon
-                  name={'ion|android-cart'}
-                  size={32}
-                  color={COLOR_1}
-                  style={styles.icons}
-              />
-            </TouchableOpacity>
+            {
+              // render ifttt actions
+              this.props.iftttActions.map((action) => {
+                return (
+                  <ActionButton
+                      text={action.actionButtonDisplay}
+                      key={action.alias}
+                      backgroundColor={COLOR_5}
+                      onPress={() => this.handleActionPress(FriendListCellActionTypeUserAction1)}
+                  />
+                )
+              })
+            }
           </View>
         )
   }
+
   render() {
 
     return (
@@ -212,8 +193,8 @@ let styles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
-    paddingTop: 6,
-    paddingBottom: 12,
+    paddingTop: 8,
+    paddingBottom: 14,
     paddingLeft: 12,
     paddingRight: 16,
     flexDirection: 'row',
