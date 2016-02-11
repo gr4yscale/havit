@@ -1,7 +1,6 @@
 import React from 'react-native';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux/native'
-import {logout} from '../redux/actions/authActions'
 import * as serverActions from '../redux/actions/serverActions'
 import LinkCell from '../components/LinkCell'
 import * as LinkCellActionTypes from '../components/LinkCell'

@@ -2,6 +2,7 @@ import React from 'react-native'
 import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
+import * as authActions from '../redux/actions/authActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import ActionsSettingsList from '../components/accountSettings/ActionsSettingsList'
 import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
@@ -97,7 +98,10 @@ class AccountSettingsContainer extends Component {
 
           <HVTButton
               text={"Log Out"}
-              onPress={() => this.handleSignInPressed()}
+              onPress={() => {
+                this.props.logout()
+                Actions.Intro()
+              }}
               extraTouchableStyle={{marginTop: 2, marginBottom: 10, marginLeft: 10, marginRight: 10}}
               extraTextWrapperStyle={{backgroundColor: COLOR_3}}
               extraTextStyle={{color: COLOR_2}}
@@ -117,6 +121,7 @@ export default connect(
   (dispatch) => {
     return {
       ...bindActionCreators(serverActions, dispatch),
+      ...bindActionCreators(authActions, dispatch),
     }
   }
 )(AccountSettingsContainer)
