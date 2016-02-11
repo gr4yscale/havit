@@ -2,7 +2,7 @@ import React from 'react-native'
 import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as accountSettingsActions from '../../redux/actions/accountSettingsActions'
-import style, {COLOR_5, COLOR_3} from '../../stylesheets/styles'
+import style, {COLOR_5, COLOR_3, COLOR_4} from '../../stylesheets/styles'
 
 let {
   Component,
@@ -24,7 +24,14 @@ class ActionsSettingsDetail extends Component {
   render() {
     const {ifttActionFieldChanged} = this.props
     let index = this.props.selectedActionIndex
-    let alias = this.props.iftttActions[index].alias
+    let action = this.props.iftttActions[index]
+    let actionName = ''
+    let actionURL = ''
+
+    if (action) {
+      actionName = action.alias
+      actionURL = action.url
+    }
 
     return (
         <View style={{flex: 1, flexDirection: 'column'}}>
@@ -35,7 +42,7 @@ class ActionsSettingsDetail extends Component {
                 placeholder={"Action Name"}
                 returnKeyType="next"
                 autoCapitalize={'characters'}
-                value={alias}
+                value={actionName}
             />
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
@@ -43,6 +50,7 @@ class ActionsSettingsDetail extends Component {
                 placeholder={"IFTTT URL"}
                 autoCapitalize={'characters'}
                 returnKeyType="next"
+                value={actionURL}
             />
           </View>
 

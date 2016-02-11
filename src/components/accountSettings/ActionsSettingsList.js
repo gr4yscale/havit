@@ -15,6 +15,14 @@ class ActionsSettingsList extends Component {
     this.props.updateSelectedIftttAction(tab)
   }
 
+  actionButtonTitle(actionIndex) {
+    let title = '-'
+    if (actionIndex < this.props.iftttActions.length) {
+      title = this.props.iftttActions[actionIndex].actionButtonDisplay
+    }
+    return title
+  }
+
   render() {
     return (
       <ScrollableTabView style={{flex: 1, height: 220}}
@@ -24,10 +32,10 @@ class ActionsSettingsList extends Component {
             this.handleTabChange(tab.i)
           }}
       >
-        <ActionsSettingsDetail tabLabel={this.props.iftttActions[0].actionButtonDisplay} actionIndex={0} />
-        <ActionsSettingsDetail tabLabel={this.props.iftttActions[1].actionButtonDisplay} actionIndex={1} />
-        <ActionsSettingsDetail tabLabel={this.props.iftttActions[2].actionButtonDisplay} actionIndex={2} />
-        <ActionsSettingsDetail tabLabel={this.props.iftttActions[3].actionButtonDisplay} actionIndex={3} />
+        <ActionsSettingsDetail tabLabel={this.actionButtonTitle(0)} actionIndex={0} />
+        <ActionsSettingsDetail tabLabel={this.actionButtonTitle(1)} actionIndex={1} />
+        <ActionsSettingsDetail tabLabel={this.actionButtonTitle(2)} actionIndex={2} />
+        <ActionsSettingsDetail tabLabel={this.actionButtonTitle(3)} actionIndex={3} />
       </ScrollableTabView>
     )
   }
