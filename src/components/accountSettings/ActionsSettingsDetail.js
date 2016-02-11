@@ -1,4 +1,7 @@
 import React from 'react-native'
+import {connect} from 'react-redux/native'
+import {bindActionCreators} from 'redux'
+import * as accountSettingsActions from '../../redux/actions/accountSettingsActions'
 import style, {COLOR_5, COLOR_3} from '../../stylesheets/styles'
 
 let {
@@ -9,7 +12,7 @@ let {
   Text,
 } = React
 
-class AccountSettingsDetail extends Component {
+class ActionsSettingsDetail extends Component {
 
   constructor(props) {
     super(props)
@@ -19,17 +22,27 @@ class AccountSettingsDetail extends Component {
   }
 
   render() {
+    const {ifttActionFieldChanged} = this.props
+    let index = this.props.selectedActionIndex
+    let alias = this.props.iftttActions[index].alias
+
     return (
         <View style={{flex: 1, flexDirection: 'column'}}>
           <View style={{flex: 2}}>
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3}])}
+                onChangeText={(value) => ifttActionFieldChanged({field: 'alias', value})}
+                autoFocus={true}
                 placeholder={"Action Name"}
                 returnKeyType="next"
+                autoCapitalize={'characters'}
+                value={alias}
             />
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3}])}
+                onChangeText={(value) => ifttActionFieldChanged({field: 'actionUrl', value})}
                 placeholder={"IFTTT URL"}
+                autoCapitalize={'characters'}
                 returnKeyType="next"
             />
           </View>
@@ -54,4 +67,13 @@ class AccountSettingsDetail extends Component {
   }
 }
 
-export default AccountSettingsDetail
+export default connect(
+  (state) => {
+    return state.accountSettings
+  },
+  (dispatch) => {
+    return {
+      ...bindActionCreators(accountSettingsActions, dispatch),
+    }
+  }
+)(ActionsSettingsDetail)

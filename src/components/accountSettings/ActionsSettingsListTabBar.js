@@ -1,6 +1,6 @@
 // import { Icon } from '../../node_modules/react-native-icons'
 import React from 'react-native'
-import style, {COLOR_3} from '../../stylesheets/styles'
+import style, {COLOR_5} from '../../stylesheets/styles'
 import ActionButton from '../ActionButton'
 
 let {
@@ -20,12 +20,9 @@ class ActionsSettingsListTabBar extends Component {
       <ActionButton
           onPress={() => this.props.goToPage(page)}
           text={actionInitial}
-          key={actionInitial}
+          key={page}
           ref={(component) => { this.tabs[page] = component}}
-          backgroundColor={'orange'}
-          onLayout={(event) => {
-            console.log(event)
-          }}
+          backgroundColor={COLOR_5}
       />
     )
   }
