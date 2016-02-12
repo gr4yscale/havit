@@ -9,6 +9,8 @@ import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
 import * as appActions from './redux/actions/appActions'
 import ActivityAndroid from '../node_modules/react-native-activity-android'
+import Clipboard from '../node_modules/react-native-clipboard'
+import {isValidUrl} from './stringUtils'
 
 const {
   DeviceEventEmitter,
@@ -100,8 +102,9 @@ class Root extends React.Component {
     if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
       CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
-
     this.refreshData()
+    let clipboardUrl = store.getState().app.lastClipboardUrl
+    this.checkForUrlInClipboard(clipboardUrl)
   }
 
   refreshData() {
@@ -110,6 +113,37 @@ class Root extends React.Component {
     .then(() => {
       store.dispatch(serverActions.fetchLinksReceived())
       store.dispatch(serverActions.fetchLinksSent())
+    })
+  }
+
+  checkForUrlInClipboard(urlInStore) {
+    Clipboard.get((clipboardContents) => {
+      console.log(urlInStore)
+      console.log(clipboardContents)
+      if (isValidUrl(clipboardContents)) {
+        if (clipboardContents !== urlInStore) {
+          store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
+          Alert.alert(
+            `URL detected in clipboard!`,
+            `Would you like to share or add this link to your inbox?\n\n${clipboardContents}`,
+            [
+              {text: 'No'},
+              {text: 'Share', onPress: () => {
+                Actions.Share({url: clipboardContents, title: '', inAppShare: true})
+              }},
+              {text: 'Add to Inbox', onPress: () => {
+                const {shareFormChanged, shareLink, fetchLinksReceived} = this.props
+                shareFormChanged('url', clipboardContents)
+                shareFormChanged('title', '')
+                shareLink(false)
+                .then(() => {
+                  fetchLinksReceived()
+                })
+              }},
+            ]
+          )
+        }
+      }
     })
   }
 
