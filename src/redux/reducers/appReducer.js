@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes'
 
 const initialState = {
   lastClipboardUrl: '',
+  requestCount: 0,
 }
 
 // TOFIX: handle request failures
