@@ -1,5 +1,6 @@
 import React from 'react-native';
 import {connect} from 'react-redux/native'
+import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import * as shareActions from '../redux/actions/shareActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
@@ -210,14 +211,8 @@ export default connect(
   },
   (dispatch) => {
     return {
-      friendsSuccess: (json) => dispatch(serverActions.friendsSuccess(json)),
-      loginSuccess: (json) => dispatch(serverActions.loginSuccess(json)),
-      shareLink: () => dispatch(shareActions.shareLink()),
-      resetSelectedFriends: (payload) => dispatch(shareActions.resetSelectedFriends(payload)),
-      friendCellTapped: (rowId) => dispatch(shareActions.friendCellTapped(rowId)),
-      shareFormChanged: (field, value) => dispatch(shareActions.shareFormChanged(field, value)),
-      postAllIftttActions: () => dispatch(shareActions.postAllIftttActions()),
-      fetchLinksSent: () => dispatch(serverActions.fetchLinksSent()),
+      ...bindActionCreators(serverActions, dispatch),
+      ...bindActionCreators(shareActions, dispatch),
     }
   }
 )(ShareContainer)
