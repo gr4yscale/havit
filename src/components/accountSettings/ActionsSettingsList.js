@@ -25,7 +25,7 @@ class ActionsSettingsList extends Component {
 
   render() {
     return (
-      <ScrollableTabView style={{flex: 1, height: 220}}
+      <ScrollableTabView style={{flex: 1, height: 258}}
           initialPage={0}
           renderTabBar={() => <ActionsSettingsListTabBar />}
           onChangeTab={(tab) => {

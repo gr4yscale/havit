@@ -25,13 +25,6 @@ class ActionsSettingsDetail extends Component {
     const {ifttActionFieldChanged} = this.props
     let index = this.props.selectedActionIndex
     let action = this.props.iftttActions[index]
-    let actionName = ''
-    let actionURL = ''
-
-    if (action) {
-      actionName = action.alias
-      actionURL = action.url
-    }
 
     return (
         <View style={{flex: 1, flexDirection: 'column'}}>
@@ -42,7 +35,7 @@ class ActionsSettingsDetail extends Component {
                 placeholder={"Action Name"}
                 returnKeyType="next"
                 autoCapitalize={'characters'}
-                value={actionName}
+                value={action.alias}
             />
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
@@ -50,20 +43,33 @@ class ActionsSettingsDetail extends Component {
                 placeholder={"IFTTT URL"}
                 autoCapitalize={'characters'}
                 returnKeyType="next"
-                value={actionURL}
+                value={action.url}
             />
           </View>
 
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1, flexDirection: 'row', marginTop: 6}}>
             <View style={{flex : 1, justifyContent: 'center'}}>
               <Text {...style('text', [{color: COLOR_5}])} numberOfLines={4}>
                 Trigger this action when someone shares to me
               </Text>
             </View>
             <Switch
-                onValueChange={(value) => this.setState({switchValue: value})}
-                style={{marginTop: 10, marginBottom: 10, marginLeft: 0, marginRight: 8, width: 48}}
-                value={this.state.switchValue}
+                onValueChange={(value) => ifttActionFieldChanged({field: 'triggerOnShareReceive', value})}
+                style={{marginTop: 10, marginBottom: 0, marginLeft: 0, marginRight: 8, width: 48}}
+                value={action.triggerOnShareReceive}
+            />
+          </View>
+
+          <View style={{flex: 0, flexDirection: 'row'}}>
+            <View style={{flex : 1, justifyContent: 'center'}}>
+              <Text {...style('text', [{color: COLOR_5}])}>
+                Enabled on Inbox
+              </Text>
+            </View>
+            <Switch
+                onValueChange={(value) => ifttActionFieldChanged({field: 'enabledOnInbox', value})}
+                style={{marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 8, width: 48}}
+                value={action.enabledOnInbox}
             />
           </View>
 
