@@ -91,15 +91,16 @@ export function postIftttActionsToFriend(user, urlToShare, title) {
     let fullFriend = _.find(getState().entities.friends, {objectId: user.objectId})
     let senderName = getState().entities.currentUser.displayName
 
-    if (!fullFriend.triggerIftttActionsOnReceiveShare) {
+    let urls = iftttUrlsForUser(fullFriend)
+
+    if (urls.length === 0) {
       dispatch(iftttUserActionsSuccess('User does not allow IFTTT actions to trigger when receiving a share.'))
       return Promise.resolve()
     }
+
     dispatch(iftttUserActionsRequest())
 
     let requestPromises = []
-    let urls = iftttUrlsForUser(fullFriend)
-
     for (let i = 0; i < urls.length; i++) {
       let iftttUrl = urls[i]
       let requestPromise = iftttRequest(urlToShare, iftttUrl, title, senderName)
@@ -152,11 +153,12 @@ export function postAllIftttActions() {
 
 function iftttUrlsForUser(user) {
   let iftttUrls = []
-  let urlKeys = ['iftttUrl1', 'iftttUrl2', 'iftttUrl3']
-  for (let i = 0; i < urlKeys.length; i++) {
-    let key = urlKeys[i]
-    if (user[key]) {
-      iftttUrls.push(user[key])
+  let actions = user.iftttActions
+
+  for (let i = 0; i < actions.length; i++) {
+    let action = actions[i]
+    if (action.triggerOnShareReceive) {
+      iftttUrls.push(action.url)
     }
   }
   return iftttUrls
