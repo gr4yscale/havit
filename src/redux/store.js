@@ -14,7 +14,7 @@ let engine = createEngine('havit-save-key')
 
 // TOFIX: make sure persisting friends doesn't bite me in the ass later with cache invalidation issues!
 // Ensure we didn't fuck iOS up
-let stateKeysToPersist = ['entities']
+let stateKeysToPersist = ['entities', 'accountSettings']
 
 engine = decorators.filter(engine, stateKeysToPersist)
 

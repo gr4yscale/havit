@@ -24,6 +24,7 @@ export function signup() {
     dispatch(signupRequest());
     let parse = new Parse();
     let data = getState().auth.signUpForm
+    data['iftttActions'] = getState().accountSettings.iftttActions
 
     return parse.signup(data)
     .then((response) => {

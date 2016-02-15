@@ -1,20 +1,34 @@
+import * as actionTypes from '../actionTypes'
+
 const initialState = {
   iftttActions: [
     {
-      alias: `😘 Hey babes`,
-      actionButtonDisplay: `😘`,
+      alias: `Unused`,
+      actionButtonDisplay: `📌`,
+      enabledOnInbox: false,
+      triggerOnShareReceive: false,
+      url: '',
     },
     {
-      alias: 'Word',
-      actionButtonDisplay: `W`,
+      alias: 'Unused',
+      actionButtonDisplay: `👻`,
+      enabledOnInbox: false,
+      triggerOnShareReceive: false,
+      url: '',
     },
     {
-      alias: 'Sup',
-      actionButtonDisplay: `S`,
+      alias: 'Unused',
+      actionButtonDisplay: `🎉`,
+      enabledOnInbox: false,
+      triggerOnShareReceive: false,
+      url: '',
     },
     {
-      alias: 'Whatup',
-      actionButtonDisplay: `W`,
+      alias: 'Unused',
+      actionButtonDisplay: `📷`,
+      enabledOnInbox: false,
+      triggerOnShareReceive: false,
+      url: '',
     },
   ],
   selectedActionIndex: 0,
@@ -54,6 +68,12 @@ export default function accountSettings(state = initialState, action) {
           iftttField(state, action, index),
           ...state.iftttActions.slice(index + 1),
         ],
+      })
+    case actionTypes.LOGIN_SUCCESS:
+      let iftttActions = []
+      if (action.response.iftttActions) iftttActions = action.response.iftttActions
+      return Object.assign({}, state, {
+        iftttActions,
       })
     default:
       return state;

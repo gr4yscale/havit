@@ -113,6 +113,7 @@ class LinksSentContainer extends Component {
                     ref={(cell) => this.cells[rowID] = cell}
                     rowID={rowID}
                     data={data}
+                    iftttActions={this.props.iftttActions}
                 />
               )
             }}
@@ -144,6 +145,7 @@ export default connect(
   (state) => {
     return {
       links: state.entities.linksSent,
+      iftttActions: state.accountSettings.iftttActions,
     }
   },
   (dispatch) => {
