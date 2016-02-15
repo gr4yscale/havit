@@ -1,5 +1,6 @@
 // import { Icon } from '../../node_modules/react-native-icons'
 import React from 'react-native'
+import {connect} from 'react-redux/native'
 import style, {COLOR_5} from '../../stylesheets/styles'
 import ActionButton from '../ActionButton'
 
@@ -15,14 +16,25 @@ class ActionsSettingsListTabBar extends Component {
     this.tabs = []
   }
 
-  renderTabOption(actionInitial, page) {
+  actionButtonTitle(actionIndex) {
+    let title = '-'
+    if (actionIndex < this.props.iftttActions.length) {
+      title = this.props.iftttActions[actionIndex].actionButtonDisplay
+    }
+    return title
+  }
+
+  renderActionButton(actionIndex, page) {
+    let title = this.actionButtonTitle(actionIndex)
+
     return (
       <ActionButton
           onPress={() => this.props.goToPage(page)}
-          text={actionInitial}
+          text={title}
           key={page}
           ref={(component) => { this.tabs[page] = component}}
           backgroundColor={COLOR_5}
+          forceCircleBackground={true}
       />
     )
   }
@@ -43,7 +55,7 @@ class ActionsSettingsListTabBar extends Component {
     return (
       <View>
         <View {...style('actionSettingsTabContainer')}>
-          {this.props.tabs.map((actionInitial, i) => this.renderTabOption(actionInitial, i))}
+          {this.props.tabs.map((actionIndex, i) => this.renderActionButton(actionIndex, i))}
         </View>
         <Animated.View style={[style('actionSettingsTabBar.activeTabIndicatorStyle').style, {left, bottom: 3}]} />
       </View>
@@ -58,3 +70,9 @@ ActionsSettingsListTabBar.PropTypes = {
 }
 
 export default ActionsSettingsListTabBar
+
+export default connect(
+  (state) => {
+    return state.accountSettings
+  }
+)(ActionsSettingsListTabBar)

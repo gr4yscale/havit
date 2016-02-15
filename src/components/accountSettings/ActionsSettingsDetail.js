@@ -34,14 +34,14 @@ class ActionsSettingsDetail extends Component {
                 onChangeText={(value) => ifttActionFieldChanged({field: 'alias', value})}
                 placeholder={"Action Name"}
                 returnKeyType="next"
-                autoCapitalize={'characters'}
+                autoCapitalize={'words'}
                 value={action.alias}
             />
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
                 onChangeText={(value) => ifttActionFieldChanged({field: 'url', value})}
                 placeholder={"IFTTT URL"}
-                autoCapitalize={'characters'}
+                autoCapitalize={'words'}
                 returnKeyType="next"
                 value={action.url}
             />
