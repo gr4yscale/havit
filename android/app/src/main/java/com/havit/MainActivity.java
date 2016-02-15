@@ -10,13 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /** Native Modules */
-import com.smixx.reactnativeicons.ReactNativeIcons;
-import com.smixx.reactnativeicons.IconFont;
 import com.projectseptember.RNGL.RNGLPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import ca.jaysoo.activityandroid.ActivityAndroidPackage;
 import com.davidsandor.rnclipboardandroid.RNClipboardAndroidPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import ca.jaysoo.activityandroid.ActivityAndroidPackage;
 
 /** HockeyApp */
 
@@ -60,13 +58,8 @@ public class MainActivity extends ReactActivity {
         new MainReactPackage(),
         new ReceiveIntentPackage(),
         new RNGLPackage(),
-        new ReactMaterialKitPackage(),
         new LinearGradientPackage(),
-        new ReactNativeIcons(),
-        new ReactNativeIcons(Arrays.asList(
-            new IconFont("ion", "ionicons.ttf")
-            )
-        ),
+        new VectorIconsPackage(),
         new ActivityAndroidPackage(this),
         new RNClipboardAndroidPackage()
       );
