@@ -12,6 +12,7 @@ import LinksFeedContainer from './LinksFeedContainer'
 import LinksSentContainer from './LinksSentContainer'
 import FriendAddContainer from './FriendAddContainer'
 import AccountSettingsContainer from './AccountSettingsContainer'
+import _ from 'lodash'
 
 let {
   Component,
@@ -19,7 +20,20 @@ let {
 
 class MainContainer extends Component {
 
+  componentWillMount() {
+    this.throttledRefreshData = _.throttle(this.refreshData, 60000, {'leading': true, 'trailing': false})
+  }
+
+  handleTabChange(tab) {
+    // on friends tab fetch "all users" list (for now, this isn't scalable obviously)
+    if (tab === 2) {
+      this.throttledRefreshData()
     }
+  }
+
+  refreshData() {
+    this.props.getAllUsers()
+    this.props.fetchFriends()
   }
 
   render() {
@@ -29,6 +43,9 @@ class MainContainer extends Component {
           renderTabBar={() => <TabBar />}
           renderProgressView={() => <ProgressView animate={true} />}
           showProgressView={this.props.requestCount > 0}
+          onChangeTab={(tab) => {
+            this.handleTabChange(tab.i)
+          }}
       >
         <LinksFeedContainer tabLabel="ion|home" />
         <LinksSentContainer tabLabel="ion|paper-airplane" />
