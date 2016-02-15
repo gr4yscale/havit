@@ -239,7 +239,7 @@ export default cairn({
       width: ICON_SIZE_NORMAL,
       height: ICON_SIZE_NORMAL,
       props: {
-        name: 'ion|android-done',
+        name: 'android-done',
         size: ICON_SIZE_NORMAL,
         color: COLOR_5,
       },
@@ -254,7 +254,7 @@ export default cairn({
       width: ICON_SIZE_NORMAL,
       height: ICON_SIZE_NORMAL,
       props: {
-        name: 'ion|ios-close-empty',
+        name: 'ios-close-empty',
         size: ICON_SIZE_NORMAL,
         color: COLOR_5,
       },

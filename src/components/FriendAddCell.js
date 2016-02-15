@@ -1,6 +1,6 @@
 import React from 'react-native';
-import {Icon} from '../../node_modules/react-native-icons'
 import style from '../stylesheets/styles'
+let Icon = require('react-native-vector-icons/Ionicons')
 
 let {
   Component,

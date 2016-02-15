@@ -7,8 +7,8 @@ import {Actions} from '../../node_modules/react-native-router-flux'
 import FriendList from '../components/FriendList'
 import ShareHeader from '../components/ShareHeader'
 import ProgressView from '../components/ProgressView'
-import {Icon} from '../../node_modules/react-native-icons'
 import style, { COLOR_1, COLOR_2 } from '../stylesheets/styles'
+let Icon = require('react-native-vector-icons/Ionicons')
 
 let {
   Component,
@@ -125,7 +125,7 @@ class ShareContainer extends Component {
           style={{position: 'absolute', top: 20, left: 8, width: 30, height: 30}}
       >
         <Icon
-            name={'ion|android-close'}
+            name="android-close"
             size={30}
             color={COLOR_2}
             style={styles.closeIcon}

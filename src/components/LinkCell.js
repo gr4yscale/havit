@@ -1,8 +1,8 @@
 import React from 'react-native'
 import Accordion from '../../node_modules/react-native-accordion'
-import {Icon} from '../../node_modules/react-native-icons'
 import style, { COLOR_1, COLOR_2, COLOR_4, COLOR_5 } from '../stylesheets/styles'
 import ActionButton from './ActionButton'
+let Icon = require('react-native-vector-icons/Ionicons');
 
 let {
   Component,
@@ -123,7 +123,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|android-globe'}
+                  name="android-globe"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}
@@ -135,7 +135,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|star'}
+                  name="star"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}
@@ -147,7 +147,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name={'ion|android-share'}
+                  name="android-share"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}
