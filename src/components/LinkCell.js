@@ -155,8 +155,11 @@ class LinkCell extends Component {
             </TouchableOpacity>
 
             {
-              // render ifttt actions
-              this.props.iftttActions.map((action) => {
+              // render ifttt action buttons
+              this.props.iftttActions.filter((action) => {
+                return action.enabledOnInbox
+              })
+              .map((action) => {
                 return (
                   <ActionButton
                       text={action.actionButtonDisplay}
