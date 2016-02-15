@@ -22,10 +22,11 @@ export const signupFailure = (error) => ({type: actionTypes.SIGNUP_FAILURE, payl
 export function signup() {
   return (dispatch, getState) => {
     dispatch(signupRequest());
-    let parse = new Parse();
+
     let data = getState().auth.signUpForm
     data['iftttActions'] = getState().accountSettings.iftttActions
 
+    let parse = new Parse();
     return parse.signup(data)
     .then((response) => {
       let json = JSON.parse(response._bodyInit)
@@ -87,6 +88,37 @@ export function login(username, password) {
     })
   }
 }
+
+
+// Update User
+//////////////////////////////////////////////////////
+
+const updateCurrentUserRequest = createAction('UPDATE_CURRENT_USER_REQUEST')
+const updateCurrentUserSuccess = createAction('UPDATE_CURRENT_USER_SUCCESS')
+const updateCurrentUserFailure = createAction('UPDATE_CURRENT_USER_FAILURE')
+
+export function updateCurrentUser() {
+  return (dispatch, getState) => {
+    dispatch(updateCurrentUserRequest());
+
+    let data = {}
+    data['iftttActions'] = getState().accountSettings.iftttActions
+    data['displayName'] = getState().accountSettings.displayName
+
+    let parse = configuredParse(getState());
+    return parse.updateCurrentUser(data)
+    .then((response) => {
+      let json = JSON.parse(response._bodyInit)
+      if (response.status === 200 || response.status === 201) {
+        return dispatch(updateCurrentUserSuccess(json))
+      } else {
+        dispatch(updateCurrentUserFailure(json.error))
+        return Promise.reject(json.error)
+      }
+    })
+  }
+}
+
 
 
 // LINKS

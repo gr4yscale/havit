@@ -39,7 +39,7 @@ class ActionsSettingsDetail extends Component {
             />
             <TextInput
                 {...style('text.heading form.textInput', [{flex: 0, backgroundColor:COLOR_3, color: COLOR_4}])}
-                onChangeText={(value) => ifttActionFieldChanged({field: 'actionUrl', value})}
+                onChangeText={(value) => ifttActionFieldChanged({field: 'url', value})}
                 placeholder={"IFTTT URL"}
                 autoCapitalize={'characters'}
                 returnKeyType="next"

@@ -24,6 +24,7 @@ export default function app(state = initialState, action) {
     case actionTypes.FRIENDS_REQUEST:
     case actionTypes.USERS_GET_ALL_REQUEST:
     case actionTypes.GET_USER_BY_EMAIL_REQUEST:
+    case 'UPDATE_CURRENT_USER_REQUEST':
 
       return Object.assign({}, state, {
         requestCount: state.requestCount + 1,
@@ -45,6 +46,8 @@ export default function app(state = initialState, action) {
     case actionTypes.USERS_GET_ALL_FAILURE:
     case actionTypes.GET_USER_BY_EMAIL_SUCCESS:
     case actionTypes.GET_USER_BY_EMAIL_FAILURE:
+    case 'UPDATE_CURRENT_USER_SUCCESS':
+    case 'UPDATE_CURRENT_USER_FAILURE':
 
       return Object.assign({}, state, {
         requestCount: state.requestCount - 1,

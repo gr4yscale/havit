@@ -40,6 +40,15 @@ export default class Parse {
     }
   }
 
+  updateCurrentUser(data) {
+    try {
+      let url = `/1/users/${this.userObjectId}`
+      return this.fetchFromParse('PUT', url, data);
+    } catch(error) {
+      throw error;
+    }
+  }
+
   getMyLinks() {
     try {
       let body = `where={"recipient_ids": {"$in": ["${this.userObjectId}"]}}&order=-createdAt`
