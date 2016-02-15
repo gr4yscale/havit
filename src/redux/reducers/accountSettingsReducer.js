@@ -69,11 +69,18 @@ export default function accountSettings(state = initialState, action) {
           ...state.iftttActions.slice(index + 1),
         ],
       })
+    case 'ACCOUNT_SETTINGS_FIELD_CHANGED': {
+      let { field, value } = action.payload
+      let updatedField = {}
+      updatedField[field] = value
+      return Object.assign({}, state, updatedField)
+    }
     case actionTypes.LOGIN_SUCCESS:
       let iftttActions = []
       if (action.response.iftttActions) iftttActions = action.response.iftttActions
       return Object.assign({}, state, {
         iftttActions,
+        displayName: action.response.displayName,
       })
     default:
       return state;

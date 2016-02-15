@@ -3,9 +3,10 @@ import {connect} from 'react-redux/native'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import * as authActions from '../redux/actions/authActions'
+import * as accountSettingsActions from '../redux/actions/accountSettingsActions'
 import {Actions} from '../../node_modules/react-native-router-flux'
 import ActionsSettingsList from '../components/accountSettings/ActionsSettingsList'
-import style, {COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
+import style, {COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
 import ProgressView from '../components/ProgressView'
 import HVTButton from '../components/HVTButton'
 
@@ -35,6 +36,7 @@ class AccountSettingsContainer extends Component {
   }
 
   render() {
+    const {accountSettingsFieldChanged} = this.props
     return (
       <ScrollView {...style('container', [{padding: 20}])}>
         <View style={{flex: 1, marginBottom: 240}}>
@@ -50,11 +52,13 @@ class AccountSettingsContainer extends Component {
               placeholder={"Display Name"}
               ref={(component) => this.textInputDisplayName = component}
               returnKeyType="next"
+              onChangeText={(value) => accountSettingsFieldChanged({field: 'displayName', value})}
               onKeyPress={(event) => {
                 if (event.nativeEvent.key === 'Enter') {
                   this.textInputDisplayName.blur()
                 }
               }}
+              value={this.props.displayName}
           />
 
           <View style={{flex: 1, marginTop: 8, marginBottom: 8, flexDirection: 'row'}}>
@@ -111,12 +115,13 @@ class AccountSettingsContainer extends Component {
 
 export default connect(
   (state) => {
-    return state
+    return state.accountSettings
   },
   (dispatch) => {
     return {
       ...bindActionCreators(serverActions, dispatch),
       ...bindActionCreators(authActions, dispatch),
+      ...bindActionCreators(accountSettingsActions, dispatch),
     }
   }
 )(AccountSettingsContainer)
