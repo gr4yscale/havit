@@ -44,6 +44,7 @@
 		29C684DB1C5A291900DD399D /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C684D81C5A291900DD399D /* HockeySDK.framework */; };
 		29C684DC1C5A291900DD399D /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 29C684DA1C5A291900DD399D /* HockeySDKResources.bundle */; };
 		29C684E01C5A365200DD399D /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C684DF1C5A365200DD399D /* HockeySDK.framework */; };
+		29E9A95D1C734C1D00A473DF /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 294F88BF1C71671000C2D955 /* libCodePush.a */; };
 		29F9F6141C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
 		29F9F6151C4D60AC00158785 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 29F9F6131C4D60AC00158785 /* main.jsbundle */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -260,6 +261,7 @@
 				D7DBD357AF0647EAB522ECB5 /* libRNGL.a in Frameworks */,
 				881007F720EE413585288E73 /* libRNClipboard.a in Frameworks */,
 				CC04C3416DD145B399EF606F /* libRNVectorIcons.a in Frameworks */,
+				29E9A95D1C734C1D00A473DF /* libCodePush.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
