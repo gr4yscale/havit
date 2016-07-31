@@ -20,7 +20,7 @@ class HVTIconButton extends Component {
       <Icon
           color={this.props.color ? this.props.color : COLOR_1}
           size={this.props.size}
-          name={this.props.iconName}
+          name="android-close"
           {...style('buttonIcon', [{width: this.props.size, height: this.props.size}, this.props.extraIconStyle])}
       />
     </TouchableOpacity>)

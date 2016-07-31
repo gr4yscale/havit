@@ -11,7 +11,7 @@
 #import "RCTBridge.h"
 #import "RCTEventDispatcher.h"
 #import "HVTShareExtensionStorage.h"
-#import "CodePush.h"
+//#import "CodePush.h"
 
 @import HockeySDK;
 
@@ -35,9 +35,9 @@ RCT_EXPORT_MODULE()
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://admins-MacBook-Pro.local:8081/index.ios.bundle?dev=true"];
+    jsCodeLocation = [NSURL URLWithString:@"http://Tylers-MacBook-Pro-2.local:8081/index.ios.bundle?dev=true"];
   #else
-    jsCodeLocation = [CodePush bundleURL];
+//    jsCodeLocation = [CodePush bundleURL];
   #endif
   
   NSDictionary *initialProps = @{@"title" : @"initialTitle",
