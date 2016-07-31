@@ -18,8 +18,8 @@ import ca.jaysoo.activityandroid.ActivityAndroidPackage;
 
 /** HockeyApp */
 
-import net.hockeyapp.android.CrashManager;
-import net.hockeyapp.android.UpdateManager;
+// import net.hockeyapp.android.CrashManager;
+// import net.hockeyapp.android.UpdateManager;
 
 public class MainActivity extends ReactActivity {
 
@@ -33,7 +33,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        UpdateManager.unregister();
+        // UpdateManager.unregister();
     }
 
     @Override
@@ -49,7 +49,8 @@ public class MainActivity extends ReactActivity {
 
     @Override
     protected boolean getUseDeveloperSupport() {
-        return BuildConfig.DEBUG;
+        // return BuildConfig.DEBUG;
+        return true;
     }
 
     @Override
@@ -67,10 +68,10 @@ public class MainActivity extends ReactActivity {
 
     private void checkForUpdates() {
         // Remove this for store / production builds!
-        UpdateManager.register(this, "[redacted]");
+        // UpdateManager.register(this, "[redacted]");
     }
 
     private void checkForCrashes() {
-        CrashManager.register(this, "[redacted]");
+        // CrashManager.register(this, "[redacted]");
     }
 }
