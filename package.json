@@ -34,10 +34,10 @@
     "mocha": "^2.3.4",
     "react-native-accordion": "^1.0.1",
     "react-native-activity-android": "^0.17.3",
+    "react-native-router-flux": "^3.32.0",
     "react-native-scrollable-tab-view": "^0.5.3",
     "react-native-vector-icons": "^2.0.3",
-    "react-redux": "^4.4.5",
-    "react-native-router-flux": "^3.32.0",
+    "react-redux": "^4.4.5"
   },
   "license": "MIT",
   "repository": {
