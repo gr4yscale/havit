@@ -7,6 +7,8 @@
     "test": "mocha --compilers js:babel-core/register --watch tests/*.js",
     "start": "/usr/local/bin/react-native start",
     "bundle": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle",
+    "bundle-android": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.android.js --platform android --minify --bundle-output android/main.jsbundle",
+    "clean-packager-cache": "rm -fr $TMPDIR/react-*",
     "clean-babelrc-files": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
     "release": "/usr/local/bin/react-native bundle --dev false --assets-dest ./ --entry-file index.ios.js --platform ios --minify --bundle-output ios/main.jsbundle; code-push release havit-ios ios/main.jsbundle 1.0.5"
   },
