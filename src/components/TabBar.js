@@ -21,8 +21,6 @@ class TabBar extends Component {
   }
 
   renderTabOption(name, page) {
-    // let isTabActive = this.props.activeTab === page
-
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} {...style('tabBar.tab')}>
         <Icon name={name} style={style('tabBar.icon').style} size={style('tabBar.icon').size} color={COLOR_1}
@@ -36,20 +34,20 @@ class TabBar extends Component {
   }
 
   setAnimationValue({value}) {
-    // this.unselectedTabIcons.forEach((icon, i) => {
-    //   let iconRef = icon
-    //
-    //   if (!icon.setNativeProps && icon !== null) {
-    //     iconRef = icon.refs.icon_image
-    //   }
-    //
-    //   if (value - i >= 0 && value - i <= 1) {
-    //     iconRef.setNativeProps({opacity: value - i})
-    //   }
-    //   if (i - value >= 0 &&  i - value <= 1) {
-    //     iconRef.setNativeProps({opacity: i - value})
-    //   }
-    // })
+    this.unselectedTabIcons.forEach((icon, i) => {
+      let iconRef = icon
+
+      if (!icon.setNativeProps && icon !== null) {
+        iconRef = icon.refs.icon_image
+      }
+
+      if (value - i >= 0 && value - i <= 1) {
+        iconRef.setNativeProps({style: {opacity: value - i}})
+      }
+      if (i - value >= 0 &&  i - value <= 1) {
+        iconRef.setNativeProps({style: {opacity: i - value}})
+      }
+    })
   }
 
   render() {
