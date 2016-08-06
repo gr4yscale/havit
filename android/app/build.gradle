@@ -59,6 +59,9 @@ import com.android.build.OutputFile
 
 apply from: "react.gradle"
 
+
+/** react-native-vector-icons */
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -119,11 +122,6 @@ android {
 
 dependencies {
     compile project(':react-native-vector-icons')
-    compile project(':react-native-code-push')
-    compile project(':react-native-activity-android')
-    compile project(':gl-react-native')
-    compile project(':react-native-clipboard')
-    compile project(':react-native-linear-gradient')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"

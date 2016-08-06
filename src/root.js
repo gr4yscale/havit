@@ -3,7 +3,7 @@ import {
   DeviceEventEmitter,
   Platform,
   AppStateIOS,
-  Alert,
+  // Alert,
 } from 'react-native'
 
 import { Provider } from 'react-redux'
@@ -16,10 +16,10 @@ import _ from 'lodash' // TOFIX: hrmmmm... not sure about having this one in...
 import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
 import * as appActions from './redux/actions/appActions'
-import ActivityAndroid from '../node_modules/react-native-activity-android'
-import Clipboard from '../node_modules/react-native-clipboard'
-import {isValidUrl} from './stringUtils'
-
+// import ActivityAndroid from '../node_modules/react-native-activity-android'
+// TOFIX: Clipboard is moved to core
+// import Clipboard from '../node_modules/react-native-clipboard'
+// import {isValidUrl} from './stringUtils'
 
 // This is necessary because React Components will not have mounted (and thus Router) when we receive the
 // event from the Android Native Module. So, I set some state on the redux store and when the components
@@ -32,10 +32,10 @@ DeviceEventEmitter.addListener(
   }
 )
 
-let CodePush
-if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
-  CodePush = require('../node_modules/react-native-code-push')
-}
+// let CodePush
+// if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
+  // CodePush = require('../node_modules/react-native-code-push')
+// }
 
 class Root extends Component {
 
@@ -53,9 +53,9 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
-      CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
-    }
+    // if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
+      // CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
+    // }
     this.subscribeToAppLifecycleEvents()
   }
 
@@ -90,9 +90,9 @@ class Root extends Component {
         }
       })
     } else {
-      ActivityAndroid.addEventListener('activityResume', () => {
-        this.appDidBecomeActive()
-      })
+      // ActivityAndroid.addEventListener('activityResume', () => {
+      //   this.appDidBecomeActive()
+      // })
     }
   }
 
@@ -101,12 +101,12 @@ class Root extends Component {
   }
 
   appDidBecomeActive() {
-    if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
-      CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
-    }
+    // if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
+      // CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
+    // }
     this.refreshData()
-    let clipboardUrl = store.getState().app.lastClipboardUrl
-    this.checkForUrlInClipboard(clipboardUrl)
+    // let clipboardUrl = store.getState().app.lastClipboardUrl
+    // this.checkForUrlInClipboard(clipboardUrl)
   }
 
   refreshData() {
@@ -118,36 +118,36 @@ class Root extends Component {
     })
   }
 
-  checkForUrlInClipboard(urlInStore) {
-    Clipboard.get((clipboardContents) => {
-      console.log(urlInStore)
-      console.log(clipboardContents)
-      if (isValidUrl(clipboardContents)) {
-        if (clipboardContents !== urlInStore) {
-          store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
-          Alert.alert(
-            `URL detected in clipboard!`,
-            `Would you like to share or add this link to your inbox?\n\n${clipboardContents}`,
-            [
-              {text: 'No'},
-              {text: 'Share', onPress: () => {
-                Actions.Share({url: clipboardContents, title: '', inAppShare: true})
-              }},
-              {text: 'Add to Inbox', onPress: () => {
-                const {shareFormChanged, shareLink, fetchLinksReceived} = this.props
-                shareFormChanged('url', clipboardContents)
-                shareFormChanged('title', '')
-                shareLink(false)
-                .then(() => {
-                  fetchLinksReceived()
-                })
-              }},
-            ]
-          )
-        }
-      }
-    })
-  }
+  // checkForUrlInClipboard(urlInStore) {
+  //   Clipboard.get((clipboardContents) => {
+  //     console.log(urlInStore)
+  //     console.log(clipboardContents)
+  //     if (isValidUrl(clipboardContents)) {
+  //       if (clipboardContents !== urlInStore) {
+  //         store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
+  //         Alert.alert(
+  //           `URL detected in clipboard!`,
+  //           `Would you like to share or add this link to your inbox?\n\n${clipboardContents}`,
+  //           [
+  //             {text: 'No'},
+  //             {text: 'Share', onPress: () => {
+  //               Actions.Share({url: clipboardContents, title: '', inAppShare: true})
+  //             }},
+  //             {text: 'Add to Inbox', onPress: () => {
+  //               const {shareFormChanged, shareLink, fetchLinksReceived} = this.props
+  //               shareFormChanged('url', clipboardContents)
+  //               shareFormChanged('title', '')
+  //               shareLink(false)
+  //               .then(() => {
+  //                 fetchLinksReceived()
+  //               })
+  //             }},
+  //           ]
+  //         )
+  //       }
+  //     }
+  //   })
+  // }
 
   render () {
     return (

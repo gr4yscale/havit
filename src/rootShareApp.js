@@ -9,8 +9,8 @@ class RootShareApp extends Component {
 
   componentDidMount() {
     if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
-      const CodePush = require('../node_modules/react-native-code-push')
-      CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
+      // const CodePush = require('../node_modules/react-native-code-push')
+      // CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     }
   }
 
