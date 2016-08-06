@@ -39,15 +39,11 @@ class App extends Component {
   render() {
     console.log('app: render')
     return (
-      <Router hideNavBar={true} >
-        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} />
-
-        <Route name="MainContainer" component={MainContainer} title="Inbox" type="replace" />
-        <Route name="Share" component={ShareContainer} title="Share" type="replace" />
-        <Route name="Friends" component={FriendAddContainer} title="Friends" />
-        <Route name="Intro" component={IntroContainer} title="Intro" type="replace"
-            initial={true}
-        />
+      <Router hideNavBar={true}>
+        <Scene key="Intro" component={IntroContainer} title="Intro" type={ActionConst.REPLACE} initial />
+        <Scene key="MainContainer" component={MainContainer} title="Inbox" type="replace" />
+        <Scene key="Share" component={ShareContainer} title="Share" type="replace" />
+        <Scene key="Friends" component={FriendAddContainer} title="Friends" />
       </Router>
     )
   }
