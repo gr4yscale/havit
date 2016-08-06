@@ -152,7 +152,7 @@ class Root extends Component {
   render () {
     return (
       <Provider store={store}>
-        {() => <App lastIntentUrlReceived={this.lastIntentUrlReceived} lastIntentTitleReceived={this.lastIntentTitleReceived} />}
+        <App lastIntentUrlReceived={this.lastIntentUrlReceived} lastIntentTitleReceived={this.lastIntentTitleReceived} />
       </Provider>
     )
   }
