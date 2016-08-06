@@ -1,13 +1,11 @@
-import React from 'react-native'
-import style from '../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component, PropTypes} from 'react'
+import {
   View,
   TouchableOpacity,
   Text,
-  PropTypes,
-} = React
+} from 'react-native'
+
+import style from '../stylesheets/styles'
 
 class HVTButton extends Component {
 

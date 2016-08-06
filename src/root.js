@@ -1,5 +1,13 @@
-import React from 'react-native'
-import { Provider } from 'react-redux/native'
+import React, {Component} from 'react'
+import {
+  DeviceEventEmitter,
+  Platform,
+  AppStateIOS,
+  Alert,
+} from 'react-native'
+
+import { Provider } from 'react-redux'
+
 import store from './redux/store'
 import { loadInitialData } from './redux/store'
 import App from './containers/app'
@@ -12,12 +20,6 @@ import ActivityAndroid from '../node_modules/react-native-activity-android'
 import Clipboard from '../node_modules/react-native-clipboard'
 import {isValidUrl} from './stringUtils'
 
-const {
-  DeviceEventEmitter,
-  Platform,
-  AppStateIOS,
-  Alert,
-} = React
 
 // This is necessary because React Components will not have mounted (and thus Router) when we receive the
 // event from the Android Native Module. So, I set some state on the redux store and when the components
@@ -35,7 +37,7 @@ if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef
   CodePush = require('../node_modules/react-native-code-push')
 }
 
-class Root extends React.Component {
+class Root extends Component {
 
   constructor(props) {
     super(props)

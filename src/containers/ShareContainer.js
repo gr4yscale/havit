@@ -1,5 +1,16 @@
-import React from 'react-native';
-import {connect} from 'react-redux/native'
+import React, {Component} from 'react'
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  NativeAppEventEmitter,
+  NativeModules,
+  Platform,
+} from 'react-native'
+
+
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import * as shareActions from '../redux/actions/shareActions'
@@ -9,17 +20,6 @@ import ShareHeader from '../components/ShareHeader'
 import ProgressView from '../components/ProgressView'
 import style, { COLOR_1, COLOR_2 } from '../stylesheets/styles'
 let Icon = require('react-native-vector-icons/Ionicons')
-
-let {
-  Component,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  NativeAppEventEmitter,
-  NativeModules,
-  Platform,
-} = React
 
 // credit: brentvatne from his example in
 // https://github.com/brentvatne/react-native-linear-gradient

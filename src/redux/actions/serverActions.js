@@ -5,12 +5,10 @@ import {createAction} from 'redux-actions'
 import {resetSelectedFriends} from '../actions/shareActions'
 
 // TOFIX: move this stuff elsewhere, also merge auth actions into serverActions!
-import React from 'react-native';
-let {
+import {
   NativeModules,
   Platform,
-} = React
-
+} from 'react-native'
 
 // SIGN UP
 //////////////////////////////////////////////////////

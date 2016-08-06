@@ -1,12 +1,10 @@
-import React from 'react-native'
+import React, {Component, PropTypes} from 'react'
+import {
+  TouchableOpacity,
+} from 'react-native'
+
 import style, {COLOR_1} from '../stylesheets/styles'
 let Icon = require('react-native-vector-icons/Ionicons')
-
-let {
-  Component,
-  TouchableOpacity,
-  PropTypes,
-} = React
 
 class HVTIconButton extends Component {
 

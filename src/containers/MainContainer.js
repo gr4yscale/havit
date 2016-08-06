@@ -1,5 +1,6 @@
-import React from 'react-native'
-import {connect} from 'react-redux/native'
+import React, {Component} from 'react'
+
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as appActions from '../redux/actions/appActions'
 import * as serverActions from '../redux/actions/serverActions'
@@ -12,10 +13,6 @@ import LinksSentContainer from './LinksSentContainer'
 import FriendAddContainer from './FriendAddContainer'
 import AccountSettingsContainer from './AccountSettingsContainer'
 import _ from 'lodash'
-
-let {
-  Component,
-} = React
 
 class MainContainer extends Component {
 

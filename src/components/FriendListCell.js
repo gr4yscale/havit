@@ -1,13 +1,12 @@
-import React from 'react-native';
-import style from '../stylesheets/styles'
-let Icon = require('react-native-vector-icons/Ionicons')
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   Text,
   TouchableOpacity,
-} = React
+} from 'react-native'
+
+import style from '../stylesheets/styles'
+let Icon = require('react-native-vector-icons/Ionicons')
 
 class FriendListCell extends Component {
 

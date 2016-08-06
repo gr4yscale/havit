@@ -1,10 +1,11 @@
-import React, {Platform} from 'react-native'
+import React, {Component} from 'react'
+
 import { Provider } from 'react-redux/native'
 import store from './redux/store'
 import ShareContainer from './containers/ShareContainer'
 
 
-class RootShareApp extends React.Component {
+class RootShareApp extends Component {
 
   componentDidMount() {
     if (!__DEV__ && Platform.OS === 'ios') { //eslint-disable-line no-undef

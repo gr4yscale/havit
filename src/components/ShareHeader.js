@@ -1,11 +1,9 @@
-import React from 'react-native';
-import style from '../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   TextInput,
-} = React
+} from 'react-native'
+import style from '../stylesheets/styles'
 
 class ShareHeader extends Component {
 

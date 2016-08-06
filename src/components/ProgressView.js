@@ -1,13 +1,12 @@
-import React from 'react-native'
-import {COLOR_3, COLOR_5} from '../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   Animated,
   Dimensions,
   StyleSheet,
-} = React
+} from 'react-native'
+
+import {COLOR_3, COLOR_5} from '../stylesheets/styles'
 
 const deviceWidth = Dimensions.get('window').width;
 

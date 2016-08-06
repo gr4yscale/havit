@@ -1,13 +1,11 @@
-import React from 'react-native'
-import style from '../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   TouchableOpacity,
   Text,
-} = React
+} from 'react-native'
 
+import style from '../stylesheets/styles'
 
 class ActionButton extends Component {
   constructor(props) {

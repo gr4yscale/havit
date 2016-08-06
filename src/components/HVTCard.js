@@ -1,12 +1,7 @@
-import React from 'react-native'
+import React, {Component, PropTypes} from 'react'
+import {View} from 'react-native';
+
 import style from '../stylesheets/styles'
-
-
-let {
-  Component,
-  View,
-  PropTypes,
-} = React
 
 // TOFIX: container is positioned relative (flexbox), but contained views are positioned absolute
 // this is so that the shadow can sit behind the content view

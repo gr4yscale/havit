@@ -1,13 +1,5 @@
-import React from 'react-native';
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux/native'
-import * as serverActions from '../redux/actions/serverActions'
-import LinkCell from '../components/LinkCell'
-import * as LinkCellActionTypes from '../components/LinkCell'
-import {Actions} from '../../node_modules/react-native-router-flux'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   StyleSheet,
   View,
   ListView,
@@ -16,7 +8,15 @@ let {
   Alert,
   Platform,
   IntentAndroid,
-} = React
+} from 'react-native'
+
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import * as serverActions from '../redux/actions/serverActions'
+import LinkCell from '../components/LinkCell'
+import * as LinkCellActionTypes from '../components/LinkCell'
+import {Actions} from '../../node_modules/react-native-router-flux'
 
 let deviceHeight = Dimensions.get('window').height;
 

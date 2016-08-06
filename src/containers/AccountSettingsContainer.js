@@ -1,5 +1,14 @@
-import React from 'react-native'
-import {connect} from 'react-redux/native'
+import React, {Component} from 'react'
+import {
+  View,
+  ScrollView,
+  Dimensions,
+  TextInput,
+  Switch,
+  Text,
+} from 'react-native'
+
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as serverActions from '../redux/actions/serverActions'
 import * as authActions from '../redux/actions/authActions'
@@ -9,16 +18,6 @@ import ActionsSettingsList from '../components/accountSettings/ActionsSettingsLi
 import style, {COLOR_2, COLOR_3, COLOR_4, COLOR_5} from '../stylesheets/styles'
 import ProgressView from '../components/ProgressView'
 import HVTButton from '../components/HVTButton'
-
-let {
-  Component,
-  View,
-  ScrollView,
-  Dimensions,
-  TextInput,
-  Switch,
-  Text,
-} = React
 
 const deviceWidth = Dimensions.get('window').width
 const deviceHeight = Dimensions.get('window').height

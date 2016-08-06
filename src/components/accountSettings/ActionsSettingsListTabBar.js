@@ -1,14 +1,13 @@
 // import { Icon } from '../../node_modules/react-native-icons'
-import React from 'react-native'
-import {connect} from 'react-redux/native'
-import style, {COLOR_5} from '../../stylesheets/styles'
-import ActionButton from '../ActionButton'
-
-let {
-  Component,
+import React, {Component, PropTypes} from 'react'
+import {
   View,
   Animated,
-} = React
+} from 'react-native'
+
+import {connect} from 'react-redux'
+import style, {COLOR_5} from '../../stylesheets/styles'
+import ActionButton from '../ActionButton'
 
 class ActionsSettingsListTabBar extends Component {
   constructor(props) {
@@ -64,9 +63,9 @@ class ActionsSettingsListTabBar extends Component {
 }
 
 ActionsSettingsListTabBar.PropTypes = {
-  goToPage: React.PropTypes.func,
-  activeTab: React.PropTypes.number,
-  tabs: React.PropTypes.array,
+  goToPage: PropTypes.func,
+  activeTab: PropTypes.number,
+  tabs: PropTypes.array,
 }
 
 export default ActionsSettingsListTabBar

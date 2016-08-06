@@ -1,18 +1,15 @@
-import React from 'react-native'
+import React, {Component} from 'react'
+import {
+  Navigator,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
+
 import MainContainer from './MainContainer'
 import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
 import FriendAddContainer from './FriendAddContainer'
-import {Router, Route, Schema} from '../../node_modules/react-native-router-flux'
-import {Actions} from '../../node_modules/react-native-router-flux'
-import ExNavigator from '../../node_modules/@exponent/react-native-navigator';
-
-let {
-  Component,
-  Navigator,
-  Text,
-  TouchableOpacity,
-} = React
+import {Router, Scene, ActionConst, Actions} from '../../node_modules/react-native-router-flux'
 
 class App extends Component {
 

@@ -1,13 +1,12 @@
-import React from 'react-native'
-import style, {COLOR_1, COLOR_5} from '../stylesheets/styles'
-let Icon = require('react-native-vector-icons/Ionicons')
-
-let {
-  Component,
+import React, {Component, PropTypes} from 'react'
+import {
   View,
   TouchableOpacity,
   Animated,
-} = React
+} from 'react-native'
+
+import style, {COLOR_1, COLOR_5} from '../stylesheets/styles'
+let Icon = require('react-native-vector-icons/Ionicons')
 
 class TabBar extends Component {
   constructor(props) {
@@ -74,9 +73,9 @@ class TabBar extends Component {
 }
 
 TabBar.PropTypes = {
-  goToPage: React.PropTypes.func,
-  activeTab: React.PropTypes.number,
-  tabs: React.PropTypes.array,
+  goToPage: PropTypes.func,
+  activeTab: PropTypes.number,
+  tabs: PropTypes.array,
 }
 
 module.exports = TabBar

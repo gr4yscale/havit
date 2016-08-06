@@ -1,14 +1,11 @@
-import React from 'react-native'
-import style from '../stylesheets/styles'
-// import StyleSheet from '../stylesheets/debugStylesheet'
-
-
-let {
-  Component,
+import React, {Component, PropTypes} from 'react'
+import {
   View,
   TextInput,
-  PropTypes,
-} = React
+} from 'react-native'
+
+import style from '../stylesheets/styles'
+// import StyleSheet from '../stylesheets/debugStylesheet'
 
 class HVTTextInput extends Component {
 

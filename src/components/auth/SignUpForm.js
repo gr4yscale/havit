@@ -1,12 +1,11 @@
-import React from 'react-native'
-import style from '../../stylesheets/styles'
-import HVTCard from '../HVTCard'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   TextInput,
-} = React
+} from 'react-native'
+
+import style from '../../stylesheets/styles'
+import HVTCard from '../HVTCard'
 
 class SignUpForm extends Component {
 

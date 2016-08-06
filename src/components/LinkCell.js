@@ -1,18 +1,18 @@
-import React from 'react-native'
-import Accordion from '../../node_modules/react-native-accordion'
-import style, { COLOR_1, COLOR_2, COLOR_4, COLOR_5 } from '../stylesheets/styles'
-import ActionButton from './ActionButton'
-let Icon = require('react-native-vector-icons/Ionicons');
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Animated,
   Easing,
-} = React
+} from 'react-native'
+
+
+import Accordion from '../../node_modules/react-native-accordion'
+import style, { COLOR_1, COLOR_2, COLOR_4, COLOR_5 } from '../stylesheets/styles'
+import ActionButton from './ActionButton'
+let Icon = require('react-native-vector-icons/Ionicons');
 
 export const FriendListCellActionTypeBrowser = 'FriendListCellActionTypeBrowser'
 export const FriendListCellActionTypeReshare = 'FriendListCellActionTypeReshare'

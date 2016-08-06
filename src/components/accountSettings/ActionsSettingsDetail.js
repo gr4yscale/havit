@@ -1,16 +1,15 @@
-import React from 'react-native'
-import {connect} from 'react-redux/native'
-import {bindActionCreators} from 'redux'
-import * as accountSettingsActions from '../../redux/actions/accountSettingsActions'
-import style, {COLOR_5, COLOR_3, COLOR_4} from '../../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   View,
   TextInput,
   Switch,
   Text,
-} = React
+} from 'react-native'
+
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as accountSettingsActions from '../../redux/actions/accountSettingsActions'
+import style, {COLOR_5, COLOR_3, COLOR_4} from '../../stylesheets/styles'
 
 class ActionsSettingsDetail extends Component {
 

@@ -1,14 +1,5 @@
-import React from 'react-native';
-import {connect} from 'react-redux/native'
-import {bindActionCreators} from 'redux'
-import * as serverActions from '../redux/actions/serverActions'
-// import {Actions} from '../../node_modules/react-native-router-flux'
-import _ from 'lodash'
-import FriendAddCell from '../components/FriendAddCell'
-import style, { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5 } from '../stylesheets/styles'
-
-let {
-  Component,
+import React, {Component} from 'react'
+import {
   StyleSheet,
   View,
   Text,
@@ -17,7 +8,16 @@ let {
   ListView,
   TextInput,
   Alert,
-} = React
+} from 'react-native'
+
+
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as serverActions from '../redux/actions/serverActions'
+// import {Actions} from '../../node_modules/react-native-router-flux'
+import _ from 'lodash'
+import FriendAddCell from '../components/FriendAddCell'
+import style, { COLOR_1, COLOR_2, COLOR_3, COLOR_4, COLOR_5 } from '../stylesheets/styles'
 
 let deviceHeight = Dimensions.get('window').height;
 

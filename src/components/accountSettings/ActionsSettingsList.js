@@ -1,13 +1,9 @@
-import React from 'react-native'
-import {connect} from 'react-redux/native'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import * as accountSettingsActions from '../../redux/actions/accountSettingsActions'
 import ScrollableTabView from '../../../node_modules/react-native-scrollable-tab-view'
 import ActionsSettingsDetail from './ActionsSettingsDetail'
 import ActionsSettingsListTabBar from './ActionsSettingsListTabBar'
-
-let {
-  Component,
-} = React
 
 class ActionsSettingsList extends Component {
   handleTabChange(tab) {

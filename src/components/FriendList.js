@@ -1,10 +1,9 @@
-import React from 'react-native';
-import FriendListCell from './FriendListCell'
+import React, {Component} from 'react'
+import {
+    ListView,
+} from 'react-native'
 
-let {
-  Component,
-  ListView,
-} = React
+import FriendListCell from './FriendListCell'
 
 class FriendList extends Component {
 

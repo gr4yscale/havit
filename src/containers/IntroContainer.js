@@ -1,6 +1,16 @@
-import React from 'react-native'
+import React, {Component} from 'react'
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Animated,
+  Alert,
+  Text,
+} from 'react-native'
+
+
 import dismissKeyboard from '../../node_modules/react-native/Libraries/Utilities/dismissKeyboard'
-import {connect} from 'react-redux/native'
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as authActions from '../redux/actions/authActions'
 import {authModeSignIn, authModeSignUp} from '../redux/actions/authActions'
@@ -10,15 +20,6 @@ import SignUpForm from '../components/auth/SignUpForm'
 import SignInForm from '../components/auth/SignInForm'
 
 import {COLOR_1, COLOR_2} from '../stylesheets/styles'
-
-let {
-  Component,
-  StyleSheet,
-  View,
-  Dimensions,
-  Animated,
-  Alert,
-} = React
 
 const deviceHeight = Dimensions.get('window').height
 const signupCardMargin = 20
