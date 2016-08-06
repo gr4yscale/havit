@@ -97,7 +97,7 @@ export default cairn({
   },
 
   buttonIcon: {
-    props:{},
+    props: {},
     icon: {
       position:'absolute',
       left: 0,
@@ -238,7 +238,7 @@ export default cairn({
       width: ICON_SIZE_NORMAL,
       height: ICON_SIZE_NORMAL,
       props: {
-        name: 'android-done',
+        name: 'md-close',
         size: ICON_SIZE_NORMAL,
         color: COLOR_5,
       },

@@ -123,7 +123,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name="android-globe"
+                  name="md-globe"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}
@@ -135,7 +135,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name="star"
+                  name="md-star"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}
@@ -147,7 +147,7 @@ class LinkCell extends Component {
                 style={styles.iconWrapper}
             >
               <Icon
-                  name="android-share"
+                  name="md-share"
                   size={30}
                   color={COLOR_1}
                   style={styles.icons}

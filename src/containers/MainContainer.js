@@ -43,10 +43,10 @@ class MainContainer extends Component {
             this.handleTabChange(tab.i)
           }}
       >
-        <LinksFeedContainer tabLabel="home" />
-        <LinksSentContainer tabLabel="paper-airplane" />
-        <FriendAddContainer tabLabel="person-stalker" />
-        <AccountSettingsContainer tabLabel="gear-a" />
+        <LinksFeedContainer tabLabel="md-home" />
+        <LinksSentContainer tabLabel="md-paper-plane" />
+        <FriendAddContainer tabLabel="md-person" />
+        <AccountSettingsContainer tabLabel="md-settings" />
       </ScrollableTabView>
     )
   }
