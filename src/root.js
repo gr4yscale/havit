@@ -16,7 +16,7 @@ import _ from 'lodash' // TOFIX: hrmmmm... not sure about having this one in...
 import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
 import * as appActions from './redux/actions/appActions'
-// import ActivityAndroid from '../node_modules/react-native-activity-android'
+import ActivityAndroid from '../node_modules/react-native-activity-android'
 // TOFIX: Clipboard is moved to core
 // import Clipboard from '../node_modules/react-native-clipboard'
 // import {isValidUrl} from './stringUtils'
@@ -90,9 +90,9 @@ class Root extends Component {
         }
       })
     } else {
-      // ActivityAndroid.addEventListener('activityResume', () => {
-      //   this.appDidBecomeActive()
-      // })
+      ActivityAndroid.addEventListener('activityResume', () => {
+        this.appDidBecomeActive()
+      })
     }
   }
 

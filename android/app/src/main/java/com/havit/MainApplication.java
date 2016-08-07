@@ -11,7 +11,7 @@ import com.facebook.react.shell.MainReactPackage;
 
 // Native modules
 import com.oblador.vectoricons.VectorIconsPackage;
-// import ca.jaysoo.activityandroid.ActivityAndroidPackage;
+import ca.jaysoo.activityandroid.ActivityAndroidPackage;
 import com.projectseptember.RNGL.RNGLPackage;
 // import com.davidsandor.rnclipboardandroid.RNClipboardAndroidPackage;
 
@@ -32,8 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
         new RNGLPackage(),
-        new VectorIconsPackage()
-        // new ActivityAndroidPackage(this)
+        new VectorIconsPackage(),
+        new ActivityAndroidPackage()
       );
     }
   };
