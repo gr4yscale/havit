@@ -116,6 +116,10 @@ class Root extends Component {
       store.dispatch(serverActions.fetchLinksReceived())
       store.dispatch(serverActions.fetchLinksSent())
     })
+    .catch((e) => {
+      console.log('Error refreshing data:')
+      console.log(e)
+    })
   }
 
   // checkForUrlInClipboard(urlInStore) {

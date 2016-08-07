@@ -27,11 +27,14 @@ export function signup() {
     let parse = new Parse();
     return parse.signup(data)
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        dispatch(signupSuccess(json))
-        return dispatch(login(data.username, data.password))
+        return response.json()
+        .then((json) => {
+          dispatch(signupSuccess(json))
+          return dispatch(login(data.username, data.password))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(signupFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -72,14 +75,16 @@ export function login(username, password) {
       password,
     })
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
-        if (Platform.OS === 'ios') {
-          updateShareExtensionStoreWithCurrentUser(json)
-        }
-        return dispatch(loginSuccess(json))
+        return response.json()
+        .then((json) => {
+          if (Platform.OS === 'ios') {
+            updateShareExtensionStoreWithCurrentUser(json)
+          }
+          return dispatch(loginSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(loginFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -106,10 +111,13 @@ export function updateCurrentUser() {
     let parse = configuredParse(getState());
     return parse.updateCurrentUser(data)
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(updateCurrentUserSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(updateCurrentUserSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(updateCurrentUserFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -148,10 +156,13 @@ export function fetchLinksReceived() {
     let parse = configuredParse(getState());
     return parse.getMyLinks()
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(linksReceivedSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(linksReceivedSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(linksReceivedFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -173,10 +184,13 @@ export function fetchLinksSent() {
     let parse = configuredParse(getState());
     return parse.getSentLinks()
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(linksSentSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(linksSentSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(linksSentFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -214,17 +228,20 @@ export function fetchFriends() {
     let parse = configuredParse(getState());
     return parse.getFriends()
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        dispatch(friendsSuccess(json))
-        dispatch(resetSelectedFriends(json.results)) // TOFIX: too imperitive
+        return response.json()
+        .then((json) => {
+          dispatch(friendsSuccess(json))
+          dispatch(resetSelectedFriends(json.results)) // TOFIX: too imperitive
 
-        // TOFIX: yucky place for this, but just getting android functional for now, will move out later
-        if (Platform.OS === 'ios') {
-          updateShareExtensionStoreWithFriends(json)
-        }
-        return Promise.resolve()
+          // TOFIX: yucky place for this, but just getting android functional for now, will move out later
+          if (Platform.OS === 'ios') {
+            updateShareExtensionStoreWithFriends(json)
+          }
+          return Promise.resolve()
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(friendsFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -247,10 +264,13 @@ export function getAllUsers() {
     let parse = new Parse()
     return parse.getAllUsers()
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(getAllUsersSuccess(json))
+        response.json()
+        .then((json) => {
+          return dispatch(getAllUsersSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(getAllUsersFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -270,10 +290,13 @@ export function fetchUserByEmail(email) {
     let parse = new Parse()
     return parse.getUserByEmail(email)
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(getUserByEmailSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(getUserByEmailSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(getUserByEmailFailure(json.error))
         return Promise.reject(json.error)
       }
@@ -310,10 +333,13 @@ export function addFriend(email) {
 
       return parse.addFriendToMe(friend.objectId)
       .then((response) => {
-        let json = JSON.parse(response._bodyInit)
         if (response.status === 200 || response.status === 201) {
-          return dispatch(addFriendSuccess(json))
+          return response.json()
+          .then((json) => {
+            return dispatch(addFriendSuccess(json))
+          })
         } else {
+          let json = JSON.parse(response._bodyInit)
           dispatch(addFriendFailure(json.error))
           return Promise.reject(json.error)
         }
@@ -332,10 +358,13 @@ export function removeFriend(objectId) {
     let parse = configuredParse(getState());
     return parse.removeFriendFromMe(objectId)
     .then((response) => {
-      let json = JSON.parse(response._bodyInit)
       if (response.status === 200 || response.status === 201) {
-        return dispatch(removeFriendSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(removeFriendSuccess(json))
+        })
       } else {
+        let json = JSON.parse(response._bodyInit)
         dispatch(removeFriendFailure(json.error))
         return Promise.reject(json.error)
       }

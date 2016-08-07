@@ -36,10 +36,13 @@ export function shareLink(toOthers) {
     return parse.shareLink(postData)
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
-        let json = JSON.parse(response._bodyInit)
-        dispatch(shareSuccess(json))
+        return response.json()
+        .then((json) => {
+          return dispatch(shareSuccess(json))
+        })
       } else {
-        dispatch(shareFailure(JSON.parse(response._bodyInit)))
+        let json = JSON.parse(response._bodyInit)
+        dispatch(shareFailure(json.error))
       }
     })
     .catch((error) => {
