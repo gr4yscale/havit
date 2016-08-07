@@ -3,7 +3,8 @@ import {
   DeviceEventEmitter,
   Platform,
   AppStateIOS,
-  // Alert,
+  Clipboard,
+  Alert,
 } from 'react-native'
 
 import { Provider } from 'react-redux'
@@ -17,9 +18,7 @@ import * as serverActions from './redux/actions/serverActions'
 import * as shareActions from './redux/actions/shareActions'
 import * as appActions from './redux/actions/appActions'
 import ActivityAndroid from '../node_modules/react-native-activity-android'
-// TOFIX: Clipboard is moved to core
-// import Clipboard from '../node_modules/react-native-clipboard'
-// import {isValidUrl} from './stringUtils'
+import {isValidUrl} from './stringUtils'
 
 // This is necessary because React Components will not have mounted (and thus Router) when we receive the
 // event from the Android Native Module. So, I set some state on the redux store and when the components
@@ -105,8 +104,8 @@ class Root extends Component {
       // CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE })
     // }
     this.refreshData()
-    // let clipboardUrl = store.getState().app.lastClipboardUrl
-    // this.checkForUrlInClipboard(clipboardUrl)
+    let clipboardUrl = store.getState().app.lastClipboardUrl
+    this.checkForUrlInClipboard(clipboardUrl)
   }
 
   refreshData() {
@@ -122,36 +121,36 @@ class Root extends Component {
     })
   }
 
-  // checkForUrlInClipboard(urlInStore) {
-  //   Clipboard.get((clipboardContents) => {
-  //     console.log(urlInStore)
-  //     console.log(clipboardContents)
-  //     if (isValidUrl(clipboardContents)) {
-  //       if (clipboardContents !== urlInStore) {
-  //         store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
-  //         Alert.alert(
-  //           `URL detected in clipboard!`,
-  //           `Would you like to share or add this link to your inbox?\n\n${clipboardContents}`,
-  //           [
-  //             {text: 'No'},
-  //             {text: 'Share', onPress: () => {
-  //               Actions.Share({url: clipboardContents, title: '', inAppShare: true})
-  //             }},
-  //             {text: 'Add to Inbox', onPress: () => {
-  //               const {shareFormChanged, shareLink, fetchLinksReceived} = this.props
-  //               shareFormChanged('url', clipboardContents)
-  //               shareFormChanged('title', '')
-  //               shareLink(false)
-  //               .then(() => {
-  //                 fetchLinksReceived()
-  //               })
-  //             }},
-  //           ]
-  //         )
-  //       }
-  //     }
-  //   })
-  // }
+  checkForUrlInClipboard(urlInStore) {
+    Clipboard.getString().then((clipboardContents) => {
+      console.log(urlInStore)
+      console.log(clipboardContents)
+      if (isValidUrl(clipboardContents)) {
+        if (clipboardContents !== urlInStore) {
+          store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
+          Alert.alert(
+            `URL detected in clipboard!`,
+            `Would you like to share or add this link to your inbox?\n\n${clipboardContents}`,
+            [
+              {text: 'No'},
+              {text: 'Share', onPress: () => {
+                Actions.Share({url: clipboardContents, title: '', inAppShare: true})
+              }},
+              {text: 'Add to Inbox', onPress: () => {
+                // TOFIX: connect() this component with react-redux, all of these store.dispatch() calls are making me crazy!
+                store.dispatch(shareActions.shareFormChanged('url', clipboardContents))
+                store.dispatch(shareActions.shareFormChanged('title', ''))
+                store.dispatch(shareActions.shareLink(false))
+                .then(() => {
+                  store.dispatch(serverActions.fetchLinksReceived())
+                })
+              }},
+            ]
+          )
+        }
+      }
+    })
+  }
 
   render () {
     return (
