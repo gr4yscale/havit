@@ -158,13 +158,17 @@ function iftttUrlsForUser(user) {
   let iftttUrls = []
   let actions = user.iftttActions
 
-  for (let i = 0; i < actions.length; i++) {
-    let action = actions[i]
-    if (action.triggerOnShareReceive) {
-      iftttUrls.push(action.url)
+  if (!actions) {
+    return []
+  } else {
+    for (let i = 0; i < actions.length; i++) {
+      let action = actions[i]
+      if (action.triggerOnShareReceive) {
+        iftttUrls.push(action.url)
+      }
     }
+    return iftttUrls
   }
-  return iftttUrls
 }
 
 function iftttRequest(urlToShare, iftttUrl, title, senderName) {
