@@ -96,7 +96,8 @@ class Root extends Component {
   }
 
   removeAppLifecycleEventListeners() {
-    // TOFIX: cleanup later, yolo!
+    AppStateIOS.removeEventListener('change')
+    ActivityAndroid.removeEventListener('activityResume')
   }
 
   appDidBecomeActive() {
@@ -123,8 +124,6 @@ class Root extends Component {
 
   checkForUrlInClipboard(urlInStore) {
     Clipboard.getString().then((clipboardContents) => {
-      console.log(urlInStore)
-      console.log(clipboardContents)
       if (isValidUrl(clipboardContents)) {
         if (clipboardContents !== urlInStore) {
           store.dispatch(appActions.updateLastClipboardUrl(clipboardContents))
