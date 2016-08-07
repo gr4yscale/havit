@@ -21,8 +21,13 @@ engine = decorators.filter(engine, stateKeysToPersist)
 let actionsAllowedToSave = [LOGIN_SUCCESS, FRIENDS_SUCCESS, LINKS_RECEIVED_SUCCESS, 'LINKS_SENT_SUCCESS', 'AUTH_LOGOUT', USERS_GET_ALL_SUCCESS]
 const persistence = storage.createMiddleware(engine, [], actionsAllowedToSave)
 
-const logger = createLogger()
-const createStoreWithMiddleware = applyMiddleware(thunk, promise, persistence, logger)(createStore)
+let createStoreWithMiddleware
+if (__DEV__) { //eslint-disable-line no-undef
+  const logger = createLogger()
+  createStoreWithMiddleware = applyMiddleware(thunk, promise, persistence, logger)(createStore)
+} else {
+  createStoreWithMiddleware = applyMiddleware(thunk, promise, persistence)(createStore)
+}
 
 const store = createStoreWithMiddleware(reducer)
 const load = storage.createLoader(engine)
