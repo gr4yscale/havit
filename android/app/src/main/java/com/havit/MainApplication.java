@@ -13,7 +13,6 @@ import com.facebook.react.shell.MainReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import ca.jaysoo.activityandroid.ActivityAndroidPackage;
 import com.projectseptember.RNGL.RNGLPackage;
-// import com.davidsandor.rnclipboardandroid.RNClipboardAndroidPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+        new ReceiveIntentPackage(),
         new RNGLPackage(),
         new VectorIconsPackage(),
         new ActivityAndroidPackage()

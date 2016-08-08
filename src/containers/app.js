@@ -1,21 +1,21 @@
 import React, {Component} from 'react'
-import {
-  Navigator,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
-
 import MainContainer from './MainContainer'
 import IntroContainer from './IntroContainer'
 import ShareContainer from './ShareContainer'
 import FriendAddContainer from './FriendAddContainer'
 import {Router, Scene, ActionConst, Actions} from '../../node_modules/react-native-router-flux'
+import store from '../redux/store'
+import * as shareActions from '../redux/actions/shareActions'
 
 class App extends Component {
-
   componentDidMount() {
+    // TOFIX: ugh, yucky race condition hack - react-native-router-flux
+    // see https://github.com/aksonov/react-native-router-flux/issues/686, issue isn't resolved
     if (this.props.lastIntentUrlReceived) {
-      Actions.Share({url: this.props.lastIntentUrlReceived, title: this.props.lastIntentTitleReceived})
+      setTimeout(() => {
+        store.dispatch(shareActions.shareFormChanged('url', this.props.lastIntentUrlReceived))
+        store.dispatch(shareActions.shareFormChanged('title', this.props.lastIntentTitleReceived))
+      }, 100)
     }
   }
 
@@ -37,13 +37,14 @@ class App extends Component {
   }
 
   render() {
-    console.log('app: render')
     return (
       <Router hideNavBar={true}>
-        <Scene key="Intro" component={IntroContainer} title="Intro" type={ActionConst.REPLACE} initial />
-        <Scene key="MainContainer" component={MainContainer} title="Inbox" type="replace" />
-        <Scene key="Share" component={ShareContainer} title="Share" type="replace" />
-        <Scene key="Friends" component={FriendAddContainer} title="Friends" />
+        <Scene key="root">
+          <Scene key="Intro" component={IntroContainer} title="Intro" type={ActionConst.REPLACE} initial={!this.props.lastIntentUrlReceived} />
+          <Scene key="MainContainer" component={MainContainer} title="Inbox" type={ActionConst.REPLACE} />
+          <Scene key="Share" component={ShareContainer} title="Share" type={ActionConst.REPLACE} initial={this.props.lastIntentUrlReceived} />
+          <Scene key="Friends" component={FriendAddContainer} title="Friends" />
+        </Scene>
       </Router>
     )
   }
